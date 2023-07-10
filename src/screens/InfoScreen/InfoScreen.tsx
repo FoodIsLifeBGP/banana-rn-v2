@@ -11,7 +11,7 @@ type InfoScreenProps = {
   nextScreenDestination?: string;
   backDestination?: string;
   showBackButton?: boolean;
-  children: any; /* TODO: add actual type */
+  children?: any; /* TODO: add actual type */
 };
 
 const InfoScreen: FunctionComponent<InfoScreenProps> = ({

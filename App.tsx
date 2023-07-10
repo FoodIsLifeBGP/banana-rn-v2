@@ -54,6 +54,7 @@ export default function App() {
   return fontsLoaded && (
     <PaperProvider>
       <SafeAreaView style={styles.container}>
+        {/* TODO: see if we even _need_ that ref on the next line */}
         {/* <Route ref={navRef => NavigationService.setTopLevelNavigator(navRef)} /> */}
         <Route />
         <TheAlertModal />

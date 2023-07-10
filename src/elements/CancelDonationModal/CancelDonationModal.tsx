@@ -3,7 +3,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import useGlobal from '@state';
+import useGlobalStore from '@state';
 import {
   TextButton,
   Modal,
@@ -25,22 +25,22 @@ export default function CancelDonationModal({
   okay = () => {},
 
 }: CancelDonationModalProps) {
-  const [ globalState, globalActions ] = useGlobal() as any;
-  const { alert: alertObj }: { alert: Alert } = globalState;
-  const { clearAlert } = globalActions;
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const clearAlert = useGlobalStore((state) => state.clearAlert);
+  const alert = useGlobalStore((state) => state.alert);
+
   const scheme = useScheme();
-  const [ state, { updateAlert } ] = useGlobal() as any;
 
   const handleNo = () => {
     clearAlert();
     onNo();
-    alertObj.cancelFn && alertObj.cancelFn();
+    alert && alert.cancelFn && alert.cancelFn();
   };
 
   const handleYes = () => {
     clearAlert();
     onYes();
-    alertObj.confirmFn && alertObj.confirmFn();
+    alert && alert.confirmFn && alert.confirmFn();
   };
 
   const handleCloseButtonPress = () => {
@@ -48,7 +48,7 @@ export default function CancelDonationModal({
   };
 
   const handleDismiss = () => {
-    if (alertObj.dismissable) {
+    if (alert && alert.dismissable) {
       clearAlert();
     }
   };
@@ -56,23 +56,23 @@ export default function CancelDonationModal({
   const handleOkay = () => {
     clearAlert();
     okay();
-    alertObj.confirmFn && alertObj.confirmFn();
+    alert && alert.confirmFn && alert.confirmFn();
   };
 
-  if (!alertObj) return null;
-  if (!alertObj.type || alertObj.type === 'default') {
+  if (!alert) return null;
+  if (!alert.type || alert.type === 'default') {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || 'Alert'}
+        title={alert?.title || 'Alert'}
         palette="accent"
-        open={alertObj !== undefined}
+        open={alert !== undefined}
         onDismiss={handleDismiss}
       >
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alertObj?.message || 'Uh oh, an unknown error occurred!'}
+              {alert?.message || 'Uh oh, an unknown error occurred!'}
             </Text>
           </View>
 
@@ -92,19 +92,19 @@ export default function CancelDonationModal({
       </Modal>
     );
   }
-  if (alertObj.type === 'cancel donation') {
+  if (alert.type === 'cancel donation') {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || 'ARE YOU SURE?'}
+        title={alert?.title || 'ARE YOU SURE?'}
         palette="secondary"
-        open={alertObj !== undefined}
+        open={alert !== undefined}
         onDismiss={handleDismiss}
       >
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alertObj?.message || 'This donation will be cancelled.'}
+              {alert?.message || 'This donation will be cancelled.'}
             </Text>
           </View>
           <View style={styles.buttonWrapper}>
@@ -141,19 +141,19 @@ export default function CancelDonationModal({
       </Modal>
     );
   }
-  if (alertObj.type === 'donation published') {
+  if (alert.type === 'donation published') {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || 'DONATION PUBLISHED'}
+        title={alert?.title || 'DONATION PUBLISHED'}
         palette="secondary"
-        open={alertObj !== undefined}
+        open={alert !== undefined}
         onDismiss={handleDismiss}
       >
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alertObj?.message || 'Donation was published successfully. Thanks for your participation.'}
+              {alert?.message || 'Donation was published successfully. Thanks for your participation.'}
             </Text>
           </View>
           <View style={styles.buttonWrapper}>
