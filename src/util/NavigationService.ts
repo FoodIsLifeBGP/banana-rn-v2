@@ -1,36 +1,26 @@
-import { NavigationActions } from 'react-navigation';
-import { DrawerActions } from 'react-navigation-drawer';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
-let navigator;
+let navigation = useNavigation();
 
-function setTopLevelNavigator(navigatorRef) {
-	navigator = navigatorRef;
+function setTopLevelNavigator(navigationRef) {
+  navigation = navigationRef;
 }
 
-function navigate(routeName, params?) {
-	navigator.dispatch(
-		NavigationActions.navigate({
-			routeName,
-			params,
-		}),
-	);
+function navigate(name, params) {
+  navigation.dispatch(
+    CommonActions.navigate({
+      name,
+      params,
+    }),
+  );
 }
 
 function goBack() {
-	navigator.dispatch(
-		NavigationActions.back(),
-	);
-}
-
-function toggleDrawer() {
-	navigator.dispatch(
-		DrawerActions.toggleDrawer(),
-	);
+  navigation.dispatch(CommonActions.goBack());
 }
 
 export default {
-	navigate,
-	setTopLevelNavigator,
-	goBack,
-	toggleDrawer,
+  navigate,
+  setTopLevelNavigator,
+  goBack,
 };

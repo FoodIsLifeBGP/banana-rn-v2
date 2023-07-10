@@ -29,6 +29,7 @@ module.exports = {
   ],
   rules: {
     'array-bracket-spacing': [ 1, 'always' ],
+    'react/function-component-definition': [ 0, 'never' ],
     'arrow-parens': [ 1, 'as-needed' ],
     'class-methods-use-this': 0,
     'eol-last': [ 1, 'always' ],
@@ -55,7 +56,7 @@ module.exports = {
     indent: [ 'error', 2 ],
     'lines-between-class-members': 0,
     'linebreak-style': 0,
-    'max-len': [ 1, 120 ],
+    'max-len': [ 1, 150 ],
     'no-async-promise-executor': 1,
     'no-confusing-arrow': [
       'error',
@@ -94,6 +95,7 @@ module.exports = {
         ],
       },
     ],
+    'react/no-unused-prop-types': 0,
     'react/no-unescaped-entities': [
       'error',
       {
@@ -103,7 +105,7 @@ module.exports = {
         ],
       },
     ],
-    'react/jsx-props-no-spreading': 1,
+    'react/jsx-props-no-spreading': 0,
     'react/prop-types': 0,
     'react/require-default-props': 0,
     semi: [ 'error', 'always' ],
@@ -111,9 +113,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': [ 0 ],
     '@typescript-eslint/explicit-member-accessibility': [ 0 ],
     '@typescript-eslint/func-call-spacing': [ 1 ],
-    '@typescript-eslint/indent': [ 'error', 2 ],
     '@typescript-eslint/interface-name-prefix': 0,
     '@typescript-eslint/no-empty-function': 'warn',
+    '@typescript-eslint/ban-types': [ 0 ],
     '@typescript-eslint/no-unused-vars': [
       1,
       {

@@ -7,29 +7,30 @@ export type ImageSourcingMethod = Extends<Permissions.PermissionType, 'camera' |
 
 // Configuration for an image sourcing method.
 interface ImageSourcingConfig {
-	permissions: Array<Permissions.PermissionType>; // Device permissions required for an image source.
-	launchImageSourcingMethod: Function; // Native launcher for the image source.
+  permissions: Array<Permissions.PermissionType>; // Device permissions required for an image source.
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  launchImageSourcingMethod: Function; // Native launcher for the image source.
 }
 
 // The possible methods of retreiving an image from the device mapped to their unique configs.
 const IMAGE_SOURCE_METHODS: Record<ImageSourcingMethod, ImageSourcingConfig> = {
-	camera: {
-		// ?? TODO: If request for camera roll is too annoying, only request on required devices (iOS 10 & Android).
-		permissions: [ 'camera', 'cameraRoll' ],
-		launchImageSourcingMethod: ImagePicker.launchCameraAsync,
-	},
-	cameraRoll: {
-		permissions: [ 'cameraRoll' ],
-		launchImageSourcingMethod: ImagePicker.launchImageLibraryAsync,
-	},
+  camera: {
+    // ?? TODO: If request for camera roll is too annoying, only request on required devices (iOS 10 & Android).
+    permissions: [ 'camera', 'cameraRoll' ],
+    launchImageSourcingMethod: ImagePicker.launchCameraAsync,
+  },
+  cameraRoll: {
+    permissions: [ 'cameraRoll' ],
+    launchImageSourcingMethod: ImagePicker.launchImageLibraryAsync,
+  },
 };
 
 // Generic options for images, no matter the image source.
 const IMAGE_OPTIONS: ImagePicker.ImagePickerOptions = {
-	mediaTypes: ImagePicker.MediaTypeOptions.Images,
-	allowsEditing: true,
-	aspect: [ 16, 9 ],
-	quality: 1,
+  mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  allowsEditing: true,
+  aspect: [ 16, 9 ],
+  quality: 1,
 };
 
 /**
@@ -42,35 +43,35 @@ const IMAGE_OPTIONS: ImagePicker.ImagePickerOptions = {
  */
 export async function sourceImage(imageSource: Permissions.PermissionType):
 Promise<ImagePicker.ImagePickerResult | null> {
-	let pickedImage = {} as ImagePicker.ImagePickerResult; // The user selected image.
+  let pickedImage = {} as ImagePicker.ImagePickerResult; // The user selected image.
 
-	/**
+  /**
 	 * Requests device access permissions from the user and launches the method of image acquisition.
 	 *
 	 * @param {ImageSourcingConfig} Configuration for a specific method of image acquisition.
 	 * @throws When access permission is denied or when an error occurs during the request.
 	 */
-	const getImageFromSource = async ({
-		permissions,
-		launchImageSourcingMethod,
-	}: ImageSourcingConfig): Promise<ImagePicker.ImagePickerResult> => {
-		const permissionResponses = await Permissions.askAsync(...permissions);
+  const getImageFromSource = async ({
+    permissions,
+    launchImageSourcingMethod,
+  }: ImageSourcingConfig): Promise<ImagePicker.ImagePickerResult> => {
+    const permissionResponses = await Permissions.askAsync(...permissions);
 
-		// Any unsuccessful permissions status will propogate to this 'status' property.
-		if (permissionResponses.status !== 'granted') {
-			throw new Error('Permission(s) not granted.');
-		}
+    // Any unsuccessful permissions status will propogate to this 'status' property.
+    if (permissionResponses.status !== 'granted') {
+      throw new Error('Permission(s) not granted.');
+    }
 
-		return launchImageSourcingMethod(IMAGE_OPTIONS);
-	};
+    return launchImageSourcingMethod(IMAGE_OPTIONS);
+  };
 
 
-	try {
-		pickedImage = await getImageFromSource(IMAGE_SOURCE_METHODS[imageSource]);
-	} catch (err) {
-		console.log(err.msg);
-		// TODO: display alert with error message
-	}
+  try {
+    pickedImage = await getImageFromSource(IMAGE_SOURCE_METHODS[imageSource]);
+  } catch (err: any) {
+    console.log(err.msg);
+    // TODO: display alert with error message
+  }
 
-	return pickedImage?.cancelled ? null : pickedImage;
+  return pickedImage?.canceled ? null : pickedImage;
 }

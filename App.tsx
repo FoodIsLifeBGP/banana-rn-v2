@@ -1,20 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  LogBox, Platform,
+  SafeAreaView, Text, View,
+} from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import Constants from 'expo-constants';
+import * as Font from 'expo-font';
+import NavigationService from '@util/navigationService';
+import {
+  TheAlertModal, IncompleteFormAlert, ComingSoonModal, CancelDonationModal,
+} from '@elements';
+import Route from './src/routes/Route';
+import styles from './App.styles';
+
+// if (Platform.OS !== 'web') {
+//   LogBox.ignoreLogs([
+//     'Warning: componentWillReceiveProps has been renamed',
+//     'Require cycle',
+//   ]);
+// }
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  const [ fontsLoaded, setFontsLoaded ] = useState(false);
+
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      // TODO: is this still tru? (we're on expo 48 now)
+      // Expo doesn't currently (v36.0.0) support fontWeight or fontStyle
+      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+      'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+      'open-sans-light': require('./assets/fonts/OpenSans-Light.ttf'),
+    });
+    setFontsLoaded(true);
+  };
+
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
+  if (![ 'donor', 'client' ].includes(Constants.manifest?.extra?.variant)) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.heading}>INCORRECT VARIANT SPECIFIED</Text>
+        <Text style={styles.text}>
+          You must specify 'donor' or 'client' in app.json
+          (expo.extra.variant).
+        </Text>
+        <Text style={styles.text}>Refresh the app to see your changes.</Text>
+      </View>
+    );
+  }
+
+  return fontsLoaded && (
+    <PaperProvider>
+      <SafeAreaView style={styles.container}>
+        {/* <Route ref={navRef => NavigationService.setTopLevelNavigator(navRef)} /> */}
+        <Route />
+        <TheAlertModal />
+        <IncompleteFormAlert />
+        <ComingSoonModal />
+        <CancelDonationModal />
+      </SafeAreaView>
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

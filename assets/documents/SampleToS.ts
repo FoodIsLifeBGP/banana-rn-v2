@@ -1,5 +1,5 @@
 const Terms = {
-	client: `
+  client: `
 	CLIENT
 	With the exception of User Content (defined below), the Sites and everything on them, from text to photos to videos to graphics and software, (collectively, the "Materials") are owned by or licensed to The Banana App. The Sites and the Materials are protected by copyright, trademark, trade dress, domain name, patent, trade secret, international treaties, and/or other proprietary rights and laws of the United States and other countries. Except as otherwise indicated on the Sites and Materials and except for the trademarks, service marks, logos and trade names of other companies that are displayed on the Sites and Materials, all trademarks, service marks, logos, trade dress, and trade names are proprietary to The Banana App, including, without limitation, The Banana App; Banana App; Banana. Please be advised that The Banana App enforces its intellectual property rights to the fullest extent of the law.
 	
@@ -87,7 +87,7 @@ const Terms = {
 	
 	YOU AND The Banana App AGREE THAT THE WARRANTY DISCLAIMERS AND LIMITATIONS OF LIABILITY IN THIS AGREEMENT ARE MATERIAL, BARGAINED-FOR BASES OF THIS AGREEMENT, AND THAT THEY HAVE BEEN TAKEN INTO ACCOUNT IN DETERMINING THE CONSIDERATION TO BE GIVEN BY EACH PARTY UNDER THIS AGREEMENT AND IN THE DECISION BY EACH PARTY TO ENTER INTO THIS AGREEMENT. YOU AND The Banana App AGREE THAT THE WARRANTY DISCLAIMERS AND LIMITATIONS OF LIABILITY IN THESE TERMS OF USE ARE FAIR AND REASONABLE. IF YOU ARE DISSATISFIED WITH THE SITE OR DO NOT AGREE TO ANY PROVISIONS OF THESE TERMS OF USE, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USING THE SITE, EXCEPT AS MAY BE OTHERWISE PROVIDED FOR IN THIS SECTION.
 	`,
-	donor: `
+  donor: `
 	DONOR
 	With the exception of User Content (defined below), the Sites and everything on them, from text to photos to videos to graphics and software, (collectively, the "Materials") are owned by or licensed to The Banana App. The Sites and the Materials are protected by copyright, trademark, trade dress, domain name, patent, trade secret, international treaties, and/or other proprietary rights and laws of the United States and other countries. Except as otherwise indicated on the Sites and Materials and except for the trademarks, service marks, logos and trade names of other companies that are displayed on the Sites and Materials, all trademarks, service marks, logos, trade dress, and trade names are proprietary to The Banana App, including, without limitation, The Banana App; Banana App; Banana. Please be advised that The Banana App enforces its intellectual property rights to the fullest extent of the law.
 	

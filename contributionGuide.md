@@ -41,7 +41,7 @@ In `app.json` under root directory, you could see setting below:
 		}
 ```
 
-Change it to 
+Change it to
 
 ```json
 "extra": {
@@ -70,7 +70,7 @@ Title
 
   ```tsx
   import Title from './Title';
-  
+
   export { Title };
   ```
 
@@ -78,8 +78,8 @@ Title
 
   ```tsx
   import { StyleSheet } from 'react-native';
-  import * as colors from '@util/colors';
-  
+  import * as colors from '@util/constants/colors';
+
   export default StyleSheet.create({
   	text: {
   		fontFamily: 'open-sans-bold',
@@ -96,7 +96,7 @@ Title
   import React from 'react';
   import { View, Text } from 'react-native';
   import styles from './Title.styles';
-  
+
   export default ({ text }: { text: string }) => (
   	<View>
   		<Text style={styles.text}>{text.toUpperCase()}</Text>
@@ -113,9 +113,9 @@ Title
   	View,
   } from 'react-native';
   import styles from './ClaimingProgressBar.styles';
-  
+
   // DEFINE INTERFACE HERE
-  
+
   interface ClaimingProgressBarProps {
 	/** Width for ClaimingProgressBar. */
 	width?: number | string;
@@ -178,9 +178,11 @@ export { Title } from './Title';
 
 After that, you could use your component in screen, as the code below:
 
+TODO: this is outdated-- needs to be fixed
+
 ```tsx
 import React, { useState } from 'react';
-import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
+import { useNavigation, useNavigationParam } from ''
 import { View, Alert, TextInput } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import useGlobal from '@state';
