@@ -8,7 +8,9 @@ interface SelectorProps {
   onMap?: () => any | undefined;
   onList?: () => any | undefined;
 }
-export default (function Selector({ position, onMap, onList }: SelectorProps) {
+export default (function Selector({
+  position, onMap, onList,
+}: SelectorProps) {
   return (
     <View style={styles.selectorContainer}>
       <TouchableOpacity

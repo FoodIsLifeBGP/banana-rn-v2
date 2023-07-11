@@ -1,10 +1,8 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from '@elements';
-import {
-  NAVY_BLUE,
-  LIGHT_GRAY_DISABLED,
-} from '@util/constants/colors';
+import { NAVY_BLUE,
+  LIGHT_GRAY_DISABLED } from '@util/constants/colors';
 
 interface CheckboxProps {
   /**

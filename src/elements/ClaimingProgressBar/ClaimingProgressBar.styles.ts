@@ -5,12 +5,8 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 export default StyleSheet.create({
 
-  textBold: {
-    fontWeight: 'bold',
-  },
-  claimProgressBar: {
-    padding: 10,
-  },
+  textBold: { fontWeight: 'bold' },
+  claimProgressBar: { padding: 10 },
 
   barContainer: {
     width: '100%',

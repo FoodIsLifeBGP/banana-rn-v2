@@ -1,27 +1,40 @@
 import railsAxios from '@util/railsAxios';
-import initialState from '@state/index';
+import { GlobalState, initialState } from '@state/index';
 
-export const logIn = async (store, { email, password }) => {
-  const { loginUrl, userIdentity } = store.state;
+export const logIn = (state) : GlobalState => {
+  const {
+    loginUrl, userIdentity, email, password,
+  } = state;
 
-  try {
-    const response = await railsAxios().post(
-      loginUrl,
-      JSON.stringify({ [userIdentity]: { email, password } }),
-    );
-    await store.setState({
-      jwt: response.data?.jwt || '',
-      user: response.data?.[userIdentity] || {},
-    });
-    return response.request.status;
-  } catch (error: any) {
-    const e = error.toString().toLowerCase().split(' status code ');
-    return e.length > 1
-      ? parseInt(e.slice(-1), 10)
-      : 418;
-  }
+  const loginAsync = async () => {
+    try {
+      const response = await railsAxios().post(
+        loginUrl,
+        JSON.stringify({ [userIdentity]: { email, password } }),
+      );
+
+      return {
+        jwt: response.data?.jwt || '',
+        user: response.data?.[userIdentity] || {},
+        responseStatus: response.status,
+      };
+    } catch (error: any) {
+      const e = error.toString().toLowerCase().split(' status code ');
+      const responseStatus = e.length > 1
+        ? parseInt(e.slice(-1), 10)
+        : 418;
+      return { responseStatus };
+    }
+  };
+
+  loginAsync();
+
+  return state;
 };
 
-export const logOut = async store => {
-  await store.setState(initialState);
-};
+export const logOut = () => ({ ...initialState });
+
+export const setEmail = email => ({ email });
+
+export const setPassword = password => ({ password });
+

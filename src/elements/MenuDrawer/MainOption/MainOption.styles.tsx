@@ -24,7 +24,5 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
-  logOut: {
-    borderTopWidth: 0,
-  },
+  logOut: { borderTopWidth: 0 },
 });

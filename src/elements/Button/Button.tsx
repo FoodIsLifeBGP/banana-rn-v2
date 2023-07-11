@@ -2,20 +2,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React, { useState } from 'react';
-import {
-  TouchableHighlight,
+import { TouchableHighlight,
   TouchableHighlightProps,
   View,
-  ViewStyle,
-} from 'react-native';
-import {
-  ColorScheme,
-  useScheme,
-} from '@util/colorSchemes';
-import {
-  DARK_GRAY_TRANSPARENT,
-  WHITE,
-} from '@util/constants/colors';
+  ViewStyle } from 'react-native';
+import { ColorScheme,
+  useScheme } from '@util/colorSchemes';
+import { DARK_GRAY_TRANSPARENT,
+  WHITE } from '@util/constants/colors';
 import styles from './Button.styles';
 import { ButtonStyle } from './index';
 
@@ -87,9 +81,7 @@ export default function Button({
       style={[
         styles.container,
         outlined && outlineBorder,
-        {
-          backgroundColor,
-        },
+        { backgroundColor },
         style,
       ]}
       underlayColor={UNDERLAY_COLOR}

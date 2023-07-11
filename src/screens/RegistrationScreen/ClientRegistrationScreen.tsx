@@ -1,24 +1,20 @@
 /* eslint-disable no-tabs */
 import React, { useRef, useState } from 'react';
-import {
-  ScrollView,
+import { ScrollView,
   View,
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
   TextInput,
-  Keyboard,
-} from 'react-native';
+  Keyboard } from 'react-native';
 import { Divider } from 'react-native-paper';
 import useGlobal from '@state';
-import {
-  Title,
+import { Title,
   LinkButton,
   FormTextInput,
   SpacerInline,
-  Icon,
-} from '@elements';
+  Icon } from '@elements';
 import validate from 'validate.js';
 import clientConstraints from '@util/validators/clientRegistration';
 import { ClientRegisterProps } from '@state/actions/register';
@@ -166,7 +162,10 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
 
         <View style={styles.checkboxRow}>
           <View style={styles.checkBox}>
-            <TouchableOpacity style={{ top: 3 }} onPress={toggleTermsOfService}>
+            <TouchableOpacity
+              style={{ top: 3 }}
+              onPress={toggleTermsOfService}
+            >
               <Icon
                 name={termsOfService ? 'checkboxOn' : 'checkboxOff'}
                 size={24}

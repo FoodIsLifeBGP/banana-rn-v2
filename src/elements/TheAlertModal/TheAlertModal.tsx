@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { Text,
+  View } from 'react-native';
 import useGlobal from '@state';
-import {
-  TextButton,
-  Modal,
-} from '@elements';
+import { TextButton,
+  Modal } from '@elements';
 import { Alert } from '@state/index.types';
 import { useScheme } from '@util/colorSchemes';
 import typography from '@util/typography';
@@ -46,9 +42,7 @@ export default function TheAlertModal() {
 
         <TextButton
           text="OK"
-          style={{
-            width: 104,
-          }}
+          style={{ width: 104 }}
           buttonStyle={{
             default: scheme.primary,
             pressed: scheme.secondary,

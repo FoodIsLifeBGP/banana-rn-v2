@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  LogBox, Platform,
-  SafeAreaView, Text, View,
-} from 'react-native';
+import { LogBox, Platform,
+  SafeAreaView, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 import * as Font from 'expo-font';
 import NavigationService from '@util/navigationService';
-import {
-  TheAlertModal, IncompleteFormAlert, ComingSoonModal, CancelDonationModal,
-} from '@elements';
+import { TheAlertModal, IncompleteFormAlert, ComingSoonModal, CancelDonationModal } from '@elements';
 import Route from './src/routes/Route';
 import styles from './App.styles';
 

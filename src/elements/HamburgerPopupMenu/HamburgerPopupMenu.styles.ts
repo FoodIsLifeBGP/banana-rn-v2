@@ -22,7 +22,5 @@ export default StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
   },
-  divider: {
-    backgroundColor: colors.NAVY_BLUE,
-  },
+  divider: { backgroundColor: colors.NAVY_BLUE },
 });

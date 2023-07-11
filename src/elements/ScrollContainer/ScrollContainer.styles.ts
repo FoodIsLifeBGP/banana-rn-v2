@@ -11,7 +11,5 @@ export default StyleSheet.create({
     borderColor: colors.NAVY_BLUE,
     padding: 15,
   },
-  documentText: {
-    ...typography.body4,
-  },
+  documentText: { ...typography.body4 },
 });

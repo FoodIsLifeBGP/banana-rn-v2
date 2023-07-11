@@ -10,9 +10,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: 'white',
   },
-  modal: {
-    flex: 1,
-  },
+  modal: { flex: 1 },
   content: {
     flex: 1,
     justifyContent: 'center',
@@ -28,9 +26,7 @@ export default StyleSheet.create({
     color: colors.NAVY_BLUE,
     marginLeft: 3,
   },
-  errorStyle: {
-    color: colors.NAVY_BLUE,
-  },
+  errorStyle: { color: colors.NAVY_BLUE },
   errorContainer: {
     flex: 1,
     marginVertical: 3,

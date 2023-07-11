@@ -25,17 +25,13 @@ export default StyleSheet.create({
     borderColor: colors.NAVY_BLUE,
     borderWidth: 2,
   },
-  input: {
-    marginBottom: 14,
-  },
+  input: { marginBottom: 14 },
   row: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  button: {
-    marginBottom: 30,
-  },
+  button: { marginBottom: 30 },
   pickupAddressLabel: {
     ...typography.h3,
     marginBottom: 14,

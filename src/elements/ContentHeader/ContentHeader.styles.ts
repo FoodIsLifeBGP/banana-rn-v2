@@ -9,16 +9,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Colors.BANANA_YELLOW,
   },
-  smallHeaderText: {
-    ...typography.h3,
-  },
-  largeHeaderText: {
-    ...typography.h1,
-  },
-  smallHeaderContainer: {
-    height: 104,
-  },
-  largeHeaderContainer: {
-    height: 180,
-  },
+  smallHeaderText: { ...typography.h3 },
+  largeHeaderText: { ...typography.h1 },
+  smallHeaderContainer: { height: 104 },
+  largeHeaderContainer: { height: 180 },
 });

@@ -83,7 +83,9 @@ export default function NavBar({
         <Button
           buttonStyle={buttonStyle}
           style={{ marginTop: 4, marginRight: 8 }}
-          onPress={() => { updateAlert({ type: 'coming soon', dismissable: false }); }}
+          onPress={() => {
+            updateAlert({ type: 'coming soon', dismissable: false });
+          }}
         />
         {showMenu && (<HamburgerPopupMenu />) }
       </View>

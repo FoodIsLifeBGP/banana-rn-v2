@@ -52,12 +52,8 @@ export default StyleSheet.create({
     marginTop: 0,
     marginBottom: 2,
   },
-  statusLabelText: {
-    fontFamily: 'open-sans-bold',
-  },
-  errorMessage: {
-    paddingHorizontal: ERROR_PADDING_HORIZONTAL,
-  },
+  statusLabelText: { fontFamily: 'open-sans-bold' },
+  errorMessage: { paddingHorizontal: ERROR_PADDING_HORIZONTAL },
   errorMessageText: {
     ...typography.body5,
     color: colors.RED,

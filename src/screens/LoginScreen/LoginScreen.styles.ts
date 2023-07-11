@@ -27,12 +27,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: SCREEN_HORIZONTAL_OFFSET,
   },
-  form: {
-    width: '100%',
-  },
-  inputEmail: {
-    marginBottom: 15,
-  },
+  form: { width: '100%' },
+  inputEmail: { marginBottom: 15 },
   buttonContainer: {
     width: '100%',
     flexDirection: 'row',
@@ -44,10 +40,6 @@ export default StyleSheet.create({
     minHeight: 70,
     maxHeight: 116,
   },
-  forgotPassword: {
-    alignSelf: 'flex-end',
-  },
-  forgotPasswordText: {
-    ...typography.body3,
-  },
+  forgotPassword: { alignSelf: 'flex-end' },
+  forgotPasswordText: { ...typography.body3 },
 });

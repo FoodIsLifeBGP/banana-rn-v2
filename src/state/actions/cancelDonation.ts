@@ -1,21 +1,28 @@
+import { GlobalState } from '@state/index';
 import railsAxios from '@util/railsAxios';
 
+export const cancelDonation = (set, state : GlobalState, donationId: number) : GlobalState => {
+  const endpoint = `/donations/${donationId}/update`;
+  const { jwt } = state;
+  const payload = {
+    donation: {
+      id: donationId,
+      status: 'deleted',
+    },
+  };
 
-const cancelDonation = async (_store, donationId: number) => {
-	const endpoint = `/donations/${donationId}/update`;
-	const { jwt } = _store.state;
-	const payload = {
-		donation: {
-			id: donationId,
-			status: 'deleted',
-		},
-	};
-	try {
-		const response = await railsAxios(jwt).patch(endpoint, payload);
-		return response.request.status || 'Error';
-	} catch (error) {
-		return 500;
-	}
+  const cancelDonationAsync = async () => {
+    try {
+      const response = await railsAxios(jwt).patch(endpoint, payload);
+      set({ responseStatus: response.request.status || 'Error' });
+    } catch (error: any) {
+      set({ responseStatus: 500 });
+    }
+  };
+
+  cancelDonationAsync();
+
+  return state;
 };
 
-export { cancelDonation };
+export default cancelDonation;

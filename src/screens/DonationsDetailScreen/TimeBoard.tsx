@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View, Text, StyleProp, TextStyle,
-} from 'react-native';
+import { View, Text, StyleProp, TextStyle } from 'react-native';
 import * as colors from '@util/constants/colors';
 import { setTSpan } from 'react-native-svg/lib/typescript/lib/extract/extractText';
 import styles from './TimeBoard.styles';

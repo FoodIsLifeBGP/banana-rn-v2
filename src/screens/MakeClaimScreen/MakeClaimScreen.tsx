@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
-import {
-  ImageBackground, ScrollView, Text, View,
-} from 'react-native';
+import { ImageBackground, ScrollView, Text, View } from 'react-native';
 import useGlobal from '@state';
 import { Icon, SpacerInline, TextButton } from '@elements';
 import * as colors from '@util/constants/colors';
@@ -20,8 +18,12 @@ function MakeClaimScreen() {
   const route = useRoute();
   const { donation } : any = route.params; // TODO: UPDATE TYPE
   const { donor } = donation;
-  const pendingTravelTimes = { pedestrian: 'calculating..', publicTransport: 'calculating..', bicycle: 'calculating..' };
-  const unavailableTravelTimes = { pedestrian: 'not available', publicTransport: 'not available', bicycle: 'not available' };
+  const pendingTravelTimes = {
+    pedestrian: 'calculating..', publicTransport: 'calculating..', bicycle: 'calculating..',
+  };
+  const unavailableTravelTimes = {
+    pedestrian: 'not available', publicTransport: 'not available', bicycle: 'not available',
+  };
   const [ travelTimes, setTravelTimes ] = useState(pendingTravelTimes);
 
   const cancelBtnStyle: ButtonStyle = {

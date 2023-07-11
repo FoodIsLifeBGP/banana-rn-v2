@@ -6,9 +6,7 @@ export default (jwt?: string) => {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
-  const AUTH_HEADER = {
-    Authorization: `Bearer ${jwt}`,
-  };
+  const AUTH_HEADER = { Authorization: `Bearer ${jwt}` };
   const { API_BASE_URL } = getEnv();
   return axios.create({
     headers: jwt

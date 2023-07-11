@@ -1,8 +1,6 @@
-import {
-  DeprecatedIconName,
+import { DeprecatedIconName,
   IconImport,
-  IconName,
-} from './Icon.types';
+  IconName } from './Icon.types';
 
 const ArrowDown: IconImport = require('@assets/icons/ICON_ARROW-DOWN.svg');
 const ArrowUp: IconImport = require('@assets/icons/ICON_ARROW-UP.svg');

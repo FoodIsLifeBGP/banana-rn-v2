@@ -7,5 +7,7 @@ interface Spacer {
 }
 
 export default function SpacerInline({ height, width }: Spacer) {
-  return <View style={{ height, width }} />;
+  return (
+    <View style={{ height, width }} />
+  );
 }

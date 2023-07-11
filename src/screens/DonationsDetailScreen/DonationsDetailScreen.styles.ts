@@ -28,9 +28,7 @@ export default StyleSheet.create({
     color: colors.NAVY_BLUE,
     fontSize: 16,
   },
-  infoPair: {
-    marginTop: 20,
-  },
+  infoPair: { marginTop: 20 },
   iconContainer: {
     marginVertical: 10,
     justifyContent: 'center',
@@ -75,17 +73,11 @@ export default StyleSheet.create({
 
   },
 
-  textBold: {
-    fontWeight: 'bold',
-  },
+  textBold: { fontWeight: 'bold' },
 
-  textUnderline: {
-    textDecorationLine: 'underline',
-  },
+  textUnderline: { textDecorationLine: 'underline' },
 
-  backgroundColorYellow: {
-    backgroundColor: colors.BANANA_YELLOW,
-  },
+  backgroundColorYellow: { backgroundColor: colors.BANANA_YELLOW },
 
   claimProgressBar: {
     width: '100%',

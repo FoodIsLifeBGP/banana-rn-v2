@@ -8,18 +8,11 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+    ecmaFeatures: { jsx: true },
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
+  settings: { react: { version: 'detect' } },
   extends: [
     'airbnb',
-    'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
   ],
   plugins: [
@@ -28,6 +21,7 @@ module.exports = {
     'jest',
   ],
   rules: {
+    'no-use-before-define': 'off',
     'array-bracket-spacing': [ 1, 'always' ],
     'react/function-component-definition': [ 0, 'never' ],
     'arrow-parens': [ 1, 'as-needed' ],
@@ -36,6 +30,12 @@ module.exports = {
     'func-call-spacing': 'off',
     'global-require': 0,
     'import/extensions': [ 0, 'never' ],
+    'object-curly-newline': [ 'error', {
+      ObjectExpression: { multiline: true, minProperties: 3 },
+      ObjectPattern: { multiline: true, minProperties: 3 },
+      ImportDeclaration: 'never',
+      ExportDeclaration: { multiline: true, minProperties: 3 },
+    } ],
     'import/no-unresolved': [
       2,
       {
@@ -60,11 +60,8 @@ module.exports = {
     'no-async-promise-executor': 1,
     'no-confusing-arrow': [
       'error',
-      {
-        allowParens: true,
-      },
+      { allowParens: true },
     ],
-    'no-empty-function': 'warn',
     'no-multiple-empty-lines': [
       'error',
       {
@@ -75,9 +72,7 @@ module.exports = {
     ],
     'no-tabs': [
       'error',
-      {
-        allowIndentationTabs: true,
-      },
+      { allowIndentationTabs: true },
     ],
     'no-unused-expressions': 0,
     'prefer-object-spread': 1,
@@ -112,17 +107,13 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/explicit-function-return-type': [ 0 ],
     '@typescript-eslint/explicit-member-accessibility': [ 0 ],
-    '@typescript-eslint/func-call-spacing': [ 1 ],
     '@typescript-eslint/interface-name-prefix': 0,
     '@typescript-eslint/no-empty-function': 'warn',
     '@typescript-eslint/ban-types': [ 0 ],
     '@typescript-eslint/no-unused-vars': [
       1,
-      {
-        argsIgnorePattern: '^_',
-      },
+      { argsIgnorePattern: '^_' },
     ],
-    '@typescript-eslint/no-use-before-define': [ 0 ],
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/semi': [ 1 ],
   },

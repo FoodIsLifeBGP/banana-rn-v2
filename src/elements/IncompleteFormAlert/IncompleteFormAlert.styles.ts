@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 import * as colors from '@util/constants/colors';
 
 export default StyleSheet.create({
-  container: {
-    position: 'absolute',
-  },
+  container: { position: 'absolute' },
   body: {
     flexGrow: 1,
     alignItems: 'center',
@@ -14,9 +12,7 @@ export default StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
-  buttonWrapper: {
-    flexDirection: 'row',
-  },
+  buttonWrapper: { flexDirection: 'row' },
   leftButton: {
     borderWidth: 2,
     borderColor: colors.NAVY_BLUE,

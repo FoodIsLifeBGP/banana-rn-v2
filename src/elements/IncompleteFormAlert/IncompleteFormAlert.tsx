@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { Text,
+  View } from 'react-native';
 import useGlobal from '@state';
-import {
-  TextButton,
-  Modal,
-} from '@elements';
+import { TextButton,
+  Modal } from '@elements';
 import { Alert } from '@state/index.types';
 import { useScheme } from '@util/colorSchemes';
 import typography from '@util/typography';
@@ -68,9 +64,7 @@ export default function IncompleteFormAlert({
 
           <TextButton
             text="OK"
-            style={{
-              width: 104,
-            }}
+            style={{ width: 104 }}
             buttonStyle={{
               default: scheme.primary,
               pressed: scheme.secondary,
@@ -102,9 +96,7 @@ export default function IncompleteFormAlert({
             <View style={styles.leftButton}>
               <TextButton
                 text="NO, KEEP IT"
-                style={{
-                  width: 120,
-                }}
+                style={{ width: 120 }}
                 buttonStyle={{
                   default: scheme.tertiary,
                   pressed: scheme.secondary,
@@ -116,9 +108,7 @@ export default function IncompleteFormAlert({
             <View style={styles.rightButton}>
               <TextButton
                 text="YES, CANCEL"
-                style={{
-                  width: 120,
-                }}
+                style={{ width: 120 }}
                 buttonStyle={{
                   default: scheme.primary,
                   pressed: scheme.secondary,

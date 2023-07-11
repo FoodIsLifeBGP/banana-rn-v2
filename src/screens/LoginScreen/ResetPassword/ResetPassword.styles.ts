@@ -16,9 +16,7 @@ export default StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
   },
-  errorContainer: {
-    flexDirection: 'row',
-  },
+  errorContainer: { flexDirection: 'row' },
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',

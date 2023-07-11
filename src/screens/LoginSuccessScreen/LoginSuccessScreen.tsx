@@ -11,7 +11,9 @@ import DonorDashboardScreen from '../DonorDashboardScreen';
 
 export default function LoginSuccessScreen() {
   const [ state ] = useGlobal();
-  const { user = {} as any, jwt = '', userIdentity } = state;
+  const {
+    user = {} as any, jwt = '', userIdentity,
+  } = state;
   const { id } = user;
   if (!jwt || !user) { return <Text>Loading...</Text>; }
 

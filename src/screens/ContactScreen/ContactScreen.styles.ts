@@ -14,41 +14,27 @@ export const ListItem = StyleSheet.create({
     borderColor: 'transparent',
     borderBottomColor: LIST_ITEM_BORDER_COLOR,
   },
-  firstContainer: {
-    borderTopColor: LIST_ITEM_BORDER_COLOR,
-  },
+  firstContainer: { borderTopColor: LIST_ITEM_BORDER_COLOR },
   title: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 5,
   },
-  titleText: {
-    ...typography.h3,
-  },
-  titleIcon: {
-    marginRight: 12,
-  },
-  message: {
-    ...typography.body1,
-  },
+  titleText: { ...typography.h3 },
+  titleIcon: { marginRight: 12 },
+  message: { ...typography.body1 },
 });
 
 export default StyleSheet.create({
-  outerContainer: {
-    flex: 1,
-  },
+  outerContainer: { flex: 1 },
   header: {
     flexBasis: '16%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.BANANA_YELLOW,
   },
-  headerText: {
-    ...typography.h3,
-  },
-  bodyContainer: {
-    flex: 1,
-  },
+  headerText: { ...typography.h3 },
+  bodyContainer: { flex: 1 },
   bodyMessage: {
     paddingHorizontal: GRID_MARGIN, // TODO: update based on Figma Question #65
     paddingVertical: GRID_MARGIN,

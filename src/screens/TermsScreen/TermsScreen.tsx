@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import {
-  Title,
+import { Title,
   SpacerInline,
   NavBar,
-  LinkButton,
-} from '@elements';
+  LinkButton } from '@elements';
 import getEnv from '@util/environment';
 import Terms from '@assets/documents/SampleToS';
 import ScrollContainer from '../../elements/ScrollContainer/ScrollContainer';

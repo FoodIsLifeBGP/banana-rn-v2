@@ -1,17 +1,13 @@
 import React from 'react';
-import {
-  Image,
+import { Image,
   Platform,
-  View,
-} from 'react-native';
+  View } from 'react-native';
 import { NAVY_BLUE } from '@util/constants/colors';
-import {
-  deprecatedIconMap,
+import { deprecatedIconMap,
   iconImports,
   DeprecatedIconName,
   IconName,
-  IconImport,
-} from './index';
+  IconImport } from './index';
 
 interface IconProps {
   name: IconName | DeprecatedIconName;
@@ -66,12 +62,8 @@ export default function Icon({
 
     return {
       transform: [
-        {
-          translateX: x,
-        },
-        {
-          translateY: y,
-        },
+        { translateX: x },
+        { translateY: y },
       ],
     };
   };

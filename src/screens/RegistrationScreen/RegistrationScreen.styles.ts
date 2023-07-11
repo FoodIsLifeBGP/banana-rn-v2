@@ -21,18 +21,14 @@ export default StyleSheet.create({
     paddingTop: '10%',
     flex: 1,
   },
-  input: {
-    marginBottom: 14,
-  },
+  input: { marginBottom: 14 },
   text: {
     fontFamily: 'open-sans-light',
     fontSize: 16,
     marginTop: 4,
     color: colors.NAVY_BLUE,
   },
-  textBold: {
-    fontFamily: 'open-sans-bold',
-  },
+  textBold: { fontFamily: 'open-sans-bold' },
   checkboxRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -56,9 +52,7 @@ export default StyleSheet.create({
     height: inputHeight,
     backgroundColor: 'white',
   },
-  iconPadding: {
-    paddingRight: 35,
-  },
+  iconPadding: { paddingRight: 35 },
   row: {
     width: '100%',
     flexDirection: 'row',

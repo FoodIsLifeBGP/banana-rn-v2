@@ -4,12 +4,8 @@ import * as colors from '@util/constants/colors';
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 export default StyleSheet.create({
-  text: {
-    color: colors.NAVY_BLUE,
-  },
-  textSelected: {
-    color: colors.LIGHT_GRAY,
-  },
+  text: { color: colors.NAVY_BLUE },
+  textSelected: { color: colors.LIGHT_GRAY },
   selectorContainer: {
     flexDirection: 'row',
     flexGrow: 1,
@@ -24,11 +20,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  selectorLast: {
-    marginLeft: -2,
-  },
-  selectorSelected: {
-    backgroundColor: colors.NAVY_BLUE,
-  },
+  selectorLast: { marginLeft: -2 },
+  selectorSelected: { backgroundColor: colors.NAVY_BLUE },
 
 });

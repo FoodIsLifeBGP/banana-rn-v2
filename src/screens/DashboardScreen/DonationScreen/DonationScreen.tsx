@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react';
-import {
-  View,
-  KeyboardAvoidingView, ScrollView, Platform, Text, Image, TextInput,
-} from 'react-native';
+import { View,
+  KeyboardAvoidingView, ScrollView, Platform, Text, Image, TextInput } from 'react-native';
 import useGlobal from '@state';
-import {
-  NavBar,
+import { NavBar,
   SpacerInline,
   FormTextInput,
-  LinkButton,
-} from '@elements';
+  LinkButton } from '@elements';
 import validate from 'validate.js';
 import { NewDonation } from '@screens/DashboardScreen/DonationScreen/DonationScreen.type';
 import donationConstraints from '@util/validators/donation';
@@ -35,7 +31,9 @@ export default function DonationScreen(props) {
 
   const hasUnsavedChanges = Boolean(newDonation.itemName || newDonation.totalAmount || newDonation.pickupInstructions !== user.pickup_instructions);
   const preventBack = () => {
-    updateAlert({ type: 'incomplete form', dismissable: false, confirmFn: () => props.navigation.goBack() });
+    updateAlert({
+      type: 'incomplete form', dismissable: false, confirmFn: () => props.navigation.goBack(),
+    });
   };
   const validateInputs = async () => {
     const validateResults = validate(newDonation, donationConstraints);

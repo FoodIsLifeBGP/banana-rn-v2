@@ -21,9 +21,7 @@ export default StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
-  buttonWrapper: {
-    flexDirection: 'row',
-  },
+  buttonWrapper: { flexDirection: 'row' },
   leftButton: {
     borderWidth: 2,
     borderColor: colors.NAVY_BLUE,

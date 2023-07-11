@@ -7,17 +7,9 @@ export default StyleSheet.create({
     color: colors.NAVY_BLUE,
     margin: 3,
   },
-  textBold: {
-    fontWeight: 'bold',
-  },
-  container: {
-    flexDirection: 'row',
-  },
-  textContainer: {
-    flexDirection: 'column',
-  },
-  smallMarginLeft: {
-    marginLeft: 10,
-  },
+  textBold: { fontWeight: 'bold' },
+  container: { flexDirection: 'row' },
+  textContainer: { flexDirection: 'column' },
+  smallMarginLeft: { marginLeft: 10 },
 
 });

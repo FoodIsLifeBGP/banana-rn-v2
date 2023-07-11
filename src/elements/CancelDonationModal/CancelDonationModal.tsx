@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { Text,
+  View } from 'react-native';
 import useGlobalStore from '@state';
-import {
-  TextButton,
-  Modal,
-} from '@elements';
+import { TextButton,
+  Modal } from '@elements';
 import { Alert } from '@state/index.types';
 import { useScheme } from '@util/colorSchemes';
 import typography from '@util/typography';
@@ -25,9 +21,9 @@ export default function CancelDonationModal({
   okay = () => {},
 
 }: CancelDonationModalProps) {
-  const updateAlert = useGlobalStore((state) => state.updateAlert);
-  const clearAlert = useGlobalStore((state) => state.clearAlert);
-  const alert = useGlobalStore((state) => state.alert);
+  const updateAlert = useGlobalStore(state => state.updateAlert);
+  const clearAlert = useGlobalStore(state => state.clearAlert);
+  const alert = useGlobalStore(state => state.alert);
 
   const scheme = useScheme();
 
@@ -78,9 +74,7 @@ export default function CancelDonationModal({
 
           <TextButton
             text="OK"
-            style={{
-              width: 104,
-            }}
+            style={{ width: 104 }}
             buttonStyle={{
               default: scheme.primary,
               pressed: scheme.secondary,
@@ -111,9 +105,7 @@ export default function CancelDonationModal({
             <View style={styles.leftButton}>
               <TextButton
                 text="NO, KEEP IT"
-                style={{
-                  width: 120,
-                }}
+                style={{ width: 120 }}
                 buttonStyle={{
                   default: scheme.tertiary,
                   pressed: scheme.secondary,
@@ -125,9 +117,7 @@ export default function CancelDonationModal({
             <View style={styles.rightButton}>
               <TextButton
                 text="YES, CANCEL"
-                style={{
-                  width: 120,
-                }}
+                style={{ width: 120 }}
                 buttonStyle={{
                   default: scheme.primary,
                   pressed: scheme.secondary,
@@ -160,9 +150,7 @@ export default function CancelDonationModal({
             <View style={styles.leftButton}>
               <TextButton
                 text="OKAY"
-                style={{
-                  width: 120,
-                }}
+                style={{ width: 120 }}
                 buttonStyle={{
                   default: scheme.tertiary,
                   pressed: scheme.secondary,

@@ -33,17 +33,13 @@ export default StyleSheet.create({
     width: imageSize,
     borderRadius: (imageSize / 2),
   },
-  mainContainer: {
-    flexDirection: 'row',
-  },
+  mainContainer: { flexDirection: 'row' },
   infoContainer: {
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     marginStart: 20,
   },
-  infoBottomContainer: {
-    flexDirection: 'row',
-  },
+  infoBottomContainer: { flexDirection: 'row' },
   infoText: {
     fontFamily: 'open-sans-regular',
     color: colors.NAVY_BLUE,

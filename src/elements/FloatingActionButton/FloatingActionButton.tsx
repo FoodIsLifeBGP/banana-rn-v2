@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  View,
+import { View,
   Image,
   TouchableOpacity,
-  Alert,
-} from 'react-native';
+  Alert } from 'react-native';
 import { Button, Icon } from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import * as colors from '@util/constants/colors';

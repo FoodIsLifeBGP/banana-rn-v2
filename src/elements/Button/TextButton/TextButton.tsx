@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React from 'react';
-import {
-  Text, TextStyle, StyleProp,
-} from 'react-native';
+import { Text, TextStyle, StyleProp } from 'react-native';
 import typography from '@util/typography';
 import Button, { ButtonProps } from '../Button';
 

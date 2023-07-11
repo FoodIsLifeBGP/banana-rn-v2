@@ -1,9 +1,5 @@
-import React, {
-  useState, RefObject, createRef, FunctionComponent,
-} from 'react';
-import {
-  View, Text, TextInput,
-} from 'react-native';
+import React, { useState, RefObject, createRef, FunctionComponent } from 'react';
+import { View, Text, TextInput } from 'react-native';
 import { FormTextInput, LinkButton, SpacerInline } from '@elements';
 import useGlobal from '@state';
 import styles from '../ResetPassword.styles';
@@ -13,9 +9,7 @@ interface NewPasswordFormProps {
   token: string;
 }
 
-const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({
-  onComplete, token,
-}) => {
+const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({ onComplete, token }) => {
   const [ isSubmitting, setIsSubmitting ] = useState(false);
   const [ formData, setFormData ] = useState({
     password: '',

@@ -1,42 +1,64 @@
-import React, {
-  useState, RefObject, createRef, useEffect,
-} from 'react';
-import {
-  ScrollView,
+import React, { useState, RefObject, createRef, useEffect } from 'react';
+import { ScrollView,
   View,
   Alert,
   Text,
-  TextInput,
-  KeyboardAvoidingView,
   Platform,
-} from 'react-native';
+  TextInput,
+  KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import useGlobal from '@state';
-import {
-  Title,
+import useGlobalStore from '@state';
+import { Title,
   LinkButton,
-  FormTextInput,
-} from '@elements';
+  FormTextInput } from '@elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styles from './LoginScreen.styles';
 import ResetPassword from './ResetPassword';
 import { PasswordResetStage } from './ResetPassword/ResetPassword';
 
 export default function LoginScreen(props) {
-  const [ state, actions ] = useGlobal() as any;
-  const { userIdentity } = state;
-  const { logIn } = actions;
+  const responseStatus = useGlobalStore(state => state.responseStatus);
+  const userIdentity = useGlobalStore(state => state.userIdentity);
+  const email = props.route.params.email ?? useGlobalStore(state => state.email);
+  const password = props.route.params.password ?? useGlobalStore(state => state.password);
+
+  const logIn = useGlobalStore(state => state.logIn);
+  const setEmail = useGlobalStore(state => state.setEmail);
+  const setPassword = useGlobalStore(state => state.setPassword);
+  const clearEmailAndPassword = useGlobalStore(state => state.clearEmailAndPassword);
 
   const passwordInputRef: RefObject<TextInput> = createRef();
-  const [ email, setEmail ] = useState(props.route.params.email ?? '');
-  const [ password, setPassword ] = useState(props.route.params.password ?? '');
-
-  const clearEmailAndPassword = () => { setEmail(''); setPassword(''); };
   const handleEmailInputSubmit = () => passwordInputRef.current?.focus();
+
   const [ showModal, setShowModal ] = useState(false);
   const [ passwordResetStage, setPasswordResetStage ] = useState(PasswordResetStage.NONE);
 
   useEffect(() => {
+    const reactToStatusCode = async () => {
+      if (responseStatus) {
+        switch (responseStatus.code) {
+        case 202: {
+          clearEmailAndPassword();
+          clearPasswordResetStage();
+          props.navigation.navigate('LoginSuccessScreen');
+          return;
+        }
+        case 401:
+          Alert.alert('Incorrect email or password');
+          return;
+        case 404:
+          Alert.alert('Server not found - please try again');
+          return;
+        case 500:
+          Alert.alert('Network error - please try again');
+          return;
+        default:
+          Alert.alert(`Server replied with ${responseStatus} status code`);
+        }
+      }
+    };
+    reactToStatusCode();
+
     const retrievePasswordResetStage = async () => {
       try {
         const value = await AsyncStorage.getItem('PASSWORD RESET STAGE');
@@ -48,7 +70,7 @@ export default function LoginScreen(props) {
       }
     };
     retrievePasswordResetStage();
-  }, []);
+  }, [ responseStatus ]);
 
   const storePasswordResetStage = async newStage => {
     try {
@@ -64,34 +86,20 @@ export default function LoginScreen(props) {
     AsyncStorage.removeItem('PASSWORD RESET STAGE');
   };
 
-  const handleLogin = async () => {
-    const statusCode = await logIn({ email, password });
-    switch (statusCode) {
-    case 202: {
-      await clearEmailAndPassword();
-      clearPasswordResetStage();
-      props.navigation.navigate('LoginSuccessScreen');
-      return;
-    }
-    case 401:
-      Alert.alert('Incorrect email or password');
-      return;
-    case 404:
-      Alert.alert('Server not found - please try again');
-      return;
-    case 500:
-      Alert.alert('Network error - please try again');
-      return;
-    default:
-      Alert.alert(`Server replied with ${statusCode} status code`);
-    }
-  };
-
   const handleForgotPassword = () => {
     setShowModal(true);
   };
+
   const handleDismissModal = () => {
     setShowModal(false);
+  };
+
+  const handleSetEmail = (newEmail: string) => {
+    setEmail(newEmail);
+  };
+
+  const handleSetPassword = (newPassword: string) => {
+    setPassword(newPassword);
   };
 
   return (
@@ -107,7 +115,7 @@ export default function LoginScreen(props) {
             label="email"
             placeholder="info@bananaapp.org"
             value={email}
-            setValue={setEmail}
+            setValue={handleSetEmail}
             style={styles.inputEmail}
             onSubmitEditing={handleEmailInputSubmit}
             autoCorrect={false}
@@ -123,9 +131,9 @@ export default function LoginScreen(props) {
             label="password"
             type="password"
             value={password}
-            setValue={setPassword}
+            setValue={handleSetPassword}
             ref={passwordInputRef}
-            onSubmitEditing={handleLogin}
+            onSubmitEditing={logIn}
             enablesReturnKeyAutomatically={true}
             returnKeyType="go"
             blurOnSubmit={false}
@@ -142,7 +150,7 @@ export default function LoginScreen(props) {
         </View>
 
         <View style={styles.buttonContainer}>
-          <LinkButton text="Log In" onPress={handleLogin} />
+          <LinkButton text="Log In" onPress={logIn} />
           <LinkButton text="Register" destination="RegistrationScreen" />
         </View>
       </ScrollView>

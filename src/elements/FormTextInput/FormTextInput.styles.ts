@@ -19,12 +19,8 @@ export default StyleSheet.create({
     // Transparent border to prevent box-size adjustments when error border is revealed.
     borderColor: 'transparent',
   },
-  inputError: {
-    borderColor: colors.RED,
-  },
-  errorMessage: {
-    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
-  },
+  inputError: { borderColor: colors.RED },
+  errorMessage: { paddingHorizontal: INPUT_PADDING_HORIZONTAL },
   errorMessageText: {
     ...typography.body5,
     color: colors.RED,

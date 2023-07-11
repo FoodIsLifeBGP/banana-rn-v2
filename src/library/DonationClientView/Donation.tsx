@@ -1,11 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import {
-  View,
+import { View,
   Text,
   TouchableOpacity,
-  Image,
-} from 'react-native';
+  Image } from 'react-native';
 import { Icon } from '@elements';
 import typography from '@util/typography';
 import formatDate from '@util/formatDate';
@@ -51,14 +49,18 @@ export default function ClientDonation({
             <Text style={typography.h3}>{food_name}</Text>
             <View style={styles.infoBottomContainer}>
               <Icon name="location" size={18} />
-              <Text style={[ typography.body3, { fontSize: 18, marginHorizontal: 4 } ]}>{donor.donor_name}</Text>
+              <Text style={[ typography.body3, { fontSize: 18, marginHorizontal: 4 } ]}>
+                {donor.donor_name}
+              </Text>
               <Icon name={isHistory ? 'time' : 'distance'} size={18} />
               {!isHistory ? (
                 <Text style={[ typography.body3, { fontSize: 18, marginHorizontal: 4 } ]}>
                   {distance && `${distance.toFixed(1)} mi`}
                 </Text>
               ) : (
-                <Text style={[ typography.body3, { fontSize: 18, marginHorizontal: 4 } ]}>{updatedAt}</Text>
+                <Text style={[ typography.body3, { fontSize: 18, marginHorizontal: 4 } ]}>
+                  {updatedAt}
+                </Text>
               )}
             </View>
           </View>

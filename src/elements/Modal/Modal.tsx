@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  View, Text, TouchableOpacity, StyleProp, ViewStyle,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { ColorPaletteName, useScheme } from '@util/colorSchemes';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles, { DEFAULT_TOP_OFFSET } from './Modal.styles';

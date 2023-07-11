@@ -78,6 +78,10 @@ export interface Alert {
 	confirmFn?: () => void;
 }
 
+export interface StatusCode {
+	code: 200 | 202 | 400 | 403 | 401 | 404 | 418 | 500;
+}
+
 export interface InitialState {
 	userIdentity: 'donor' | 'client';
 	apiBaseUrl: string;
@@ -87,10 +91,9 @@ export interface InitialState {
 	jwt?: string;
 	user?: DonorState | ClientState | SharedProps;
 	donationsOrClaims?: Donation[] | Claim[];
-}
-
-export interface StatusCode {
-	code: 200 | 202 | 400 | 403 | 404 | 418 | 500;
+	email?: string,
+  password?: string,
+	responseStatus?: StatusCode;
 }
 
 export interface Location {

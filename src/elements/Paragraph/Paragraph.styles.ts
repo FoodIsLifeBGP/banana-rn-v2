@@ -7,7 +7,5 @@ export default StyleSheet.create({
     fontSize: 20,
     color: colors.NAVY_BLUE,
   },
-  emphasizedParagraphText: {
-    fontFamily: 'open-sans-bold',
-  },
+  emphasizedParagraphText: { fontFamily: 'open-sans-bold' },
 });

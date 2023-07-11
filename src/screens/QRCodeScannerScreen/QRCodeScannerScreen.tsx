@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import * as colors from '@util/constants/colors';
-import {
-  Text,
+import { Text,
   View,
   StyleSheet,
-  Image,
-} from 'react-native';
+  Image } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 import useGlobal from '@state';
 
-import {
-  Modal, TextButton, Icon, LinkButton,
-} from '@elements';
+import { Modal, TextButton, Icon, LinkButton } from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import { categoryImage } from '@util/donationCategory';
 import openAppSettings from '@util/openAppSettings';
@@ -26,7 +22,10 @@ export default function QRCodeScannerScreen(props) {
   const { scan } = actions;
   const [ hasCameraPermission, setHasCameraPermission ] = useState<boolean | null>(null);
   const [ modalOn, setModalOn ] = useState(false);
-  const [ claimedDonation, setClaimedDonation ] = useState({ food_name: '', claim: { client_name: '' } });
+  const [ claimedDonation, setClaimedDonation ] = useState({
+    food_name: '',
+    claim: { client_name: '' },
+  });
   // TBD.
   // const [ scannerActive, setScannerActive ] = useState(true);
   const [ icon, setIcon ] = useState(() => categoryImage(''));
@@ -76,7 +75,10 @@ export default function QRCodeScannerScreen(props) {
   // Triggers when user clicks outside of modal.
   // Resets value of scanned, and sets modalOn to false.
   const handleDismiss = () => {
-    setClaimedDonation({ food_name: '', claim: { client_name: '' } });
+    setClaimedDonation({
+      food_name: '',
+      claim: { client_name: '' },
+    });
     setModalOn(false);
     props.navigation.goBack();
   };
@@ -98,7 +100,10 @@ export default function QRCodeScannerScreen(props) {
                 {claimedDonation.claim.client_name}
               </Text>
             </View>
-            <View style={{ ...styles.textContainer, marginTop: 'auto', marginBottom: -80 }}>
+            <View style={{
+              ...styles.textContainer, marginTop: 'auto', marginBottom: -80,
+            }}
+            >
               <Icon name="time" color="blue" size={20} />
               <Text style={styles.textStyle}>
                 {getTime()}
@@ -119,7 +124,9 @@ export default function QRCodeScannerScreen(props) {
         <Modal title="SOMETHING WENT WRONG" open={modalOn} onDismiss={handleDismiss} palette="secondary">
           <View style={styles.content}>
             <Image source={icon} style={styles.icon} />
-            <Text style={{ ...styles.textStyle, fontWeight: 'bold' }}>PLEASE TRY AGAIN</Text>
+            <Text style={{ ...styles.textStyle, fontWeight: 'bold' }}>
+              PLEASE TRY AGAIN
+            </Text>
             <View style={{ ...styles.errorContainer, marginVertical: 20 }}>
               <Text style={styles.errorStyle}>QR Code Scan was not successful.</Text>
               <Text style={styles.errorStyle}>If this issue is not resolved,</Text>

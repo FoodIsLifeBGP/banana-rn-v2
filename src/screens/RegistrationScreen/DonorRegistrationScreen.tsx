@@ -1,19 +1,15 @@
 /* eslint-disable no-tabs */
 import React, { useRef, useState } from 'react';
-import {
-  KeyboardAvoidingView,
+import { KeyboardAvoidingView,
   ScrollView,
   Text, TouchableOpacity,
   View,
-  Platform, TextInput, Keyboard,
-} from 'react-native';
+  Platform, TextInput, Keyboard } from 'react-native';
 import { Divider } from 'react-native-paper';
-import {
-  FormTextInput,
+import { FormTextInput,
   LinkButton,
   SpacerInline,
-  Title, Icon,
-} from '@elements';
+  Title, Icon } from '@elements';
 import useGlobal from '@state';
 import { getStateList } from '@util/constants/statesAbbr';
 import donorConstraints from '@util/validators/donorRegistration';
@@ -231,7 +227,10 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
 
         <View style={styles.checkboxRow}>
           <View style={styles.checkBox}>
-            <TouchableOpacity style={{ top: 3 }} onPress={toggleTermsOfService}>
+            <TouchableOpacity
+              style={{ top: 3 }}
+              onPress={toggleTermsOfService}
+            >
               <Icon
                 name={termsOfService ? 'checkboxOn' : 'checkboxOff'}
                 size={24}

@@ -1,11 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import {
-  View,
+import { View,
   Text,
   TouchableOpacity,
-  Image,
-} from 'react-native';
+  Image } from 'react-native';
 import typography from '@util/typography';
 import { categoryImage } from '@util/donationCategory';
 import formatDate from '@util/formatDate';
@@ -14,7 +12,9 @@ import { Donation } from './Donation.type';
 import styles from './Donation.styles';
 
 export default function DonorDonation(props) {
-  const { donation, isHistory, navigation } = props;
+  const {
+    donation, isHistory, navigation,
+  } = props;
 
   const {
     food_name,
@@ -28,7 +28,9 @@ export default function DonorDonation(props) {
   const updatedAt = formatDate(updated_at);
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('DonationsDetailScreen', { donation, id, edit: true })}
+      onPress={() => navigation.navigate('DonationsDetailScreen', {
+        donation, id, edit: true,
+      })}
     >
       <View style={styles.infoContainer}>
         <View style={{
@@ -46,7 +48,9 @@ export default function DonorDonation(props) {
             {isHistory ? (
               <View style={{ flexDirection: 'row' }}>
                 <Icon name="time" color="blue" size={20} />
-                <Text style={{ ...typography.h5, marginLeft: 5 }}>{updatedAt}</Text>
+                <Text style={{ ...typography.h5, marginLeft: 5 }}>
+                  {updatedAt}
+                </Text>
               </View>
             ) : <Text style={typography.h5}>{`about ${total_amount}`}</Text>}
           </View>

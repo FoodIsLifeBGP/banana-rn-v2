@@ -20,22 +20,14 @@ const claimStyles: Record<string, TextStyle|ImageStyle|ViewStyle> = {
     borderBottomColor: colors.LIGHT_GRAY,
     paddingBottom: 10,
   },
-  mainContent: {
-    padding: '3%',
-  },
-  title: {
-    marginBottom: 7,
-  },
-  smallTitle: {
-    marginBottom: 1,
-  },
+  mainContent: { padding: '3%' },
+  title: { marginBottom: 7 },
+  smallTitle: { marginBottom: 1 },
   itemWithIcon: {
     flexDirection: 'row',
     marginBottom: 5,
   },
-  item: {
-    marginBottom: 5,
-  },
+  item: { marginBottom: 5 },
   closeLnk: {
     marginRight: 10,
     marginTop: 10,

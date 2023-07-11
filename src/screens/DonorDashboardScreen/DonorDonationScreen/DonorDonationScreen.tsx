@@ -1,30 +1,30 @@
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
-import {
-  View,
+import { View,
   Text,
   TouchableOpacity,
   Image,
-  Alert,
-} from 'react-native';
+  Alert } from 'react-native';
 import { Switch } from 'react-native-paper';
 import useGlobal from '@state';
-import {
-  NavBar,
+import { NavBar,
   SpacerInline,
   FormTextInput,
   LinkButton,
-  InputLabel,
-} from '@elements';
+  InputLabel } from '@elements';
 import * as colors from '@util/constants/colors';
 import styles from './DonorDonationScreen.styles';
 
 export default function DonorDonationScreen(props) {
   const [ state, actions ] = useGlobal() as any;
   const { user, jwt } = state;
-  const { postDonation, logOut, getDonationsOrClaims } = actions;
+  const {
+    postDonation, logOut, getDonationsOrClaims,
+  } = actions;
 
-  const { donation, edit, donationId } = props.route;
+  const {
+    donation, edit, donationId,
+  } = props.route;
 
   const {
     claims = '',
@@ -162,7 +162,10 @@ export default function DonorDonationScreen(props) {
       { edit && (
         <>
           <View style={{ flexDirection: 'column' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{
+              flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+            }}
+            >
               <InputLabel text="Cancel donation?" />
               <Switch value={cancel} onValueChange={toggleCancel} color={colors.NAVY_BLUE} />
             </View>
@@ -170,7 +173,10 @@ export default function DonorDonationScreen(props) {
           </View>
 
           <View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{
+              flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+            }}
+            >
               <InputLabel text="Stop donation?" />
               <Switch value={stop} onValueChange={toggleStop} color={colors.NAVY_BLUE} />
             </View>

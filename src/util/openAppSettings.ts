@@ -11,9 +11,7 @@ export default Platform.select({
     const packageName = 'com.banana.app'; /* TODO: see if we need to update this pkg name */
     await startActivityAsync(
       ActivityAction.APPLICATION_DETAILS_SETTINGS,
-      {
-        data: `package:${packageName}`,
-      },
+      { data: `package:${packageName}` },
     );
   },
   default: () => Promise.resolve(),

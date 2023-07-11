@@ -33,9 +33,7 @@ export default StyleSheet.create({
     height: (iconSize * 0.64),
     width: (iconSize * 0.8),
   },
-  infoContainer: {
-    flexDirection: 'column',
-  },
+  infoContainer: { flexDirection: 'column' },
   infoText: {
     fontFamily: 'open-sans-regular',
     color: colors.NAVY_BLUE,

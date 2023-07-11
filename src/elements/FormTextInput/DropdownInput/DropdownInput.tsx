@@ -1,6 +1,4 @@
-import {
-  StyleProp, TextInput, TextInputProps, TextStyle,
-} from 'react-native';
+import { StyleProp, TextInput, TextInputProps, TextStyle } from 'react-native';
 import React, { Ref } from 'react';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
 import { Icon } from '@elements';

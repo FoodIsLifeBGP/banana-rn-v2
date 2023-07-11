@@ -83,51 +83,37 @@ function donorOrClientDrawer() {
   const DONOR_MENU = {
     QRCodeScannerScreen: {
       screen: StackNavigator,
-      navigationOptions: {
-        drawerLabel: <MainOption text="Scan QR Code" icon="qrCode" />,
-      },
+      navigationOptions: { drawerLabel: <MainOption text="Scan QR Code" icon="qrCode" /> },
     },
     DonorDashboardScreen: {
       screen: StackNavigator,
-      navigationOptions: {
-        drawerLabel: <MainOption text="Donations" icon="claims" />,
-      },
+      navigationOptions: { drawerLabel: <MainOption text="Donations" icon="claims" /> },
     },
     DonorHistoryScreen: {
       screen: StackNavigator,
-      navigationOptions: {
-        drawerLabel: <SubOption text="History" />,
-      },
+      navigationOptions: { drawerLabel: <SubOption text="History" /> },
     },
   };
 
   const CLIENT_MENU = {
     DashboardScreen: {
       screen: StackNavigator,
-      navigationOptions: {
-        drawerLabel: <MainOption text="Donations" icon="donations" />,
-      },
+      navigationOptions: { drawerLabel: <MainOption text="Donations" icon="donations" /> },
     },
     ClientClaimsScreen: {
       screen: StackNavigator,
-      navigationOptions: {
-        drawerLabel: <MainOption text="Claims" icon="claims" />,
-      },
+      navigationOptions: { drawerLabel: <MainOption text="Claims" icon="claims" /> },
     },
     ClientHistoryScreen: {
       screen: StackNavigator,
-      navigationOptions: {
-        drawerLabel: <SubOption text="History" />,
-      },
+      navigationOptions: { drawerLabel: <SubOption text="History" /> },
     },
   };
 
   const COMMON_MENU = {
     ContactScreen: {
       screen: props => <ContactScreen {...props} />,
-      navigationOptions: {
-        drawerLabel: <MainOption text="Contact Us" icon="help" />,
-      },
+      navigationOptions: { drawerLabel: <MainOption text="Contact Us" icon="help" /> },
     },
   };
 

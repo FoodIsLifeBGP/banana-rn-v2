@@ -1,22 +1,16 @@
-import React, {
-  Ref,
+import React, { Ref,
   RefObject,
-  forwardRef,
-} from 'react';
-import {
-  View,
+  forwardRef } from 'react';
+import { View,
   Image,
   Text,
   StyleProp,
-  ViewStyle,
-} from 'react-native';
+  ViewStyle } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
 
-import {
-  Icon,
-  InputLabel,
-} from '@elements';
+import { Icon,
+  InputLabel } from '@elements';
 import { sourceImage } from '@util/ImageSourcer';
 import styles from './FormImageInput.styles';
 
