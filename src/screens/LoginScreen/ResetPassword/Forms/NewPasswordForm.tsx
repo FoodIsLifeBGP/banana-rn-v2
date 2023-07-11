@@ -56,7 +56,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({ onComplete, 
         label="Password"
         type="password"
         value={formData.password}
-        setValue={text => {
+        setValue={(text) => {
           setError('');
           setFormData({ ...formData, password: text });
         }}
@@ -69,7 +69,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({ onComplete, 
         label="Confirm Password"
         type="password"
         value={formData.confirmPassword}
-        setValue={text => {
+        setValue={(text) => {
           setError('');
           setFormData({ ...formData, confirmPassword: text });
         }}

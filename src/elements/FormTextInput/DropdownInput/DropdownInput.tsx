@@ -26,7 +26,7 @@ function DropdownInput(props: DropdownInputProps) {
     style, value, setValue, dropdownData, placeholder,
   } = props;
   const formattedData: Item[] = [];
-  dropdownData?.forEach(item => formattedData.push({ label: item, value: item }));
+  dropdownData?.forEach((item) => formattedData.push({ label: item, value: item }));
   // this setting are designed so by requirement of <RNPickerSelect> component.
   const placeholderObj = placeholder ? {
     label: placeholder,
@@ -51,7 +51,7 @@ function DropdownInput(props: DropdownInputProps) {
       }
       placeholder={placeholderObj}
       value={value}
-      onValueChange={v => {
+      onValueChange={(v) => {
         if (setValue) {
           setValue(v.toString());
         }

@@ -24,7 +24,7 @@ export default function LinkButton({
 }: LinkButtonProps) {
   const buttonFunction = (destination && navigate)
     ? () => navigate(destination)
-    : onPress && (func => onPress(func));
+    : onPress && ((func) => onPress(func));
 
   return (
     <View style={styles.container}>

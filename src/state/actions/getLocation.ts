@@ -2,7 +2,7 @@ import { askAsync, LOCATION, PermissionStatus } from 'expo-permissions';
 import { getCurrentPositionAsync } from 'expo-location';
 import Constants from 'expo-constants';
 
-export const getLocation = async store => {
+export const getLocation = async (store) => {
   const { status }: { status: PermissionStatus } = await askAsync(LOCATION);
   if (status === 'granted') {
     try {

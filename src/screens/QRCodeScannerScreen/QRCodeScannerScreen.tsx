@@ -54,12 +54,12 @@ export default function QRCodeScannerScreen(props) {
     setHasCameraPermission(status === 'granted');
   };
 
-  const handleBarCodeScanned = barcode => {
-    const match = state.donationsOrClaims.filter(d => d.status === 'claimed' && d.claim.qr_code === barcode.data);
+  const handleBarCodeScanned = (barcode) => {
+    const match = state.donationsOrClaims.filter((d) => d.status === 'claimed' && d.claim.qr_code === barcode.data);
     if (match[0]) {
       // TBD
       // setScannerActive(false);
-      scan(barcode.data).then(res => {
+      scan(barcode.data).then((res) => {
         if (res === 202) {
           setClaimedDonation(match[0]);
           setIcon(categoryImage(match[0].category));

@@ -13,7 +13,7 @@ function BananaMap({
       initialRegion={mapRegion}
       style={styles.map}
     >
-      {(donations as any).map(donation => {
+      {(donations as any).map((donation) => {
         const { id } = donation;
         return (
           <DonationMarker

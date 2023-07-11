@@ -53,7 +53,7 @@ function DashboardScreen(props) {
           ? (
             <ScrollView>
               {
-                (donations as any).map(donation => (
+                (donations as any).map((donation) => (
                   <View key={donation.id}>
                     <Donation
                       donation={donation}

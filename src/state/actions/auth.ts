@@ -1,7 +1,7 @@
 import railsAxios from '@util/railsAxios';
 import { GlobalState, initialState } from '@state/index';
 
-export const logIn = (state) : GlobalState => {
+export const logIn = (state): GlobalState => {
   const {
     loginUrl, userIdentity, email, password,
   } = state;
@@ -34,7 +34,7 @@ export const logIn = (state) : GlobalState => {
 
 export const logOut = () => ({ ...initialState });
 
-export const setEmail = email => ({ email });
+export const setEmail = (email) => ({ email });
 
-export const setPassword = password => ({ password });
+export const setPassword = (password) => ({ password });
 

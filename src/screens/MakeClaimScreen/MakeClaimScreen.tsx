@@ -16,7 +16,7 @@ function MakeClaimScreen() {
   const { claimDonation, getTravelTimes } = globalActions;
   const { user } = globalState;
   const route = useRoute();
-  const { donation } : any = route.params; // TODO: UPDATE TYPE
+  const { donation }: any = route.params; // TODO: UPDATE TYPE
   const { donor } = donation;
   const pendingTravelTimes = {
     pedestrian: 'calculating..', publicTransport: 'calculating..', bicycle: 'calculating..',

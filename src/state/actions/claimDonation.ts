@@ -1,16 +1,23 @@
+import { GlobalState } from '@state/index';
 import railsAxios from '@util/railsAxios';
 
-
-const claimDonation = async (_store, donationId: number, clientId: number) => {
+export const claimDonation = (state: GlobalState, donationId: number, clientId: number): GlobalState => {
   const endpoint = `/donations/${donationId}/claim`;
-  const { jwt } = _store.state;
+  const { jwt } = state;
   const payload = { client_id: clientId };
-  try {
-    const response = await railsAxios(jwt).post(endpoint, payload);
-    return { status: response.request.status, claim: response.data.claim };
-  } catch (error) {
-    return 500;
-  }
+
+  const claimDonationAsync = async () => {
+    try {
+      const response = await railsAxios(jwt).post(endpoint, payload);
+      return { responseStatus: response.request.status, claim: response.data.claim };
+    } catch (error: any) {
+      return { responseStatus: 500 };
+    }
+  };
+
+  claimDonationAsync();
+
+  return state;
 };
 
-export { claimDonation };
+export default claimDonation;

@@ -14,7 +14,7 @@ function DonorHistoryScreen() {
 
   useEffect(() => {
     if (isFocused) {
-      getDonationHistory().then(data => setDonations(data));
+      getDonationHistory().then((data) => setDonations(data));
     }
   }, [ isFocused ]);
 
@@ -36,7 +36,7 @@ function DonorHistoryScreen() {
         </View>
         {(donations && donations.length > 0) ? (
           <ScrollView>
-            {(donations as any).map(donation => (
+            {(donations as any).map((donation) => (
               <View key={donation.id}>
                 <Donation
                   donation={donation}

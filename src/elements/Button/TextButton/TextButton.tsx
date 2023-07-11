@@ -36,7 +36,7 @@ export default function TextButton({
       {...props}
     >
       {
-        foregroundColor => (
+        (foregroundColor) => (
           <Text
             style={[
               {

@@ -98,7 +98,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Email"
           value={newDonor.email}
-          setValue={s => setNewDonor({ ...newDonor, email: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, email: s })}
           style={styles.input}
           placeholder="info@bananaapp.org"
           error={!!validationErrors.email}
@@ -111,7 +111,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Password"
           value={newDonor.password}
-          setValue={s => setNewDonor({ ...newDonor, password: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, password: s })}
           type="password"
           style={styles.input}
           error={!!validationErrors.password}
@@ -124,7 +124,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Confirm Password"
           value={newDonor.retypedPassword}
-          setValue={s => setNewDonor({ ...newDonor, retypedPassword: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, retypedPassword: s })}
           style={styles.input}
           type="password"
           error={!!validationErrors.retypedPassword}
@@ -139,7 +139,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="First Name"
           value={newDonor.firstName}
-          setValue={s => setNewDonor({ ...newDonor, firstName: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, firstName: s })}
           style={styles.input}
           error={!!validationErrors.firstName}
           errorMessage={validationErrors.firstName}
@@ -151,7 +151,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Last Name"
           value={newDonor.lastName}
-          setValue={s => setNewDonor({ ...newDonor, lastName: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, lastName: s })}
           style={styles.input}
           error={!!validationErrors.lastName}
           errorMessage={validationErrors.lastName}
@@ -162,7 +162,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Business Name"
           value={newDonor.businessName}
-          setValue={s => setNewDonor({ ...newDonor, businessName: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, businessName: s })}
           style={styles.input}
           error={!!validationErrors.businessName}
           errorMessage={validationErrors.businessName}
@@ -173,7 +173,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Business Address"
           value={newDonor.businessAddress}
-          setValue={s => setNewDonor({ ...newDonor, businessAddress: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, businessAddress: s })}
           style={styles.input}
           error={!!validationErrors.businessAddress}
           errorMessage={validationErrors.businessAddress}
@@ -185,7 +185,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           <FormTextInput
             label="City"
             value={newDonor.city}
-            setValue={s => setNewDonor({ ...newDonor, city: s })}
+            setValue={(s) => setNewDonor({ ...newDonor, city: s })}
             style={{ width: '40%' }}
             autoCapitalize="words"
             error={!!validationErrors.city}
@@ -198,7 +198,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
             type="dropdown"
             dropdownData={stateList}
             value={newDonor.state}
-            setValue={s => setNewDonor({ ...newDonor, state: s })}
+            setValue={(s) => setNewDonor({ ...newDonor, state: s })}
             style={{ width: '20%' }}
             error={!!validationErrors.state}
             errorMessage={validationErrors.state}
@@ -206,7 +206,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           <FormTextInput
             label="Zip"
             value={newDonor.zip}
-            setValue={s => setNewDonor({ ...newDonor, zip: s })}
+            setValue={(s) => setNewDonor({ ...newDonor, zip: s })}
             style={{ width: '30%' }}
             autoCapitalize="words"
             error={!!validationErrors.zip}
@@ -218,7 +218,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Pick up instructions"
           value={newDonor.pickupInstructions}
-          setValue={s => setNewDonor({ ...newDonor, pickupInstructions: s })}
+          setValue={(s) => setNewDonor({ ...newDonor, pickupInstructions: s })}
           placeholder="Directions on where to pick up item"
           error={!!validationErrors.pickupInstructions}
           errorMessage={validationErrors.pickupInstructions}

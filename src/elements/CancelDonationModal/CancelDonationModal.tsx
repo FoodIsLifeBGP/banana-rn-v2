@@ -21,9 +21,9 @@ export default function CancelDonationModal({
   okay = () => {},
 
 }: CancelDonationModalProps) {
-  const updateAlert = useGlobalStore(state => state.updateAlert);
-  const clearAlert = useGlobalStore(state => state.clearAlert);
-  const alert = useGlobalStore(state => state.alert);
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const clearAlert = useGlobalStore((state) => state.clearAlert);
+  const alert = useGlobalStore((state) => state.alert);
 
   const scheme = useScheme();
 

@@ -33,19 +33,24 @@ export interface GlobalState extends InitialState {
   clearAlert: () => void,
   logIn: () => void,
   logOut: () => void,
+  cancelDonation: (donationId: number) => void,
+  claimDonation: (donationId: number, clientId: number) => void,
 }
 
-const useGlobalStore = create<GlobalState>(set => ({
+const useGlobalStore = create<GlobalState>((set) => ({
   ...initialState,
-  updateAlert: alert => set(actions.updateAlert(alert)),
-  setResponseStatus: statusCode => set(actions.setResponseStatus(statusCode)),
+  updateAlert: (alert) => set(actions.updateAlert(alert)),
+  setResponseStatus: (statusCode) => set(actions.setResponseStatus(statusCode)),
   clearAlert: () => set(actions.clearAlert()),
-  logIn: () => set(state => actions.logIn(state)),
+  logIn: () => set((state) => actions.logIn(state)),
   logOut: () => set(actions.logOut()),
-  setEmail: email => set(actions.setEmail(email)),
-  setPassword: password => set(actions.setPassword(password)),
+  setEmail: (email) => set(actions.setEmail(email)),
+  setPassword: (password) => set(actions.setPassword(password)),
   clearEmailAndPassword: () => set({ email: undefined, password: undefined }),
+  cancelDonation: (donationId) => set((state) => actions.cancelDonation(state, donationId)),
+  claimDonation: (donationId, clientId) => set((state) => actions.claimDonation(state, donationId, clientId)),
 }));
+
 // Paste the following into your code to use global state & actions:
 
 // import useGlobalStore from '@state';

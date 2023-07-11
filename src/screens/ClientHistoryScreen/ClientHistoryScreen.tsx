@@ -48,7 +48,7 @@ function ClientHistoryScreen(props) {
         { !loaded && <Text>Loading...</Text> }
         {(claims && claims.length > 0) ? (
           <ScrollView>
-            {(claims as any).sort((a, b) => a.created_at > b.created_at).map(claim => (
+            {(claims as any).sort((a, b) => a.created_at > b.created_at).map((claim) => (
               <View key={claim.id}>
                 <Donation
                   donation={claim}

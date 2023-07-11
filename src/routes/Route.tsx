@@ -112,7 +112,7 @@ function donorOrClientDrawer() {
 
   const COMMON_MENU = {
     ContactScreen: {
-      screen: props => <ContactScreen {...props} />,
+      screen: (props) => <ContactScreen {...props} />,
       navigationOptions: { drawerLabel: <MainOption text="Contact Us" icon="help" /> },
     },
   };
@@ -126,7 +126,7 @@ function donorOrClientDrawer() {
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
-  Object.entries(donorOrClientDrawer()).forEach(ting => console.log('ting', ting));
+  Object.entries(donorOrClientDrawer()).forEach((ting) => console.log('ting', ting));
   // TODO: figure out why Drawer.Screen is erroring and remove the above console.log
   return (
     <Drawer.Navigator>

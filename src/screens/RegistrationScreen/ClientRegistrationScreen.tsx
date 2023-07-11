@@ -98,7 +98,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Email"
           value={newClient.email}
-          setValue={v => setNewClient({ ...newClient, email: v })}
+          setValue={(v) => setNewClient({ ...newClient, email: v })}
           style={styles.input}
           placeholder="info@bananaapp.org"
           error={validateError.email}
@@ -111,7 +111,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Password"
           value={newClient.password}
-          setValue={v => setNewClient({ ...newClient, password: v })}
+          setValue={(v) => setNewClient({ ...newClient, password: v })}
           type="password"
           style={styles.input}
           error={validateError.password}
@@ -124,7 +124,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Confirm Password"
           value={newClient.retypedPassword}
-          setValue={v => setNewClient({ ...newClient, retypedPassword: v })}
+          setValue={(v) => setNewClient({ ...newClient, retypedPassword: v })}
           style={styles.input}
           type="password"
           error={validateError.retypedPassword}
@@ -140,7 +140,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="First Name"
           value={newClient.firstName}
-          setValue={v => setNewClient({ ...newClient, firstName: v })}
+          setValue={(v) => setNewClient({ ...newClient, firstName: v })}
           style={styles.input}
           error={validateError.firstName}
           errorMessage={validateError.firstName}
@@ -152,7 +152,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Last Name"
           value={newClient.lastName}
-          setValue={v => setNewClient({ ...newClient, lastName: v })}
+          setValue={(v) => setNewClient({ ...newClient, lastName: v })}
           style={styles.input}
           error={validateError.lastName}
           errorMessage={validateError.lastName}

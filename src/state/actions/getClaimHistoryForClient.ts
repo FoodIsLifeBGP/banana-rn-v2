@@ -1,6 +1,6 @@
 import railsAxios from '@util/railsAxios';
 
-export const getClaimHistoryForClient = async store => {
+export const getClaimHistoryForClient = async (store) => {
   const { jwt, user } = store.state;
   const endpoint = `/clients/${user.id}/claims_history`;
   try {

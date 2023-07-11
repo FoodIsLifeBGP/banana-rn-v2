@@ -17,15 +17,15 @@ import ResetPassword from './ResetPassword';
 import { PasswordResetStage } from './ResetPassword/ResetPassword';
 
 export default function LoginScreen(props) {
-  const responseStatus = useGlobalStore(state => state.responseStatus);
-  const userIdentity = useGlobalStore(state => state.userIdentity);
-  const email = props.route.params.email ?? useGlobalStore(state => state.email);
-  const password = props.route.params.password ?? useGlobalStore(state => state.password);
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
+  const email = props.route.params.email ?? useGlobalStore((state) => state.email);
+  const password = props.route.params.password ?? useGlobalStore((state) => state.password);
 
-  const logIn = useGlobalStore(state => state.logIn);
-  const setEmail = useGlobalStore(state => state.setEmail);
-  const setPassword = useGlobalStore(state => state.setPassword);
-  const clearEmailAndPassword = useGlobalStore(state => state.clearEmailAndPassword);
+  const logIn = useGlobalStore((state) => state.logIn);
+  const setEmail = useGlobalStore((state) => state.setEmail);
+  const setPassword = useGlobalStore((state) => state.setPassword);
+  const clearEmailAndPassword = useGlobalStore((state) => state.clearEmailAndPassword);
 
   const passwordInputRef: RefObject<TextInput> = createRef();
   const handleEmailInputSubmit = () => passwordInputRef.current?.focus();
@@ -37,6 +37,7 @@ export default function LoginScreen(props) {
     const reactToStatusCode = async () => {
       if (responseStatus) {
         switch (responseStatus.code) {
+        // TODO: should this be pulled-from or set-to global state
         case 202: {
           clearEmailAndPassword();
           clearPasswordResetStage();
@@ -72,7 +73,7 @@ export default function LoginScreen(props) {
     retrievePasswordResetStage();
   }, [ responseStatus ]);
 
-  const storePasswordResetStage = async newStage => {
+  const storePasswordResetStage = async (newStage) => {
     try {
       await AsyncStorage.setItem('PASSWORD RESET STAGE', newStage);
       setPasswordResetStage(newStage);

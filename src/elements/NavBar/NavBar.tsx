@@ -46,7 +46,7 @@ export default function NavBar({
 
   // TODO: fix dis
   // const [ state, { updateAlert } ] = useGlobal() as any;
-  const updateAlert = a => {
+  const updateAlert = (a) => {
     console.log(a);
   };
 

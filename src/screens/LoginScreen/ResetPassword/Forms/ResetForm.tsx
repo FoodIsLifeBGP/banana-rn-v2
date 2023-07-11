@@ -45,7 +45,7 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
         label="email"
         placeholder="info@bananaapp.org"
         value={formData}
-        setValue={text => {
+        setValue={(text) => {
           setError('');
           setFormData(text);
         }}

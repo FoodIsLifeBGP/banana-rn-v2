@@ -1,6 +1,6 @@
 import railsAxios from '@util/railsAxios';
 
-export const getClaimedDonationsForClient = async store => {
+export const getClaimedDonationsForClient = async (store) => {
   const { jwt, user } = store.state;
   const endpoint = `/clients/${user.id}/get_claims?client_lat=${user.coords.latitude}&client_long=${user.coords.longitude}`;
   try {

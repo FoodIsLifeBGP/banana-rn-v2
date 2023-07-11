@@ -24,7 +24,7 @@ export default function FloatingActionButton({
   size = 28.5,
   onPress = () => {},
 }: FloatingActionProps) {
-  const buttonFunction = onPress && (func => onPress(func));
+  const buttonFunction = onPress && ((func) => onPress(func));
   const buttonStyle: ButtonStyle = {
     default: {
       background: colors.BANANA_YELLOW,
@@ -39,7 +39,7 @@ export default function FloatingActionButton({
     <View style={[ styles.floatingContainer, { top, left } ]}>
       <View style={styles.ellipseContainer}>
         <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}>
-          {foregroundColor => (<Icon name={iconName} size={size} color={foregroundColor} />)}
+          {(foregroundColor) => (<Icon name={iconName} size={size} color={foregroundColor} />)}
         </Button>
       </View>
     </View>

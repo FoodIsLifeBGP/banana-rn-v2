@@ -41,7 +41,7 @@ const CodeForm: FunctionComponent<CodeFormProps> = ({
       <FormTextInput
         label="Token"
         value={formData}
-        setValue={text => {
+        setValue={(text) => {
           setError('');
           setFormData(text);
         }}

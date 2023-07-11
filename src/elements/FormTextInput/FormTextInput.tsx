@@ -146,7 +146,7 @@ function FormTextInput(
   }: FormTextInputProps,
   ref: Ref<TextInput>,
 ) {
-  const parseDigits = string => (string.match(/\d+/g) || []).join('');
+  const parseDigits = (string) => (string.match(/\d+/g) || []).join('');
   const numberFormat = (str: string | undefined) => {
     const digits = parseDigits(str);
     return new AsYouType('US').input(digits);

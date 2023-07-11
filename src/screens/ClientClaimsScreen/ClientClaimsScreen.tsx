@@ -44,7 +44,7 @@ function ClientClaimsScreen(props) {
           ? (
             <ScrollView>
               {
-                (claimedDonations as any).map(claimedDonation => (
+                (claimedDonations as any).map((claimedDonation) => (
                   <View key={claimedDonation.id}>
                     <Donation
                       donation={claimedDonation}

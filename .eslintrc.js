@@ -1,3 +1,8 @@
+/* NOTE: please try to use human-readable rules instead of numbers--
+   i.e. 'off' instead of 0, 'warn' instead of 1, 'error' instead of 2,
+   also please be mindful about not adding redundant/conflicting rules.
+ */
+
 module.exports = {
   env: {
     es6: true,
@@ -22,22 +27,22 @@ module.exports = {
   ],
   rules: {
     'no-use-before-define': 'off',
-    'array-bracket-spacing': [ 1, 'always' ],
-    'react/function-component-definition': [ 0, 'never' ],
-    'arrow-parens': [ 1, 'as-needed' ],
-    'class-methods-use-this': 0,
-    'eol-last': [ 1, 'always' ],
+    'array-bracket-spacing': [ 'warn', 'always' ],
+    'react/function-component-definition': [ 'off', 'never' ],
+    'arrow-parens': [ 'warn', 'always' ],
+    'class-methods-use-this': 'off',
+    'eol-last': [ 'warn', 'always' ],
     'func-call-spacing': 'off',
-    'global-require': 0,
-    'import/extensions': [ 0, 'never' ],
-    'object-curly-newline': [ 'error', {
+    'global-require': 'off',
+    'import/extensions': [ 'off', 'never' ],
+    'object-curly-newline': [ 'warn', {
       ObjectExpression: { multiline: true, minProperties: 3 },
       ObjectPattern: { multiline: true, minProperties: 3 },
       ImportDeclaration: 'never',
       ExportDeclaration: { multiline: true, minProperties: 3 },
     } ],
     'import/no-unresolved': [
-      2,
+      'error',
       {
         caseSensitive: false,
         ignore: [
@@ -52,18 +57,18 @@ module.exports = {
         ],
       },
     ],
-    'import/prefer-default-export': 0,
-    indent: [ 'error', 2 ],
-    'lines-between-class-members': 0,
-    'linebreak-style': 0,
-    'max-len': [ 1, 150 ],
-    'no-async-promise-executor': 1,
+    'import/prefer-default-export': 'off',
+    indent: [ 'warn', 2 ],
+    'lines-between-class-members': 'off',
+    'linebreak-style': 'off',
+    'max-len': [ 'warn', 150 ],
+    'no-async-promise-executor': 'warn',
     'no-confusing-arrow': [
-      'error',
+      'warn',
       { allowParens: true },
     ],
     'no-multiple-empty-lines': [
-      'error',
+      'warn',
       {
         max: 2,
         maxEOF: 1,
@@ -71,18 +76,18 @@ module.exports = {
       },
     ],
     'no-tabs': [
-      'error',
+      'warn',
       { allowIndentationTabs: true },
     ],
-    'no-unused-expressions': 0,
-    'prefer-object-spread': 1,
-    quotes: [ 2, 'single', 'avoid-escape' ],
-    'react/destructuring-assignment': [ 1 ],
-    'react/jsx-indent': [ 2, 2 ],
-    'react/jsx-indent-props': [ 2, 2 ],
-    'react/jsx-boolean-value': [ 1, 'always' ],
+    'no-unused-expressions': 'off',
+    'prefer-object-spread': 'warn',
+    quotes: [ 'error', 'single', 'avoid-escape' ],
+    'react/destructuring-assignment': [ 'warn' ],
+    'react/jsx-indent': [ 'error', 2 ],
+    'react/jsx-indent-props': [ 'error', 2 ],
+    'react/jsx-boolean-value': [ 'warn', 'always' ],
     'react/jsx-filename-extension': [
-      1,
+      'warn',
       {
         extensions: [
           '.ts',
@@ -90,9 +95,9 @@ module.exports = {
         ],
       },
     ],
-    'react/no-unused-prop-types': 0,
+    'react/no-unused-prop-types': 'off',
     'react/no-unescaped-entities': [
-      'error',
+      'warn',
       {
         forbid: [
           '>',
@@ -100,25 +105,27 @@ module.exports = {
         ],
       },
     ],
-    'react/jsx-props-no-spreading': 0,
-    'react/prop-types': 0,
-    'react/require-default-props': 0,
-    semi: [ 'error', 'always' ],
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
+    semi: [ 'warn', 'always' ],
     '@typescript-eslint/camelcase': 'off',
-    '@typescript-eslint/explicit-function-return-type': [ 0 ],
-    '@typescript-eslint/explicit-member-accessibility': [ 0 ],
-    '@typescript-eslint/interface-name-prefix': 0,
+    '@typescript-eslint/explicit-function-return-type': [ 'off' ],
+    '@typescript-eslint/explicit-member-accessibility': [ 'off' ],
+    '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-empty-function': 'warn',
-    '@typescript-eslint/ban-types': [ 0 ],
+    '@typescript-eslint/ban-types': [ 'off' ],
+    '@typescript-eslint/type-annotation-spacing': 'warn',
     '@typescript-eslint/no-unused-vars': [
-      1,
+      'warn',
       { argsIgnorePattern: '^_' },
     ],
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/semi': [ 1 ],
+    '@typescript-eslint/semi': [ 'warn' ],
   },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
 };
+
