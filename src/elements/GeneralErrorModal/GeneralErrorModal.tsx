@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text } from 'react-native';
+import {Text, View} from 'react-native';
 import { SpacerInline } from '@elements/SpacerInline';
 import { TextButton } from '@elements/Button/TextButton';
 import { useScheme } from '@util/colorSchemes';

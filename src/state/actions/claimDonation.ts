@@ -9,7 +9,7 @@ export const claimDonation = (state: GlobalState, donationId: number, clientId: 
   const claimDonationAsync = async () => {
     try {
       const response = await railsAxios(jwt).post(endpoint, payload);
-      return { responseStatus: response.request.status, claim: response.data.claim };
+      return {responseStatus: response.request.status, claim: response.data.claim};
     } catch (error: any) {
       return { responseStatus: 500 };
     }

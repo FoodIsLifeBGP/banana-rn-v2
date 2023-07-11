@@ -1,8 +1,8 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import * as colors from '@util/constants/colors';
 import typography from '@util/typography';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const MAP_HEIGHT = height - 120;
 export default StyleSheet.create({

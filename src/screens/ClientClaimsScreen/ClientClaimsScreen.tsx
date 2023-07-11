@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ScrollView, Text, View 
+} from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import Donation from '@library/DonationClientView/Donation';
 import useGlobal from '@state';
-import { EmptyStateView, NavBar, SpacerInline, Title } from '@elements';
+import {
+  EmptyStateView, NavBar, SpacerInline, Title 
+} from '@elements';
 import styles from './ClientClaimsScreen.styles';
 
 function ClientClaimsScreen(props) {
@@ -14,7 +18,7 @@ function ClientClaimsScreen(props) {
   const [ loaded, setLoaded ] = useState(false);
 
   const getClaims = async () => {
-    const { getClaimedDonationsForClient, getLocation } = actions;
+    const {getClaimedDonationsForClient, getLocation} = actions;
     await getLocation();
     const data = await getClaimedDonationsForClient();
     if (data) {

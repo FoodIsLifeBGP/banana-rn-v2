@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleProp, TextStyle } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  StyleProp, Text, TextStyle, View 
+} from 'react-native';
 import * as colors from '@util/constants/colors';
 import { setTSpan } from 'react-native-svg/lib/typescript/lib/extract/extractText';
 import styles from './TimeBoard.styles';
@@ -8,7 +10,7 @@ interface TimeBoardProps {
   deadline: Date;
   style?: StyleProp<TextStyle>;
 }
-export default function TimeBoard({ deadline, style }: TimeBoardProps) {
+export default function TimeBoard({deadline, style}: TimeBoardProps) {
   const calcRemainingMin = (futureTime: Date) => Math.floor((futureTime.getTime() - Date.now()) / 60000);
   const calcRemainingSec = (futureTime: Date) => Math.floor(((futureTime.getTime() - Date.now()) % 60000) / 1000);
   const [ min, setMin ] = useState(calcRemainingMin(deadline));

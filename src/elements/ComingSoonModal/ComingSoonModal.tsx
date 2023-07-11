@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text,
-  View } from 'react-native';
+import {
+  Text,
+  View 
+} from 'react-native';
 import useGlobal from '@state';
-import { TextButton,
+import {
+  Icon,
   Modal,
-  Icon } from '@elements';
+  TextButton 
+} from '@elements';
 import { Alert } from '@state/index.types';
 import { useScheme } from '@util/colorSchemes';
 import typography from '@util/typography';

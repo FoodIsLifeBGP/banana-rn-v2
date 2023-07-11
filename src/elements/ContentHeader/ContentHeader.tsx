@@ -1,10 +1,12 @@
 
 import React from 'react';
-import { Text,
-  View,
+import {
   StyleProp,
-  ViewStyle,
-  TextStyle } from 'react-native';
+  Text,
+  TextStyle,
+  View,
+  ViewStyle 
+} from 'react-native';
 import styles from './ContentHeader.styles';
 
 export type HeaderSize = 'small' | 'large';

@@ -1,4 +1,4 @@
-import { Alert, StatusCode } from '../index.types';
+import {Alert, StatusCode} from '../index.types';
 
 export const updateAlert = (alert: Alert) => ({ alert });
 

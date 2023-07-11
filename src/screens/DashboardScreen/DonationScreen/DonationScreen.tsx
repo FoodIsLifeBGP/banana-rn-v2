@@ -1,11 +1,15 @@
-import React, { useRef, useState } from 'react';
-import { View,
-  KeyboardAvoidingView, ScrollView, Platform, Text, Image, TextInput } from 'react-native';
+import React, {useRef, useState} from 'react';
+import {
+  Image,
+  KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View 
+} from 'react-native';
 import useGlobal from '@state';
-import { NavBar,
-  SpacerInline,
+import {
   FormTextInput,
-  LinkButton } from '@elements';
+  LinkButton,
+  NavBar,
+  SpacerInline 
+} from '@elements';
 import validate from 'validate.js';
 import { NewDonation } from '@screens/DashboardScreen/DonationScreen/DonationScreen.type';
 import donationConstraints from '@util/validators/donation';
@@ -43,7 +47,7 @@ export default function DonationScreen(props) {
       setValidateError({});
       const result = await postDonation(newDonation);
       if (result === 201) {
-        updateAlert({ type: 'donation published', dismissable: false });
+        updateAlert({type: 'donation published', dismissable: false});
         setNewDonation(emptyDonation);
         props.navigation.navigate('DonorDashboardScreen');
       } else {
@@ -73,7 +77,7 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Item Name"
           value={newDonation.itemName}
-          setValue={(s) => setNewDonation({ ...newDonation, itemName: s })}
+          setValue={(s) => setNewDonation({...newDonation, itemName: s})}
           style={styles.input}
           error={validateError.itemName}
           errorMessage={validateError.itemName}
@@ -83,7 +87,7 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Food Category"
           dropdownData={foodCategories}
-          setValue={(s) => setNewDonation({ ...newDonation, category: s })}
+          setValue={(s) => setNewDonation({...newDonation, category: s})}
           defaultValue={foodCategories[0]}
           value={newDonation.category}
           type="dropdown"
@@ -94,7 +98,7 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Total Amount"
           value={newDonation.totalAmount}
-          setValue={(s) => setNewDonation({ ...newDonation, totalAmount: s })}
+          setValue={(s) => setNewDonation({...newDonation, totalAmount: s})}
           style={styles.input}
           error={validateError.totalAmount}
           errorMessage={validateError.totalAmount}
@@ -112,7 +116,7 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Pickup Instructions"
           value={newDonation.pickupInstructions}
-          setValue={(s) => setNewDonation({ ...newDonation, pickupInstructions: s })}
+          setValue={(s) => setNewDonation({...newDonation, pickupInstructions: s})}
           style={styles.input}
           error={validateError.pickupInstructions}
           errorMessage={validateError.pickupInstructions}

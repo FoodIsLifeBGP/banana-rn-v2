@@ -1,7 +1,9 @@
-import React, { useState, FunctionComponent } from 'react';
-import { View, Text } from 'react-native';
+import React, {FunctionComponent, useState} from 'react';
+import {Text, View} from 'react-native';
 import { Modal } from '@elements';
-import { ResetForm, CodeForm, NewPasswordForm } from './Forms';
+import {
+  CodeForm, NewPasswordForm, ResetForm 
+} from './Forms';
 import styles from './ResetPassword.styles';
 
 // TODO: fix this error and remove the comment below

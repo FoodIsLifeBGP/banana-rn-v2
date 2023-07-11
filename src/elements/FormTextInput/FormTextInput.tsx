@@ -1,17 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { forwardRef,
-  RefObject,
+import React, {
   Ref,
-  useState } from 'react';
-import { View,
-  TextInput,
-  Text,
+  RefObject,
+  forwardRef,
+  useState 
+} from 'react';
+import {
   StyleProp,
+  Text,
+  TextInput,
+  TextInputProps,
   TextStyle,
-  TextInputProps } from 'react-native';
-import { Icon,
-  InputLabel } from '@elements';
+  View 
+} from 'react-native';
+import {
+  Icon,
+  InputLabel 
+} from '@elements';
 import { LIGHT_BLUE } from '@util/constants/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { AsYouType } from 'libphonenumber-js';

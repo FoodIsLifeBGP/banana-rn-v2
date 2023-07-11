@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleProp, Text, TextStyle, View } from 'react-native';
+import {
+  StyleProp, Text, TextStyle, View 
+} from 'react-native';
 import styles from './ClaimingProgressBar.styles';
 
 interface ClaimingProgressBarProps {

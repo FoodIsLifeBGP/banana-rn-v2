@@ -1,20 +1,24 @@
 /* eslint-disable no-tabs */
-import React, { useRef, useState } from 'react';
-import { ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
+import React, {useRef, useState} from 'react';
+import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
+  Text,
   TextInput,
-  Keyboard } from 'react-native';
+  TouchableOpacity,
+  View 
+} from 'react-native';
 import { Divider } from 'react-native-paper';
 import useGlobal from '@state';
-import { Title,
-  LinkButton,
+import {
   FormTextInput,
+  Icon,
+  LinkButton,
   SpacerInline,
-  Icon } from '@elements';
+  Title 
+} from '@elements';
 import validate from 'validate.js';
 import clientConstraints from '@util/validators/clientRegistration';
 import { ClientRegisterProps } from '@state/actions/register';
@@ -22,9 +26,9 @@ import { Alert } from '@state/index.types';
 import styles from './RegistrationScreen.styles';
 
 
-export default function ClientRegistrationScreen({ navigation, goBack }) {
+export default function ClientRegistrationScreen({navigation, goBack}) {
   const [ state, actions ] = useGlobal() as any;
-  const { register, updateAlert } = actions;
+  const {register, updateAlert} = actions;
 
   const [ termsOfService, setTermsOfService ] = useState(false);
   const [ validateError, setValidateError ] = useState({} as any);
@@ -98,7 +102,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Email"
           value={newClient.email}
-          setValue={(v) => setNewClient({ ...newClient, email: v })}
+          setValue={(v) => setNewClient({...newClient, email: v})}
           style={styles.input}
           placeholder="info@bananaapp.org"
           error={validateError.email}
@@ -111,7 +115,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Password"
           value={newClient.password}
-          setValue={(v) => setNewClient({ ...newClient, password: v })}
+          setValue={(v) => setNewClient({...newClient, password: v})}
           type="password"
           style={styles.input}
           error={validateError.password}
@@ -124,7 +128,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Confirm Password"
           value={newClient.retypedPassword}
-          setValue={(v) => setNewClient({ ...newClient, retypedPassword: v })}
+          setValue={(v) => setNewClient({...newClient, retypedPassword: v})}
           style={styles.input}
           type="password"
           error={validateError.retypedPassword}
@@ -140,7 +144,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="First Name"
           value={newClient.firstName}
-          setValue={(v) => setNewClient({ ...newClient, firstName: v })}
+          setValue={(v) => setNewClient({...newClient, firstName: v})}
           style={styles.input}
           error={validateError.firstName}
           errorMessage={validateError.firstName}
@@ -152,7 +156,7 @@ export default function ClientRegistrationScreen({ navigation, goBack }) {
         <FormTextInput
           label="Last Name"
           value={newClient.lastName}
-          setValue={(v) => setNewClient({ ...newClient, lastName: v })}
+          setValue={(v) => setNewClient({...newClient, lastName: v})}
           style={styles.input}
           error={validateError.lastName}
           errorMessage={validateError.lastName}

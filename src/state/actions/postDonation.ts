@@ -4,7 +4,7 @@ import { NewDonation } from '@screens/DashboardScreen/DonationScreen/DonationScr
 
 const postDonation = async (_store, donation: NewDonation) => {
   const endpoint = '/donations/create';
-  const { user, jwt } = _store.state;
+  const {user, jwt} = _store.state;
   const payload = {
     donation: {
       donor_id: user.id,

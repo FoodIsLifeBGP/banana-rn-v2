@@ -1,6 +1,6 @@
 import styles from '@elements/NavBar/Selector.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 import React, { useState } from 'react';
 
 interface SelectorProps {

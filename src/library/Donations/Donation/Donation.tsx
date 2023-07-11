@@ -1,9 +1,11 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import { View,
+import {
+  Image,
   Text,
   TouchableOpacity,
-  Image } from 'react-native';
+  View 
+} from 'react-native';
 import typography from '@util/typography';
 import { categoryImage } from '@util/donationCategory';
 import formatDate from '@util/formatDate';
@@ -40,7 +42,7 @@ export default function DonorDonation(props) {
           <Text style={typography.h5}>{category}</Text>
           <Image source={icon} style={styles.icon} />
         </View>
-        <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+        <View style={{flexDirection: 'column', justifyContent: 'center'}}>
           <View>
             <Text style={typography.h3}>{food_name}</Text>
           </View>
@@ -48,7 +50,7 @@ export default function DonorDonation(props) {
             {isHistory ? (
               <View style={{ flexDirection: 'row' }}>
                 <Icon name="time" color="blue" size={20} />
-                <Text style={{ ...typography.h5, marginLeft: 5 }}>
+                <Text style={{...typography.h5, marginLeft: 5}}>
                   {updatedAt}
                 </Text>
               </View>

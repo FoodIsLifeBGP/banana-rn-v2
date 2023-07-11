@@ -32,7 +32,7 @@ export interface ClientRegisterProps {
 }
 
 export const registerDonor = async (store, donor: DonorRegisterProps) => {
-  const { createUrl, userIdentity } = store.state;
+  const {createUrl, userIdentity} = store.state;
   const {
     email, password, firstName, lastName, businessName, businessAddress, city, state, zip, pickupInstructions,
   } = donor;
@@ -67,7 +67,7 @@ export const registerDonor = async (store, donor: DonorRegisterProps) => {
 };
 
 export const registerClient = async (store, client: ClientRegisterProps) => {
-  const { createUrl, userIdentity } = store.state;
+  const {createUrl, userIdentity} = store.state;
   const {
     email, password, firstName, lastName,
   } = client;

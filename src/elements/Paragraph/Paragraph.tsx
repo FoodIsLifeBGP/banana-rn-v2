@@ -16,7 +16,7 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
   children,
 }) => {
   const style = emphasized
-    ? [ styles.paragraphText, styles.emphasizedParagraphText, { fontSize, textAlign } ]
+    ? [ styles.paragraphText, styles.emphasizedParagraphText, {fontSize, textAlign} ]
     : [ styles.paragraphText ];
   return <Text style={style}>{children}</Text>;
 };

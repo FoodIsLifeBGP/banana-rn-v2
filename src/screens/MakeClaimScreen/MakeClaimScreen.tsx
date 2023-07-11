@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
-import { ImageBackground, ScrollView, Text, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  useIsFocused, useNavigation, useRoute 
+} from '@react-navigation/native';
+import {
+  ImageBackground, ScrollView, Text, View 
+} from 'react-native';
 import useGlobal from '@state';
-import { Icon, SpacerInline, TextButton } from '@elements';
+import {
+  Icon, SpacerInline, TextButton 
+} from '@elements';
 import * as colors from '@util/constants/colors';
 import typography from '@util/typography';
 import { ButtonStyle } from '@elements/Button';
@@ -11,9 +17,9 @@ import styles from './MakeClaimScreen.styles';
 
 function MakeClaimScreen() {
   const isFocused = useIsFocused();
-  const { navigate, goBack } = useNavigation();
+  const {navigate, goBack} = useNavigation();
   const [ globalState, globalActions ] = useGlobal() as any;
-  const { claimDonation, getTravelTimes } = globalActions;
+  const {claimDonation, getTravelTimes} = globalActions;
   const { user } = globalState;
   const route = useRoute();
   const { donation }: any = route.params; // TODO: UPDATE TYPE

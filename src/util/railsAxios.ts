@@ -10,7 +10,7 @@ export default (jwt?: string) => {
   const { API_BASE_URL } = getEnv();
   return axios.create({
     headers: jwt
-      ? { ...JSON_HEADERS, ...AUTH_HEADER }
+      ? {...JSON_HEADERS, ...AUTH_HEADER}
       : { ...JSON_HEADERS },
     baseURL: API_BASE_URL,
   });

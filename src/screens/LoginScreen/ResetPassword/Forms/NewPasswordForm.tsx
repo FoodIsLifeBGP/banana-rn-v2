@@ -1,6 +1,12 @@
-import React, { useState, RefObject, createRef, FunctionComponent } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { FormTextInput, LinkButton, SpacerInline } from '@elements';
+import React, {
+  FunctionComponent, RefObject, createRef, useState 
+} from 'react';
+import {
+  Text, TextInput, View 
+} from 'react-native';
+import {
+  FormTextInput, LinkButton, SpacerInline 
+} from '@elements';
 import useGlobal from '@state';
 import styles from '../ResetPassword.styles';
 
@@ -9,7 +15,7 @@ interface NewPasswordFormProps {
   token: string;
 }
 
-const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({ onComplete, token }) => {
+const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({onComplete, token}) => {
   const [ isSubmitting, setIsSubmitting ] = useState(false);
   const [ formData, setFormData ] = useState({
     password: '',
@@ -58,7 +64,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({ onComplete, 
         value={formData.password}
         setValue={(text) => {
           setError('');
-          setFormData({ ...formData, password: text });
+          setFormData({...formData, password: text});
         }}
         ref={passwordInputRef}
         autoCompleteType="password"
@@ -71,7 +77,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({ onComplete, 
         value={formData.confirmPassword}
         setValue={(text) => {
           setError('');
-          setFormData({ ...formData, confirmPassword: text });
+          setFormData({...formData, confirmPassword: text});
         }}
         ref={passwordInputRef}
         autoCompleteType="password"

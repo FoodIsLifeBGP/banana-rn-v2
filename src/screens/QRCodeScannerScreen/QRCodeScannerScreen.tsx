@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import * as colors from '@util/constants/colors';
-import { Text,
-  View,
+import {
+  Image,
   StyleSheet,
-  Image } from 'react-native';
+  Text,
+  View 
+} from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 import useGlobal from '@state';
 
-import { Modal, TextButton, Icon, LinkButton } from '@elements';
+import {
+  Icon, LinkButton, Modal, TextButton 
+} from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import { categoryImage } from '@util/donationCategory';
 import openAppSettings from '@util/openAppSettings';
@@ -94,7 +98,7 @@ export default function QRCodeScannerScreen(props) {
             <Text style={styles.claimTitle}>
               {claimedDonation.food_name}
             </Text>
-            <View style={{ ...styles.textContainer, marginBottom: -100 }}>
+            <View style={{...styles.textContainer, marginBottom: -100}}>
               <Icon name="user" color="blue" size={20} />
               <Text style={styles.textStyle}>
                 {claimedDonation.claim.client_name}
@@ -124,10 +128,10 @@ export default function QRCodeScannerScreen(props) {
         <Modal title="SOMETHING WENT WRONG" open={modalOn} onDismiss={handleDismiss} palette="secondary">
           <View style={styles.content}>
             <Image source={icon} style={styles.icon} />
-            <Text style={{ ...styles.textStyle, fontWeight: 'bold' }}>
+            <Text style={{...styles.textStyle, fontWeight: 'bold'}}>
               PLEASE TRY AGAIN
             </Text>
-            <View style={{ ...styles.errorContainer, marginVertical: 20 }}>
+            <View style={{...styles.errorContainer, marginVertical: 20}}>
               <Text style={styles.errorStyle}>QR Code Scan was not successful.</Text>
               <Text style={styles.errorStyle}>If this issue is not resolved,</Text>
               <Text style={styles.errorStyle}>Please contact us.</Text>

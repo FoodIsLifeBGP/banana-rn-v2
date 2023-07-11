@@ -1,13 +1,17 @@
 import React from 'react';
-import { Image,
+import {
+  Image,
   Platform,
-  View } from 'react-native';
+  View 
+} from 'react-native';
 import { NAVY_BLUE } from '@util/constants/colors';
-import { deprecatedIconMap,
-  iconImports,
+import {
   DeprecatedIconName,
+  IconImport,
   IconName,
-  IconImport } from './index';
+  deprecatedIconMap,
+  iconImports 
+} from './index';
 
 interface IconProps {
   name: IconName | DeprecatedIconName;
@@ -42,7 +46,7 @@ export default function Icon({
       height *= (26 / 24.0);
     }
 
-    return { width, height };
+    return {width, height};
   };
 
   /**

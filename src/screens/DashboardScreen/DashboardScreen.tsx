@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ScrollView, Text, View 
+} from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import Donation from '@library/DonationClientView/Donation';
 import useGlobal from '@state';
-import { EmptyStateView, NavBar, SpacerInline, Title } from '@elements';
+import {
+  EmptyStateView, NavBar, SpacerInline, Title 
+} from '@elements';
 import styles from './DashboardScreen.styles';
 
 function DashboardScreen(props) {
@@ -14,7 +18,7 @@ function DashboardScreen(props) {
   const [ loaded, setLoaded ] = useState(false);
 
   const getActiveDonationsForLocation = async () => {
-    const { getActiveDonationsForClient, getLocation } = actions;
+    const {getActiveDonationsForClient, getLocation} = actions;
     await getLocation();
     const data = await getActiveDonationsForClient();
     if (data) {

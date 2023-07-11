@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Icon } from '@elements';
+import {Button, Icon} from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import * as colors from '@util/constants/colors';
 import Selector from '@elements/NavBar/Selector';
@@ -82,9 +82,9 @@ export default function NavBar({
       <View style={styles.notificationContainer}>
         <Button
           buttonStyle={buttonStyle}
-          style={{ marginTop: 4, marginRight: 8 }}
+          style={{marginTop: 4, marginRight: 8}}
           onPress={() => {
-            updateAlert({ type: 'coming soon', dismissable: false });
+            updateAlert({type: 'coming soon', dismissable: false});
           }}
         />
         {showMenu && (<HamburgerPopupMenu />) }

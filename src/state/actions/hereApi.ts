@@ -6,7 +6,7 @@ const getTravelTimes = async (_store, donorId: number, clientLat: number, client
   const { jwt } = _store.state;
   try {
     const response = await railsAxios(jwt).get(endpoint);
-    return { status: response.request.status, times: response.data };
+    return {status: response.request.status, times: response.data};
   } catch (error) {
     return 500;
   }

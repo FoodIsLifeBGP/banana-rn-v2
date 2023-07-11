@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 
 import { Icon } from '@elements';
 import { IconName } from '@elements/Icon';
@@ -7,7 +7,7 @@ import * as colors from '@util/constants/colors';
 
 import styles from './MainOption.styles';
 
-function MainOption({ icon, text }) {
+function MainOption({icon, text}) {
   let menuStyle = {};
 
   const DrawerIcon = (name: IconName) => Icon({

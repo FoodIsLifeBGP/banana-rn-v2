@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import * as colors from '@util/constants/colors';
 
 const screenHeight = Math.round(Dimensions.get('window').height);

@@ -1,7 +1,7 @@
-import { SpacerInline, Paragraph } from '@elements';
+import {Paragraph, SpacerInline} from '@elements';
 
 import setAccountToActive from '@util/setAccountToActive';
-import React, { FunctionComponent, useState } from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import InfoScreen from '../InfoScreen';
 
 type ApplicationApprovedScreenProps = {
@@ -9,9 +9,9 @@ type ApplicationApprovedScreenProps = {
   jwt: string;
 };
 
-const ApplicationApprovedScreen: FunctionComponent<ApplicationApprovedScreenProps> = ({ id, jwt }) => {
+const ApplicationApprovedScreen: FunctionComponent<ApplicationApprovedScreenProps> = ({id, jwt}) => {
   const [ activated, setActivated ] = useState(false);
-  setAccountToActive({ jwt, id }).then(() => setActivated(true));
+  setAccountToActive({jwt, id}).then(() => setActivated(true));
 
   return (activated
     ? (

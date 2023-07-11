@@ -1,7 +1,7 @@
 import railsAxios from '@util/railsAxios';
 
 export const getActiveDonationsForClient = async (store) => {
-  const { jwt, user } = store.state;
+  const {jwt, user} = store.state;
   if (!user.coords) {
     return [];
   }

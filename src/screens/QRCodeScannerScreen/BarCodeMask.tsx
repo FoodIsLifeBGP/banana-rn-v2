@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {Text, View} from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Icon } from '@elements';
 import styles from './BarCodeMask.styles';

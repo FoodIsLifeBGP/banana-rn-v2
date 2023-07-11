@@ -1,29 +1,33 @@
 /* eslint-disable no-tabs */
-import React, { useRef, useState } from 'react';
-import { KeyboardAvoidingView,
+import React, { useRef, useState } from "react";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
-  Text, TouchableOpacity,
+  Text,
+  TextInput,
+  TouchableOpacity,
   View,
-  Platform, TextInput, Keyboard } from 'react-native';
-import { Divider } from 'react-native-paper';
-import { FormTextInput,
-  LinkButton,
-  SpacerInline,
-  Title, Icon } from '@elements';
-import useGlobal from '@state';
-import { getStateList } from '@util/constants/statesAbbr';
-import donorConstraints from '@util/validators/donorRegistration';
-import validate from 'validate.js';
-import { DonorRegisterProps } from '@state/actions/register';
-import { Alert } from '@state/index.types';
-import styles from './RegistrationScreen.styles';
+} from "react-native";
+import { Divider } from "react-native-paper";
+import {
+ FormTextInput, Icon, LinkButton, SpacerInline, Title
+} from "@elements";
+import useGlobal from "@state";
+import { getStateList } from "@util/constants/statesAbbr";
+import donorConstraints from "@util/validators/donorRegistration";
+import validate from "validate.js";
+import { DonorRegisterProps } from "@state/actions/register";
+import { Alert } from "@state/index.types";
+import styles from "./RegistrationScreen.styles";
 
 // TODO: possibly add prop types for this function component?
 
 export default function DonorRegistrationScreen({ navigate, goBack }) {
   const [ _state, actions ] = useGlobal() as any;
   const { register, updateAlert } = actions;
-  const [ newDonor, setNewDonor ] = useState<DonorRegisterProps>({ state: 'WA' } as DonorRegisterProps);
+  const [ newDonor, setNewDonor ] = useState<DonorRegisterProps>({state: "WA",} as DonorRegisterProps);
   const [ validationErrors, setValidationErrors ] = useState({} as any);
   const [ termsOfService, setTermsOfService ] = useState(false);
   const stateList = getStateList();
@@ -46,33 +50,33 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
     } else {
       const statusCode = await register(newDonor);
       switch (statusCode) {
-      case 201: {
-        navigate('LoginSuccessScreen');
-        break;
-      }
-      case 409: {
-        updateAlert({
-          title: 'Error',
-          message: `This email address has already been used (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-        break;
-      }
-      case 500: {
-        updateAlert({
-          title: 'Error',
-          message: `Network Issues (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-        break;
-      }
-      default: {
-        updateAlert({
-          title: 'Error',
-          message: `Unknown Error (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-      }
+        case 201: {
+          navigate("LoginSuccessScreen");
+          break;
+        }
+        case 409: {
+          updateAlert({
+            title: "Error",
+            message: `This email address has already been used (Error code:${statusCode})`,
+            dismissable: true,
+          } as Alert);
+          break;
+        }
+        case 500: {
+          updateAlert({
+            title: "Error",
+            message: `Network Issues (Error code:${statusCode})`,
+            dismissable: true,
+          } as Alert);
+          break;
+        }
+        default: {
+          updateAlert({
+            title: "Error",
+            message: `Unknown Error (Error code:${statusCode})`,
+            dismissable: true,
+          } as Alert);
+        }
       }
     }
   };
@@ -82,13 +86,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
     await validateInputs();
   };
 
-
   return (
     <KeyboardAvoidingView
       style={styles.keyboardAvoidContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Android & iOS both interact with this prop differently
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Android & iOS both interact with this prop differently
       enabled={true}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
     >
       <View style={styles.header}>
         <Title text="Registration" />
@@ -120,7 +123,6 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
         />
 
-
         <FormTextInput
           label="Confirm Password"
           value={newDonor.retypedPassword}
@@ -132,9 +134,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           ref={confirmPasswordRef}
           onSubmitEditing={() => firstNameRef?.current?.focus()}
         />
-        <Divider
-          style={{ marginVertical: 20 }}
-        />
+        <Divider style={{ marginVertical: 20 }} />
 
         <FormTextInput
           label="First Name"
@@ -146,7 +146,6 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           ref={firstNameRef}
           onSubmitEditing={() => lastNameRef?.current?.focus()}
         />
-
 
         <FormTextInput
           label="Last Name"
@@ -186,7 +185,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
             label="City"
             value={newDonor.city}
             setValue={(s) => setNewDonor({ ...newDonor, city: s })}
-            style={{ width: '40%' }}
+            style={{ width: "40%" }}
             autoCapitalize="words"
             error={!!validationErrors.city}
             errorMessage={validationErrors.city}
@@ -199,7 +198,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
             dropdownData={stateList}
             value={newDonor.state}
             setValue={(s) => setNewDonor({ ...newDonor, state: s })}
-            style={{ width: '20%' }}
+            style={{ width: "20%" }}
             error={!!validationErrors.state}
             errorMessage={validationErrors.state}
           />
@@ -207,7 +206,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
             label="Zip"
             value={newDonor.zip}
             setValue={(s) => setNewDonor({ ...newDonor, zip: s })}
-            style={{ width: '30%' }}
+            style={{ width: "30%" }}
             autoCapitalize="words"
             error={!!validationErrors.zip}
             errorMessage={validationErrors.zip}
@@ -227,38 +226,23 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
 
         <View style={styles.checkboxRow}>
           <View style={styles.checkBox}>
-            <TouchableOpacity
-              style={{ top: 3 }}
-              onPress={toggleTermsOfService}
-            >
-              <Icon
-                name={termsOfService ? 'checkboxOn' : 'checkboxOff'}
-                size={24}
-                color="none"
-              />
+            <TouchableOpacity style={{ top: 3 }} onPress={toggleTermsOfService}>
+              <Icon name={termsOfService ? "checkboxOn" : "checkboxOff"} size={24} color="none" />
             </TouchableOpacity>
           </View>
           <SpacerInline width={10} />
-          <Text
-            style={styles.text}
-            onPress={toggleTermsOfService}
-
-          >
-            {'I agree to the '}
+          <Text style={styles.text} onPress={toggleTermsOfService}>
+            {"I agree to the "}
           </Text>
           <View>
-            <TouchableOpacity onPress={() => (navigate('TermsScreen'))}>
+            <TouchableOpacity onPress={() => navigate("TermsScreen")}>
               <Text style={[ styles.text, styles.textBold ]}>Terms & Conditions</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        <View style={[ styles.row, { paddingHorizontal: '10%' } ]}>
-          <LinkButton
-            text="back"
-            navigate={navigate}
-            onPress={() => goBack()}
-          />
+        <View style={[ styles.row, { paddingHorizontal: "10%" } ]}>
+          <LinkButton text="back" navigate={navigate} onPress={() => goBack()} />
           <LinkButton
             disabled={!termsOfService}
             text="Register"
@@ -267,10 +251,7 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           />
         </View>
         <SpacerInline height={50} />
-
-
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
-

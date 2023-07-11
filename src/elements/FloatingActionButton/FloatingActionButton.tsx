@@ -1,9 +1,11 @@
 import React from 'react';
-import { View,
+import {
+  Alert,
   Image,
   TouchableOpacity,
-  Alert } from 'react-native';
-import { Button, Icon } from '@elements';
+  View 
+} from 'react-native';
+import {Button, Icon} from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import * as colors from '@util/constants/colors';
 import styles from './FloatingActionButton.styles';
@@ -36,7 +38,7 @@ export default function FloatingActionButton({
     },
   };
   return (
-    <View style={[ styles.floatingContainer, { top, left } ]}>
+    <View style={[ styles.floatingContainer, {top, left} ]}>
       <View style={styles.ellipseContainer}>
         <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}>
           {(foregroundColor) => (<Icon name={iconName} size={size} color={foregroundColor} />)}

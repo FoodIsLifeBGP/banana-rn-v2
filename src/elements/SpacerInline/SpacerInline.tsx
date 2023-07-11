@@ -6,8 +6,8 @@ interface Spacer {
   width?: number | string;
 }
 
-export default function SpacerInline({ height, width }: Spacer) {
+export default function SpacerInline({height, width}: Spacer) {
   return (
-    <View style={{ height, width }} />
+    <View style={{height, width}} />
   );
 }

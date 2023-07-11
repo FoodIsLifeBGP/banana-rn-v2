@@ -1,4 +1,6 @@
-import { StyleProp, TextInput, TextInputProps, TextStyle } from 'react-native';
+import {
+  StyleProp, TextInput, TextInputProps, TextStyle 
+} from 'react-native';
 import React, { Ref } from 'react';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
 import { Icon } from '@elements';
@@ -26,7 +28,7 @@ function DropdownInput(props: DropdownInputProps) {
     style, value, setValue, dropdownData, placeholder,
   } = props;
   const formattedData: Item[] = [];
-  dropdownData?.forEach((item) => formattedData.push({ label: item, value: item }));
+  dropdownData?.forEach((item) => formattedData.push({label: item, value: item}));
   // this setting are designed so by requirement of <RNPickerSelect> component.
   const placeholderObj = placeholder ? {
     label: placeholder,

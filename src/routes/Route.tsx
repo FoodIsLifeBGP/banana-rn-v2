@@ -118,8 +118,8 @@ function donorOrClientDrawer() {
   };
 
   return USER_IDENTITY === 'donor'
-    ? { ...DONOR_MENU, ...COMMON_MENU }
-    : { ...CLIENT_MENU, ...COMMON_MENU };
+    ? {...DONOR_MENU, ...COMMON_MENU}
+    : {...CLIENT_MENU, ...COMMON_MENU};
 }
 
 // Drawer Navigator

@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ScrollView, Text, View 
+} from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { Title, NavBar, EmptyStateView } from '@elements';
+import {
+  EmptyStateView, NavBar, Title 
+} from '@elements';
 import Donation from '@library/Donations/Donation/Donation';
 import useGlobal from '@state';
 import styles from './DonorHistoryScreen.styles';

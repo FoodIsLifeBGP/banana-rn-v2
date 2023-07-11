@@ -1,4 +1,6 @@
-import { askAsync, LOCATION, PermissionStatus } from 'expo-permissions';
+import {
+  LOCATION, PermissionStatus, askAsync 
+} from 'expo-permissions';
 import { getCurrentPositionAsync } from 'expo-location';
 import Constants from 'expo-constants';
 
@@ -7,7 +9,7 @@ export const getLocation = async (store) => {
   if (status === 'granted') {
     try {
       const { coords } = await getCurrentPositionAsync({});
-      await store.setState({ user: { ...store.state.user, coords } });
+      await store.setState({user: {...store.state.user, coords}});
       return coords;
     } catch (e) {
       console.log(e);
@@ -18,7 +20,7 @@ export const getLocation = async (store) => {
           latitude: 47.609175,
           longitude: -122.325849,
         };
-        await store.setState({ user: { ...store.state.user, coords: dummyLocation } });
+        await store.setState({user: {...store.state.user, coords: dummyLocation}});
         return dummyLocation;
       }
     }

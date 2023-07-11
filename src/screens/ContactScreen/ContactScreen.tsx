@@ -2,16 +2,20 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
-import { ScrollView,
+import {
+  ScrollView,
   Text,
   TouchableHighlight,
-  View } from 'react-native';
+  View 
+} from 'react-native';
 import * as Linking from 'expo-linking';
-import { ContentHeader,
-  NavBar,
-  SpacerInline,
+import {
+  ContentHeader,
+  Icon,
   LinkButton,
-  Icon } from '@elements';
+  NavBar,
+  SpacerInline 
+} from '@elements';
 import { IconName } from '@elements/Icon';
 import useGlobal from '@state';
 import styles, { ListItem } from './ContactScreen.styles';
@@ -105,7 +109,10 @@ export default function ContactScreen(props) {
         </View>
 
         <SpacerInline height={44} />
-        <LinkButton text="Back" onPress={props.backDestination ? () => props.navigation.navigate(props.backDestination) : () => props.navigation.goBack()} />
+        <LinkButton
+          text="Back"
+          onPress={props.backDestination ? () => props.navigation.navigate(props.backDestination) : () => props.navigation.goBack()}
+        />
 
       </ScrollView>
     </View>

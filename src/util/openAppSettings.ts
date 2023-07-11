@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
-import { startActivityAsync, ActivityAction } from 'expo-intent-launcher';
+import {ActivityAction, startActivityAsync} from 'expo-intent-launcher';
 import { openURL } from 'expo-linking';
 
 export default Platform.select({

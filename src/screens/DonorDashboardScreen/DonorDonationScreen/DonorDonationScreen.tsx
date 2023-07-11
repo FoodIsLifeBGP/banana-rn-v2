@@ -1,23 +1,27 @@
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
-import { View,
+import {
+  Alert,
+  Image,
   Text,
   TouchableOpacity,
-  Image,
-  Alert } from 'react-native';
+  View 
+} from 'react-native';
 import { Switch } from 'react-native-paper';
 import useGlobal from '@state';
-import { NavBar,
-  SpacerInline,
+import {
   FormTextInput,
+  InputLabel,
   LinkButton,
-  InputLabel } from '@elements';
+  NavBar,
+  SpacerInline 
+} from '@elements';
 import * as colors from '@util/constants/colors';
 import styles from './DonorDonationScreen.styles';
 
 export default function DonorDonationScreen(props) {
   const [ state, actions ] = useGlobal() as any;
-  const { user, jwt } = state;
+  const {user, jwt} = state;
   const {
     postDonation, logOut, getDonationsOrClaims,
   } = actions;
@@ -102,7 +106,7 @@ export default function DonorDonationScreen(props) {
         <SpacerInline height={40} />
         <View>
           <InputLabel text="Time limit" />
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity
               onPress={() => setDurationInMinutes(30)}
               style={{

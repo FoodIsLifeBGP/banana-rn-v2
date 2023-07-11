@@ -1,6 +1,8 @@
 import getEnv from '@util/environment';
 import { create } from 'zustand';
-import { InitialState, Alert, StatusCode } from './index.types';
+import {
+  Alert, InitialState, StatusCode 
+} from './index.types';
 import * as actions from './actions';
 
 const {
@@ -46,7 +48,7 @@ const useGlobalStore = create<GlobalState>((set) => ({
   logOut: () => set(actions.logOut()),
   setEmail: (email) => set(actions.setEmail(email)),
   setPassword: (password) => set(actions.setPassword(password)),
-  clearEmailAndPassword: () => set({ email: undefined, password: undefined }),
+  clearEmailAndPassword: () => set({email: undefined, password: undefined}),
   cancelDonation: (donationId) => set((state) => actions.cancelDonation(state, donationId)),
   claimDonation: (donationId, clientId) => set((state) => actions.claimDonation(state, donationId, clientId)),
 }));

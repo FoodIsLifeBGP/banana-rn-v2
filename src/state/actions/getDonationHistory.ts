@@ -1,7 +1,7 @@
 import railsAxios from '@util/railsAxios';
 
 export const getDonationHistory = async (store) => {
-  const { jwt, user } = store.state;
+  const {jwt, user} = store.state;
   const endpoint = `/donations/${user.id}/history_donations`;
 
   try {

@@ -1,6 +1,8 @@
-import React, { useState, FunctionComponent } from 'react';
-import { View, Text } from 'react-native';
-import { FormTextInput, LinkButton, SpacerInline } from '@elements';
+import React, {FunctionComponent, useState} from 'react';
+import {Text, View} from 'react-native';
+import {
+  FormTextInput, LinkButton, SpacerInline 
+} from '@elements';
 import useGlobal from '@state';
 import styles from '../ResetPassword.styles';
 

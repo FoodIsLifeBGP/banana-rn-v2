@@ -1,4 +1,4 @@
-import { SpacerInline, Paragraph } from '@elements';
+import {Paragraph, SpacerInline} from '@elements';
 
 import React from 'react';
 import InfoScreen from '../InfoScreen';

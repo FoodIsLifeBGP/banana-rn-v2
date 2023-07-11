@@ -1,4 +1,6 @@
-import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+import {
+  ImageStyle, TextStyle, ViewStyle,
+} from 'react-native';
 import * as colors from '@util/constants/colors';
 
 

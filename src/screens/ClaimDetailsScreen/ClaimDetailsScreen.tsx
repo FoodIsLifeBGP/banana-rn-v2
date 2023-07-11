@@ -1,6 +1,10 @@
 import React from 'react';
-import { Dimensions, ImageBackground, ScrollView, Text, View, Platform, Linking } from 'react-native';
-import { Icon, SpacerInline, TextButton } from '@elements';
+import {
+  Dimensions, ImageBackground, Linking, Platform, ScrollView, Text, View 
+} from 'react-native';
+import {
+  Icon, SpacerInline, TextButton 
+} from '@elements';
 import QRCode from 'react-native-qrcode-svg';
 import * as colors from '@util/constants/colors';
 import typography from '@util/typography';
@@ -86,7 +90,7 @@ export default function ClaimDetailsScreen(props) {
               <Text style={typography.body4}>{donation.pickup_instructions}</Text>
             </View>
             {claim.status !== 'closed' && (
-              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                 <TextButton text="Directions" buttonStyle={claimBtnStyle} onPress={() => openGPS()} />
               </View>
             )}

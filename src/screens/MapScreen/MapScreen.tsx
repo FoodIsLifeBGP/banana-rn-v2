@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Dimensions, View} from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import useGlobal from '@state';
-import { BananaMap,
-  NavBar } from '@elements';
+import {
+  BananaMap,
+  NavBar 
+} from '@elements';
 
 
 function MapScreen(props) {
@@ -11,8 +13,8 @@ function MapScreen(props) {
   const [ state, actions ] = useGlobal() as any;
 
   const [ donations, setDonations ] = useState([]);
-  const { width, height } = Dimensions.get('window');
-  const { latitude, longitude } = state.user.coords;
+  const {width, height} = Dimensions.get('window');
+  const {latitude, longitude} = state.user.coords;
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.05;
 
@@ -50,7 +52,7 @@ function MapScreen(props) {
         navigation={props.navigation}
         donations={donations}
         mapRegion={location}
-        clientLocation={{ latitude, longitude }}
+        clientLocation={{latitude, longitude}}
         markerSize={24}
       />
     </View>

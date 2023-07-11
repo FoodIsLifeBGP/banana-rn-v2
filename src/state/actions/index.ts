@@ -1,4 +1,6 @@
-import { Donation, Claim, StatusCode } from '@state/index.types';
+import {
+  Claim, Donation, StatusCode 
+} from '@state/index.types';
 
 export interface Actions {
 	getActiveDonationsForClient: () => Promise<Donation[] | []>;

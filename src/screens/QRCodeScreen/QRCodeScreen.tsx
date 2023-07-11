@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { AppRegistry,
-  View,
-  TextInput } from 'react-native';
+import {
+  AppRegistry,
+  TextInput,
+  View 
+} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 import styles from './QRCodeScreen.styles';

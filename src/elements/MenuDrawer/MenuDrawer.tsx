@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text,
-  View,
-  ScrollView,
+import {
   SafeAreaView,
-  TouchableOpacity } from 'react-native';
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View 
+} from 'react-native';
 import { DrawerItem } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import useGlobal from '@state';
@@ -19,7 +21,7 @@ function MenuDrawer(props) {
   return (
     <ScrollView>
       <View style={styles.drawerHeader}>
-        <Text style={{ ...styles.username, marginBottom: 0 }}>
+        <Text style={{...styles.username, marginBottom: 0}}>
           Hello,
         </Text>
         <Text style={styles.username}>{name}</Text>

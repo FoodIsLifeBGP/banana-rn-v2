@@ -1,16 +1,22 @@
-import React, { useState, RefObject, createRef, useEffect } from 'react';
-import { ScrollView,
-  View,
+import React, {
+  RefObject, createRef, useEffect, useState
+} from 'react';
+import {
   Alert,
-  Text,
+  KeyboardAvoidingView,
   Platform,
+  ScrollView,
+  Text,
   TextInput,
-  KeyboardAvoidingView } from 'react-native';
+  View
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useGlobalStore from '@state';
-import { Title,
+import {
+  FormTextInput,
   LinkButton,
-  FormTextInput } from '@elements';
+  Title
+} from '@elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styles from './LoginScreen.styles';
 import ResetPassword from './ResetPassword';

@@ -23,7 +23,7 @@ function BananaMap({
               longitude: parseFloat(donation.donor.longitude),
             }}
             size={markerSize}
-            onPress={() => navigate('MakeClaimScreen', { donation, id })}
+            onPress={() => navigate('MakeClaimScreen', {donation, id})}
           />
         );
       })}

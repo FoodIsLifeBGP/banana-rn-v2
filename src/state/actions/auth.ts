@@ -1,5 +1,5 @@
 import railsAxios from '@util/railsAxios';
-import { GlobalState, initialState } from '@state/index';
+import {GlobalState, initialState} from '@state/index';
 
 export const logIn = (state): GlobalState => {
   const {
@@ -10,7 +10,7 @@ export const logIn = (state): GlobalState => {
     try {
       const response = await railsAxios().post(
         loginUrl,
-        JSON.stringify({ [userIdentity]: { email, password } }),
+        JSON.stringify({[userIdentity]: {email, password}}),
       );
 
       return {
