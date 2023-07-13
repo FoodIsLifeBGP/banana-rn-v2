@@ -1,22 +1,22 @@
-import { StyleSheet } from 'react-native';
-import typography from '@util/typography';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import typography from "@util/typography";
+import * as colors from "@util/constants/colors";
 
 export default StyleSheet.create({
   keyboardAvoidContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
   },
   scrollContainer: {
-    paddingHorizontal: '5%',
-    paddingTop: '10%',
+    paddingHorizontal: "5%",
+    paddingTop: "10%",
     flex: 1,
   },
   imageInputContainer: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   icon: {
     height: 60,
@@ -27,9 +27,9 @@ export default StyleSheet.create({
   },
   input: { marginBottom: 14 },
   row: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   button: { marginBottom: 30 },
   pickupAddressLabel: {

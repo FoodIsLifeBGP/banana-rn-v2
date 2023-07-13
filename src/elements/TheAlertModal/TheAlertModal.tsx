@@ -1,20 +1,14 @@
-import React from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
-import useGlobal from '@state';
-import {
-  Modal,
-  TextButton
-} from '@elements';
-import { Alert } from '@state/index.types';
-import { useScheme } from '@util/colorSchemes';
-import typography from '@util/typography';
-import styles from './TheAlertModal.styles';
+import React from "react";
+import { Text, View } from "react-native";
+import useGlobal from "@state";
+import { Modal, TextButton } from "@elements";
+import { Alert } from "@state/index.types";
+import { useScheme } from "@util/colorSchemes";
+import typography from "@util/typography";
+import styles from "./TheAlertModal.styles";
 
 export default function TheAlertModal() {
-  const [ globalState, globalActions ] = useGlobal() as any;
+  const [globalState, globalActions] = useGlobal() as any;
   const { alert }: { alert: Alert } = globalState;
   const { clearAlert } = globalActions;
 
@@ -32,7 +26,7 @@ export default function TheAlertModal() {
   return (
     <Modal
       style={styles.container}
-      title={alert?.title || 'Alert'}
+      title={alert?.title || "Alert"}
       palette="accent"
       open={alert !== undefined}
       onDismiss={handleDismiss}
@@ -40,7 +34,7 @@ export default function TheAlertModal() {
       <View style={styles.body}>
         <View style={styles.textContainer}>
           <Text style={typography.body1}>
-            {alert?.message || 'Uh oh, an unknown error occurred!'}
+            {alert?.message || "Uh oh, an unknown error occurred!"}
           </Text>
         </View>
 

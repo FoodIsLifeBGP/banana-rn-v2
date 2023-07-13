@@ -1,3 +1,3 @@
-import AccountSuspendedScreen from './AccountSuspendedScreen';
+import AccountSuspendedScreen from "./AccountSuspendedScreen";
 
 export default AccountSuspendedScreen;

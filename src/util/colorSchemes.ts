@@ -2,8 +2,8 @@
  * Provides infrastructure for color scheme and palette declaration.
  */
 
-import { Appearance } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { Appearance } from "react-native";
+import * as colors from "@util/constants/colors";
 
 /**
  * | PaletteName | Background  | Foreground  |
@@ -15,8 +15,14 @@ import * as colors from '@util/constants/colors';
  * | accent      | red         | white       |
  * | disabled    | light grey  | white       |
  */
-export type ColorSchemeName = 'light' | 'dark' | 'no-preference';
-export type ColorPaletteName = 'default' | 'primary' | 'secondary' | 'tertiary' | 'accent' | 'disabled';
+export type ColorSchemeName = "light" | "dark" | "no-preference";
+export type ColorPaletteName =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "accent"
+  | "disabled";
 export type ColorPalette = {
   background: string;
   foreground: string;
@@ -37,7 +43,7 @@ const lightScheme: ColorScheme = {
     foreground: colors.NAVY_BLUE,
   },
   tertiary: {
-    background: 'transparent',
+    background: "transparent",
     foreground: colors.NAVY_BLUE,
   },
   accent: {
@@ -52,15 +58,16 @@ const lightScheme: ColorScheme = {
 
 export const COLOR_SCHEMES: Record<ColorSchemeName, ColorScheme> = {
   light: lightScheme,
-  dark: lightScheme, /* TODO: Add dark theme when available */
-  'no-preference': lightScheme,
+  dark: lightScheme /* TODO: Add dark theme when available */,
+  "no-preference": lightScheme,
 };
-
 
 /**
  * Hook that returns the Banana color scheme associated with the active,
  * OS-defined color scheme.
  */
 export function useScheme(): ColorScheme {
-  return COLOR_SCHEMES[Appearance.getColorScheme() || 'no-preference'];
+  return COLOR_SCHEMES[
+    Appearance.getColorScheme() || "no-preference"
+  ];
 }

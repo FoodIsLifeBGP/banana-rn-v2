@@ -1,7 +1,7 @@
-import {Dimensions, StyleSheet} from 'react-native';
-import * as colors from '@util/constants/colors';
+import { Dimensions, StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get("screen");
 const windowSquare = 300;
 
 /*
@@ -11,7 +11,7 @@ const windowSquare = 300;
 */
 const scaler = windowSquare / (windowSquare / 50);
 const widthMinusWindow = (width - windowSquare) / 2;
-const heightMinusWindow = ((height - windowSquare) / 2) - scaler;
+const heightMinusWindow = (height - windowSquare) / 2 - scaler;
 
 export default StyleSheet.create({
   background: {
@@ -21,39 +21,39 @@ export default StyleSheet.create({
     zIndex: -1,
   },
   xContainer: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'row',
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
     top: 0,
     left: 0,
-    justifyContent: 'space-between',
-    width: '100%',
+    justifyContent: "space-between",
+    width: "100%",
     paddingTop: 20,
     paddingHorizontal: 5,
   },
   x: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 48,
   },
   textContainer: {
-    display: 'flex',
-    position: 'absolute',
+    display: "flex",
+    position: "absolute",
     bottom: 0,
     width,
     height: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     fontSize: 24,
     color: colors.WHITE,
-    textShadowColor: 'black',
+    textShadowColor: "black",
     textShadowRadius: 5,
   },
   reticleUL: {
-    position: 'absolute',
-    borderStyle: 'solid',
+    position: "absolute",
+    borderStyle: "solid",
     height: windowSquare / 5,
     width: windowSquare / 2.75,
     borderWidth: 4,
@@ -65,8 +65,8 @@ export default StyleSheet.create({
     left: widthMinusWindow,
   },
   reticleUR: {
-    position: 'absolute',
-    borderStyle: 'solid',
+    position: "absolute",
+    borderStyle: "solid",
     height: windowSquare / 5,
     width: windowSquare / 2.75,
     borderWidth: 4,
@@ -78,8 +78,8 @@ export default StyleSheet.create({
     right: widthMinusWindow,
   },
   reticleDL: {
-    position: 'absolute',
-    borderStyle: 'solid',
+    position: "absolute",
+    borderStyle: "solid",
     height: windowSquare / 5,
     width: windowSquare / 2.75,
     borderWidth: 4,
@@ -91,8 +91,8 @@ export default StyleSheet.create({
     left: widthMinusWindow,
   },
   reticleDR: {
-    position: 'absolute',
-    borderStyle: 'solid',
+    position: "absolute",
+    borderStyle: "solid",
     height: windowSquare / 5,
     width: windowSquare / 2.75,
     borderWidth: 4,

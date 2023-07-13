@@ -1,3 +1,3 @@
-import HamburgerPopupMenu from './HamburgerPopupMenu';
+import HamburgerPopupMenu from "./HamburgerPopupMenu";
 
 export default HamburgerPopupMenu;

@@ -1,17 +1,11 @@
-import React from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
-import useGlobal from '@state';
-import {
-  Modal,
-  TextButton
-} from '@elements';
-import { Alert } from '@state/index.types';
-import { useScheme } from '@util/colorSchemes';
-import typography from '@util/typography';
-import styles from './IncompleteFormAlert.styles';
+import React from "react";
+import { Text, View } from "react-native";
+import useGlobal from "@state";
+import { Modal, TextButton } from "@elements";
+import { Alert } from "@state/index.types";
+import { useScheme } from "@util/colorSchemes";
+import typography from "@util/typography";
+import styles from "./IncompleteFormAlert.styles";
 
 interface IncompleteFormAlertProps {
   onYes?: () => void;
@@ -22,7 +16,7 @@ export default function IncompleteFormAlert({
   onYes = () => {},
   onNo = () => {},
 }: IncompleteFormAlertProps) {
-  const [ globalState, globalActions ] = useGlobal() as any;
+  const [globalState, globalActions] = useGlobal() as any;
   const { alert: alertObj }: { alert: Alert } = globalState;
   const { clearAlert } = globalActions;
   const scheme = useScheme();
@@ -50,11 +44,11 @@ export default function IncompleteFormAlert({
   };
 
   if (!alertObj) return null;
-  if (!alertObj.type || alertObj.type === 'default') {
+  if (!alertObj.type || alertObj.type === "default") {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || 'Alert'}
+        title={alertObj?.title || "Alert"}
         palette="accent"
         open={alertObj !== undefined}
         onDismiss={handleDismiss}
@@ -62,7 +56,8 @@ export default function IncompleteFormAlert({
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alertObj?.message || 'Uh oh, an unknown error occurred!'}
+              {alertObj?.message ||
+                "Uh oh, an unknown error occurred!"}
             </Text>
           </View>
 
@@ -80,11 +75,11 @@ export default function IncompleteFormAlert({
       </Modal>
     );
   }
-  if (alertObj.type === 'incomplete form') {
+  if (alertObj.type === "incomplete form") {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || 'ARE YOU SURE?'}
+        title={alertObj?.title || "ARE YOU SURE?"}
         palette="secondary"
         open={alertObj !== undefined}
         onDismiss={handleDismiss}
@@ -92,7 +87,8 @@ export default function IncompleteFormAlert({
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alertObj?.message || 'This is incomplete and will be canceled if you leave this page.'}
+              {alertObj?.message ||
+                "This is incomplete and will be canceled if you leave this page."}
             </Text>
           </View>
 

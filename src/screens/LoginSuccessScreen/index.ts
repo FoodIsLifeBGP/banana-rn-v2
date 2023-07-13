@@ -1,3 +1,3 @@
-import LoginSuccessScreen from './LoginSuccessScreen';
+import LoginSuccessScreen from "./LoginSuccessScreen";
 
 export default LoginSuccessScreen;

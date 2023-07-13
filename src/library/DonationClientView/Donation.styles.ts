@@ -1,51 +1,51 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 const iconSize = 70;
-const imageSize = iconSize * 0.90;
+const imageSize = iconSize * 0.9;
 
 export default StyleSheet.create({
   card: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    flexDirection: "column",
+    alignItems: "flex-start",
     marginBottom: 10,
     padding: 10,
     borderRadius: 16,
   },
   categoryText: {
     width: iconSize + 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    textAlign: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    textAlign: "center",
   },
   iconContainer: {
     height: iconSize,
     width: iconSize,
     borderRadius: iconSize / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginStart: 10,
-    borderColor: 'blue',
+    borderColor: "blue",
     borderWidth: iconSize - imageSize,
   },
   icon: {
     height: imageSize,
     width: imageSize,
-    borderRadius: (imageSize / 2),
+    borderRadius: imageSize / 2,
   },
-  mainContainer: { flexDirection: 'row' },
+  mainContainer: { flexDirection: "row" },
   infoContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    flexDirection: "column",
+    justifyContent: "space-evenly",
     marginStart: 20,
   },
-  infoBottomContainer: { flexDirection: 'row' },
+  infoBottomContainer: { flexDirection: "row" },
   infoText: {
-    fontFamily: 'open-sans-regular',
+    fontFamily: "open-sans-regular",
     color: colors.NAVY_BLUE,
   },
   infoTextBold: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     color: colors.NAVY_BLUE,
   },
 });

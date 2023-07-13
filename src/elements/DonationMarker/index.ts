@@ -1,3 +1,3 @@
-import DonationMarker from './DonationMarker';
+import DonationMarker from "./DonationMarker";
 
 export { DonationMarker };

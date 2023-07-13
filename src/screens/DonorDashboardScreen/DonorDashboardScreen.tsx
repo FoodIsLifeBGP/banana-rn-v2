@@ -1,22 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import { useIsFocused } from '@react-navigation/native';
-import {
-  ScrollView, Text, View
-} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import {
-  EmptyStateView, NavBar, Title
-} from '@elements';
-import useGlobal from '@state';
-import Donation from '@library/Donations/Donation';
-import styles from './DonorDashboardScreen.styles';
+import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { ScrollView, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { EmptyStateView, NavBar, Title } from "@elements";
+import useGlobal from "@state";
+import Donation from "@library/Donations/Donation";
+import styles from "./DonorDashboardScreen.styles";
 
 function DonorDashboardScreen(props) {
   const isFocused = useIsFocused();
-  const [ state, actions ] = useGlobal() as any;
+  const [state, actions] = useGlobal() as any;
 
-  const [ donations, setDonations ] = useState(state.donationsOrClaims);
-  const [ loaded, setLoaded ] = useState(false);
+  const [donations, setDonations] = useState(state.donationsOrClaims);
+  const [loaded, setLoaded] = useState(false);
 
   const getDonorActiveDonations = async () => {
     const { getDonations } = actions;
@@ -31,7 +27,7 @@ function DonorDashboardScreen(props) {
     if (isFocused) {
       getDonorActiveDonations();
     }
-  }, [ isFocused ]);
+  }, [isFocused]);
 
   return (
     <View style={styles.outerContainer}>
@@ -39,44 +35,47 @@ function DonorDashboardScreen(props) {
 
       <View style={styles.contentContainer}>
         <Title text="Donations" />
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
           <View>
             <Text style={styles.activeHeader}>ACTIVE</Text>
           </View>
-          <TouchableOpacity onPress={() => props.navigation.navigate('DonationScreen')}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate("DonationScreen")
+            }
+          >
             <View>
               <Text style={styles.plus}>+</Text>
             </View>
           </TouchableOpacity>
         </View>
-        { !loaded && <Text>Loading...</Text> }
-        {loaded && donations && Array.isArray(donations) && donations.length > 0
-          ? (
-            <ScrollView>
-              {
-                (donations as any).map((donation, i) => (
-                  <View key={donation.id}>
-                    <Donation
-                      donation={donation}
-                      key={donation.id}
-                      resource="donations"
-                    />
-                    {i === (donations as any).length - 1}
-                  </View>
-                ))
-              }
-            </ScrollView>
-          )
-          : (
-            <EmptyStateView lowerText="You currently don't have any donations." />
-          )}
+        {!loaded && <Text>Loading...</Text>}
+        {loaded &&
+        donations &&
+        Array.isArray(donations) &&
+        donations.length > 0 ? (
+          <ScrollView>
+            {(donations as any).map((donation, i) => (
+              <View key={donation.id}>
+                <Donation
+                  donation={donation}
+                  key={donation.id}
+                  resource="donations"
+                />
+                {i === (donations as any).length - 1}
+              </View>
+            ))}
+          </ScrollView>
+        ) : (
+          <EmptyStateView lowerText="You currently don't have any donations." />
+        )}
       </View>
-
     </View>
   );
 }

@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 const iconSize = 90;
 
@@ -10,9 +10,9 @@ export default StyleSheet.create({
     borderRadius: iconSize / 2,
     backgroundColor: colors.BANANA_YELLOW,
     marginHorizontal: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'blue',
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "blue",
     borderWidth: 1,
   },
   icon: {
@@ -24,21 +24,21 @@ export default StyleSheet.create({
     height: 125,
     backgroundColor: colors.LIGHT_GRAY,
     borderRadius: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 15,
   },
   infoText: {
-    fontFamily: 'open-sans-regular',
+    fontFamily: "open-sans-regular",
     color: colors.NAVY_BLUE,
   },
   infoTextBold: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     color: colors.NAVY_BLUE,
   },
   infoTitle: {
     width: iconSize,
-    textAlign: 'center',
-    fontFamily: 'open-sans-bold',
+    textAlign: "center",
+    fontFamily: "open-sans-bold",
     color: colors.NAVY_BLUE,
     marginHorizontal: 10,
     marginTop: 10,

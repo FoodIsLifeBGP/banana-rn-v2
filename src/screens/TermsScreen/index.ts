@@ -1,3 +1,3 @@
-import TermsScreen from './TermsScreen';
+import TermsScreen from "./TermsScreen";
 
 export default TermsScreen;

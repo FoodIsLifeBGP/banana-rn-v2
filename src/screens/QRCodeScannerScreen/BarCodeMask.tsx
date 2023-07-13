@@ -1,8 +1,8 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Icon } from '@elements';
-import styles from './BarCodeMask.styles';
+import React from "react";
+import { Text, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Icon } from "@elements";
+import styles from "./BarCodeMask.styles";
 
 export default function BarCodeMask(props) {
   return (
@@ -13,20 +13,20 @@ export default function BarCodeMask(props) {
       <View style={styles.reticleDR} />
       <View style={styles.background} />
       <View style={styles.xContainer}>
-        <TouchableWithoutFeedback onPress={() => props.navigation.navigate.goBack()}>
+        <TouchableWithoutFeedback
+          onPress={() => props.navigation.navigate.goBack()}
+        >
           <Icon name="chevron-left" size={48} color="gray" />
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => props.navigation.navigate.goBack()}>
+        <TouchableWithoutFeedback
+          onPress={() => props.navigation.navigate.goBack()}
+        >
           <Icon name="close" size={48} color="gray" />
         </TouchableWithoutFeedback>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>
-          Align QR code
-        </Text>
-        <Text style={styles.text}>
-          within frame to scan
-        </Text>
+        <Text style={styles.text}>Align QR code</Text>
+        <Text style={styles.text}>within frame to scan</Text>
       </View>
     </>
   );

@@ -1,39 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import * as colors from '@util/constants/colors';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import * as Permissions from 'expo-permissions';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import React, { useEffect, useState } from "react";
+import * as colors from "@util/constants/colors";
+import { Image, StyleSheet, Text, View } from "react-native";
+import * as Permissions from "expo-permissions";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
-import useGlobal from '@state';
+import useGlobal from "@state";
 
-import {
-  Icon, LinkButton, Modal, TextButton
-} from '@elements';
-import { ButtonStyle } from '@elements/Button';
-import { categoryImage } from '@util/donationCategory';
-import openAppSettings from '@util/openAppSettings';
+import { Icon, LinkButton, Modal, TextButton } from "@elements";
+import { ButtonStyle } from "@elements/Button";
+import { categoryImage } from "@util/donationCategory";
+import openAppSettings from "@util/openAppSettings";
 
-import BarCodeMask from './BarCodeMask';
-import styles from './QRCodeScannerScreen.styles';
+import BarCodeMask from "./BarCodeMask";
+import styles from "./QRCodeScannerScreen.styles";
 
 export default function QRCodeScannerScreen(props) {
-  const [ state, actions ] = useGlobal() as any;
+  const [state, actions] = useGlobal() as any;
   const { scan } = actions;
-  const [ hasCameraPermission, setHasCameraPermission ] = useState<boolean | null>(null);
-  const [ modalOn, setModalOn ] = useState(false);
-  const [ claimedDonation, setClaimedDonation ] = useState({
-    food_name: '',
-    claim: { client_name: '' },
+  const [hasCameraPermission, setHasCameraPermission] = useState<
+    boolean | null
+  >(null);
+  const [modalOn, setModalOn] = useState(false);
+  const [claimedDonation, setClaimedDonation] = useState({
+    food_name: "",
+    claim: { client_name: "" },
   });
   // TBD.
   // const [ scannerActive, setScannerActive ] = useState(true);
-  const [ icon, setIcon ] = useState(() => categoryImage(''));
-
+  const [icon, setIcon] = useState(() => categoryImage(""));
 
   const buttonStyle: ButtonStyle = {
     default: {
@@ -46,20 +40,25 @@ export default function QRCodeScannerScreen(props) {
     const date = new Date();
     const hh = date.getHours();
     const mm = date.getMinutes();
-    const AMPM = (hh > 12) ? 'PM' : 'AM';
-    return `${(hh > 12) ? hh % 12 : hh}: ${(mm < 10) ? '0'.concat(mm.toString()) : mm} ${AMPM} `;
+    const AMPM = hh > 12 ? "PM" : "AM";
+    return `${hh > 12 ? hh % 12 : hh}: ${
+      mm < 10 ? "0".concat(mm.toString()) : mm
+    } ${AMPM} `;
   };
 
-  const getDate = () => new Date().toDateString().slice(4).split(' ')
-    .join('/');
+  const getDate = () =>
+    new Date().toDateString().slice(4).split(" ").join("/");
 
   const getPermissions = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    setHasCameraPermission(status === 'granted');
+    setHasCameraPermission(status === "granted");
   };
 
   const handleBarCodeScanned = (barcode) => {
-    const match = state.donationsOrClaims.filter((d) => d.status === 'claimed' && d.claim.qr_code === barcode.data);
+    const match = state.donationsOrClaims.filter(
+      (d) =>
+        d.status === "claimed" && d.claim.qr_code === barcode.data,
+    );
     if (match[0]) {
       // TBD
       // setScannerActive(false);
@@ -72,7 +71,7 @@ export default function QRCodeScannerScreen(props) {
       });
     } else {
       setModalOn(true);
-      console.log('No match found');
+      console.log("No match found");
     }
   };
 
@@ -80,8 +79,8 @@ export default function QRCodeScannerScreen(props) {
   // Resets value of scanned, and sets modalOn to false.
   const handleDismiss = () => {
     setClaimedDonation({
-      food_name: '',
-      claim: { client_name: '' },
+      food_name: "",
+      claim: { client_name: "" },
     });
     setModalOn(false);
     props.navigation.goBack();
@@ -92,21 +91,34 @@ export default function QRCodeScannerScreen(props) {
     let content;
     if (claimedDonation.food_name) {
       content = (
-        <Modal title="ITEM DONATED" open={modalOn} onDismiss={handleDismiss} palette="secondary">
+        <Modal
+          title="ITEM DONATED"
+          open={modalOn}
+          onDismiss={handleDismiss}
+          palette="secondary"
+        >
           <View style={styles.content}>
             <Image source={icon} style={styles.icon} />
             <Text style={styles.claimTitle}>
               {claimedDonation.food_name}
             </Text>
-            <View style={{...styles.textContainer, marginBottom: -100}}>
+            <View
+              style={{
+                ...styles.textContainer,
+                marginBottom: -100,
+              }}
+            >
               <Icon name="user" color="blue" size={20} />
               <Text style={styles.textStyle}>
                 {claimedDonation.claim.client_name}
               </Text>
             </View>
-            <View style={{
-              ...styles.textContainer, marginTop: 'auto', marginBottom: -80,
-            }}
+            <View
+              style={{
+                ...styles.textContainer,
+                marginTop: "auto",
+                marginBottom: -80,
+              }}
             >
               <Icon name="time" color="blue" size={20} />
               <Text style={styles.textStyle}>
@@ -125,16 +137,37 @@ export default function QRCodeScannerScreen(props) {
       );
     } else {
       content = (
-        <Modal title="SOMETHING WENT WRONG" open={modalOn} onDismiss={handleDismiss} palette="secondary">
+        <Modal
+          title="SOMETHING WENT WRONG"
+          open={modalOn}
+          onDismiss={handleDismiss}
+          palette="secondary"
+        >
           <View style={styles.content}>
             <Image source={icon} style={styles.icon} />
-            <Text style={{...styles.textStyle, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                ...styles.textStyle,
+                fontWeight: "bold",
+              }}
+            >
               PLEASE TRY AGAIN
             </Text>
-            <View style={{...styles.errorContainer, marginVertical: 20}}>
-              <Text style={styles.errorStyle}>QR Code Scan was not successful.</Text>
-              <Text style={styles.errorStyle}>If this issue is not resolved,</Text>
-              <Text style={styles.errorStyle}>Please contact us.</Text>
+            <View
+              style={{
+                ...styles.errorContainer,
+                marginVertical: 20,
+              }}
+            >
+              <Text style={styles.errorStyle}>
+                QR Code Scan was not successful.
+              </Text>
+              <Text style={styles.errorStyle}>
+                If this issue is not resolved,
+              </Text>
+              <Text style={styles.errorStyle}>
+                Please contact us.
+              </Text>
             </View>
             <TextButton
               text="OK"
@@ -153,29 +186,37 @@ export default function QRCodeScannerScreen(props) {
   // eslint-disable-next-line react/no-unstable-nested-components
   function ScannerContent() {
     switch (hasCameraPermission) {
-    case true: return (
-      <>
-        {/* scannerActive conditional goes here  */}
-        <BarCodeScanner
-          onBarCodeScanned={handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
-        <BarCodeMask />
-        <ModalContent />
-      </>
-    );
-    case false: return (
-      <>
-        <Text>No access to camera</Text>
-        <Text>The app needs access to the camera to scan QR codes.</Text>
-        <LinkButton
-          text="Open Settings"
-          onPress={() => openAppSettings().then(getPermissions)}
-        />
-        <LinkButton text="Go Back" onPress={() => props.navigation.goBack()} />
-      </>
-    );
-    default: return <Text>Requesting permission to access camera</Text>;
+      case true:
+        return (
+          <>
+            {/* scannerActive conditional goes here  */}
+            <BarCodeScanner
+              onBarCodeScanned={handleBarCodeScanned}
+              style={StyleSheet.absoluteFillObject}
+            />
+            <BarCodeMask />
+            <ModalContent />
+          </>
+        );
+      case false:
+        return (
+          <>
+            <Text>No access to camera</Text>
+            <Text>
+              The app needs access to the camera to scan QR codes.
+            </Text>
+            <LinkButton
+              text="Open Settings"
+              onPress={() => openAppSettings().then(getPermissions)}
+            />
+            <LinkButton
+              text="Go Back"
+              onPress={() => props.navigation.goBack()}
+            />
+          </>
+        );
+      default:
+        return <Text>Requesting permission to access camera</Text>;
     }
   }
 

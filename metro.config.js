@@ -2,15 +2,21 @@
  * Configuration file for the React Native bundler, Metro.
  */
 
-const { getDefaultConfig } = require('metro-config');
+const { getDefaultConfig } = require("metro-config");
 
 module.exports = (async () => {
-  const {resolver: {sourceExts, assetExts}} = await getDefaultConfig();
+  const {
+    resolver: { sourceExts, assetExts },
+  } = await getDefaultConfig();
   return {
-    transformer: { babelTransformerPath: require.resolve('react-native-svg-transformer') },
+    transformer: {
+      babelTransformerPath: require.resolve(
+        "react-native-svg-transformer",
+      ),
+    },
     resolver: {
-      assetExts: assetExts.filter((ext) => ext !== 'svg'),
-      sourceExts: [ ...sourceExts, 'svg' ],
+      assetExts: assetExts.filter((ext) => ext !== "svg"),
+      sourceExts: [...sourceExts, "svg"],
     },
   };
 })();

@@ -1,26 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {
-  ScrollView, Text, View
-} from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
-import {
-  EmptyStateView, NavBar, Title
-} from '@elements';
-import Donation from '@library/Donations/Donation/Donation';
-import useGlobal from '@state';
-import styles from './DonorHistoryScreen.styles';
+import React, { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { EmptyStateView, NavBar, Title } from "@elements";
+import Donation from "@library/Donations/Donation/Donation";
+import useGlobal from "@state";
+import styles from "./DonorHistoryScreen.styles";
 
 function DonorHistoryScreen() {
   const isFocused = useIsFocused();
-  const [ state, actions ] = useGlobal() as any;
-  const [ donations, setDonations ] = useState([]);
+  const [state, actions] = useGlobal() as any;
+  const [donations, setDonations] = useState([]);
   const { getDonationHistory } = actions;
 
   useEffect(() => {
     if (isFocused) {
       getDonationHistory().then((data) => setDonations(data));
     }
-  }, [ isFocused ]);
+  }, [isFocused]);
 
   return (
     <View style={styles.outerContainer}>
@@ -28,17 +24,18 @@ function DonorHistoryScreen() {
 
       <View style={styles.contentContainer}>
         <Title text="Donations" />
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
           <View>
             <Text style={styles.activeHeader}>History</Text>
           </View>
         </View>
-        {(donations && donations.length > 0) ? (
+        {donations && donations.length > 0 ? (
           <ScrollView>
             {(donations as any).map((donation) => (
               <View key={donation.id}>

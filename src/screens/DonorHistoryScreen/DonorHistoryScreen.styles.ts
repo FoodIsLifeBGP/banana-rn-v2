@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 export default StyleSheet.create({
   outerContainer: {
@@ -15,7 +15,7 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
   activeHeader: {
-    fontFamily: 'open-sans-regular',
+    fontFamily: "open-sans-regular",
     fontSize: 20,
     color: colors.NAVY_BLUE,
   },

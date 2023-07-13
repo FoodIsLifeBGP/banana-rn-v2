@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import {
-  LinkButton,
-  NavBar,
-  SpacerInline,
-  Title
-} from '@elements';
-import getEnv from '@util/environment';
-import Terms from '@assets/documents/SampleToS';
-import ScrollContainer from '../../elements/ScrollContainer/ScrollContainer';
-import styles from './TermsScreen.styles';
+import React, { useState } from "react";
+import { View } from "react-native";
+import { LinkButton, NavBar, SpacerInline, Title } from "@elements";
+import getEnv from "@util/environment";
+import Terms from "@assets/documents/SampleToS";
+import ScrollContainer from "../../elements/ScrollContainer/ScrollContainer";
+import styles from "./TermsScreen.styles";
 
 export default function TermsScreen() {
-  const [ button, setButton ] = useState(true);
+  const [button, setButton] = useState(true);
   return (
     <>
       <View style={styles.titleContainer}>
@@ -23,8 +18,14 @@ export default function TermsScreen() {
       <View style={styles.outerContainer}>
         <SpacerInline height={20} />
         <ScrollContainer
-          documentText={getEnv().USER_IDENTITY === 'client' ? Terms.client : Terms.donor}
-          onScrollToEnd={() => { setButton(false); }}
+          documentText={
+            getEnv().USER_IDENTITY === "client"
+              ? Terms.client
+              : Terms.donor
+          }
+          onScrollToEnd={() => {
+            setButton(false);
+          }}
         />
         <SpacerInline height={40} />
         <LinkButton

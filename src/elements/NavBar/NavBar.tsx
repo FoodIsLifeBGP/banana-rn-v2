@@ -1,32 +1,32 @@
-import React from 'react';
-import { View } from 'react-native';
-import {Button, Icon} from '@elements';
-import { ButtonStyle } from '@elements/Button';
-import * as colors from '@util/constants/colors';
-import Selector from '@elements/NavBar/Selector';
+import React from "react";
+import { View } from "react-native";
+import { Button, Icon } from "@elements";
+import { ButtonStyle } from "@elements/Button";
+import * as colors from "@util/constants/colors";
+import Selector from "@elements/NavBar/Selector";
 // import useGlobal from '@state';
-import { NAVBAR_ICON_SIZE } from '@util/constants/icons';
-import HamburgerPopupMenu from '@elements/HamburgerPopupMenu';
-import styles from './NavBar.styles';
+import { NAVBAR_ICON_SIZE } from "@util/constants/icons";
+import HamburgerPopupMenu from "@elements/HamburgerPopupMenu";
+import styles from "./NavBar.styles";
 
 interface NavBarProps {
   backDestination?: string;
   showMenu?: boolean;
   showBackButton?: boolean;
-  leftButton?: 'qrCode'|'back';
+  leftButton?: "qrCode" | "back";
   showSelector?: boolean;
-  position?: 'map'|'list';
+  position?: "map" | "list";
   onMap?: () => any | undefined;
   onList?: () => any | undefined;
   backButtonFn?: () => void;
-  navigation?: any; /* TODO: replace with correct type */
+  navigation?: any /* TODO: replace with correct type */;
   goBack?: () => void;
 }
 
 export default function NavBar({
   showMenu = true,
   showBackButton = true,
-  leftButton = 'back',
+  leftButton = "back",
   backDestination,
   showSelector,
   position,
@@ -35,7 +35,6 @@ export default function NavBar({
   backButtonFn,
   navigation,
   goBack,
-
 }: NavBarProps) {
   const buttonStyle: ButtonStyle = {
     default: {
@@ -55,39 +54,46 @@ export default function NavBar({
       <View style={styles.backContainer}>
         {/* TODO: add this icon back */}
         {/* <Icon size={NAVBAR_ICON_SIZE} color='blue' name="back" /> */}
-        {
-          leftButton === 'back' && showBackButton && (
-            <Button
-              buttonStyle={buttonStyle}
-              onPress={backButtonFn || (backDestination ? () => navigation.navigate(backDestination) : () => goBack())}
-            />
-          )
-        }
+        {leftButton === "back" && showBackButton && (
+          <Button
+            buttonStyle={buttonStyle}
+            onPress={
+              backButtonFn ||
+              (backDestination
+                ? () => navigation.navigate(backDestination)
+                : () => goBack())
+            }
+          />
+        )}
         {/* TODO: add this icon back */}
         {/* <Icon size={NAVBAR_ICON_SIZE} color="blue" name="qrCode" /> */}
-        {
-          leftButton === 'qrCode' && (
-            <Button
-              buttonStyle={buttonStyle}
-              onPress={() => navigation.navigate('QRCodeScannerScreen')}
-            />
-          )
-        }
+        {leftButton === "qrCode" && (
+          <Button
+            buttonStyle={buttonStyle}
+            onPress={() => navigation.navigate("QRCodeScannerScreen")}
+          />
+        )}
       </View>
-      {
-        showSelector && position && <Selector position={position} onMap={onMap} onList={onList} />
-      }
+      {showSelector && position && (
+        <Selector position={position} onMap={onMap} onList={onList} />
+      )}
       {/* TODO: add this icon back */}
       {/* <Icon size={NAVBAR_ICON_SIZE} color={foregroundColor} name="bell" /> */}
       <View style={styles.notificationContainer}>
         <Button
           buttonStyle={buttonStyle}
-          style={{marginTop: 4, marginRight: 8}}
+          style={{
+            marginTop: 4,
+            marginRight: 8,
+          }}
           onPress={() => {
-            updateAlert({type: 'coming soon', dismissable: false});
+            updateAlert({
+              type: "coming soon",
+              dismissable: false,
+            });
           }}
         />
-        {showMenu && (<HamburgerPopupMenu />) }
+        {showMenu && <HamburgerPopupMenu />}
       </View>
     </View>
   );

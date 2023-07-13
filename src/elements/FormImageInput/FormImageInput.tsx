@@ -1,26 +1,19 @@
-import React, {
-  Ref,
-  RefObject,
-  forwardRef
-} from 'react';
+import React, { Ref, RefObject, forwardRef } from "react";
 import {
   Image,
   StyleProp,
   Text,
   View,
-  ViewStyle
-} from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
+  ViewStyle,
+} from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 
-import {
-  Icon,
-  InputLabel
-} from '@elements';
-import { sourceImage } from '@util/ImageSourcer';
-import styles from './FormImageInput.styles';
+import { Icon, InputLabel } from "@elements";
+import { sourceImage } from "@util/ImageSourcer";
+import styles from "./FormImageInput.styles";
 
-type UploadStatus = 'none' | 'pending' | 'success' | 'failure';
+type UploadStatus = "none" | "pending" | "success" | "failure";
 
 interface FormImageInputProps {
   /** Label for the input. */
@@ -45,14 +38,14 @@ interface FormImageInputProps {
   errorMessage?: string;
 
   /** Shape of the image input */
-  shape?: 'rectangular' | 'circular';
+  shape?: "rectangular" | "circular";
 }
 
 const MessageFromStatus = {
-  none: 'No file uploaded',
-  pending: 'Pending file upload',
-  success: 'File uploaded',
-  failure: 'File upload failed',
+  none: "No file uploaded",
+  pending: "Pending file upload",
+  success: "File uploaded",
+  failure: "File upload failed",
 };
 
 /**
@@ -63,16 +56,16 @@ function FormImageInput(
     label,
     value,
     setValue,
-    status = 'none',
+    status = "none",
     style,
     error = false,
     errorMessage,
-    shape = 'rectangular',
+    shape = "rectangular",
   }: FormImageInputProps,
   ref: Ref<TouchableWithoutFeedback>,
 ) {
   const pickImage = async () => {
-    const imageResult = await sourceImage('cameraRoll');
+    const imageResult = await sourceImage("cameraRoll");
     if (imageResult && !imageResult.cancelled) {
       setValue(imageResult as ImageInfo);
     }
@@ -81,43 +74,46 @@ function FormImageInput(
     <View style={style}>
       <InputLabel text={label} />
 
-
-      {status !== 'none' ? (
+      {status !== "none" ? (
         <Text style={styles.statusRowText}>
-          <Text style={styles.statusLabelText}>
-            {'Status : '}
-          </Text>
-          {MessageFromStatus[status] || 'Unknown status'}
+          <Text style={styles.statusLabelText}>{"Status : "}</Text>
+          {MessageFromStatus[status] || "Unknown status"}
         </Text>
       ) : null}
 
-      <TouchableWithoutFeedback
-        onPress={pickImage}
-        ref={ref}
-      >
-        { value?.uri != null
-          ? (
-            <Image
-              style={shape === 'rectangular' ? styles.image : styles.circularImage}
-              source={{ uri: value.uri }}
-            />
-          )
-          : (
-            <View style={shape === 'rectangular' ? styles.iconContainer : styles.iconCircularContainer}>
-              <Icon name="image" size={24} />
-            </View>
-          )}
+      <TouchableWithoutFeedback onPress={pickImage} ref={ref}>
+        {value?.uri != null ? (
+          <Image
+            style={
+              shape === "rectangular"
+                ? styles.image
+                : styles.circularImage
+            }
+            source={{ uri: value.uri }}
+          />
+        ) : (
+          <View
+            style={
+              shape === "rectangular"
+                ? styles.iconContainer
+                : styles.iconCircularContainer
+            }
+          >
+            <Icon name="image" size={24} />
+          </View>
+        )}
       </TouchableWithoutFeedback>
 
-      { error && (
+      {error && (
         <View style={styles.errorMessage}>
-          <Text style={styles.errorMessageText}>
-            {errorMessage}
-          </Text>
+          <Text style={styles.errorMessageText}>{errorMessage}</Text>
         </View>
-      ) }
+      )}
     </View>
   );
 }
 
-export default forwardRef<TouchableWithoutFeedback, FormImageInputProps & { ref?: RefObject<TouchableWithoutFeedback> }>(FormImageInput);
+export default forwardRef<
+  TouchableWithoutFeedback,
+  FormImageInputProps & { ref?: RefObject<TouchableWithoutFeedback> }
+>(FormImageInput);

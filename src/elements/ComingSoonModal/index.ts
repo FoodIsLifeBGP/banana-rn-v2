@@ -1,3 +1,3 @@
-import ComingSoonModal from './ComingSoonModal';
+import ComingSoonModal from "./ComingSoonModal";
 
 export { ComingSoonModal };

@@ -1,5 +1,5 @@
-import React from 'react';
-import { ScrollView } from 'react-native';
+import React from "react";
+import { ScrollView } from "react-native";
 
 interface EndOfScrollWrapperProps {
   onScrollToEnd: Function;
@@ -13,10 +13,15 @@ export default function EndOfScrollWrapper({
   children,
 }: EndOfScrollWrapperProps) {
   const isCloseToBottom = ({
-    layoutMeasurement, contentOffset, contentSize,
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
   }) => {
     const paddingToBottom = 20;
-    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
+    return (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
   };
 
   return (

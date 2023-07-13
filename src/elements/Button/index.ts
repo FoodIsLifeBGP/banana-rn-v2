@@ -1,4 +1,4 @@
-import Button from './Button';
+import Button from "./Button";
 
 export { Button };
-export * from './index.types';
+export * from "./index.types";

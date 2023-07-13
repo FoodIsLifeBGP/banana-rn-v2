@@ -1,3 +1,3 @@
-import LogoutScreen from './LogoutScreen';
+import LogoutScreen from "./LogoutScreen";
 
 export default LogoutScreen;

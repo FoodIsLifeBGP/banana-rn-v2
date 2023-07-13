@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 // TODO: container shadow does not show iOS with required hidden overflow
 
@@ -8,25 +8,25 @@ export const DEFAULT_TOP_OFFSET = 90;
 
 export default StyleSheet.create({
   wrapper: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   underlay: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    position: "absolute",
     backgroundColor: colors.MODAL_BACKGROUND,
   },
   container: {
-    width: '100%',
+    width: "100%",
     maxWidth: 330,
     minHeight: 362,
     marginHorizontal: 15,
-    position: 'absolute',
-    alignItems: 'center',
-    overflow: 'hidden',
+    position: "absolute",
+    alignItems: "center",
+    overflow: "hidden",
     borderRadius: 10,
     shadowColor: colors.MODAL_SHADOW,
     shadowOffset: {
@@ -37,30 +37,30 @@ export default StyleSheet.create({
     shadowOpacity: 1,
   },
   header: {
-    width: '100%',
+    width: "100%",
     height: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    width: '95%',
-    textAlign: 'center',
-    fontFamily: 'open-sans-bold',
+    width: "95%",
+    textAlign: "center",
+    fontFamily: "open-sans-bold",
     fontSize: 20,
   },
   body: {
-    width: '100%',
+    width: "100%",
     flexGrow: 1,
     backgroundColor: colors.WHITE,
   },
   bodyContent: {
-    overflow: 'scroll',
+    overflow: "scroll",
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
     paddingVertical: 20,
     paddingHorizontal: 18,
     color: colors.NAVY_BLUE,
-    textAlign: 'center',
-    justifyContent: 'space-around',
+    textAlign: "center",
+    justifyContent: "space-around",
   },
 });

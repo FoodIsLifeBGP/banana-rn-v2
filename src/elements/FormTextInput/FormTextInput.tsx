@@ -1,35 +1,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, {
-  Ref,
-  RefObject,
-  forwardRef,
-  useState
-} from 'react';
+import React, { Ref, RefObject, forwardRef, useState } from "react";
 import {
   StyleProp,
   Text,
   TextInput,
   TextInputProps,
   TextStyle,
-  View
-} from 'react-native';
-import {
-  Icon,
-  InputLabel
-} from '@elements';
-import { LIGHT_BLUE } from '@util/constants/colors';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { AsYouType } from 'libphonenumber-js';
-import styles from './FormTextInput.styles';
-import { DropdownInput } from './DropdownInput';
+  View,
+} from "react-native";
+import { Icon, InputLabel } from "@elements";
+import { LIGHT_BLUE } from "@util/constants/colors";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { AsYouType } from "libphonenumber-js";
+import styles from "./FormTextInput.styles";
+import { DropdownInput } from "./DropdownInput";
 
 interface BasicTextInputProps extends TextInputProps {
   /** User-submitted value. */
-  value: TextInputProps['value'];
+  value: TextInputProps["value"];
 
   /** Callback used with every keystroke within the input. */
-  setValue: TextInputProps['onChangeText'];
+  setValue: TextInputProps["onChangeText"];
 
   /** Styling to override default input styling. */
   inputStyle?: StyleProp<TextStyle>;
@@ -40,7 +32,7 @@ interface BasicTextInputProps extends TextInputProps {
 
 interface FormTextInputProps extends BasicTextInputProps {
   /** Type text input. */
-  type?: 'default' | 'password' | 'phoneNumber'|'dropdown';
+  type?: "default" | "password" | "phoneNumber" | "dropdown";
 
   /** Label for the input. */
   label: string;
@@ -90,7 +82,7 @@ function BasicTextInput({
  * Properties are 'transparent' and all are passed to the BasicTextInput.
  */
 function PasswordInput(props: BasicTextInputProps) {
-  const [ isPasswordVisible, setIsPasswordVisible ] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
     <View>
@@ -107,9 +99,7 @@ function PasswordInput(props: BasicTextInputProps) {
         >
           <View style={styles.passwordIconContainer}>
             <Icon
-              name={isPasswordVisible
-                ? 'eyeOff'
-                : 'eyeOn'}
+              name={isPasswordVisible ? "eyeOff" : "eyeOn"}
               size={24}
             />
           </View>
@@ -132,14 +122,13 @@ function PhoneNumberInput(props: BasicTextInputProps) {
   );
 }
 
-
 /**
  * Input component for a form that includes a standardized label and text input.
  * Can render a field with an optional visible password if 'type' password is given.
  */
 function FormTextInput(
   {
-    type = 'default',
+    type = "default",
     label,
     value,
     setValue,
@@ -152,21 +141,22 @@ function FormTextInput(
   }: FormTextInputProps,
   ref: Ref<TextInput>,
 ) {
-  const parseDigits = (string) => (string.match(/\d+/g) || []).join('');
+  const parseDigits = (string) =>
+    (string.match(/\d+/g) || []).join("");
   const numberFormat = (str: string | undefined) => {
     const digits = parseDigits(str);
-    return new AsYouType('US').input(digits);
+    return new AsYouType("US").input(digits);
   };
 
   let tempInput;
   let passedValue;
-  if (type === 'password') {
+  if (type === "password") {
     tempInput = PasswordInput;
     passedValue = value;
-  } else if (type === 'dropdown') {
+  } else if (type === "dropdown") {
     tempInput = DropdownInput;
     passedValue = value;
-  } else if (type === 'phoneNumber') {
+  } else if (type === "phoneNumber") {
     tempInput = PhoneNumberInput;
     /* To solve state infinite loop */
     const tempValue = numberFormat(value);
@@ -199,7 +189,9 @@ function FormTextInput(
         {error && (
           <View style={styles.errorMessage}>
             <Text style={styles.errorMessageText}>
-              {errorMessage && errorMessage.length ? errorMessage[0] : ''}
+              {errorMessage && errorMessage.length
+                ? errorMessage[0]
+                : ""}
             </Text>
           </View>
         )}
@@ -211,4 +203,7 @@ function FormTextInput(
 /**
  * Allows the Higher-Order-Component (FormTextInput) to pass references to the native TextInput.
  */
-export default forwardRef<TextInput, FormTextInputProps & { ref?: RefObject<TextInput> }>(FormTextInput);
+export default forwardRef<
+  TextInput,
+  FormTextInputProps & { ref?: RefObject<TextInput> }
+>(FormTextInput);

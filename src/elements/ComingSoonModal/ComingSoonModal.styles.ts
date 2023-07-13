@@ -1,9 +1,9 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 export default StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: colors.MODAL_BACKGROUND,
     shadowColor: colors.MODAL_SHADOW,
     shadowOffset: {
@@ -14,11 +14,11 @@ export default StyleSheet.create({
   },
   body: {
     flexGrow: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textContainer: {
     padding: 15,
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });

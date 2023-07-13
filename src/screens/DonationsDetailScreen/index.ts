@@ -1,3 +1,3 @@
-import DonationsDetailScreen from './DonationsDetailScreen';
+import DonationsDetailScreen from "./DonationsDetailScreen";
 
 export default DonationsDetailScreen;

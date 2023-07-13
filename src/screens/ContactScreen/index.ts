@@ -1,3 +1,3 @@
-import ContactScreen from './ContactScreen';
+import ContactScreen from "./ContactScreen";
 
 export default ContactScreen;

@@ -1,4 +1,3 @@
-import BananaMap from './BananaMap';
+import BananaMap from "./BananaMap";
 
 export { BananaMap };
-

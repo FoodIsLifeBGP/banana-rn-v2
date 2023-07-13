@@ -1,6 +1,6 @@
-import { Paragraph } from '@elements';
-import React from 'react';
-import InfoScreen from '../InfoScreen';
+import { Paragraph } from "@elements";
+import React from "react";
+import InfoScreen from "../InfoScreen";
 
 export default function LogoutScreen() {
   return (

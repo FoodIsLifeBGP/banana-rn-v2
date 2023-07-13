@@ -1,26 +1,26 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 const iconSize = 70;
-const imageSize = iconSize * 0.90;
+const imageSize = iconSize * 0.9;
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'white',
+    justifyContent: "flex-end",
+    backgroundColor: "white",
   },
   modal: { flex: 1 },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     color: colors.NAVY_BLUE,
   },
   textContainer: {
     flex: 1,
     color: colors.NAVY_BLUE,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   textStyle: {
     color: colors.NAVY_BLUE,
@@ -31,8 +31,8 @@ export default StyleSheet.create({
     flex: 1,
     marginVertical: 3,
     color: colors.NAVY_BLUE,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonTextStyle: {
     fontSize: 12,
@@ -41,7 +41,7 @@ export default StyleSheet.create({
   icon: {
     height: imageSize,
     width: imageSize,
-    borderRadius: (imageSize / 2),
+    borderRadius: imageSize / 2,
     borderColor: colors.NAVY_BLUE,
     borderWidth: 2,
     marginBottom: 15,
@@ -49,7 +49,7 @@ export default StyleSheet.create({
   claimTitle: {
     color: colors.NAVY_BLUE,
     marginLeft: 3,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 15,
     fontSize: 20,
   },

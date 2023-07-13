@@ -134,18 +134,10 @@ Title
    * Data visualization that shows the total number of picked-up, reserved, and available
    * servings within a single donation.
    */
-  export default ({
-    width = "100%",
-    pickedUp,
-    reserved,
-    left,
-    style,
-  }: ClaimingProgressBarProps) => {
+  export default ({ width = "100%", pickedUp, reserved, left, style }: ClaimingProgressBarProps) => {
     const num2Str = (num, places) => String(num).padStart(places, "0");
     const total = pickedUp + reserved + left;
-    return (
-      <View style={[styles.claimProgressBar, { width }, style]}>/*implementation logic*/</View>
-    );
+    return <View style={[styles.claimProgressBar, { width }, style]}>/*implementation logic*/</View>;
   };
   ```
 

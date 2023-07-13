@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import platformShadow from '@util/platformShadow';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import platformShadow from "@util/platformShadow";
+import * as colors from "@util/constants/colors";
 
 const addButtonSize = 110;
 
@@ -18,36 +18,36 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
   documentContainer: {
-    backgroundColor: 'white',
-    paddingHorizontal: '5%',
+    backgroundColor: "white",
+    paddingHorizontal: "5%",
   },
   documentText: {
-    fontFamily: 'open-sans-regular',
+    fontFamily: "open-sans-regular",
     color: colors.NAVY_BLUE,
     fontSize: 13,
-    textAlign: 'justify',
+    textAlign: "justify",
   },
   addButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 60,
     right: 25,
     height: addButtonSize,
     width: addButtonSize,
-    borderColor: 'white',
+    borderColor: "white",
     borderRadius: addButtonSize / 2,
     borderWidth: 2,
     backgroundColor: colors.NAVY_BLUE,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     ...platformShadow(5),
   },
   plus: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     fontSize: 40,
     color: colors.NAVY_BLUE,
   },
   activeHeader: {
-    fontFamily: 'open-sans-regular',
+    fontFamily: "open-sans-regular",
     fontSize: 20,
     color: colors.NAVY_BLUE,
   },

@@ -1,10 +1,12 @@
-import React from 'react';
-import { Text } from 'react-native';
-import { BananaMapProps } from './BananaMapProps';
-
+import React from "react";
+import { Text } from "react-native";
+import { BananaMapProps } from "./BananaMapProps";
 
 function BananaMap({
-  donations, markerSize, clientLocation, mapRegion,
+  donations,
+  markerSize,
+  clientLocation,
+  mapRegion,
 }: BananaMapProps) {
   console.log(donations);
   console.log(markerSize);

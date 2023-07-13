@@ -1,30 +1,33 @@
-import styles from '@elements/NavBar/Selector.styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import {Text, View} from 'react-native';
-import React, { useState } from 'react';
+import styles from "@elements/NavBar/Selector.styles";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, View } from "react-native";
+import React, { useState } from "react";
 
 interface SelectorProps {
-  position: 'map'|'list';
+  position: "map" | "list";
   onMap?: () => any | undefined;
   onList?: () => any | undefined;
 }
 export default (function Selector({
-  position, onMap, onList,
+  position,
+  onMap,
+  onList,
 }: SelectorProps) {
   return (
     <View style={styles.selectorContainer}>
       <TouchableOpacity
         style={[
           styles.selector,
-          position === 'map' ? styles.selectorSelected : {},
+          position === "map" ? styles.selectorSelected : {},
         ]}
         onPress={() => {
           onMap && onMap();
         }}
       >
-        <Text style={
-          position === 'map' ? styles.textSelected : styles.text
-        }
+        <Text
+          style={
+            position === "map" ? styles.textSelected : styles.text
+          }
         >
           map
         </Text>
@@ -32,15 +35,16 @@ export default (function Selector({
       <TouchableOpacity
         style={[
           styles.selector,
-          position === 'list' ? styles.selectorSelected : {},
+          position === "list" ? styles.selectorSelected : {},
         ]}
         onPress={() => {
           onList && onList();
         }}
       >
-        <Text style={
-          position === 'list' ? styles.textSelected : styles.text
-        }
+        <Text
+          style={
+            position === "list" ? styles.textSelected : styles.text
+          }
         >
           list
         </Text>
@@ -48,4 +52,3 @@ export default (function Selector({
     </View>
   );
 });
-

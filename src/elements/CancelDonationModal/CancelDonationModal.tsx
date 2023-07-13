@@ -1,17 +1,11 @@
-import React from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
-import useGlobalStore from '@state';
-import {
-  Modal,
-  TextButton
-} from '@elements';
-import { Alert } from '@state/index.types';
-import { useScheme } from '@util/colorSchemes';
-import typography from '@util/typography';
-import styles from './CancelDonationModal.styles';
+import React from "react";
+import { Text, View } from "react-native";
+import useGlobalStore from "@state";
+import { Modal, TextButton } from "@elements";
+import { Alert } from "@state/index.types";
+import { useScheme } from "@util/colorSchemes";
+import typography from "@util/typography";
+import styles from "./CancelDonationModal.styles";
 
 interface CancelDonationModalProps {
   onYes?: () => void;
@@ -23,7 +17,6 @@ export default function CancelDonationModal({
   onYes = () => {},
   onNo = () => {},
   okay = () => {},
-
 }: CancelDonationModalProps) {
   const updateAlert = useGlobalStore((state) => state.updateAlert);
   const clearAlert = useGlobalStore((state) => state.clearAlert);
@@ -60,11 +53,11 @@ export default function CancelDonationModal({
   };
 
   if (!alert) return null;
-  if (!alert.type || alert.type === 'default') {
+  if (!alert.type || alert.type === "default") {
     return (
       <Modal
         style={styles.container}
-        title={alert?.title || 'Alert'}
+        title={alert?.title || "Alert"}
         palette="accent"
         open={alert !== undefined}
         onDismiss={handleDismiss}
@@ -72,7 +65,7 @@ export default function CancelDonationModal({
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alert?.message || 'Uh oh, an unknown error occurred!'}
+              {alert?.message || "Uh oh, an unknown error occurred!"}
             </Text>
           </View>
 
@@ -90,11 +83,11 @@ export default function CancelDonationModal({
       </Modal>
     );
   }
-  if (alert.type === 'cancel donation') {
+  if (alert.type === "cancel donation") {
     return (
       <Modal
         style={styles.container}
-        title={alert?.title || 'ARE YOU SURE?'}
+        title={alert?.title || "ARE YOU SURE?"}
         palette="secondary"
         open={alert !== undefined}
         onDismiss={handleDismiss}
@@ -102,7 +95,7 @@ export default function CancelDonationModal({
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alert?.message || 'This donation will be cancelled.'}
+              {alert?.message || "This donation will be cancelled."}
             </Text>
           </View>
           <View style={styles.buttonWrapper}>
@@ -135,11 +128,11 @@ export default function CancelDonationModal({
       </Modal>
     );
   }
-  if (alert.type === 'donation published') {
+  if (alert.type === "donation published") {
     return (
       <Modal
         style={styles.container}
-        title={alert?.title || 'DONATION PUBLISHED'}
+        title={alert?.title || "DONATION PUBLISHED"}
         palette="secondary"
         open={alert !== undefined}
         onDismiss={handleDismiss}
@@ -147,7 +140,8 @@ export default function CancelDonationModal({
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alert?.message || 'Donation was published successfully. Thanks for your participation.'}
+              {alert?.message ||
+                "Donation was published successfully. Thanks for your participation."}
             </Text>
           </View>
           <View style={styles.buttonWrapper}>

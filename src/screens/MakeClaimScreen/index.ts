@@ -1,3 +1,3 @@
-import MakeClaimScreen from './MakeClaimScreen';
+import MakeClaimScreen from "./MakeClaimScreen";
 
 export default MakeClaimScreen;

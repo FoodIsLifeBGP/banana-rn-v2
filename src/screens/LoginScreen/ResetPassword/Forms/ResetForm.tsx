@@ -1,32 +1,35 @@
-import React, {FunctionComponent, useState} from 'react';
-import {Text, View} from 'react-native';
-import {
-  FormTextInput, LinkButton, SpacerInline
-} from '@elements';
-import useGlobal from '@state';
-import styles from '../ResetPassword.styles';
+import React, { FunctionComponent, useState } from "react";
+import { Text, View } from "react-native";
+import { FormTextInput, LinkButton, SpacerInline } from "@elements";
+import useGlobal from "@state";
+import styles from "../ResetPassword.styles";
 
 interface ResetFormProps {
   onComplete: () => void;
 }
 
-const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
-  const [ isSubmitting, setIsSubmitting ] = useState(false);
-  const [ formData, setFormData ] = useState('');
-  const [ error, setError ] = useState('');
-  const [ , actions ] = useGlobal() as any;
+const ResetForm: FunctionComponent<ResetFormProps> = ({
+  onComplete,
+}) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState("");
+  const [error, setError] = useState("");
+  const [, actions] = useGlobal() as any;
   const { requestResetToken } = actions;
 
   const isValidEmail = () => {
-    if (!formData.includes('@') || !formData.includes('.')) {
-      setError('Must be a valid email address.');
+    if (!formData.includes("@") || !formData.includes(".")) {
+      setError("Must be a valid email address.");
       return false;
     }
     return true;
   };
 
   const requestResetProps = {
-    input: formData, setIsSubmitting, onComplete, setError,
+    input: formData,
+    setIsSubmitting,
+    onComplete,
+    setError,
   };
   const handleSubmit = () => {
     if (isValidEmail() && !isSubmitting) {
@@ -39,7 +42,8 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
     <View>
       <SpacerInline height={20} />
       <Text style={styles.text}>
-        If you are a valid user in our system, we will email you password reset instructions.
+        If you are a valid user in our system, we will email you
+        password reset instructions.
       </Text>
       <SpacerInline height={20} />
 
@@ -48,7 +52,7 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
         placeholder="info@bananaapp.org"
         value={formData}
         setValue={(text) => {
-          setError('');
+          setError("");
           setFormData(text);
         }}
         autoCorrect={false}
@@ -65,7 +69,11 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
       </View>
       <SpacerInline height={20} />
       <View>
-        <LinkButton disabled={isSubmitting} text="Submit" onPress={handleSubmit} />
+        <LinkButton
+          disabled={isSubmitting}
+          text="Submit"
+          onPress={handleSubmit}
+        />
       </View>
     </View>
   );

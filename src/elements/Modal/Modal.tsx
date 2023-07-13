@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
 import {
-  StyleProp, Text, TouchableOpacity, View, ViewStyle
-} from 'react-native';
-import {ColorPaletteName, useScheme} from '@util/colorSchemes';
-import { ScrollView } from 'react-native-gesture-handler';
-import styles, { DEFAULT_TOP_OFFSET } from './Modal.styles';
-
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
+import { ColorPaletteName, useScheme } from "@util/colorSchemes";
+import { ScrollView } from "react-native-gesture-handler";
+import styles, { DEFAULT_TOP_OFFSET } from "./Modal.styles";
 
 interface ModalProps {
   /** Title text shown in the header. */
@@ -35,7 +38,7 @@ export default function Modal({
   open,
   style = {},
   top = DEFAULT_TOP_OFFSET,
-  palette = 'secondary',
+  palette = "secondary",
   onDismiss,
   children,
 }: ModalProps) {
@@ -52,31 +55,21 @@ export default function Modal({
   if (!open) return null;
 
   return (
-    <View style={[
-      style,
-      styles.wrapper,
-    ]}
-    >
+    <View style={[style, styles.wrapper]}>
       <TouchableOpacity
         style={styles.underlay}
         onPress={handleUnderlayPress}
       />
 
-      <View style={[
-        styles.container,
-        { top },
-      ]}
-      >
-        <View style={[
-          styles.header,
-          { backgroundColor: colorPalette.background },
-        ]}
+      <View style={[styles.container, { top }]}>
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: colorPalette.background },
+          ]}
         >
           <Text
-            style={[
-              styles.title,
-              { color: colorPalette.foreground },
-            ]}
+            style={[styles.title, { color: colorPalette.foreground }]}
           >
             {title.toUpperCase()}
           </Text>

@@ -3,7 +3,10 @@
 
 import React, { useState } from "react";
 import {
-  TouchableHighlight, TouchableHighlightProps, View, ViewStyle
+  TouchableHighlight,
+  TouchableHighlightProps,
+  View,
+  ViewStyle,
 } from "react-native";
 import { ColorScheme, useScheme } from "@util/colorSchemes";
 import { DARK_GRAY_TRANSPARENT, WHITE } from "@util/constants/colors";
@@ -35,7 +38,7 @@ export default function Button({
 }: ButtonProps) {
   const scheme: ColorScheme = useScheme();
   // Whether or not the button is pressed/ active.
-  const [ pressed, setPressed ] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
   const DEFAULT_PRESSED_PALETTE = {
     background: DARK_GRAY_TRANSPARENT,
@@ -45,14 +48,18 @@ export default function Button({
 
   // Palettes for button states.
   const defaultPalette = buttonStyle.default;
-  const pressedPalette = buttonStyle.pressed || DEFAULT_PRESSED_PALETTE;
-  const disabledPalette = buttonStyle.disabled || DEFAULT_DISABLED_PALETTE;
+  const pressedPalette =
+    buttonStyle.pressed || DEFAULT_PRESSED_PALETTE;
+  const disabledPalette =
+    buttonStyle.disabled || DEFAULT_DISABLED_PALETTE;
 
   // Underlay color is showed when the button is pressed.
-  const UNDERLAY_COLOR = pressedPalette?.background || DARK_GRAY_TRANSPARENT;
+  const UNDERLAY_COLOR =
+    pressedPalette?.background || DARK_GRAY_TRANSPARENT;
 
   // Outline styling
-  const BORDER_COLOR = (disabled ? disabledPalette : defaultPalette).foreground;
+  const BORDER_COLOR = (disabled ? disabledPalette : defaultPalette)
+    .foreground;
   const outlineBorder: ViewStyle = {
     borderColor: BORDER_COLOR,
     borderWidth: 2,
@@ -71,7 +78,12 @@ export default function Button({
 
   return (
     <TouchableHighlight
-      style={[ styles.container, outlined && outlineBorder, { backgroundColor }, style ]}
+      style={[
+        styles.container,
+        outlined && outlineBorder,
+        { backgroundColor },
+        style,
+      ]}
       underlayColor={UNDERLAY_COLOR}
       activeOpacity={activeOpacity}
       disabled={disabled}

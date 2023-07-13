@@ -1,6 +1,6 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import styles from './InputLabel.styles';
+import React from "react";
+import { Text, View } from "react-native";
+import styles from "./InputLabel.styles";
 
 export default function InputLabel({ text }: { text: string }) {
   return (

@@ -1,3 +1,3 @@
-import SpacerInline from './SpacerInline';
+import SpacerInline from "./SpacerInline";
 
 export { SpacerInline };

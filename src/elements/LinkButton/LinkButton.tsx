@@ -1,9 +1,7 @@
-import React from 'react';
-import {
-  Text, TouchableOpacity, View
-} from 'react-native';
-import * as colors from '@util/constants/colors';
-import styles from './LinkButton.styles';
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import * as colors from "@util/constants/colors";
+import styles from "./LinkButton.styles";
 
 interface LinkButtonProps {
   text: string;
@@ -24,9 +22,10 @@ export default function LinkButton({
   onPress = () => {},
   navigate,
 }: LinkButtonProps) {
-  const buttonFunction = (destination && navigate)
-    ? () => navigate(destination)
-    : onPress && ((func) => onPress(func));
+  const buttonFunction =
+    destination && navigate
+      ? () => navigate(destination)
+      : onPress && ((func) => onPress(func));
 
   return (
     <View style={styles.container}>
@@ -35,7 +34,7 @@ export default function LinkButton({
         activeOpacity={0.3}
         onPress={buttonFunction}
       >
-        <View style={[ styles.textContainer, { borderColor } ]}>
+        <View style={[styles.textContainer, { borderColor }]}>
           <Text
             style={[
               styles.text,

@@ -1,9 +1,7 @@
-import {
-  LinkButton, SpacerInline, Title
-} from '@elements';
-import React, { FunctionComponent } from 'react';
-import { View } from 'react-native';
-import styles from './InfoScreen.styles';
+import { LinkButton, SpacerInline, Title } from "@elements";
+import React, { FunctionComponent } from "react";
+import { View } from "react-native";
+import styles from "./InfoScreen.styles";
 
 type InfoScreenProps = {
   title: string;
@@ -11,7 +9,7 @@ type InfoScreenProps = {
   nextScreenDestination?: string;
   backDestination?: string;
   showBackButton?: boolean;
-  children?: any; /* TODO: add actual type */
+  children?: any /* TODO: add actual type */;
 };
 
 const InfoScreen: FunctionComponent<InfoScreenProps> = ({
@@ -24,14 +22,15 @@ const InfoScreen: FunctionComponent<InfoScreenProps> = ({
     <View>
       <Title text={title} />
       <SpacerInline height={40} />
-      <View>
-        {children}
-      </View>
+      <View>{children}</View>
     </View>
 
     <View>
-      { nextScreenTitle && nextScreenDestination && (
-        <LinkButton text={nextScreenTitle} destination={nextScreenDestination} />
+      {nextScreenTitle && nextScreenDestination && (
+        <LinkButton
+          text={nextScreenTitle}
+          destination={nextScreenDestination}
+        />
       )}
     </View>
   </View>

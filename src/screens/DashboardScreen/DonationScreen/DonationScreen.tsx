@@ -1,83 +1,115 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from "react";
 import {
   Image,
-  KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View
-} from 'react-native';
-import useGlobal from '@state';
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import useGlobal from "@state";
 import {
   FormTextInput,
   LinkButton,
   NavBar,
-  SpacerInline
-} from '@elements';
-import validate from 'validate.js';
-import { NewDonation } from '@screens/DashboardScreen/DonationScreen/DonationScreen.type';
-import donationConstraints from '@util/validators/donation';
-import { categoryImage } from '@util/donationCategory';
-import styles from './DonationScreen.styles';
+  SpacerInline,
+} from "@elements";
+import validate from "validate.js";
+import { NewDonation } from "@screens/DashboardScreen/DonationScreen/DonationScreen.type";
+import donationConstraints from "@util/validators/donation";
+import { categoryImage } from "@util/donationCategory";
+import styles from "./DonationScreen.styles";
 
 export default function DonationScreen(props) {
-  const [ state, actions ] = useGlobal() as any;
+  const [state, actions] = useGlobal() as any;
   const { updateAlert } = actions;
   const { user } = state;
-  const foodCategories: Array<string> = [ 'Bread', 'Dairy', 'Hot Meal', 'Produce', 'Protein', 'Others' ];
+  const foodCategories: Array<string> = [
+    "Bread",
+    "Dairy",
+    "Hot Meal",
+    "Produce",
+    "Protein",
+    "Others",
+  ];
   const emptyDonation: NewDonation = {
     pickupAddress: `${user.address_street} ${user.address_city}, ${user.address_state} ${user.address_zip}`,
     category: foodCategories[0],
-    itemName: '',
+    itemName: "",
     pickupInstructions: user.pickup_instructions,
-    totalAmount: '',
+    totalAmount: "",
   };
 
-  const [ newDonation, setNewDonation ] = useState<NewDonation>(emptyDonation);
-  const [ validateError, setValidateError ] = useState({} as any);
+  const [newDonation, setNewDonation] =
+    useState<NewDonation>(emptyDonation);
+  const [validateError, setValidateError] = useState({} as any);
   const { postDonation } = actions;
 
-  const hasUnsavedChanges = Boolean(newDonation.itemName || newDonation.totalAmount || newDonation.pickupInstructions !== user.pickup_instructions);
+  const hasUnsavedChanges = Boolean(
+    newDonation.itemName ||
+      newDonation.totalAmount ||
+      newDonation.pickupInstructions !== user.pickup_instructions,
+  );
   const preventBack = () => {
     updateAlert({
-      type: 'incomplete form', dismissable: false, confirmFn: () => props.navigation.goBack(),
+      type: "incomplete form",
+      dismissable: false,
+      confirmFn: () => props.navigation.goBack(),
     });
   };
   const validateInputs = async () => {
-    const validateResults = validate(newDonation, donationConstraints);
+    const validateResults = validate(
+      newDonation,
+      donationConstraints,
+    );
     if (validateResults) {
       setValidateError(validateResults);
     } else {
       setValidateError({});
       const result = await postDonation(newDonation);
       if (result === 201) {
-        updateAlert({type: 'donation published', dismissable: false});
+        updateAlert({
+          type: "donation published",
+          dismissable: false,
+        });
         setNewDonation(emptyDonation);
-        props.navigation.navigate('DonorDashboardScreen');
+        props.navigation.navigate("DonorDashboardScreen");
       } else {
         // TODO: communicate failures better
-        console.log('There was a problem creating the donation');
+        console.log("There was a problem creating the donation");
       }
     }
   };
   return (
     <KeyboardAvoidingView
       style={styles.keyboardAvoidContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Android and iOS both interact with this prop differently
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Android and iOS both interact with this prop differently
       enabled={true}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
     >
       <NavBar
         showBackButton={true}
         backButtonFn={hasUnsavedChanges ? preventBack : undefined}
       />
       <ScrollView style={styles.scrollContainer}>
-
         <View style={styles.imageInputContainer}>
-          <Image source={categoryImage(newDonation.category)} style={styles.icon} />
+          <Image
+            source={categoryImage(newDonation.category)}
+            style={styles.icon}
+          />
         </View>
 
         <SpacerInline height={20} />
         <FormTextInput
           label="Item Name"
           value={newDonation.itemName}
-          setValue={(s) => setNewDonation({...newDonation, itemName: s})}
+          setValue={(s) =>
+            setNewDonation({
+              ...newDonation,
+              itemName: s,
+            })
+          }
           style={styles.input}
           error={validateError.itemName}
           errorMessage={validateError.itemName}
@@ -87,7 +119,12 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Food Category"
           dropdownData={foodCategories}
-          setValue={(s) => setNewDonation({...newDonation, category: s})}
+          setValue={(s) =>
+            setNewDonation({
+              ...newDonation,
+              category: s,
+            })
+          }
           defaultValue={foodCategories[0]}
           value={newDonation.category}
           type="dropdown"
@@ -98,7 +135,12 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Total Amount"
           value={newDonation.totalAmount}
-          setValue={(s) => setNewDonation({...newDonation, totalAmount: s})}
+          setValue={(s) =>
+            setNewDonation({
+              ...newDonation,
+              totalAmount: s,
+            })
+          }
           style={styles.input}
           error={validateError.totalAmount}
           errorMessage={validateError.totalAmount}
@@ -116,20 +158,21 @@ export default function DonationScreen(props) {
         <FormTextInput
           label="Pickup Instructions"
           value={newDonation.pickupInstructions}
-          setValue={(s) => setNewDonation({...newDonation, pickupInstructions: s})}
+          setValue={(s) =>
+            setNewDonation({
+              ...newDonation,
+              pickupInstructions: s,
+            })
+          }
           style={styles.input}
           error={validateError.pickupInstructions}
           errorMessage={validateError.pickupInstructions}
         />
 
         <View style={styles.button}>
-          <LinkButton
-            text="Publish"
-            onPress={validateInputs}
-          />
+          <LinkButton text="Publish" onPress={validateInputs} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-
   );
 }

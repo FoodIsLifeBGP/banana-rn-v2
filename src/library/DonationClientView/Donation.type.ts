@@ -1,4 +1,3 @@
-
 export interface Donation {
   category: string;
   created_at: Date;

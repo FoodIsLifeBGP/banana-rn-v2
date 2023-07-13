@@ -1,3 +1,3 @@
-import ApplicationPendingScreen from './ApplicationPendingScreen';
+import ApplicationPendingScreen from "./ApplicationPendingScreen";
 
 export default ApplicationPendingScreen;

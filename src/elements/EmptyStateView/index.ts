@@ -1,3 +1,3 @@
-import EmptyStateView from './EmptyStateView';
+import EmptyStateView from "./EmptyStateView";
 
 export { EmptyStateView };

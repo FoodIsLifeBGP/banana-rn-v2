@@ -5,13 +5,15 @@ export default {
   },
   password: {
     format: {
-      message: 'must be 8-25 characters with a mix of upper & lowercase letters, numbers, and special characters',
-      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@^_`{|}~]{8,25}$/,
+      message:
+        "must be 8-25 characters with a mix of upper & lowercase letters, numbers, and special characters",
+      pattern:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@^_`{|}~]{8,25}$/,
     },
     presence: { allowEmpty: false },
   },
   retypedPassword: {
-    equality: 'password',
+    equality: "password",
     presence: { allowEmpty: false },
   },
   firstName: { presence: { allowEmpty: false } },

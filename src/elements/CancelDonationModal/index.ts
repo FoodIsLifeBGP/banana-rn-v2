@@ -1,3 +1,3 @@
-import CancelDonationModal from './CancelDonationModal';
+import CancelDonationModal from "./CancelDonationModal";
 
 export { CancelDonationModal };

@@ -1,12 +1,12 @@
-import { StyleSheet } from 'react-native';
-import typography from '@util/typography';
-import * as Colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import typography from "@util/typography";
+import * as Colors from "@util/constants/colors";
 
 export default StyleSheet.create({
   headerContainer: {
-    flexBasis: 'auto',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexBasis: "auto",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.BANANA_YELLOW,
   },
   smallHeaderText: { ...typography.h3 },

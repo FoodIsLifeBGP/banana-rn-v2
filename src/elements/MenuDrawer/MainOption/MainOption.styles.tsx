@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native';
-import * as colors from '@util/constants/colors';
+import { StyleSheet } from "react-native";
+import * as colors from "@util/constants/colors";
 
 export default StyleSheet.create({
   mainOption: {
     flex: 1,
-    width: '100%',
+    width: "100%",
     paddingLeft: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     borderTopWidth: 1,
     borderTopColor: colors.WHITE,
     paddingTop: 20,
@@ -18,10 +18,10 @@ export default StyleSheet.create({
   },
   optionText: {
     color: colors.WHITE,
-    textTransform: 'uppercase',
-    marginLeft: 'auto',
+    textTransform: "uppercase",
+    marginLeft: "auto",
     marginRight: 5,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
   },
   logOut: { borderTopWidth: 0 },

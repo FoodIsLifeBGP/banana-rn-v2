@@ -1,5 +1,5 @@
-import Icon from './Icon';
+import Icon from "./Icon";
 
 export { Icon };
-export * from './icons';
-export * from './Icon.types';
+export * from "./icons";
+export * from "./Icon.types";

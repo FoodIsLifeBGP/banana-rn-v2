@@ -1,3 +1,3 @@
-import ApplicationApprovedScreen from './ApplicationApprovedScreen';
+import ApplicationApprovedScreen from "./ApplicationApprovedScreen";
 
 export default ApplicationApprovedScreen;

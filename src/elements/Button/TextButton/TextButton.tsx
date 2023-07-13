@@ -1,24 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
-import {
-  StyleProp, Text, TextStyle
-} from 'react-native';
-import typography from '@util/typography';
-import Button, { ButtonProps } from '../Button';
+import React from "react";
+import { StyleProp, Text, TextStyle } from "react-native";
+import typography from "@util/typography";
+import Button, { ButtonProps } from "../Button";
 
 type TextButtonProps = {
   /**
-	 * Text within the button.
-	 */
+   * Text within the button.
+   */
   text: string;
 
   /**
-	 * Style of the text within the button.
-	 * Setting 'color' will override buttonStyle.
-	 */
+   * Style of the text within the button.
+   * Setting 'color' will override buttonStyle.
+   */
   textStyle?: StyleProp<TextStyle>;
-} & Omit<ButtonProps, 'children'>;
+} & Omit<ButtonProps, "children">;
 
 export default function TextButton({
   text,
@@ -37,24 +35,21 @@ export default function TextButton({
       disabled={disabled}
       {...props}
     >
-      {
-        (foregroundColor) => (
-          <Text
-            style={[
-              {
-                ...typography.h4,
-                textAlign: 'center',
-                color: foregroundColor,
-              },
-              textStyle,
-            ]}
-            allowFontScaling={false}
-          >
-            {text}
-          </Text>
-        )
-      }
-
+      {(foregroundColor) => (
+        <Text
+          style={[
+            {
+              ...typography.h4,
+              textAlign: "center",
+              color: foregroundColor,
+            },
+            textStyle,
+          ]}
+          allowFontScaling={false}
+        >
+          {text}
+        </Text>
+      )}
     </Button>
   );
 }

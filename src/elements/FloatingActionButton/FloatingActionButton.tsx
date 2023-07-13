@@ -1,10 +1,10 @@
-import React from 'react';
-import {View} from 'react-native';
-import { Button, Icon } from '@elements';
-import { ButtonStyle } from '@elements/Button';
-import * as colors from '@util/constants/colors';
-import styles from './FloatingActionButton.styles';
-import { IconName } from '../Icon/Icon.types';
+import React from "react";
+import { View } from "react-native";
+import { Button, Icon } from "@elements";
+import { ButtonStyle } from "@elements/Button";
+import * as colors from "@util/constants/colors";
+import styles from "./FloatingActionButton.styles";
+import { IconName } from "../Icon/Icon.types";
 
 interface FloatingActionProps {
   iconName: IconName;
@@ -33,13 +33,25 @@ export default function FloatingActionButton({
     },
   };
   return (
-    <View style={[ styles.floatingContainer, {top, left} ]}>
+    <View
+      style={[
+        styles.floatingContainer,
+        {
+          top,
+          left,
+        },
+      ]}
+    >
       <View style={styles.ellipseContainer}>
         {/* <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}>
           {(foregroundColor) => (<Icon name={iconName} size={size} color={foregroundColor} />)}
         </Button> */}
         {/* TODO: add back nested Icon */}
-        <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}/>
+        <Button
+          buttonStyle={buttonStyle}
+          onPress={buttonFunction}
+          style={styles.iconContainer}
+        />
       </View>
     </View>
   );

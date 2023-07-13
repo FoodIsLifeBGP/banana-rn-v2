@@ -1,50 +1,56 @@
 import React, {
-  FunctionComponent, RefObject, createRef, useState
-} from 'react';
-import {
-  Text, TextInput, View
-} from 'react-native';
-import {
-  FormTextInput, LinkButton, SpacerInline
-} from '@elements';
-import useGlobal from '@state';
-import styles from '../ResetPassword.styles';
+  FunctionComponent,
+  RefObject,
+  createRef,
+  useState,
+} from "react";
+import { Text, TextInput, View } from "react-native";
+import { FormTextInput, LinkButton, SpacerInline } from "@elements";
+import useGlobal from "@state";
+import styles from "../ResetPassword.styles";
 
 interface NewPasswordFormProps {
   onComplete: () => void;
   token: string;
 }
 
-const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({onComplete, token}) => {
-  const [ isSubmitting, setIsSubmitting ] = useState(false);
-  const [ formData, setFormData ] = useState({
-    password: '',
-    confirmPassword: '',
+const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({
+  onComplete,
+  token,
+}) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    password: "",
+    confirmPassword: "",
   });
-  const [ error, setError ] = useState('');
+  const [error, setError] = useState("");
   const passwordInputRef: RefObject<TextInput> = createRef();
-  const [ , actions ] = useGlobal() as any;
+  const [, actions] = useGlobal() as any;
   const { submitNewPassword } = actions;
 
   const isPasswordValid = () => {
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
+      setError("Passwords do not match.");
       return false;
     }
     if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters.');
+      setError("Password must be at least 8 characters.");
       return false;
     }
     return true;
   };
 
   const submitPasswordProps = {
-    input: formData.password, token, setIsSubmitting, onComplete, setError,
+    input: formData.password,
+    token,
+    setIsSubmitting,
+    onComplete,
+    setError,
   };
 
   const handleSubmit = () => {
     if (isPasswordValid() && !isSubmitting) {
-      setError('');
+      setError("");
       setIsSubmitting(true);
       submitNewPassword(submitPasswordProps);
     }
@@ -53,9 +59,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({onComplete, t
   return (
     <View>
       <SpacerInline height={20} />
-      <Text style={styles.text}>
-        Enter a new password:
-      </Text>
+      <Text style={styles.text}>Enter a new password:</Text>
       <Text style={styles.smallText}>(at least 8 characters)</Text>
       <SpacerInline height={20} />
       <FormTextInput
@@ -63,8 +67,11 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({onComplete, t
         type="password"
         value={formData.password}
         setValue={(text) => {
-          setError('');
-          setFormData({...formData, password: text});
+          setError("");
+          setFormData({
+            ...formData,
+            password: text,
+          });
         }}
         ref={passwordInputRef}
         autoCompleteType="password"
@@ -76,8 +83,11 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({onComplete, t
         type="password"
         value={formData.confirmPassword}
         setValue={(text) => {
-          setError('');
-          setFormData({...formData, confirmPassword: text});
+          setError("");
+          setFormData({
+            ...formData,
+            confirmPassword: text,
+          });
         }}
         ref={passwordInputRef}
         autoCompleteType="password"
@@ -86,7 +96,11 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({onComplete, t
       <Text style={styles.errors}>{error || null}</Text>
       <SpacerInline height={20} />
       <View>
-        <LinkButton disabled={isSubmitting} text="Reset Password" onPress={handleSubmit} />
+        <LinkButton
+          disabled={isSubmitting}
+          text="Reset Password"
+          onPress={handleSubmit}
+        />
       </View>
     </View>
   );

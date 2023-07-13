@@ -1,3 +1,3 @@
-import InfoScreen from './InfoScreen';
+import InfoScreen from "./InfoScreen";
 
 export default InfoScreen;

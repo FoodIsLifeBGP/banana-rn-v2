@@ -1,6 +1,6 @@
-import {Paragraph, SpacerInline} from '@elements';
-import React from 'react';
-import InfoScreen from '../InfoScreen';
+import { Paragraph, SpacerInline } from "@elements";
+import React from "react";
+import InfoScreen from "../InfoScreen";
 
 export default function ApplicationIncompleteScreen() {
   return (
@@ -10,11 +10,13 @@ export default function ApplicationIncompleteScreen() {
       nextScreenDestination="ContactScreen"
       showBackButton={false}
     >
-      <Paragraph fontSize={20}>Looks like your application needs further review.</Paragraph>
+      <Paragraph fontSize={20}>
+        Looks like your application needs further review.
+      </Paragraph>
       <SpacerInline height={20} />
       <Paragraph fontSize={20}>
-        Please expect to receive a call from us within 24-48 hours regarding your
-        account.
+        Please expect to receive a call from us within 24-48 hours
+        regarding your account.
       </Paragraph>
       <SpacerInline height={20} />
       <Paragraph fontSize={20}>

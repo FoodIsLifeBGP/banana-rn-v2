@@ -1,3 +1,3 @@
-import ClientHistoryScreen from './ClientHistoryScreen';
+import ClientHistoryScreen from "./ClientHistoryScreen";
 
 export default ClientHistoryScreen;

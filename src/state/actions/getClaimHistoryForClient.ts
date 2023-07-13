@@ -1,5 +1,5 @@
-import { GlobalState } from '@state/index';
-import railsAxios from '@util/railsAxios';
+import { GlobalState } from "@state/index";
+import railsAxios from "@util/railsAxios";
 
 export const getClaimHistoryForClient = (state: GlobalState) => {
   const { jwt, user } = state;
@@ -12,7 +12,9 @@ export const getClaimHistoryForClient = (state: GlobalState) => {
         const response = await railsAxios(jwt).get(endpoint);
         const { data } = response;
 
-        const sortedData = data.sort((a, b) => a.created_at < b.created_at);
+        const sortedData = data.sort(
+          (a, b) => a.created_at < b.created_at,
+        );
         if (sortedData) {
           return { claimHistory: sortedData };
         }

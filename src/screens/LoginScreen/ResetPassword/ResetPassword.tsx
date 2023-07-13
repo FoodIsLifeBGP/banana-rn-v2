@@ -1,19 +1,17 @@
-import React, {FunctionComponent, useState} from 'react';
-import {Text, View} from 'react-native';
-import { Modal } from '@elements';
-import {
-  CodeForm, NewPasswordForm, ResetForm
-} from './Forms';
-import styles from './ResetPassword.styles';
+import React, { FunctionComponent, useState } from "react";
+import { Text, View } from "react-native";
+import { Modal } from "@elements";
+import { CodeForm, NewPasswordForm, ResetForm } from "./Forms";
+import styles from "./ResetPassword.styles";
 
 // TODO: fix this error and remove the comment below
 // eslint-disable-next-line no-shadow
 export enum PasswordResetStage {
-  NONE = 'NONE',
-  REQUEST_LINK = 'REQUEST_LINK',
-  VERIFY = 'VERIFY',
-  RESET = 'RESET',
-  SUCCESS = 'SUCCESS',
+  NONE = "NONE",
+  REQUEST_LINK = "REQUEST_LINK",
+  VERIFY = "VERIFY",
+  RESET = "RESET",
+  SUCCESS = "SUCCESS",
 }
 
 interface ResetPasswordProps {
@@ -31,40 +29,40 @@ export const ResetPassword: FunctionComponent<ResetPasswordProps> = ({
   onRequest,
   onBack,
 }) => {
-  const [ stage, setStage ] = useState(
+  const [stage, setStage] = useState(
     initialStage || PasswordResetStage.REQUEST_LINK,
   );
-  const [ token, setToken ] = useState('');
+  const [token, setToken] = useState("");
 
   const handleComplete = () => {
     switch (stage) {
-    case PasswordResetStage.REQUEST_LINK:
-      setStage(PasswordResetStage.VERIFY);
-      onRequest(PasswordResetStage.VERIFY);
-      break;
-    case PasswordResetStage.VERIFY:
-      setStage(PasswordResetStage.RESET);
-      break;
-    case PasswordResetStage.RESET:
-      setStage(PasswordResetStage.SUCCESS);
-      break;
-    case PasswordResetStage.SUCCESS:
-      onSuccess();
-      setStage(PasswordResetStage.REQUEST_LINK);
-      break;
-    default:
-      console.log('Unexpected passwordResetStage: ', stage);
+      case PasswordResetStage.REQUEST_LINK:
+        setStage(PasswordResetStage.VERIFY);
+        onRequest(PasswordResetStage.VERIFY);
+        break;
+      case PasswordResetStage.VERIFY:
+        setStage(PasswordResetStage.RESET);
+        break;
+      case PasswordResetStage.RESET:
+        setStage(PasswordResetStage.SUCCESS);
+        break;
+      case PasswordResetStage.SUCCESS:
+        onSuccess();
+        setStage(PasswordResetStage.REQUEST_LINK);
+        break;
+      default:
+        console.log("Unexpected passwordResetStage: ", stage);
     }
   };
 
   const handleBack = () => {
     switch (stage) {
-    case PasswordResetStage.VERIFY:
-      setStage(PasswordResetStage.REQUEST_LINK);
-      onBack();
-      break;
-    default:
-      console.log('Unexpected passwordResetStage: ', stage);
+      case PasswordResetStage.VERIFY:
+        setStage(PasswordResetStage.REQUEST_LINK);
+        onBack();
+        break;
+      default:
+        console.log("Unexpected passwordResetStage: ", stage);
     }
   };
 
@@ -76,7 +74,7 @@ export const ResetPassword: FunctionComponent<ResetPasswordProps> = ({
         if (stage === PasswordResetStage.SUCCESS) handleComplete();
         onDismiss();
       }}
-      style={{ position: 'absolute' }}
+      style={{ position: "absolute" }}
     >
       <View>
         {stage === PasswordResetStage.REQUEST_LINK && (
@@ -90,7 +88,10 @@ export const ResetPassword: FunctionComponent<ResetPasswordProps> = ({
           />
         )}
         {stage === PasswordResetStage.RESET && (
-          <NewPasswordForm onComplete={handleComplete} token={token} />
+          <NewPasswordForm
+            onComplete={handleComplete}
+            token={token}
+          />
         )}
         {stage === PasswordResetStage.SUCCESS && (
           <Text style={styles.text}>

@@ -12,7 +12,11 @@ import {
 } from "react-native";
 import { Divider } from "react-native-paper";
 import {
-  FormTextInput, Icon, LinkButton, SpacerInline, Title
+  FormTextInput,
+  Icon,
+  LinkButton,
+  SpacerInline,
+  Title,
 } from "@elements";
 import useGlobal from "@state";
 import { getStateList } from "@util/constants/statesAbbr";
@@ -24,12 +28,17 @@ import styles from "./RegistrationScreen.styles";
 
 // TODO: possibly add prop types for this function component?
 
-export default function DonorRegistrationScreen({ navigate, goBack }) {
-  const [ _state, actions ] = useGlobal() as any;
+export default function DonorRegistrationScreen({
+  navigate,
+  goBack,
+}) {
+  const [_state, actions] = useGlobal() as any;
   const { register, updateAlert } = actions;
-  const [ newDonor, setNewDonor ] = useState<DonorRegisterProps>({state: "WA",} as DonorRegisterProps);
-  const [ validationErrors, setValidationErrors ] = useState({} as any);
-  const [ termsOfService, setTermsOfService ] = useState(false);
+  const [newDonor, setNewDonor] = useState<DonorRegisterProps>({
+    state: "WA",
+  } as DonorRegisterProps);
+  const [validationErrors, setValidationErrors] = useState({} as any);
+  const [termsOfService, setTermsOfService] = useState(false);
   const stateList = getStateList();
   const passwordRef = useRef<TextInput>(null);
   const confirmPasswordRef = useRef<TextInput>(null);
@@ -41,7 +50,8 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
   const zipRef = useRef<TextInput>(null);
   const pickUpRef = useRef<TextInput>(null);
 
-  const toggleTermsOfService = () => setTermsOfService(!termsOfService);
+  const toggleTermsOfService = () =>
+    setTermsOfService(!termsOfService);
 
   const validateInputs = async () => {
     const validateResults = validate(newDonor, donorConstraints);
@@ -50,33 +60,33 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
     } else {
       const statusCode = await register(newDonor);
       switch (statusCode) {
-      case 201: {
-        navigate("LoginSuccessScreen");
-        break;
-      }
-      case 409: {
-        updateAlert({
-          title: "Error",
-          message: `This email address has already been used (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-        break;
-      }
-      case 500: {
-        updateAlert({
-          title: "Error",
-          message: `Network Issues (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-        break;
-      }
-      default: {
-        updateAlert({
-          title: "Error",
-          message: `Unknown Error (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-      }
+        case 201: {
+          navigate("LoginSuccessScreen");
+          break;
+        }
+        case 409: {
+          updateAlert({
+            title: "Error",
+            message: `This email address has already been used (Error code:${statusCode})`,
+            dismissable: true,
+          } as Alert);
+          break;
+        }
+        case 500: {
+          updateAlert({
+            title: "Error",
+            message: `Network Issues (Error code:${statusCode})`,
+            dismissable: true,
+          } as Alert);
+          break;
+        }
+        default: {
+          updateAlert({
+            title: "Error",
+            message: `Unknown Error (Error code:${statusCode})`,
+            dismissable: true,
+          } as Alert);
+        }
       }
     }
   };
@@ -97,11 +107,19 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <Title text="Registration" />
       </View>
 
-      <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        style={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+      >
         <FormTextInput
           label="Email"
           value={newDonor.email}
-          setValue={(s) => setNewDonor({ ...newDonor, email: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              email: s,
+            })
+          }
           style={styles.input}
           placeholder="info@bananaapp.org"
           error={!!validationErrors.email}
@@ -114,7 +132,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Password"
           value={newDonor.password}
-          setValue={(s) => setNewDonor({ ...newDonor, password: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              password: s,
+            })
+          }
           type="password"
           style={styles.input}
           error={!!validationErrors.password}
@@ -126,7 +149,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Confirm Password"
           value={newDonor.retypedPassword}
-          setValue={(s) => setNewDonor({ ...newDonor, retypedPassword: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              retypedPassword: s,
+            })
+          }
           style={styles.input}
           type="password"
           error={!!validationErrors.retypedPassword}
@@ -139,7 +167,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="First Name"
           value={newDonor.firstName}
-          setValue={(s) => setNewDonor({ ...newDonor, firstName: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              firstName: s,
+            })
+          }
           style={styles.input}
           error={!!validationErrors.firstName}
           errorMessage={validationErrors.firstName}
@@ -150,7 +183,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Last Name"
           value={newDonor.lastName}
-          setValue={(s) => setNewDonor({ ...newDonor, lastName: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              lastName: s,
+            })
+          }
           style={styles.input}
           error={!!validationErrors.lastName}
           errorMessage={validationErrors.lastName}
@@ -161,7 +199,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Business Name"
           value={newDonor.businessName}
-          setValue={(s) => setNewDonor({ ...newDonor, businessName: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              businessName: s,
+            })
+          }
           style={styles.input}
           error={!!validationErrors.businessName}
           errorMessage={validationErrors.businessName}
@@ -172,7 +215,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Business Address"
           value={newDonor.businessAddress}
-          setValue={(s) => setNewDonor({ ...newDonor, businessAddress: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              businessAddress: s,
+            })
+          }
           style={styles.input}
           error={!!validationErrors.businessAddress}
           errorMessage={validationErrors.businessAddress}
@@ -180,11 +228,16 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           onSubmitEditing={() => cityRef?.current?.focus()}
         />
 
-        <View style={[ styles.row, styles.input ]}>
+        <View style={[styles.row, styles.input]}>
           <FormTextInput
             label="City"
             value={newDonor.city}
-            setValue={(s) => setNewDonor({ ...newDonor, city: s })}
+            setValue={(s) =>
+              setNewDonor({
+                ...newDonor,
+                city: s,
+              })
+            }
             style={{ width: "40%" }}
             autoCapitalize="words"
             error={!!validationErrors.city}
@@ -197,7 +250,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
             type="dropdown"
             dropdownData={stateList}
             value={newDonor.state}
-            setValue={(s) => setNewDonor({ ...newDonor, state: s })}
+            setValue={(s) =>
+              setNewDonor({
+                ...newDonor,
+                state: s,
+              })
+            }
             style={{ width: "20%" }}
             error={!!validationErrors.state}
             errorMessage={validationErrors.state}
@@ -205,7 +263,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           <FormTextInput
             label="Zip"
             value={newDonor.zip}
-            setValue={(s) => setNewDonor({ ...newDonor, zip: s })}
+            setValue={(s) =>
+              setNewDonor({
+                ...newDonor,
+                zip: s,
+              })
+            }
             style={{ width: "30%" }}
             autoCapitalize="words"
             error={!!validationErrors.zip}
@@ -217,7 +280,12 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
         <FormTextInput
           label="Pick up instructions"
           value={newDonor.pickupInstructions}
-          setValue={(s) => setNewDonor({ ...newDonor, pickupInstructions: s })}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              pickupInstructions: s,
+            })
+          }
           placeholder="Directions on where to pick up item"
           error={!!validationErrors.pickupInstructions}
           errorMessage={validationErrors.pickupInstructions}
@@ -226,8 +294,15 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
 
         <View style={styles.checkboxRow}>
           <View style={styles.checkBox}>
-            <TouchableOpacity style={{ top: 3 }} onPress={toggleTermsOfService}>
-              <Icon name={termsOfService ? "checkboxOn" : "checkboxOff"} size={24} color="none" />
+            <TouchableOpacity
+              style={{ top: 3 }}
+              onPress={toggleTermsOfService}
+            >
+              <Icon
+                name={termsOfService ? "checkboxOn" : "checkboxOff"}
+                size={24}
+                color="none"
+              />
             </TouchableOpacity>
           </View>
           <SpacerInline width={10} />
@@ -236,13 +311,19 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
           </Text>
           <View>
             <TouchableOpacity onPress={() => navigate("TermsScreen")}>
-              <Text style={[ styles.text, styles.textBold ]}>Terms & Conditions</Text>
+              <Text style={[styles.text, styles.textBold]}>
+                Terms & Conditions
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        <View style={[ styles.row, { paddingHorizontal: "10%" } ]}>
-          <LinkButton text="back" navigate={navigate} onPress={() => goBack()} />
+        <View style={[styles.row, { paddingHorizontal: "10%" }]}>
+          <LinkButton
+            text="back"
+            navigate={navigate}
+            onPress={() => goBack()}
+          />
           <LinkButton
             disabled={!termsOfService}
             text="Register"

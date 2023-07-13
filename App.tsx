@@ -1,17 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
-  LogBox, Platform,
-  SafeAreaView, Text, View
-} from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
-import Constants from 'expo-constants';
-import * as Font from 'expo-font';
-import NavigationService from '@util/navigationService';
+  LogBox,
+  Platform,
+  SafeAreaView,
+  Text,
+  View,
+} from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
+import Constants from "expo-constants";
+import * as Font from "expo-font";
+import NavigationService from "@util/navigationService";
 import {
-  CancelDonationModal, ComingSoonModal, IncompleteFormAlert, TheAlertModal
-} from '@elements';
-import Route from './src/routes/Route';
-import styles from './App.styles';
+  CancelDonationModal,
+  ComingSoonModal,
+  IncompleteFormAlert,
+  TheAlertModal,
+} from "@elements";
+import Route from "./src/routes/Route";
+import styles from "./App.styles";
 
 // if (Platform.OS !== 'web') {
 //   LogBox.ignoreLogs([
@@ -21,15 +27,15 @@ import styles from './App.styles';
 // }
 
 export default function App() {
-  const [ fontsLoaded, setFontsLoaded ] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const loadFonts = async () => {
     await Font.loadAsync({
       // TODO: is this still tru? (we're on expo 48 now)
       // Expo doesn't currently (v36.0.0) support fontWeight or fontStyle
-      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
-      'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf'),
-      'open-sans-light': require('./assets/fonts/OpenSans-Light.ttf'),
+      "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+      "open-sans-regular": require("./assets/fonts/OpenSans-Regular.ttf"),
+      "open-sans-light": require("./assets/fonts/OpenSans-Light.ttf"),
     });
     setFontsLoaded(true);
   };
@@ -38,30 +44,38 @@ export default function App() {
     loadFonts();
   }, []);
 
-  if (![ 'donor', 'client' ].includes(Constants.manifest?.extra?.variant)) {
+  if (
+    !["donor", "client"].includes(Constants.manifest?.extra?.variant)
+  ) {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>INCORRECT VARIANT SPECIFIED</Text>
+        <Text style={styles.heading}>
+          INCORRECT VARIANT SPECIFIED
+        </Text>
         <Text style={styles.text}>
           You must specify 'donor' or 'client' in app.json
           (expo.extra.variant).
         </Text>
-        <Text style={styles.text}>Refresh the app to see your changes.</Text>
+        <Text style={styles.text}>
+          Refresh the app to see your changes.
+        </Text>
       </View>
     );
   }
 
-  return fontsLoaded && (
-    <PaperProvider>
-      <SafeAreaView style={styles.container}>
-        {/* TODO: see if we even _need_ that ref on the next line */}
-        {/* <Route ref={navRef => NavigationService.setTopLevelNavigator(navRef)} /> */}
-        <Route />
-        <TheAlertModal />
-        <IncompleteFormAlert />
-        <ComingSoonModal />
-        <CancelDonationModal />
-      </SafeAreaView>
-    </PaperProvider>
+  return (
+    fontsLoaded && (
+      <PaperProvider>
+        <SafeAreaView style={styles.container}>
+          {/* TODO: see if we even _need_ that ref on the next line */}
+          {/* <Route ref={navRef => NavigationService.setTopLevelNavigator(navRef)} /> */}
+          <Route />
+          <TheAlertModal />
+          <IncompleteFormAlert />
+          <ComingSoonModal />
+          <CancelDonationModal />
+        </SafeAreaView>
+      </PaperProvider>
+    )
   );
 }

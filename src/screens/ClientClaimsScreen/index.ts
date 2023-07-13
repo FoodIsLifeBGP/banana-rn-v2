@@ -1,3 +1,3 @@
-import ClientClaimsScreen from './ClientClaimsScreen';
+import ClientClaimsScreen from "./ClientClaimsScreen";
 
 export default ClientClaimsScreen;

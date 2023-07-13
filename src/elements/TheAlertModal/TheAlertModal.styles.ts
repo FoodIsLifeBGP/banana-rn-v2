@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  container: { position: 'absolute' },
+  container: { position: "absolute" },
   body: {
     flexGrow: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textContainer: {
     padding: 15,
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });

@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import * as Colors from '@util/constants/colors';
-import typography from '@util/typography';
+import { StyleSheet } from "react-native";
+import * as Colors from "@util/constants/colors";
+import typography from "@util/typography";
 
 const GRID_MARGIN = 20; // Grid One from Style Guide TODO: make grid constants global
 const LIST_ITEM_BORDER_COLOR = Colors.LIGHT_GRAY;
@@ -10,14 +10,14 @@ export const ListItem = StyleSheet.create({
     paddingHorizontal: GRID_MARGIN,
     paddingVertical: 10,
     borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'transparent',
+    borderStyle: "solid",
+    borderColor: "transparent",
     borderBottomColor: LIST_ITEM_BORDER_COLOR,
   },
   firstContainer: { borderTopColor: LIST_ITEM_BORDER_COLOR },
   title: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 5,
   },
   titleText: { ...typography.h3 },
@@ -28,9 +28,9 @@ export const ListItem = StyleSheet.create({
 export default StyleSheet.create({
   outerContainer: { flex: 1 },
   header: {
-    flexBasis: '16%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexBasis: "16%",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.BANANA_YELLOW,
   },
   headerText: { ...typography.h3 },
@@ -41,12 +41,12 @@ export default StyleSheet.create({
   },
   bodyMessageTitle: {
     ...typography.h3,
-    alignSelf: 'center',
+    alignSelf: "center",
     padding: GRID_MARGIN,
   },
   bodyMessageBody: {
     ...typography.body1,
     paddingBottom: GRID_MARGIN,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

@@ -1,3 +1,3 @@
-import ClaimDetailsScreen from './ClaimDetailsScreen';
+import ClaimDetailsScreen from "./ClaimDetailsScreen";
 
 export default ClaimDetailsScreen;

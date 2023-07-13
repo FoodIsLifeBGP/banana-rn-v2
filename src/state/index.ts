@@ -1,15 +1,16 @@
-import getEnv from '@util/environment';
-import { create } from 'zustand';
+import getEnv from "@util/environment";
+import { create } from "zustand";
 import {
-  Alert, InitialState, StatusCode, Claim, Donation,
-} from './index.types';
-import * as actions from './actions';
+  Alert,
+  InitialState,
+  StatusCode,
+  Claim,
+  Donation,
+} from "./index.types";
+import * as actions from "./actions";
 
 const {
-  USER_IDENTITY,
-  API_BASE_URL,
-  LOGIN_URL,
-  CREATE_URL,
+  USER_IDENTITY, API_BASE_URL, LOGIN_URL, CREATE_URL,
 } = getEnv();
 
 export const initialState: InitialState = {
@@ -18,7 +19,7 @@ export const initialState: InitialState = {
   loginUrl: LOGIN_URL,
   createUrl: CREATE_URL,
   alert: undefined,
-  donationsOrClaims: <Claim[]|Donation[]>[],
+  donationsOrClaims: <Claim[] | Donation[]>[],
   jwt: undefined,
   user: undefined,
   email: undefined,
@@ -27,32 +28,44 @@ export const initialState: InitialState = {
 };
 
 export interface GlobalState extends InitialState {
-  updateAlert: (alert: Alert) => void,
-  setResponseStatus: (statusCode: StatusCode) => void,
-  setEmail: (email: string) => void,
-  setPassword: (password: string) => void,
-  clearEmailAndPassword: () => void,
-  clearAlert: () => void,
-  logIn: (state: GlobalState) => Promise<Partial<GlobalState>>, /* TODO: woops! model everything after this one! (not sure if state type is kosher in login param) */
-  logOut: () => void,
-  cancelDonation: (donationId: number) => void,
-  claimDonation: (donationId: number, clientId: number) => void,
-  getActiveDonationsForClient: () => void,
-  getClaimedDonationsForClient: () => void,
-  getClaimHistoryForClient: () => void,
-  getDonationHistory: () => void,
+  updateAlert: (alert: Alert) => void;
+  setResponseStatus: (statusCode: StatusCode) => void;
+  clearEmailAndPassword: () => void;
+  clearAlert: () => void;
+  logIn: (state: GlobalState) => Promise<void>;
+  logOut: () => void;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  cancelDonation: (donationId: number) => void;
+  claimDonation: (donationId: number, clientId: number) => void;
+  getActiveDonationsForClient: () => void;
+  getClaimedDonationsForClient: () => void;
+  getClaimHistoryForClient: () => void;
+  getDonationHistory: () => void;
 }
 
 const useGlobalStore = create<GlobalState>((set) => ({
   ...initialState,
   updateAlert: (alert) => set(actions.updateAlert(alert)),
-  setResponseStatus: (statusCode) => set(actions.setResponseStatus(statusCode)),
+  setResponseStatus: (statusCode) =>
+    set(actions.setResponseStatus(statusCode)),
   clearAlert: () => set(actions.clearAlert()),
-  logIn: (state) => actions.logIn(state),
+  logIn: async (state) => {
+    const { jwt, user, responseStatus } = await actions.logIn(state);
+
+    set({
+      jwt,
+      user,
+      responseStatus,
+    });
+  },
   logOut: () => set(actions.logOut()),
   setEmail: (email) => set(actions.setEmail(email)),
   setPassword: (password) => set(actions.setPassword(password)),
-  clearEmailAndPassword: () => set({email: undefined, password: undefined}),
+  clearEmailAndPassword: () => set({
+    email: undefined,
+    password: undefined,
+  }),
   cancelDonation: (donationId) => set((state) => actions.cancelDonation(state, donationId)),
   claimDonation: (donationId, clientId) => set((state) => actions.claimDonation(state, donationId, clientId)),
   getActiveDonationsForClient: () => set((state) => actions.getActiveDonationsForClient(state)),
