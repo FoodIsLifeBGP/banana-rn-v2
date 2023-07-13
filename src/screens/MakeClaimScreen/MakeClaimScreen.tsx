@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {
-  useIsFocused, useNavigation, useRoute 
+  useIsFocused, useNavigation, useRoute
 } from '@react-navigation/native';
 import {
-  ImageBackground, ScrollView, Text, View 
+  ImageBackground, ScrollView, Text, View
 } from 'react-native';
 import useGlobal from '@state';
 import {
-  Icon, SpacerInline, TextButton 
+  Icon, SpacerInline, TextButton
 } from '@elements';
 import * as colors from '@util/constants/colors';
 import typography from '@util/typography';

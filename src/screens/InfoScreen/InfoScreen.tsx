@@ -1,5 +1,5 @@
 import {
-  LinkButton, SpacerInline, Title 
+  LinkButton, SpacerInline, Title
 } from '@elements';
 import React, { FunctionComponent } from 'react';
 import { View } from 'react-native';

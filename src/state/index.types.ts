@@ -10,6 +10,7 @@ export interface ClientState {
 }
 
 export interface SharedProps {
+  id: number;
 	email: string;
 	password: string;
 	address_street: string;
@@ -89,8 +90,9 @@ export interface InitialState {
 	createUrl: string;
 	alert?: Alert;
 	jwt?: string;
-	user?: DonorState | ClientState | SharedProps;
+	user?: DonorState & SharedProps | ClientState & SharedProps;
 	donationsOrClaims?: Donation[] | Claim[];
+	claimHistory?: Claim[]; /* TODO: double check this type */
 	email?: string,
   password?: string,
 	responseStatus?: StatusCode;

@@ -24,6 +24,7 @@ module.exports = {
   plugins: [ "react", "@typescript-eslint", "jest" ],
   rules: {
     "no-use-before-define": "off",
+    "no-trailing-spaces": "error",
     "array-bracket-spacing": [ "warn", "always" ],
     "react/function-component-definition": [ "off", "never" ],
     "arrow-parens": [ "warn", "always" ],

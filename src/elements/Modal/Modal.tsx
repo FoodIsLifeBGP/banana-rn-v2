@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleProp, Text, TouchableOpacity, View, ViewStyle 
+  StyleProp, Text, TouchableOpacity, View, ViewStyle
 } from 'react-native';
 import {ColorPaletteName, useScheme} from '@util/colorSchemes';
 import { ScrollView } from 'react-native-gesture-handler';

@@ -1,7 +1,7 @@
 import { Location } from '@state/index.types';
 import { Marker } from 'react-native-maps';
 import {
-  Animated, Text, View 
+  Animated, Text, View
 } from 'react-native';
 import * as colors from '@util/constants/colors';
 import React, {useEffect, useRef} from 'react';

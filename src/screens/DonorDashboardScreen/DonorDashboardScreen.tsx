@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import {
-  ScrollView, Text, View 
+  ScrollView, Text, View
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
-  EmptyStateView, NavBar, Title 
+  EmptyStateView, NavBar, Title
 } from '@elements';
 import useGlobal from '@state';
 import Donation from '@library/Donations/Donation';

@@ -1,35 +1,32 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Icon } from '@elements';
-import {
-  LIGHT_GRAY_DISABLED,
-  NAVY_BLUE 
-} from '@util/constants/colors';
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import { Icon } from "@elements";
+import { LIGHT_GRAY_DISABLED, NAVY_BLUE } from "@util/constants/colors";
 
 interface CheckboxProps {
   /**
-	 * Whether or not the checkbox is checked.
-	 */
+   * Whether or not the checkbox is checked.
+   */
   checked: boolean;
 
   /**
-	 * Callback to set the checked variable.
-	 */
+   * Callback to set the checked variable.
+   */
   setChecked: Function;
 
   /**
-	 * The square dimensions of the checkbox.
-	 */
+   * The square dimensions of the checkbox.
+   */
   size?: number;
 
   /**
-	 * Whether or not the checkbox is disabled/ interactive.
-	 */
+   * Whether or not the checkbox is disabled/ interactive.
+   */
   disabled?: boolean;
 
   /**
-	 * Callback for when a user presses on the checkbox.
-	 */
+   * Callback for when a user presses on the checkbox.
+   */
   onPress?: Function;
 }
 
@@ -46,17 +43,10 @@ export default function Checkbox({
   };
 
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      onPress={handlePress}
-    >
+    <TouchableOpacity disabled={disabled} onPress={handlePress}>
       <Icon
-        name={checked
-          ? 'checkboxOn'
-          : 'checkboxOff'}
-        color={disabled
-          ? LIGHT_GRAY_DISABLED
-          : NAVY_BLUE}
+        name={checked ? "checkboxOn" : "checkboxOff"}
+        color={disabled ? LIGHT_GRAY_DISABLED : NAVY_BLUE}
         size={size}
       />
     </TouchableOpacity>

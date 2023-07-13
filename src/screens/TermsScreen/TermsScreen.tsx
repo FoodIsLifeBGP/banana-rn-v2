@@ -4,7 +4,7 @@ import {
   LinkButton,
   NavBar,
   SpacerInline,
-  Title 
+  Title
 } from '@elements';
 import getEnv from '@util/environment';
 import Terms from '@assets/documents/SampleToS';

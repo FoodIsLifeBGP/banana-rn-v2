@@ -4,7 +4,7 @@ import {
   Image,
   StyleSheet,
   Text,
-  View 
+  View
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -12,7 +12,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import useGlobal from '@state';
 
 import {
-  Icon, LinkButton, Modal, TextButton 
+  Icon, LinkButton, Modal, TextButton
 } from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import { categoryImage } from '@util/donationCategory';

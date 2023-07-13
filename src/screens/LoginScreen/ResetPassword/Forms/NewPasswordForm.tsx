@@ -1,11 +1,11 @@
 import React, {
-  FunctionComponent, RefObject, createRef, useState 
+  FunctionComponent, RefObject, createRef, useState
 } from 'react';
 import {
-  Text, TextInput, View 
+  Text, TextInput, View
 } from 'react-native';
 import {
-  FormTextInput, LinkButton, SpacerInline 
+  FormTextInput, LinkButton, SpacerInline
 } from '@elements';
 import useGlobal from '@state';
 import styles from '../ResetPassword.styles';

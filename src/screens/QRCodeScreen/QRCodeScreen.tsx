@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   AppRegistry,
   TextInput,
-  View 
+  View
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 

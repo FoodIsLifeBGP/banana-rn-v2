@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {
-  StyleProp, Text, TextStyle 
+  StyleProp, Text, TextStyle
 } from 'react-native';
 import typography from '@util/typography';
 import Button, { ButtonProps } from '../Button';

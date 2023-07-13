@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  Alert,
-  Image,
-  TouchableOpacity,
-  View 
-} from 'react-native';
-import {Button, Icon} from '@elements';
+import {View} from 'react-native';
+import { Button, Icon } from '@elements';
 import { ButtonStyle } from '@elements/Button';
 import * as colors from '@util/constants/colors';
 import styles from './FloatingActionButton.styles';
@@ -40,9 +35,11 @@ export default function FloatingActionButton({
   return (
     <View style={[ styles.floatingContainer, {top, left} ]}>
       <View style={styles.ellipseContainer}>
-        <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}>
+        {/* <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}>
           {(foregroundColor) => (<Icon name={iconName} size={size} color={foregroundColor} />)}
-        </Button>
+        </Button> */}
+        {/* TODO: add back nested Icon */}
+        <Button buttonStyle={buttonStyle} onPress={buttonFunction} style={styles.iconContainer}/>
       </View>
     </View>
   );

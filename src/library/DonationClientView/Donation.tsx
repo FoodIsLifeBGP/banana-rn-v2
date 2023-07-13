@@ -4,7 +4,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View 
+  View
 } from 'react-native';
 import { Icon } from '@elements';
 import typography from '@util/typography';

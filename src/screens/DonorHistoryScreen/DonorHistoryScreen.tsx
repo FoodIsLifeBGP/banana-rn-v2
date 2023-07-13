@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {
-  ScrollView, Text, View 
+  ScrollView, Text, View
 } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import {
-  EmptyStateView, NavBar, Title 
+  EmptyStateView, NavBar, Title
 } from '@elements';
 import Donation from '@library/Donations/Donation/Donation';
 import useGlobal from '@state';

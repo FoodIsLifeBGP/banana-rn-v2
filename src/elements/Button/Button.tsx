@@ -1,23 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  TouchableHighlight,
-  TouchableHighlightProps,
-  View,
-  ViewStyle 
-} from 'react-native';
-import {
-  ColorScheme,
-  useScheme 
-} from '@util/colorSchemes';
-import {
-  DARK_GRAY_TRANSPARENT,
-  WHITE 
-} from '@util/constants/colors';
-import styles from './Button.styles';
-import { ButtonStyle } from './index';
+  TouchableHighlight, TouchableHighlightProps, View, ViewStyle
+} from "react-native";
+import { ColorScheme, useScheme } from "@util/colorSchemes";
+import { DARK_GRAY_TRANSPARENT, WHITE } from "@util/constants/colors";
+import styles from "./Button.styles";
+import { ButtonStyle } from "./index";
 
 export type ButtonProps = TouchableHighlightProps & {
   /** Render function that results in elements to be wrapped by the button. */
@@ -38,8 +29,8 @@ export default function Button({
   outlined = false,
   disabled = false,
   activeOpacity = 0.8,
-  onShowUnderlay = () => { },
-  onHideUnderlay = () => { },
+  onShowUnderlay = () => {},
+  onHideUnderlay = () => {},
   ...props
 }: ButtonProps) {
   const scheme: ColorScheme = useScheme();
@@ -61,15 +52,11 @@ export default function Button({
   const UNDERLAY_COLOR = pressedPalette?.background || DARK_GRAY_TRANSPARENT;
 
   // Outline styling
-  const BORDER_COLOR = (
-    disabled
-      ? disabledPalette
-      : defaultPalette
-  ).foreground;
+  const BORDER_COLOR = (disabled ? disabledPalette : defaultPalette).foreground;
   const outlineBorder: ViewStyle = {
     borderColor: BORDER_COLOR,
     borderWidth: 2,
-    borderStyle: 'solid',
+    borderStyle: "solid",
   };
 
   const getCurrentPalette = () => {
@@ -84,27 +71,25 @@ export default function Button({
 
   return (
     <TouchableHighlight
-      style={[
-        styles.container,
-        outlined && outlineBorder,
-        { backgroundColor },
-        style,
-      ]}
+      style={[ styles.container, outlined && outlineBorder, { backgroundColor }, style ]}
       underlayColor={UNDERLAY_COLOR}
       activeOpacity={activeOpacity}
       disabled={disabled}
-      onShowUnderlay={() => { setPressed(true); onShowUnderlay(); }}
-      onHideUnderlay={() => { setPressed(false); onHideUnderlay(); }}
+      onShowUnderlay={() => {
+        setPressed(true);
+        onShowUnderlay();
+      }}
+      onHideUnderlay={() => {
+        setPressed(false);
+        onHideUnderlay();
+      }}
       {...props}
     >
       {/**
-			  * View is required in order for native props to pass down to children properly.
-			  */}
-      <View>
-        {
-          children(foregroundColor)
-        }
-      </View>
+       * View is required in order for native props to pass down to children properly.
+       * TODO: this might not be needed: `children &&`
+       */}
+      <View>{children && children(foregroundColor)}</View>
     </TouchableHighlight>
   );
 }

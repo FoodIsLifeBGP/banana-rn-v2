@@ -2,7 +2,7 @@ import React, {FunctionComponent, useState} from 'react';
 import {Text, View} from 'react-native';
 import { Modal } from '@elements';
 import {
-  CodeForm, NewPasswordForm, ResetForm 
+  CodeForm, NewPasswordForm, ResetForm
 } from './Forms';
 import styles from './ResetPassword.styles';
 

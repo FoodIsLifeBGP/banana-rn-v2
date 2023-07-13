@@ -1,5 +1,5 @@
 import {
-  StyleProp, TextInput, TextInputProps, TextStyle 
+  StyleProp, TextInput, TextInputProps, TextStyle
 } from 'react-native';
 import React, { Ref } from 'react';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
@@ -59,6 +59,7 @@ function DropdownInput(props: DropdownInputProps) {
         }
       }}
       items={formattedData}
+      // TODO: add this back
       // Icon={() => (
       //   <Icon color={colors.NAVY_BLUE} name="dropdown" size={18} />
       // )}

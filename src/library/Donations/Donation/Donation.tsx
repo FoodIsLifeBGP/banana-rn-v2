@@ -4,7 +4,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View 
+  View
 } from 'react-native';
 import typography from '@util/typography';
 import { categoryImage } from '@util/donationCategory';

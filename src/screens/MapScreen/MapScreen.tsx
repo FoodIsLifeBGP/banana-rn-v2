@@ -4,7 +4,7 @@ import { useIsFocused } from '@react-navigation/native';
 import useGlobal from '@state';
 import {
   BananaMap,
-  NavBar 
+  NavBar
 } from '@elements';
 
 

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Divider } from "react-native-paper";
 import {
- FormTextInput, Icon, LinkButton, SpacerInline, Title
+  FormTextInput, Icon, LinkButton, SpacerInline, Title
 } from "@elements";
 import useGlobal from "@state";
 import { getStateList } from "@util/constants/statesAbbr";
@@ -50,33 +50,33 @@ export default function DonorRegistrationScreen({ navigate, goBack }) {
     } else {
       const statusCode = await register(newDonor);
       switch (statusCode) {
-        case 201: {
-          navigate("LoginSuccessScreen");
-          break;
-        }
-        case 409: {
-          updateAlert({
-            title: "Error",
-            message: `This email address has already been used (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-          break;
-        }
-        case 500: {
-          updateAlert({
-            title: "Error",
-            message: `Network Issues (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-          break;
-        }
-        default: {
-          updateAlert({
-            title: "Error",
-            message: `Unknown Error (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-        }
+      case 201: {
+        navigate("LoginSuccessScreen");
+        break;
+      }
+      case 409: {
+        updateAlert({
+          title: "Error",
+          message: `This email address has already been used (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+        break;
+      }
+      case 500: {
+        updateAlert({
+          title: "Error",
+          message: `Network Issues (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+        break;
+      }
+      default: {
+        updateAlert({
+          title: "Error",
+          message: `Unknown Error (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+      }
       }
     }
   };

@@ -1,7 +1,7 @@
 import {Paragraph, SpacerInline} from '@elements';
 import React, { FunctionComponent } from 'react';
 import {
-  Image, Platform, View 
+  Image, Platform, View
 } from 'react-native';
 import styles from './EmptyStateView.styles';
 

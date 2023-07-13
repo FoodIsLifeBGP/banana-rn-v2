@@ -6,7 +6,7 @@ import {
   ScrollView,
   Text,
   TouchableHighlight,
-  View 
+  View
 } from 'react-native';
 import * as Linking from 'expo-linking';
 import {
@@ -14,7 +14,7 @@ import {
   Icon,
   LinkButton,
   NavBar,
-  SpacerInline 
+  SpacerInline
 } from '@elements';
 import { IconName } from '@elements/Icon';
 import useGlobal from '@state';

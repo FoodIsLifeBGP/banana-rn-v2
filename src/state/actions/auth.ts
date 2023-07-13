@@ -1,35 +1,31 @@
 import railsAxios from '@util/railsAxios';
 import {GlobalState, initialState} from '@state/index';
+import {StatusCode} from '@state/index.types';
 
-export const logIn = (state): GlobalState => {
+export const logIn = async (state): Promise<Partial<GlobalState>> => {
   const {
     loginUrl, userIdentity, email, password,
   } = state;
 
-  const loginAsync = async () => {
-    try {
-      const response = await railsAxios().post(
-        loginUrl,
-        JSON.stringify({[userIdentity]: {email, password}}),
-      );
+  try {
+    const response = await railsAxios().post(
+      loginUrl,
+      JSON.stringify({[userIdentity]: {email, password}}),
+    );
 
-      return {
-        jwt: response.data?.jwt || '',
-        user: response.data?.[userIdentity] || {},
-        responseStatus: response.status,
-      };
-    } catch (error: any) {
-      const e = error.toString().toLowerCase().split(' status code ');
-      const responseStatus = e.length > 1
-        ? parseInt(e.slice(-1), 10)
-        : 418;
-      return { responseStatus };
-    }
-  };
+    return {
+      jwt: response.data?.jwt || '',
+      user: response.data?.[userIdentity] || {},
+      responseStatus: { code: <StatusCode["code"]> response.status }, /* TODO: define return types/methods for axios */
 
-  loginAsync();
-
-  return state;
+    };
+  } catch (error: any) {
+    const e = error.toString().toLowerCase().split(' status code ');
+    const responseStatus = e.length > 1
+      ? parseInt(e.slice(-1), 10)
+      : 418;
+    return { responseStatus: { code: <StatusCode["code"]> responseStatus } };
+  }
 };
 
 export const logOut = () => ({ ...initialState });

@@ -1,5 +1,5 @@
 import {
-  LOCATION, PermissionStatus, askAsync 
+  LOCATION, PermissionStatus, askAsync
 } from 'expo-permissions';
 import { getCurrentPositionAsync } from 'expo-location';
 import Constants from 'expo-constants';

@@ -5,7 +5,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View 
+  View
 } from 'react-native';
 import { Switch } from 'react-native-paper';
 import useGlobal from '@state';
@@ -14,7 +14,7 @@ import {
   InputLabel,
   LinkButton,
   NavBar,
-  SpacerInline 
+  SpacerInline
 } from '@elements';
 import * as colors from '@util/constants/colors';
 import styles from './DonorDonationScreen.styles';

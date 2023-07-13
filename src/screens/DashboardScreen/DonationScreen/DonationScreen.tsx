@@ -1,14 +1,14 @@
 import React, {useRef, useState} from 'react';
 import {
   Image,
-  KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View 
+  KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View
 } from 'react-native';
 import useGlobal from '@state';
 import {
   FormTextInput,
   LinkButton,
   NavBar,
-  SpacerInline 
+  SpacerInline
 } from '@elements';
 import validate from 'validate.js';
 import { NewDonation } from '@screens/DashboardScreen/DonationScreen/DonationScreen.type';

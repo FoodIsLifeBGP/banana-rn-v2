@@ -5,7 +5,7 @@ import {
   Text,
   TextStyle,
   View,
-  ViewStyle 
+  ViewStyle
 } from 'react-native';
 import styles from './ContentHeader.styles';
 

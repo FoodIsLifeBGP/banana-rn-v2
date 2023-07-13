@@ -4,7 +4,7 @@ import React, {
   Ref,
   RefObject,
   forwardRef,
-  useState 
+  useState
 } from 'react';
 import {
   StyleProp,
@@ -12,11 +12,11 @@ import {
   TextInput,
   TextInputProps,
   TextStyle,
-  View 
+  View
 } from 'react-native';
 import {
   Icon,
-  InputLabel 
+  InputLabel
 } from '@elements';
 import { LIGHT_BLUE } from '@util/constants/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StyleProp, Text, TextStyle, View 
+  StyleProp, Text, TextStyle, View
 } from 'react-native';
 import * as colors from '@util/constants/colors';
 import { setTSpan } from 'react-native-svg/lib/typescript/lib/extract/extractText';

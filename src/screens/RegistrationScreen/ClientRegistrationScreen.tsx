@@ -8,7 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View 
+  View
 } from 'react-native';
 import { Divider } from 'react-native-paper';
 import useGlobal from '@state';
@@ -17,7 +17,7 @@ import {
   Icon,
   LinkButton,
   SpacerInline,
-  Title 
+  Title
 } from '@elements';
 import validate from 'validate.js';
 import clientConstraints from '@util/validators/clientRegistration';

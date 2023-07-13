@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Image, ScrollView, Text, View 
+  Image, ScrollView, Text, View
 } from 'react-native';
 import useGlobal from '@state';
 import {
-  Icon, LinkButton, NavBar, SpacerInline 
+  Icon, LinkButton, NavBar, SpacerInline
 } from '@elements';
 import typography from '@util/typography';
 import { categoryImage } from '@util/donationCategory';

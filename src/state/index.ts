@@ -1,7 +1,7 @@
 import getEnv from '@util/environment';
 import { create } from 'zustand';
 import {
-  Alert, InitialState, StatusCode 
+  Alert, InitialState, StatusCode, Claim, Donation,
 } from './index.types';
 import * as actions from './actions';
 
@@ -18,7 +18,7 @@ export const initialState: InitialState = {
   loginUrl: LOGIN_URL,
   createUrl: CREATE_URL,
   alert: undefined,
-  donationsOrClaims: [],
+  donationsOrClaims: <Claim[]|Donation[]>[],
   jwt: undefined,
   user: undefined,
   email: undefined,
@@ -33,10 +33,14 @@ export interface GlobalState extends InitialState {
   setPassword: (password: string) => void,
   clearEmailAndPassword: () => void,
   clearAlert: () => void,
-  logIn: () => void,
+  logIn: (state: GlobalState) => Promise<Partial<GlobalState>>, /* TODO: woops! model everything after this one! (not sure if state type is kosher in login param) */
   logOut: () => void,
   cancelDonation: (donationId: number) => void,
   claimDonation: (donationId: number, clientId: number) => void,
+  getActiveDonationsForClient: () => void,
+  getClaimedDonationsForClient: () => void,
+  getClaimHistoryForClient: () => void,
+  getDonationHistory: () => void,
 }
 
 const useGlobalStore = create<GlobalState>((set) => ({
@@ -44,13 +48,17 @@ const useGlobalStore = create<GlobalState>((set) => ({
   updateAlert: (alert) => set(actions.updateAlert(alert)),
   setResponseStatus: (statusCode) => set(actions.setResponseStatus(statusCode)),
   clearAlert: () => set(actions.clearAlert()),
-  logIn: () => set((state) => actions.logIn(state)),
+  logIn: (state) => actions.logIn(state),
   logOut: () => set(actions.logOut()),
   setEmail: (email) => set(actions.setEmail(email)),
   setPassword: (password) => set(actions.setPassword(password)),
   clearEmailAndPassword: () => set({email: undefined, password: undefined}),
   cancelDonation: (donationId) => set((state) => actions.cancelDonation(state, donationId)),
   claimDonation: (donationId, clientId) => set((state) => actions.claimDonation(state, donationId, clientId)),
+  getActiveDonationsForClient: () => set((state) => actions.getActiveDonationsForClient(state)),
+  getClaimedDonationsForClient: () => set((state) => actions.getClaimedDonationsForClient(state)),
+  getClaimHistoryForClient: () => set((state) => actions.getClaimHistoryForClient(state)),
+  getDonationHistory: () => (state) => actions.getDonationHistory(state),
 }));
 
 // Paste the following into your code to use global state & actions:
@@ -58,6 +66,6 @@ const useGlobalStore = create<GlobalState>((set) => ({
 // import useGlobalStore from '@state';
 
 // const email = useGlobalStore(state => state.email);
-// const logIn = useGlobalStore(state => state.logIn);
+// const setEmail = useGlobalStore(state => state.setEmail);
 
 export default useGlobalStore;

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Image,
   Platform,
-  View 
+  View
 } from 'react-native';
 import { NAVY_BLUE } from '@util/constants/colors';
 import {
@@ -10,7 +10,7 @@ import {
   IconImport,
   IconName,
   deprecatedIconMap,
-  iconImports 
+  iconImports
 } from './index';
 
 interface IconProps {
@@ -30,10 +30,10 @@ export default function Icon({
     : name;
 
   /**
-	 * Returns the required dimensions for the base icon (e.g. the hamburger
-	 * icon excluding the red dot) to be the given size.
-	 * ?? Should the values used be added to a data structure with the imported icons?
-	 */
+     * Returns the required dimensions for the base icon (e.g. the hamburger
+     * icon excluding the red dot) to be the given size.
+     * ?? Should the values used be added to a data structure with the imported icons?
+     */
   const getDimensions = () => {
     let width = size;
     let height = size;
@@ -50,10 +50,10 @@ export default function Icon({
   };
 
   /**
-	 * Returns the coordinate change required to center the base icon (e.g. the hamburger
-	 * icon excluding the red dot).
-	 * ?? Should the values used be calculated and added to a data structure with the imported icons?
-	 */
+     * Returns the coordinate change required to center the base icon (e.g. the hamburger
+     * icon excluding the red dot).
+     * ?? Should the values used be calculated and added to a data structure with the imported icons?
+     */
   const getOffset = () => {
     const x = 0;
     let y = 0;

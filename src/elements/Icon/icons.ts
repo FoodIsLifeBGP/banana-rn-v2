@@ -1,7 +1,7 @@
 import {
   DeprecatedIconName,
   IconImport,
-  IconName 
+  IconName
 } from './Icon.types';
 
 const ArrowDown: IconImport = require('@assets/icons/ICON_ARROW-DOWN.svg');

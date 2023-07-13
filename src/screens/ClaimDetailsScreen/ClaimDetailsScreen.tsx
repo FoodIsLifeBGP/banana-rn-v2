@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Dimensions, ImageBackground, Linking, Platform, ScrollView, Text, View 
+  Dimensions, ImageBackground, Linking, Platform, ScrollView, Text, View
 } from 'react-native';
 import {
-  Icon, SpacerInline, TextButton 
+  Icon, SpacerInline, TextButton
 } from '@elements';
 import QRCode from 'react-native-qrcode-svg';
 import * as colors from '@util/constants/colors';

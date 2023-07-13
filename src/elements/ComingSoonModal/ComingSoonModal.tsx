@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   Text,
-  View 
+  View
 } from 'react-native';
 import useGlobal from '@state';
 import {
   Icon,
   Modal,
-  TextButton 
+  TextButton
 } from '@elements';
 import { Alert } from '@state/index.types';
 import { useScheme } from '@util/colorSchemes';
