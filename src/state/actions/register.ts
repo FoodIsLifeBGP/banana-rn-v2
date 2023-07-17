@@ -86,7 +86,9 @@ export const registerClient = async (
   client: ClientRegisterProps,
 ) => {
   const { createUrl, userIdentity } = store.state;
-  const { email, password, firstName, lastName } = client;
+  const {
+    email, password, firstName, lastName,
+  } = client;
   try {
     const response = await railsAxios().post(
       createUrl,

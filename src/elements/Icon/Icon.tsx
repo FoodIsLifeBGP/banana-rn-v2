@@ -64,9 +64,7 @@ export default function Icon({
       y = -2;
     }
 
-    return {
-      transform: [{ translateX: x }, { translateY: y }],
-    };
+    return { transform: [{ translateX: x }, { translateY: y }] };
   };
 
   const IconSvg: IconImport = iconImports[validIconName];

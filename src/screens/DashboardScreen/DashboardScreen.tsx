@@ -59,28 +59,28 @@ function DashboardScreen(props) {
         donations &&
         Array.isArray(donations) &&
         donations.length > 0 ? (
-          <ScrollView>
-            {(donations as any).map((donation) => (
-              <View key={donation.id}>
-                <Donation
-                  donation={donation}
-                  key={donation.id}
-                  isClaim={false}
-                  isHistory={false}
-                  navigation={props.navigation}
-                />
-              </View>
-            ))}
-            <SpacerInline height={200} />
-          </ScrollView>
-        ) : (
-          <EmptyStateView
-            upperText="No available donations near you."
-            lowerText={
-              "We will notify you when new donations are available.\nOR\nPlease check back later."
-            }
-          />
-        )}
+            <ScrollView>
+              {(donations as any).map((donation) => (
+                <View key={donation.id}>
+                  <Donation
+                    donation={donation}
+                    key={donation.id}
+                    isClaim={false}
+                    isHistory={false}
+                    navigation={props.navigation}
+                  />
+                </View>
+              ))}
+              <SpacerInline height={200} />
+            </ScrollView>
+          ) : (
+            <EmptyStateView
+              upperText="No available donations near you."
+              lowerText={
+                "We will notify you when new donations are available.\nOR\nPlease check back later."
+              }
+            />
+          )}
       </View>
     </View>
   );

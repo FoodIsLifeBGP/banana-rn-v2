@@ -60,21 +60,21 @@ function DonorDashboardScreen(props) {
         donations &&
         Array.isArray(donations) &&
         donations.length > 0 ? (
-          <ScrollView>
-            {(donations as any).map((donation, i) => (
-              <View key={donation.id}>
-                <Donation
-                  donation={donation}
-                  key={donation.id}
-                  resource="donations"
-                />
-                {i === (donations as any).length - 1}
-              </View>
-            ))}
-          </ScrollView>
-        ) : (
-          <EmptyStateView lowerText="You currently don't have any donations." />
-        )}
+            <ScrollView>
+              {(donations as any).map((donation, i) => (
+                <View key={donation.id}>
+                  <Donation
+                    donation={donation}
+                    key={donation.id}
+                    resource="donations"
+                  />
+                  {i === (donations as any).length - 1}
+                </View>
+              ))}
+            </ScrollView>
+          ) : (
+            <EmptyStateView lowerText="You currently don't have any donations." />
+          )}
       </View>
     </View>
   );

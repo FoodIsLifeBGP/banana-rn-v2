@@ -1,34 +1,36 @@
 import { GlobalState } from "@state/index";
 import railsAxios from "@util/railsAxios";
+import { StatusCode } from "@state/index.types";
 
-export const getClaimHistoryForClient = (state: GlobalState) => {
-  const { jwt, user } = state;
-
+export const getClaimHistoryForClient = async ({ jwt, user }: GlobalState) => {
   if (user) {
     const endpoint = `/clients/${user.id}/claims_history`;
 
-    const getClaimHistoryAsync = async () => {
-      try {
-        const response = await railsAxios(jwt).get(endpoint);
-        const { data } = response;
+    try {
+      const response = await railsAxios(jwt).get(endpoint);
+      const { data, request } = response;
 
-        const sortedData = data.sort(
-          (a, b) => a.created_at < b.created_at,
-        );
-        if (sortedData) {
-          return { claimHistory: sortedData };
-        }
-      } catch (error: any) {
-        console.log(error);
-        return { claimHistory: [] };
+      const sortedData = data.sort(
+        (a, b) => a.created_at < b.created_at,
+      );
+      if (sortedData) {
+        return {
+          claimHistory: sortedData,
+          responseStatus: request.status,
+        };
       }
-      return { claimHistory: [] };
-    };
-
-    return getClaimHistoryAsync();
+    } catch (error: any) {
+      console.log(error);
+      return {
+        claimHistory: [],
+        responseStatus: { code: <StatusCode["code"]> 500 },
+      };
+    }
   }
-
-  return state;
+  return {
+    claimHistory: [],
+    responseStatus: { code: <StatusCode["code"]> 500 },
+  };
 };
 
 export default getClaimHistoryForClient;

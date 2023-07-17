@@ -34,9 +34,7 @@ export default function DonorRegistrationScreen({
 }) {
   const [_state, actions] = useGlobal() as any;
   const { register, updateAlert } = actions;
-  const [newDonor, setNewDonor] = useState<DonorRegisterProps>({
-    state: "WA",
-  } as DonorRegisterProps);
+  const [newDonor, setNewDonor] = useState<DonorRegisterProps>({ state: "WA" } as DonorRegisterProps);
   const [validationErrors, setValidationErrors] = useState({} as any);
   const [termsOfService, setTermsOfService] = useState(false);
   const stateList = getStateList();
@@ -60,33 +58,33 @@ export default function DonorRegistrationScreen({
     } else {
       const statusCode = await register(newDonor);
       switch (statusCode) {
-        case 201: {
-          navigate("LoginSuccessScreen");
-          break;
-        }
-        case 409: {
-          updateAlert({
-            title: "Error",
-            message: `This email address has already been used (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-          break;
-        }
-        case 500: {
-          updateAlert({
-            title: "Error",
-            message: `Network Issues (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-          break;
-        }
-        default: {
-          updateAlert({
-            title: "Error",
-            message: `Unknown Error (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-        }
+      case 201: {
+        navigate("LoginSuccessScreen");
+        break;
+      }
+      case 409: {
+        updateAlert({
+          title: "Error",
+          message: `This email address has already been used (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+        break;
+      }
+      case 500: {
+        updateAlert({
+          title: "Error",
+          message: `Network Issues (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+        break;
+      }
+      default: {
+        updateAlert({
+          title: "Error",
+          message: `Unknown Error (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+      }
       }
     }
   };

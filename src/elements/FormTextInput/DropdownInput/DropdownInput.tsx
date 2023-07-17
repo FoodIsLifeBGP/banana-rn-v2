@@ -25,7 +25,9 @@ interface DropdownInputProps extends TextInputProps {
 }
 
 function DropdownInput(props: DropdownInputProps) {
-  const { style, value, setValue, dropdownData, placeholder } = props;
+  const {
+    style, value, setValue, dropdownData, placeholder,
+  } = props;
   const formattedData: Item[] = [];
   dropdownData?.forEach((item) =>
     formattedData.push({
@@ -36,10 +38,10 @@ function DropdownInput(props: DropdownInputProps) {
   // this setting are designed so by requirement of <RNPickerSelect> component.
   const placeholderObj = placeholder
     ? {
-        label: placeholder,
-        value: dropdownData ? dropdownData[0] : undefined,
-        color: colors.NAVY_BLUE,
-      }
+      label: placeholder,
+      value: dropdownData ? dropdownData[0] : undefined,
+      color: colors.NAVY_BLUE,
+    }
     : {};
   return (
     <RNPickerSelect

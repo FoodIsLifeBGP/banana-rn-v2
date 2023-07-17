@@ -56,10 +56,10 @@ export default function ContactScreen(props) {
     supported
       ? await Linking.openURL(url)
       : updateAlert({
-          title: "Oops!",
-          message: `There was an error connecting to ${url}-- please try again later.`,
-          dismissable: true,
-        });
+        title: "Oops!",
+        message: `There was an error connecting to ${url}-- please try again later.`,
+        dismissable: true,
+      });
   };
 
   return (

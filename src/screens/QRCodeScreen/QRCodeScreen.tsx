@@ -4,9 +4,7 @@ import QRCode from "react-native-qrcode-svg";
 
 import styles from "./QRCodeScreen.styles";
 
-export default function QRCodeScreen({
-  QRString,
-}: {
+export default function QRCodeScreen({ QRString }: {
   QRString?: string;
 }) {
   const [text, setText] = useState(QRString || "Food Donation");

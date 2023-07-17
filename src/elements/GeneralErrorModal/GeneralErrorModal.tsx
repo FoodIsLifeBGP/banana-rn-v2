@@ -10,9 +10,7 @@ interface GeneralErrorProps {
   onDismiss: () => void;
 }
 
-const GeneralError: FunctionComponent<GeneralErrorProps> = ({
-  onDismiss,
-}) => {
+const GeneralError: FunctionComponent<GeneralErrorProps> = ({ onDismiss }) => {
   const scheme = useScheme();
   return (
     <Modal

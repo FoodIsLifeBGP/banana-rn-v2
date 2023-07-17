@@ -36,33 +36,33 @@ export const ResetPassword: FunctionComponent<ResetPasswordProps> = ({
 
   const handleComplete = () => {
     switch (stage) {
-      case PasswordResetStage.REQUEST_LINK:
-        setStage(PasswordResetStage.VERIFY);
-        onRequest(PasswordResetStage.VERIFY);
-        break;
-      case PasswordResetStage.VERIFY:
-        setStage(PasswordResetStage.RESET);
-        break;
-      case PasswordResetStage.RESET:
-        setStage(PasswordResetStage.SUCCESS);
-        break;
-      case PasswordResetStage.SUCCESS:
-        onSuccess();
-        setStage(PasswordResetStage.REQUEST_LINK);
-        break;
-      default:
-        console.log("Unexpected passwordResetStage: ", stage);
+    case PasswordResetStage.REQUEST_LINK:
+      setStage(PasswordResetStage.VERIFY);
+      onRequest(PasswordResetStage.VERIFY);
+      break;
+    case PasswordResetStage.VERIFY:
+      setStage(PasswordResetStage.RESET);
+      break;
+    case PasswordResetStage.RESET:
+      setStage(PasswordResetStage.SUCCESS);
+      break;
+    case PasswordResetStage.SUCCESS:
+      onSuccess();
+      setStage(PasswordResetStage.REQUEST_LINK);
+      break;
+    default:
+      console.log("Unexpected passwordResetStage: ", stage);
     }
   };
 
   const handleBack = () => {
     switch (stage) {
-      case PasswordResetStage.VERIFY:
-        setStage(PasswordResetStage.REQUEST_LINK);
-        onBack();
-        break;
-      default:
-        console.log("Unexpected passwordResetStage: ", stage);
+    case PasswordResetStage.VERIFY:
+      setStage(PasswordResetStage.REQUEST_LINK);
+      onBack();
+      break;
+    default:
+      console.log("Unexpected passwordResetStage: ", stage);
     }
   };
 

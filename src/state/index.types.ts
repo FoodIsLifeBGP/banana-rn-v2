@@ -99,9 +99,11 @@ export interface InitialState {
   user?: (DonorState & SharedProps) | (ClientState & SharedProps);
   donationsOrClaims?: Donation[] | Claim[];
   claimHistory?: Claim[] /* TODO: double check this type */;
+  donationHistory?: Donation[] /* TODO: double check this type */;
   email?: string;
   password?: string;
   responseStatus?: StatusCode;
+  claim?: Claim;
 }
 
 export interface Location {

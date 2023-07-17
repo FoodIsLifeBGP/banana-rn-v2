@@ -2,10 +2,10 @@ import railsAxios from "@util/railsAxios";
 import { GlobalState, initialState } from "@state/index";
 import { StatusCode } from "@state/index.types";
 
-export const logIn = async (
-  state: GlobalState,
-): Promise<Partial<GlobalState>> => {
-  const { loginUrl, userIdentity, email, password } = state;
+export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>> => {
+  const {
+    loginUrl, userIdentity, email, password,
+  } = state;
 
   try {
     const response = await railsAxios().post(
@@ -21,10 +21,9 @@ export const logIn = async (
     return {
       jwt: response.data?.jwt || "",
       user: response.data?.[userIdentity] || undefined,
-      responseStatus: {
-        code: <StatusCode["code"]>response.status,
-      } /* TODO: define return types/methods for axios */,
+      responseStatus: { code: <StatusCode["code"]>response.status } /* TODO: define return types/methods for axios */,
     };
+  /* TODO: add type for error below */
   } catch (error: any) {
     const e = error.toString().toLowerCase().split(" status code ");
     const responseStatus =

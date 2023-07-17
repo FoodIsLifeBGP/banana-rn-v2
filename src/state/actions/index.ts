@@ -1,13 +1,11 @@
 import { Claim, Donation, StatusCode } from "@state/index.types";
 
 export interface Actions {
-  getActiveDonationsForClient: () => Promise<Donation[] | []>;
-  getClaimedDonationsForClient: () => Promise<
-    Donation[] | Claim[] | []
-  >;
-  getClaimHistoryForClient: () => Promise<Donation[] | Claim[] | []>;
-  getDonations: () => Promise<Donation[] | []>;
-  getDonationHistory: () => Promise<Donation[] | []>;
+  getActiveDonationsForClient: () => Promise<Donation[]>;
+  getClaimedDonationsForClient: () => Promise<Donation[] | Claim[]>;
+  getDonations: () => Promise<Donation[]>;
+  getClaimHistoryForClient: () => Promise<Claim[]>;
+  getDonationHistory: () => Promise<Donation[]>;
   getLocation: () => Promise<{ latitude: number; longitude: number }>;
   logIn: () => Promise<StatusCode>;
   logOut: () => Promise<void>;
@@ -25,7 +23,9 @@ export { getClaimHistoryForClient } from "./getClaimHistoryForClient";
 export { getDonations } from "./getDonations";
 export { getDonationHistory } from "./getDonationHistory";
 export { getLocation } from "./getLocation";
-export { logIn, logOut, setEmail, setPassword } from "./auth";
+export {
+  logIn, logOut, setEmail, setPassword,
+} from "./auth";
 export { postDonation } from "./postDonation";
 export { cancelDonation } from "./cancelDonation";
 export { claimDonation } from "./claimDonation";

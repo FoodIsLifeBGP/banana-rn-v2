@@ -48,23 +48,23 @@ function ClientClaimsScreen(props) {
         claimedDonations &&
         Array.isArray(claimedDonations) &&
         claimedDonations.length > 0 ? (
-          <ScrollView>
-            {(claimedDonations as any).map((claimedDonation) => (
-              <View key={claimedDonation.id}>
-                <Donation
-                  donation={claimedDonation}
-                  key={claimedDonation.id}
-                  isClaim={true}
-                  isHistory={false}
-                  navigation={props.navigation}
-                />
-              </View>
-            ))}
-            <SpacerInline height={200} />
-          </ScrollView>
-        ) : (
-          <EmptyStateView upperText="You don't currently have any outstanding claimed donations." />
-        )}
+            <ScrollView>
+              {(claimedDonations as any).map((claimedDonation) => (
+                <View key={claimedDonation.id}>
+                  <Donation
+                    donation={claimedDonation}
+                    key={claimedDonation.id}
+                    isClaim={true}
+                    isHistory={false}
+                    navigation={props.navigation}
+                  />
+                </View>
+              ))}
+              <SpacerInline height={200} />
+            </ScrollView>
+          ) : (
+            <EmptyStateView upperText="You don't currently have any outstanding claimed donations." />
+          )}
       </View>
     </View>
   );

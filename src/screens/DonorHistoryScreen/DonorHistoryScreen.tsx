@@ -10,11 +10,11 @@ function DonorHistoryScreen() {
   const isFocused = useIsFocused();
   const [state, actions] = useGlobal() as any;
   const [donations, setDonations] = useState([]);
-  const { getDonationHistory } = actions;
+  const { getDonationOrClaimHistory } = actions;
 
   useEffect(() => {
     if (isFocused) {
-      getDonationHistory().then((data) => setDonations(data));
+      getDonationOrClaimHistory().then((data) => setDonations(data));
     }
   }, [isFocused]);
 

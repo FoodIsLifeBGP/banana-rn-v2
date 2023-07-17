@@ -5,7 +5,7 @@ import { ButtonStyle } from "@elements/Button";
 import * as colors from "@util/constants/colors";
 import Selector from "@elements/NavBar/Selector";
 // import useGlobal from '@state';
-import { NAVBAR_ICON_SIZE } from "@util/constants/icons";
+// import { NAVBAR_ICON_SIZE } from "@util/constants/icons";
 import HamburgerPopupMenu from "@elements/HamburgerPopupMenu";
 import styles from "./NavBar.styles";
 
@@ -19,7 +19,7 @@ interface NavBarProps {
   onMap?: () => any | undefined;
   onList?: () => any | undefined;
   backButtonFn?: () => void;
-  navigation?: any /* TODO: replace with correct type */;
+  navigation?: any;
   goBack?: () => void;
 }
 

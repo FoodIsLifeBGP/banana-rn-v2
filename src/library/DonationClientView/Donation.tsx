@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image, Text, TouchableOpacity, View,
+} from "react-native";
 import { Icon } from "@elements";
 import typography from "@util/typography";
 import formatDate from "@util/formatDate";
@@ -12,7 +14,7 @@ interface ClientDonationProps {
   isClaim: boolean;
   isHistory: boolean;
   donation: Donation;
-  navigation: any /* TODO: replace with correct type */;
+  navigation: any;
 }
 
 export default function ClientDonation({
@@ -21,7 +23,9 @@ export default function ClientDonation({
   isHistory,
   navigation,
 }: ClientDonationProps) {
-  const { category, food_name, id, distance, donor, updated_at } =
+  const {
+    category, food_name, id, distance, donor, updated_at,
+  } =
     donation;
   const icon = categoryImage(category);
   const updatedAt = formatDate(updated_at);
@@ -31,9 +35,9 @@ export default function ClientDonation({
       onPress={() =>
         (!isClaim
           ? navigation.navigate("MakeClaimScreen", {
-              donation,
-              id,
-            })
+            donation,
+            id,
+          })
           : navigation.navigate("ClaimDetailsScreen", { donation }))
       }
     >

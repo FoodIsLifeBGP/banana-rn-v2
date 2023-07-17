@@ -15,7 +15,7 @@ import { ButtonStyle } from "./index";
 
 export type ButtonProps = TouchableHighlightProps & {
   /** Render function that results in elements to be wrapped by the button. */
-  // TODO: making this undefined temporarily
+  // TODO: making this potentially undefined temporarily
   children?: (foregroundColor: string) => React.ReactNode;
 
   /** Styles for different button states. */

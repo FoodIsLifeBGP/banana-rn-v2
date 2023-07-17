@@ -1,22 +1,29 @@
 import railsAxios from "@util/railsAxios";
+import { StatusCode } from "@state/index.types";
+import { GlobalState } from "@state/index";
 
-export const getDonationHistory = (state) => {
-  const { jwt, user } = state;
-
+export const getDonationHistory = async ({ jwt, user }: Partial<GlobalState>) => {
   if (user) {
     const endpoint = `/donations/${user.id}/history_donations`;
 
-    railsAxios(jwt)
-      .get(endpoint)
-      .then((response) => {
-        const { data } = response;
-        if (data) {
-          state.set({ donationHistory: data });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        state.set({ donationHistory: [] });
-      });
+    try {
+      const response = await railsAxios(jwt).get(endpoint);
+      const { data, request } = response;
+
+      return {
+        donationHistory: data,
+        responseStatus: request.status,
+      };
+    } catch (error: any) {
+      console.log(error);
+      return {
+        donationHistory: [],
+        responseStatus: { code: <StatusCode["code"]> 500 },
+      };
+    }
   }
+  return {
+    donationHistory: [],
+    responseStatus: { code: <StatusCode["code"]> 500 },
+  };
 };

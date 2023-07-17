@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image, Text, TouchableOpacity, View,
+} from "react-native";
 import typography from "@util/typography";
 import { categoryImage } from "@util/donationCategory";
 import formatDate from "@util/formatDate";
@@ -11,7 +13,9 @@ import styles from "./Donation.styles";
 export default function DonorDonation(props) {
   const { donation, isHistory, navigation } = props;
 
-  const { food_name, id, total_amount, category, updated_at } =
+  const {
+    food_name, id, total_amount, category, updated_at,
+  } =
     donation;
 
   const icon = categoryImage(category);

@@ -54,34 +54,34 @@ export default function ClientRegistrationScreen({
     } else {
       const statusCode = await register(newClient);
       switch (statusCode) {
-        case 201: {
-          navigation.navigate("LoginSuccessScreen");
-          break;
-        }
-        case 500: {
-          updateAlert({
-            title: "Error",
-            message: `Network Issues (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-          console.log(state);
-          break;
-        }
-        case 409: {
-          updateAlert({
-            title: "Error",
-            message: `This email address has already been used (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-          break;
-        }
-        default: {
-          updateAlert({
-            title: "Error",
-            message: `Unknown Error (Error code:${statusCode})`,
-            dismissable: true,
-          } as Alert);
-        }
+      case 201: {
+        navigation.navigate("LoginSuccessScreen");
+        break;
+      }
+      case 500: {
+        updateAlert({
+          title: "Error",
+          message: `Network Issues (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+        console.log(state);
+        break;
+      }
+      case 409: {
+        updateAlert({
+          title: "Error",
+          message: `This email address has already been used (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+        break;
+      }
+      default: {
+        updateAlert({
+          title: "Error",
+          message: `Unknown Error (Error code:${statusCode})`,
+          dismissable: true,
+        } as Alert);
+      }
       }
     }
   };

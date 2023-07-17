@@ -11,9 +11,9 @@ export default (jwt?: string) => {
   return axios.create({
     headers: jwt
       ? {
-          ...JSON_HEADERS,
-          ...AUTH_HEADER,
-        }
+        ...JSON_HEADERS,
+        ...AUTH_HEADER,
+      }
       : { ...JSON_HEADERS },
     baseURL: API_BASE_URL,
   });

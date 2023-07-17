@@ -30,7 +30,7 @@ interface ModalProps {
   onDismiss: Function; //
 
   /** Body content of the modal. */
-  children: JSX.Element | Array<JSX.Element>;
+  children: React.JSX.Element | Array<React.JSX.Element>;
 }
 
 export default function Modal({

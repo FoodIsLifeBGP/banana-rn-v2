@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { Ref, RefObject, forwardRef, useState } from "react";
+import React, {
+  Ref, RefObject, forwardRef, useState,
+} from "react";
 import {
   StyleProp,
   Text,

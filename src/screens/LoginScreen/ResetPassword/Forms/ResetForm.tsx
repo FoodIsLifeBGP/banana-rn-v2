@@ -8,9 +8,7 @@ interface ResetFormProps {
   onComplete: () => void;
 }
 
-const ResetForm: FunctionComponent<ResetFormProps> = ({
-  onComplete,
-}) => {
+const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState("");
   const [error, setError] = useState("");

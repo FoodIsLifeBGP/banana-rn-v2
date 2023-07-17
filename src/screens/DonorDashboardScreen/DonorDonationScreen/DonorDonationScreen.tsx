@@ -97,32 +97,32 @@ export default function DonorDonationScreen(props) {
     }
     const statusCode = await postDonation(donationProps);
     switch (statusCode) {
-      case 201:
-        Alert.alert("Donation created!");
-        getDonationsOrClaims();
-        props.navigation.navigate("LoginSuccessScreen");
-        return;
-      case 202:
-        Alert.alert("Donation updated!");
-        getDonationsOrClaims();
-        props.navigation.navigate("LoginSuccessScreen");
-        return;
-      case 400 || 406:
-        Alert.alert("Bad data - sorry, please try again!");
-        return;
-      case 401 || 403:
-        Alert.alert("Authentication error - please log in again.");
-        logOut();
-        props.navigation.navigate("LoginScreen");
-        return;
-      case 404:
-        Alert.alert("Network error - sorry, please try again!");
-        return;
-      case 500:
-        Alert.alert("Server problem - sorry, please try again!");
-        return;
-      default:
-        Alert.alert("Sorry, something went wrong. Please try again.");
+    case 201:
+      Alert.alert("Donation created!");
+      getDonationsOrClaims();
+      props.navigation.navigate("LoginSuccessScreen");
+      return;
+    case 202:
+      Alert.alert("Donation updated!");
+      getDonationsOrClaims();
+      props.navigation.navigate("LoginSuccessScreen");
+      return;
+    case 400 || 406:
+      Alert.alert("Bad data - sorry, please try again!");
+      return;
+    case 401 || 403:
+      Alert.alert("Authentication error - please log in again.");
+      logOut();
+      props.navigation.navigate("LoginScreen");
+      return;
+    case 404:
+      Alert.alert("Network error - sorry, please try again!");
+      return;
+    case 500:
+      Alert.alert("Server problem - sorry, please try again!");
+      return;
+    default:
+      Alert.alert("Sorry, something went wrong. Please try again.");
     }
   };
 

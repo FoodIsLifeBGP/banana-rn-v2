@@ -14,16 +14,17 @@ const {
 } = getEnv();
 
 export const initialState: InitialState = {
-  userIdentity: USER_IDENTITY,
-  apiBaseUrl: API_BASE_URL,
-  loginUrl: LOGIN_URL,
-  createUrl: CREATE_URL,
-  alert: undefined,
-  donationsOrClaims: <Claim[] | Donation[]>[],
   jwt: undefined,
   user: undefined,
+  claim: undefined,
   email: undefined,
+  alert: undefined,
   password: undefined,
+  loginUrl: LOGIN_URL,
+  createUrl: CREATE_URL,
+  apiBaseUrl: API_BASE_URL,
+  userIdentity: USER_IDENTITY,
+  donationsOrClaims: <Claim[] | Donation[]>[],
   responseStatus: undefined,
 };
 
@@ -36,12 +37,12 @@ export interface GlobalState extends InitialState {
   logOut: () => void;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
-  cancelDonation: (donationId: number) => void;
-  claimDonation: (donationId: number, clientId: number) => void;
-  getActiveDonationsForClient: () => void;
-  getClaimedDonationsForClient: () => void;
-  getClaimHistoryForClient: () => void;
-  getDonationHistory: () => void;
+  cancelDonation: (state: GlobalState, donationId: number) => void;
+  claimDonation: (state: GlobalState, donationId: number, clientId: number) => void;
+  getActiveDonationsForClient: (state: GlobalState) => void;
+  getClaimedDonationsForClient: (state: GlobalState) => void;
+  getClaimHistoryForClient: (state: GlobalState) => void;
+  getDonationHistory: (state: GlobalState) => void;
 }
 
 const useGlobalStore = create<GlobalState>((set) => ({
@@ -52,7 +53,6 @@ const useGlobalStore = create<GlobalState>((set) => ({
   clearAlert: () => set(actions.clearAlert()),
   logIn: async (state) => {
     const { jwt, user, responseStatus } = await actions.logIn(state);
-
     set({
       jwt,
       user,
@@ -66,19 +66,55 @@ const useGlobalStore = create<GlobalState>((set) => ({
     email: undefined,
     password: undefined,
   }),
-  cancelDonation: (donationId) => set((state) => actions.cancelDonation(state, donationId)),
-  claimDonation: (donationId, clientId) => set((state) => actions.claimDonation(state, donationId, clientId)),
-  getActiveDonationsForClient: () => set((state) => actions.getActiveDonationsForClient(state)),
-  getClaimedDonationsForClient: () => set((state) => actions.getClaimedDonationsForClient(state)),
-  getClaimHistoryForClient: () => set((state) => actions.getClaimHistoryForClient(state)),
-  getDonationHistory: () => (state) => actions.getDonationHistory(state),
+  cancelDonation: async (state, donationId) => {
+    const { responseStatus } = await actions.cancelDonation(state, donationId);
+    set({ responseStatus });
+  },
+  claimDonation: async (state, donationId, clientId)  => {
+    const { responseStatus, claim } = await actions.claimDonation(state, donationId, clientId);
+    set({
+      claim,
+      responseStatus,
+    });
+  },
+  getActiveDonationsForClient: async (state)  => {
+    const { donationsOrClaims, responseStatus } = await actions.getActiveDonationsForClient(state);
+    set({
+      donationsOrClaims,
+      responseStatus,
+    });
+  },
+  getClaimedDonationsForClient: async (state)  => {
+    const { donationsOrClaims, responseStatus } = await actions.getClaimedDonationsForClient(state);
+    set({
+      donationsOrClaims,
+      responseStatus,
+    });
+  },
+  getClaimHistoryForClient: async (state)  => {
+    const { claimHistory, responseStatus } = await actions.getClaimHistoryForClient(state);
+    set({
+      claimHistory,
+      responseStatus,
+    });
+  },
+  getDonationHistory: async (state)  => {
+    const { donationHistory, responseStatus } = await actions.getDonationHistory(state);
+    set({
+      donationHistory,
+      responseStatus,
+    });
+  },
 }));
+/*
+Paste the following into your code to use global state & actions:
 
-// Paste the following into your code to use global state & actions:
+```
+import useGlobalStore from '@state';
 
-// import useGlobalStore from '@state';
-
-// const email = useGlobalStore(state => state.email);
-// const setEmail = useGlobalStore(state => state.setEmail);
+const email = useGlobalStore(state => state.email);
+const setEmail = useGlobalStore(state => state.setEmail);
+```
+ */
 
 export default useGlobalStore;

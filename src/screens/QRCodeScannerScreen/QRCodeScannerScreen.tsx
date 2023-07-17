@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import * as colors from "@util/constants/colors";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image, StyleSheet, Text, View,
+} from "react-native";
 import * as Permissions from "expo-permissions";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 import useGlobal from "@state";
 
-import { Icon, LinkButton, Modal, TextButton } from "@elements";
+import {
+  Icon, LinkButton, Modal, TextButton,
+} from "@elements";
 import { ButtonStyle } from "@elements/Button";
 import { categoryImage } from "@util/donationCategory";
 import openAppSettings from "@util/openAppSettings";
@@ -186,37 +190,37 @@ export default function QRCodeScannerScreen(props) {
   // eslint-disable-next-line react/no-unstable-nested-components
   function ScannerContent() {
     switch (hasCameraPermission) {
-      case true:
-        return (
-          <>
-            {/* scannerActive conditional goes here  */}
-            <BarCodeScanner
-              onBarCodeScanned={handleBarCodeScanned}
-              style={StyleSheet.absoluteFillObject}
-            />
-            <BarCodeMask />
-            <ModalContent />
-          </>
-        );
-      case false:
-        return (
-          <>
-            <Text>No access to camera</Text>
-            <Text>
+    case true:
+      return (
+        <>
+          {/* scannerActive conditional goes here  */}
+          <BarCodeScanner
+            onBarCodeScanned={handleBarCodeScanned}
+            style={StyleSheet.absoluteFillObject}
+          />
+          <BarCodeMask />
+          <ModalContent />
+        </>
+      );
+    case false:
+      return (
+        <>
+          <Text>No access to camera</Text>
+          <Text>
               The app needs access to the camera to scan QR codes.
-            </Text>
-            <LinkButton
-              text="Open Settings"
-              onPress={() => openAppSettings().then(getPermissions)}
-            />
-            <LinkButton
-              text="Go Back"
-              onPress={() => props.navigation.goBack()}
-            />
-          </>
-        );
-      default:
-        return <Text>Requesting permission to access camera</Text>;
+          </Text>
+          <LinkButton
+            text="Open Settings"
+            onPress={() => openAppSettings().then(getPermissions)}
+          />
+          <LinkButton
+            text="Go Back"
+            onPress={() => props.navigation.goBack()}
+          />
+        </>
+      );
+    default:
+      return <Text>Requesting permission to access camera</Text>;
     }
   }
 
