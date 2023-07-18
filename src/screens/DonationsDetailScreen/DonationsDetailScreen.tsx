@@ -2,7 +2,7 @@ import React from "react";
 import {
   Image, ScrollView, Text, View,
 } from "react-native";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import {
   Icon, LinkButton, NavBar, SpacerInline,
 } from "@elements";

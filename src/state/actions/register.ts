@@ -1,41 +1,10 @@
 import railsAxios from "@util/railsAxios";
-
-export interface DonorRegisterProps {
-  email: string;
-  password: string;
-  retypedPassword: string;
-  firstName: string;
-  lastName: string;
-  businessName: string;
-  businessAddress: string;
-  city: string;
-  state: string;
-  zip: string;
-  pickupInstructions: string;
-  // license: string
-  // licenseVerificationImage: any
-}
-
-export interface ClientRegisterProps {
-  email: string;
-  password: string;
-  retypedPassword: string;
-  firstName: string;
-  lastName: string;
-  // street: string;
-  // city: string;
-  // state: string;
-  // zip: string;
-  // transportationMethod: string;
-  // ethnicity: string;
-  // gender: string;
-}
+import { UserIdentity } from "@state/index.types";
+import { DonorRegisterProps, ClientRegisterProps } from "@state/index.types";
 
 export const registerDonor = async (
-  store,
-  donor: DonorRegisterProps,
+  createUrl, userIdentity: UserIdentity, donor: DonorRegisterProps,
 ) => {
-  const { createUrl, userIdentity } = store.state;
   const {
     email,
     password,
@@ -48,9 +17,9 @@ export const registerDonor = async (
     zip,
     pickupInstructions,
   } = donor;
+
   try {
-    const response = await railsAxios().post(
-      createUrl,
+    const { data, request } = await railsAxios().post(createUrl,
       JSON.stringify({
         [userIdentity]: {
           email,
@@ -64,34 +33,35 @@ export const registerDonor = async (
           address_zip: zip,
           pickup_instructions: pickupInstructions,
         },
-      }),
-    );
+      }));
 
-    await store.setState({
-      jwt: response.data?.jwt || "",
-      user: response.data?.donor || {},
-    });
-    return response.status;
-  } catch (error) {
-    await store.setState({
-      jwt: "",
-      user: {},
-    });
-    return error.response.status;
+    return {
+      jwt: data?.jwt || "",
+      user: data?.client || {},
+      responseStatus: { code: request.status },
+    };
+  } catch (error: any) {
+    return {
+      responseStatus: {
+        code: error.response.status,
+        message: error.response.message,
+      },
+    };
   }
 };
 
 export const registerClient = async (
-  store,
-  client: ClientRegisterProps,
+  createUrl, userIdentity: UserIdentity, client: ClientRegisterProps,
 ) => {
-  const { createUrl, userIdentity } = store.state;
   const {
-    email, password, firstName, lastName,
+    email,
+    password,
+    firstName,
+    lastName,
   } = client;
+
   try {
-    const response = await railsAxios().post(
-      createUrl,
+    const { data, request } = await railsAxios().post(createUrl,
       JSON.stringify({
         [userIdentity]: {
           email,
@@ -99,27 +69,33 @@ export const registerClient = async (
           first_name: firstName,
           last_name: lastName,
         },
-      }),
-    );
-    await store.setState({
-      jwt: response.data?.jwt || "",
-      user: response.data?.client || {},
-    });
-    return response.status;
-  } catch (error) {
-    await store.setState({
-      jwt: "",
-      user: {},
-    });
-    return error.response.status;
+      }));
+
+    return {
+      jwt: data?.jwt || "",
+      user: data?.client || {},
+      responseStatus: { code: request.status },
+    };
+  } catch (error: any) {
+    return {
+      responseStatus: {
+        code: error.response.status,
+        message: error.response.message,
+      },
+    };
   }
 };
 
-const register = (store, user) => {
-  const { userIdentity } = store.state;
+const register = (
+  createUrl, userIdentity, userToRegister,
+) => {
   return userIdentity === "donor"
-    ? registerDonor(store, user)
-    : registerClient(store, user);
+    ? registerDonor(
+      createUrl, userIdentity, userToRegister,
+    )
+    : registerClient(
+      createUrl, userIdentity, userToRegister,
+    );
 };
 
 export { register };

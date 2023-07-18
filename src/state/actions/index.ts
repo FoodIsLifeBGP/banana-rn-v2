@@ -1,4 +1,6 @@
-import { Claim, Donation, StatusCode } from "@state/index.types";
+import {
+  Claim, Donation, ResponseStatus,
+} from "@state/index.types";
 
 export interface Actions {
   getActiveDonationsForClient: () => Promise<Donation[]>;
@@ -7,15 +9,15 @@ export interface Actions {
   getClaimHistoryForClient: () => Promise<Claim[]>;
   getDonationHistory: () => Promise<Donation[]>;
   getLocation: () => Promise<{ latitude: number; longitude: number }>;
-  logIn: () => Promise<StatusCode>;
+  logIn: () => Promise<ResponseStatus>;
   logOut: () => Promise<void>;
-  postDonation: () => Promise<StatusCode>;
-  register: () => Promise<StatusCode>;
-  scan: () => Promise<StatusCode>;
-  requestResetToken: () => Promise<StatusCode>;
-  submitResetToken: () => Promise<StatusCode>;
-  submitNewPassword: () => Promise<StatusCode>;
-  getTravelTimes: () => Promise<{ status: StatusCode; times: {} }>;
+  postDonation: () => Promise<ResponseStatus>;
+  register: () => Promise<ResponseStatus>;
+  scan: () => Promise<ResponseStatus>;
+  requestResetToken: () => Promise<ResponseStatus>;
+  submitResetToken: () => Promise<ResponseStatus>;
+  submitNewPassword: () => Promise<ResponseStatus>;
+  getTravelTimes: () => Promise<{ status: ResponseStatus; times: {} }>;
 }
 export { getActiveDonationsForClient } from "./getActiveDonationsForClient";
 export { getClaimedDonationsForClient } from "./getClaimedDonationsForClient";
@@ -32,7 +34,9 @@ export { claimDonation } from "./claimDonation";
 export { getTravelTimes } from "./hereApi";
 export { register } from "./register";
 export { scan } from "./scan";
-export { updateAlert, clearAlert, setResponseStatus } from "./alert";
+export {
+  updateAlert, clearAlert, setResponseStatus,
+} from "./alert";
 export {
   requestResetToken,
   submitResetToken,

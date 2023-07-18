@@ -10,8 +10,10 @@ import {
   Text,
   View,
 } from "react-native";
-import useGlobal from "@state";
-import { Icon, SpacerInline, TextButton } from "@elements";
+import useGlobalStore from "@state";
+import {
+  Icon, SpacerInline, TextButton,
+} from "@elements";
 import * as colors from "@util/constants/colors";
 import typography from "@util/typography";
 import { ButtonStyle } from "@elements/Button";

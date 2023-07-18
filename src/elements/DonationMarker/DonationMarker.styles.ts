@@ -1,4 +1,6 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import {
+  Dimensions, Platform, StyleSheet,
+} from "react-native";
 import * as colors from "@util/constants/colors";
 
 export default StyleSheet.create({

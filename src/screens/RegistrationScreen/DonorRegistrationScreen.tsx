@@ -1,4 +1,3 @@
-/* eslint-disable no-tabs */
 import React, { useRef, useState } from "react";
 import {
   Keyboard,
@@ -18,7 +17,7 @@ import {
   SpacerInline,
   Title,
 } from "@elements";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import { getStateList } from "@util/constants/statesAbbr";
 import donorConstraints from "@util/validators/donorRegistration";
 import validate from "validate.js";
@@ -32,8 +31,11 @@ export default function DonorRegistrationScreen({
   navigate,
   goBack,
 }) {
-  const [_state, actions] = useGlobal() as any;
-  const { register, updateAlert } = actions;
+
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const register = useGlobalStore((state) => state.register);
+
+
   const [newDonor, setNewDonor] = useState<DonorRegisterProps>({ state: "WA" } as DonorRegisterProps);
   const [validationErrors, setValidationErrors] = useState({} as any);
   const [termsOfService, setTermsOfService] = useState(false);
@@ -66,7 +68,7 @@ export default function DonorRegistrationScreen({
         updateAlert({
           title: "Error",
           message: `This email address has already been used (Error code:${statusCode})`,
-          dismissable: true,
+          dismissible: true,
         } as Alert);
         break;
       }
@@ -74,7 +76,7 @@ export default function DonorRegistrationScreen({
         updateAlert({
           title: "Error",
           message: `Network Issues (Error code:${statusCode})`,
-          dismissable: true,
+          dismissible: true,
         } as Alert);
         break;
       }
@@ -82,7 +84,7 @@ export default function DonorRegistrationScreen({
         updateAlert({
           title: "Error",
           message: `Unknown Error (Error code:${statusCode})`,
-          dismissable: true,
+          dismissible: true,
         } as Alert);
       }
       }

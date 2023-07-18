@@ -11,13 +11,9 @@ export const getActiveDonationsForClient = async (state: GlobalState) => {
     try {
       const { data, request } = await railsAxios(jwt).get(endpoint);
 
-      const sortedData = data.sort(
-        (a, b) => a.created_at < b.created_at,
-      );
+      const sortedData = data.sort((a, b) => a.created_at < b.created_at);
       if (sortedData) {
-        const activeDonations = sortedData.filter(
-          (donation) => donation.status === "active",
-        );
+        const activeDonations = sortedData.filter((donation) => donation.status === "active");
         return {
           donationsOrClaims: activeDonations,
           responseStatus: request.status,

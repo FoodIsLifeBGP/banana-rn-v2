@@ -1,5 +1,7 @@
 import React from "react";
-import { Image, Platform, View } from "react-native";
+import {
+  Image, Platform, View,
+} from "react-native";
 import { NAVY_BLUE } from "@util/constants/colors";
 import {
   DeprecatedIconName,

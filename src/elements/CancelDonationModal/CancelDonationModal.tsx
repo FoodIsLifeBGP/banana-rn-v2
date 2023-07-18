@@ -41,7 +41,7 @@ export default function CancelDonationModal({
   };
 
   const handleDismiss = () => {
-    if (alert && alert.dismissable) {
+    if (alert && alert.dismissible) {
       clearAlert();
     }
   };

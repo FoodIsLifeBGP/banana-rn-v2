@@ -33,8 +33,7 @@ function DropdownInput(props: DropdownInputProps) {
     formattedData.push({
       label: item,
       value: item,
-    }),
-  );
+    }));
   // this setting are designed so by requirement of <RNPickerSelect> component.
   const placeholderObj = placeholder
     ? {

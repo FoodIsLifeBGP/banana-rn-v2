@@ -1,5 +1,5 @@
 import railsAxios from "@util/railsAxios";
-import { StatusCode } from "@state/index.types";
+import { ResponseStatus } from "@state/index.types";
 import { GlobalState } from "@state/index";
 
 export const getDonationHistory = async ({ jwt, user }: Partial<GlobalState>) => {
@@ -18,12 +18,12 @@ export const getDonationHistory = async ({ jwt, user }: Partial<GlobalState>) =>
       console.log(error);
       return {
         donationHistory: [],
-        responseStatus: { code: <StatusCode["code"]> 500 },
+        responseStatus: { code: <ResponseStatus["code"]> 500 },
       };
     }
   }
   return {
     donationHistory: [],
-    responseStatus: { code: <StatusCode["code"]> 500 },
+    responseStatus: { code: <ResponseStatus["code"]> 500 },
   };
 };

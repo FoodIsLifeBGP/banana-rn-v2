@@ -4,9 +4,13 @@ import React, {
   createRef,
   useState,
 } from "react";
-import { Text, TextInput, View } from "react-native";
-import { FormTextInput, LinkButton, SpacerInline } from "@elements";
-import useGlobal from "@state";
+import {
+  Text, TextInput, View,
+} from "react-native";
+import {
+  FormTextInput, LinkButton, SpacerInline,
+} from "@elements";
+import useGlobalStore from "@state";
 import styles from "../ResetPassword.styles";
 
 interface NewPasswordFormProps {

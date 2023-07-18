@@ -6,7 +6,7 @@ import {
 import * as Permissions from "expo-permissions";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 
 import {
   Icon, LinkButton, Modal, TextButton,
@@ -19,8 +19,9 @@ import BarCodeMask from "./BarCodeMask";
 import styles from "./QRCodeScannerScreen.styles";
 
 export default function QRCodeScannerScreen(props) {
-  const [state, actions] = useGlobal() as any;
-  const { scan } = actions;
+  const scan = useGlobalStore((state) => state.scan);
+  const donationsOrClaims = useGlobalStore((state) => state.donationsOrClaims);
+
   const [hasCameraPermission, setHasCameraPermission] = useState<
     boolean | null
   >(null);
@@ -58,26 +59,30 @@ export default function QRCodeScannerScreen(props) {
     setHasCameraPermission(status === "granted");
   };
 
-  const handleBarCodeScanned = (barcode) => {
-    const match = state.donationsOrClaims.filter(
-      (d) =>
-        d.status === "claimed" && d.claim.qr_code === barcode.data,
-    );
-    if (match[0]) {
-      // TBD
-      // setScannerActive(false);
-      scan(barcode.data).then((res) => {
-        if (res === 202) {
-          setClaimedDonation(match[0]);
-          setIcon(categoryImage(match[0].category));
-          setModalOn(true);
+  const handleBarCodeScanned = async (barcode) => {
+    if (donationsOrClaims) {
+      const match = donationsOrClaims.filter((d) => d.status === "claimed" && d.claim.qr_code === barcode.data);
+
+      if (match[0]) {
+        // TBD
+        // setScannerActive(false);
+        try {
+          const res = await scan(barcode.data);
+          if (res === 202) {
+            setClaimedDonation(match[0]);
+            setIcon(categoryImage(match[0].category));
+            setModalOn(true);
+          }
+        } catch (err) {
+          console.error(err);
         }
-      });
-    } else {
-      setModalOn(true);
-      console.log("No match found");
+      } else {
+        setModalOn(true);
+        console.log("No match found");
+      }
     }
   };
+
 
   // Triggers when user clicks outside of modal.
   // Resets value of scanned, and sets modalOn to false.

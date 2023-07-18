@@ -1,10 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import { Button, Icon } from "@elements";
+import { Button } from "@elements";
+// import { Button, Icon } from "@elements";
 import { ButtonStyle } from "@elements/Button";
 import * as colors from "@util/constants/colors";
 import Selector from "@elements/NavBar/Selector";
-// import useGlobal from '@state';
+import useGlobalStore from "@state";
 // import { NAVBAR_ICON_SIZE } from "@util/constants/icons";
 import HamburgerPopupMenu from "@elements/HamburgerPopupMenu";
 import styles from "./NavBar.styles";
@@ -20,7 +21,7 @@ interface NavBarProps {
   onList?: () => any | undefined;
   backButtonFn?: () => void;
   navigation?: any;
-  goBack?: () => void;
+  goBack: () => void;
 }
 
 export default function NavBar({
@@ -43,11 +44,7 @@ export default function NavBar({
     },
   };
 
-  // TODO: fix dis
-  // const [ state, { updateAlert } ] = useGlobal() as any;
-  const updateAlert = (a) => {
-    console.log(a);
-  };
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
 
   return (
     <View style={styles.contentContainer}>
@@ -88,8 +85,10 @@ export default function NavBar({
           }}
           onPress={() => {
             updateAlert({
+              title: "Coming Soon",
               type: "coming soon",
-              dismissable: false,
+              message: "coming soon",
+              dismissible: false,
             });
           }}
         />

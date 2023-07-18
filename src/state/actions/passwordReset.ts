@@ -9,15 +9,13 @@ interface ResetPasswordPropsBase {
 
 export type RequestResetTokenProps = ResetPasswordPropsBase;
 
-export const requestResetToken = async (
-  store,
+export const requestResetToken = async (store,
   {
     onComplete,
     input,
     setIsSubmitting,
     setError,
-  }: RequestResetTokenProps,
-) => {
+  }: RequestResetTokenProps) => {
   const { userIdentity } = store.state;
   const endpoint = `/password_resets/${userIdentity}/`;
   const email = JSON.stringify({ email: input });
@@ -27,11 +25,9 @@ export const requestResetToken = async (
     onComplete();
   } catch (e) {
     setIsSubmitting(false);
-    setError(
-      e.response
-        ? e.response.data.message
-        : "We're sorry, but there was an error.  Please try again.",
-    );
+    setError(e.response
+      ? e.response.data.message
+      : "We're sorry, but there was an error.  Please try again.");
   }
 };
 
@@ -40,16 +36,14 @@ export interface SubmitResetTokenProps
   setToken: (value: string) => void;
 }
 
-export const submitResetToken = async (
-  store,
+export const submitResetToken = async (store,
   {
     onComplete,
     input,
     setIsSubmitting,
     setError,
     setToken,
-  }: SubmitResetTokenProps,
-) => {
+  }: SubmitResetTokenProps) => {
   const { userIdentity } = store.state;
   const endpoint = `/password_resets/${userIdentity}/${input}/`;
   try {
@@ -59,11 +53,9 @@ export const submitResetToken = async (
     onComplete();
   } catch (e) {
     setIsSubmitting(false);
-    setError(
-      e.response
-        ? e.response.data.message
-        : "We're sorry, but there was an error.  Please try again.",
-    );
+    setError(e.response
+      ? e.response.data.message
+      : "We're sorry, but there was an error.  Please try again.");
   }
 };
 
@@ -72,16 +64,14 @@ export interface SubmitNewPasswordProps
   token: string;
 }
 
-export const submitNewPassword = async (
-  store,
+export const submitNewPassword = async (store,
   {
     input,
     token,
     setIsSubmitting,
     onComplete,
     setError,
-  }: SubmitNewPasswordProps,
-) => {
+  }: SubmitNewPasswordProps) => {
   const { userIdentity } = store.state;
   const password = JSON.stringify({ password: input });
   const endpoint = `/password_resets/${userIdentity}/${token}`;
@@ -91,10 +81,8 @@ export const submitNewPassword = async (
     onComplete();
   } catch (e) {
     setIsSubmitting(false);
-    setError(
-      e.response
-        ? e.response.data.message
-        : "We're sorry, but there was an error.  Please try again.",
-    );
+    setError(e.response
+      ? e.response.data.message
+      : "We're sorry, but there was an error.  Please try again.");
   }
 };

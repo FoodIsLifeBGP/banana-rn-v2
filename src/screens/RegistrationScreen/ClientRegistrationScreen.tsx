@@ -1,4 +1,3 @@
-/* eslint-disable no-tabs */
 import React, { useRef, useState } from "react";
 import {
   Keyboard,
@@ -11,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { Divider } from "react-native-paper";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import {
   FormTextInput,
   Icon,
@@ -21,7 +20,7 @@ import {
 } from "@elements";
 import validate from "validate.js";
 import clientConstraints from "@util/validators/clientRegistration";
-import { ClientRegisterProps } from "@state/actions/register";
+import { ClientRegisterProps } from "@state/index.types";
 import { Alert } from "@state/index.types";
 import styles from "./RegistrationScreen.styles";
 
@@ -29,14 +28,16 @@ export default function ClientRegistrationScreen({
   navigation,
   goBack,
 }) {
-  const [state, actions] = useGlobal() as any;
-  const { register, updateAlert } = actions;
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const register = useGlobalStore((state) => state.register);
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
+
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
+  const createUrl = useGlobalStore((state) => state.createUrl);
 
   const [termsOfService, setTermsOfService] = useState(false);
   const [validateError, setValidateError] = useState({} as any);
-  const [newClient, setNewClient] = useState<ClientRegisterProps>(
-    {} as ClientRegisterProps,
-  );
+  const [newClient, setNewClient] = useState<ClientRegisterProps>({} as ClientRegisterProps);
 
   const passwordRef = useRef<TextInput>(null);
   const confirmPasswordRef = useRef<TextInput>(null);
@@ -52,36 +53,42 @@ export default function ClientRegistrationScreen({
     if (validateResults) {
       setValidateError(validateResults);
     } else {
-      const statusCode = await register(newClient);
-      switch (statusCode) {
-      case 201: {
-        navigation.navigate("LoginSuccessScreen");
-        break;
-      }
-      case 500: {
-        updateAlert({
-          title: "Error",
-          message: `Network Issues (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-        console.log(state);
-        break;
-      }
-      case 409: {
-        updateAlert({
-          title: "Error",
-          message: `This email address has already been used (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-        break;
-      }
-      default: {
-        updateAlert({
-          title: "Error",
-          message: `Unknown Error (Error code:${statusCode})`,
-          dismissable: true,
-        } as Alert);
-      }
+      register(
+        userIdentity,
+        createUrl,
+        newClient,
+      );
+
+      if (responseStatus) {
+        switch (responseStatus.code) {
+        case 201: {
+          navigation.navigate("LoginSuccessScreen");
+          break;
+        }
+        case 500: {
+          updateAlert({
+            title: "Error",
+            message: `Network Issues (Error code:${responseStatus.code})`,
+            dismissible: true,
+          } as Alert);
+          break;
+        }
+        case 409: {
+          updateAlert({
+            title: "Error",
+            message: `This email address has already been used (Error code:${responseStatus.code})`,
+            dismissible: true,
+          } as Alert);
+          break;
+        }
+        default: {
+          updateAlert({
+            title: "Error",
+            message: `Unknown Error (Error code:${responseStatus.code})`,
+            dismissible: true,
+          } as Alert);
+        }
+        }
       }
     }
   };

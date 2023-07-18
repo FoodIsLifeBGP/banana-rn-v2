@@ -10,12 +10,10 @@ function setTopLevelNavigator(navigationRef) {
 }
 
 function navigate(name, params) {
-  navigation.dispatch(
-    CommonActions.navigate({
-      name,
-      params,
-    }),
-  );
+  navigation.dispatch(CommonActions.navigate({
+    name,
+    params,
+  }));
 }
 
 function goBack() {

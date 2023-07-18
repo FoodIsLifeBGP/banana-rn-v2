@@ -1,5 +1,5 @@
 import React from "react";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import DonorRegistrationScreen from "./DonorRegistrationScreen";
 import ClientRegistrationScreen from "./ClientRegistrationScreen";
 

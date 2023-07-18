@@ -44,7 +44,7 @@ module.exports = {
     "lines-between-class-members": ["off"],
     "linebreak-style": ["warn", "unix"],
     "no-async-promise-executor": ["warn"],
-    "no-confusing-arrow": ["warn", { allowParens: true }],
+    "no-confusing-arrow": ["warn"],
     "no-multiple-empty-lines": [
       "warn",
       {
@@ -77,11 +77,12 @@ module.exports = {
     "@typescript-eslint/no-var-requires": ["off"],
     "quotes": ["warn", "double"],
     "semi": ["warn", "always"],
-    "max-len": ["error", { "code": 160 }],
+    "max-len": ["warn", { "code": 150 }],
+    "function-paren-newline": ["warn", { "minItems": 3 }],
     "object-curly-newline": ["warn", {
       "ObjectExpression": {
         "multiline": true,
-        "minProperties": 4,
+        "minProperties": 3,
       },
       "ObjectPattern": {
         "multiline": true,
@@ -89,11 +90,11 @@ module.exports = {
       },
       "ImportDeclaration": {
         "multiline": true,
-        "minProperties": 4,
+        "minProperties": 3,
       },
       "ExportDeclaration": {
         "multiline": true,
-        "minProperties": 4,
+        "minProperties": 3,
       },
     }],
     "no-console": ["warn"],

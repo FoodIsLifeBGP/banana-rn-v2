@@ -1,14 +1,3 @@
-export interface DonorState {
-  organization_name: string;
-  business_license: string;
-}
-
-export interface ClientState {
-  transportation_method: string;
-  ethnicity: string;
-  gender: string;
-}
-
 export interface SharedProps {
   id: number;
   email: string;
@@ -24,6 +13,64 @@ export interface SharedProps {
   };
 }
 
+export interface DonorState extends SharedProps {
+  organization_name: string;
+  business_license: string;
+}
+
+export interface ClientState extends SharedProps {
+  transportation_method: string;
+  ethnicity: string;
+  gender: string;
+}
+
+export interface DonorRegisterProps {
+  email: string;
+  password: string;
+  retypedPassword: string;
+  firstName: string;
+  lastName: string;
+  businessName: string;
+  businessAddress: string;
+  city: string;
+  state: string;
+  zip: string;
+  pickupInstructions: string;
+  // license: string
+  // licenseVerificationImage: any
+}
+
+export interface ClientRegisterProps {
+  email: string;
+  password: string;
+  retypedPassword: string;
+  firstName: string;
+  lastName: string;
+  // street: string;
+  // city: string;
+  // state: string;
+  // zip: string;
+  // transportationMethod: string;
+  // ethnicity: string;
+  // gender: string;
+}
+
+export type ClientOrDonorRegisterProps = ClientRegisterProps | DonorRegisterProps;
+
+enum ClaimStatus {
+  ACTIVE = "active",
+  CLOSED = "closed",
+  EXPIRED = "expired"
+}
+
+enum DonationStatus {
+  ACTIVE = "active",
+  CLAIMED = "claimed",
+  CLOSED = "closed",
+  DELETED = "deleted",
+  EXPIRED = "expired"
+}
+
 export interface Claim {
   client_id: number;
   donation_id: number;
@@ -33,6 +80,7 @@ export interface Claim {
   updated_at: Date;
   time_claimed: Date;
   canceled: boolean;
+  status: ClaimStatus;
 }
 
 export interface Donation {
@@ -47,6 +95,7 @@ export interface Donation {
   updated_at: Date;
   canceled: boolean;
   pickup_location: string;
+  status: DonationStatus;
 }
 
 /**
@@ -78,32 +127,35 @@ export interface Alert {
    * Whether the alert can be casually dismissed by the user
    * (i.e. tapping the content behind a modal).
    */
-  dismissable?: boolean;
+  dismissible?: boolean;
 
   cancelFn?: () => void;
 
   confirmFn?: () => void;
 }
 
-export interface StatusCode {
-  code: 200 | 202 | 400 | 403 | 401 | 404 | 418 | 500;
+export interface ResponseStatus {
+  message?: string;
+  code: 200 | 201 | 202 | 400 | 403 | 401 | 404 | 409 | 418 | 500;
 }
 
+export type UserIdentity = "donor" | "client";
+
 export interface InitialState {
-  userIdentity: "donor" | "client";
+  userIdentity: UserIdentity;
   apiBaseUrl: string;
   loginUrl: string;
   createUrl: string;
   alert?: Alert;
   jwt?: string;
-  user?: (DonorState & SharedProps) | (ClientState & SharedProps);
+  user?: DonorState | ClientState;
   donationsOrClaims?: Donation[] | Claim[];
   claimHistory?: Claim[] /* TODO: double check this type */;
   donationHistory?: Donation[] /* TODO: double check this type */;
   email?: string;
   password?: string;
-  responseStatus?: StatusCode;
-  claim?: Claim;
+  responseStatus?: ResponseStatus;
+  currentClaim?: Claim;
 }
 
 export interface Location {

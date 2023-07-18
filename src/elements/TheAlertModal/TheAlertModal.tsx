@@ -1,16 +1,14 @@
 import React from "react";
 import { Text, View } from "react-native";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import { Modal, TextButton } from "@elements";
-import { Alert } from "@state/index.types";
 import { useScheme } from "@util/colorSchemes";
 import typography from "@util/typography";
 import styles from "./TheAlertModal.styles";
 
 export default function TheAlertModal() {
-  const [globalState, globalActions] = useGlobal() as any;
-  const { alert }: { alert: Alert } = globalState;
-  const { clearAlert } = globalActions;
+  const alert = useGlobalStore((state) => state.alert);
+  const clearAlert = useGlobalStore((state) => state.clearAlert);
 
   const scheme = useScheme();
 
@@ -19,7 +17,7 @@ export default function TheAlertModal() {
   };
 
   const handleDismiss = () => {
-    if (alert.dismissable) {
+    if (alert && alert.dismissible) {
       clearAlert();
     }
   };

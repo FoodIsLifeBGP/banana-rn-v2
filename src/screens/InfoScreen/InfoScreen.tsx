@@ -1,4 +1,6 @@
-import { LinkButton, SpacerInline, Title } from "@elements";
+import {
+  LinkButton, SpacerInline, Title,
+} from "@elements";
 import React, { FunctionComponent } from "react";
 import { View } from "react-native";
 import styles from "./InfoScreen.styles";

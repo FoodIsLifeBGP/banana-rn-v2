@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useState } from "react";
 import { Text, View } from "react-native";
 import { Modal } from "@elements";
-import { CodeForm, NewPasswordForm, ResetForm } from "./Forms";
+import {
+  CodeForm, NewPasswordForm, ResetForm,
+} from "./Forms";
 import styles from "./ResetPassword.styles";
 
 // TODO: fix this error and remove the comment below
@@ -29,9 +31,7 @@ export const ResetPassword: FunctionComponent<ResetPasswordProps> = ({
   onRequest,
   onBack,
 }) => {
-  const [stage, setStage] = useState(
-    initialStage || PasswordResetStage.REQUEST_LINK,
-  );
+  const [stage, setStage] = useState(initialStage || PasswordResetStage.REQUEST_LINK);
   const [token, setToken] = useState("");
 
   const handleComplete = () => {

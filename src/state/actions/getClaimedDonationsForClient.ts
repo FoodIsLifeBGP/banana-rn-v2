@@ -1,7 +1,7 @@
 import { GlobalState } from "@state/index";
 import { Claim, Donation } from "@state/index.types";
 import railsAxios from "@util/railsAxios";
-import { StatusCode } from "@state/index.types";
+import { ResponseStatus } from "@state/index.types";
 
 export const getClaimedDonationsForClient = async (state: GlobalState)=> {
   const { jwt, user } = state;
@@ -13,9 +13,7 @@ export const getClaimedDonationsForClient = async (state: GlobalState)=> {
       const response = await railsAxios(jwt).get(endpoint);
       const { data, request } = response;
 
-      const sortedData = data.sort(
-        (a, b) => a.created_at < b.created_at,
-      );
+      const sortedData = data.sort((a, b) => a.created_at < b.created_at);
       if (sortedData) {
         const claimedDonations = sortedData;
         return {
@@ -27,13 +25,13 @@ export const getClaimedDonationsForClient = async (state: GlobalState)=> {
       console.log(error);
       return {
         donationsOrClaims: <Claim[] | Donation[]>[],
-        responseStatus: { code: <StatusCode["code"]> 500 },
+        responseStatus: { code: <ResponseStatus["code"]> 500 },
       };
     }
   }
   return {
     donationsOrClaims: <Claim[] | Donation[]>[],
-    responseStatus: { code: <StatusCode["code"]> 500 },
+    responseStatus: { code: <ResponseStatus["code"]> 500 },
   };
 };
 

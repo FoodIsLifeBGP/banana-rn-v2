@@ -1,4 +1,6 @@
-import React, { Ref, RefObject, forwardRef } from "react";
+import React, {
+  Ref, RefObject, forwardRef,
+} from "react";
 import {
   Image,
   StyleProp,
@@ -51,19 +53,17 @@ const MessageFromStatus = {
 /**
  * Input component for a form to select an image from storage to upload.
  */
-function FormImageInput(
-  {
-    label,
-    value,
-    setValue,
-    status = "none",
-    style,
-    error = false,
-    errorMessage,
-    shape = "rectangular",
-  }: FormImageInputProps,
-  ref: Ref<TouchableWithoutFeedback>,
-) {
+function FormImageInput({
+  label,
+  value,
+  setValue,
+  status = "none",
+  style,
+  error = false,
+  errorMessage,
+  shape = "rectangular",
+}: FormImageInputProps,
+ref: Ref<TouchableWithoutFeedback>) {
   const pickImage = async () => {
     const imageResult = await sourceImage("cameraRoll");
     if (imageResult && !imageResult.cancelled) {

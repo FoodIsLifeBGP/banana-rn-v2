@@ -8,7 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import {
   FormTextInput,
   LinkButton,
@@ -46,11 +46,9 @@ export default function DonationScreen(props) {
   const [validateError, setValidateError] = useState({} as any);
   const { postDonation } = actions;
 
-  const hasUnsavedChanges = Boolean(
-    newDonation.itemName ||
+  const hasUnsavedChanges = Boolean(newDonation.itemName ||
       newDonation.totalAmount ||
-      newDonation.pickupInstructions !== user.pickup_instructions,
-  );
+      newDonation.pickupInstructions !== user.pickup_instructions);
   const preventBack = () => {
     updateAlert({
       type: "incomplete form",
@@ -59,10 +57,8 @@ export default function DonationScreen(props) {
     });
   };
   const validateInputs = async () => {
-    const validateResults = validate(
-      newDonation,
-      donationConstraints,
-    );
+    const validateResults = validate(newDonation,
+      donationConstraints);
     if (validateResults) {
       setValidateError(validateResults);
     } else {

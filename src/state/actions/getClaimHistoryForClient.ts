@@ -1,6 +1,6 @@
 import { GlobalState } from "@state/index";
 import railsAxios from "@util/railsAxios";
-import { StatusCode } from "@state/index.types";
+import { ResponseStatus } from "@state/index.types";
 
 export const getClaimHistoryForClient = async ({ jwt, user }: GlobalState) => {
   if (user) {
@@ -10,9 +10,7 @@ export const getClaimHistoryForClient = async ({ jwt, user }: GlobalState) => {
       const response = await railsAxios(jwt).get(endpoint);
       const { data, request } = response;
 
-      const sortedData = data.sort(
-        (a, b) => a.created_at < b.created_at,
-      );
+      const sortedData = data.sort((a, b) => a.created_at < b.created_at);
       if (sortedData) {
         return {
           claimHistory: sortedData,
@@ -23,13 +21,13 @@ export const getClaimHistoryForClient = async ({ jwt, user }: GlobalState) => {
       console.log(error);
       return {
         claimHistory: [],
-        responseStatus: { code: <StatusCode["code"]> 500 },
+        responseStatus: { code: <ResponseStatus["code"]> 500 },
       };
     }
   }
   return {
     claimHistory: [],
-    responseStatus: { code: <StatusCode["code"]> 500 },
+    responseStatus: { code: <ResponseStatus["code"]> 500 },
   };
 };
 

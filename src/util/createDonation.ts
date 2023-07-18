@@ -21,8 +21,7 @@ export default async ({
   perPerson,
   pickupLocation,
 }: DonationProps) => {
-  const response = await railsAxios(jwt).post(
-    "/donations/create",
+  const response = await railsAxios(jwt).post("/donations/create",
     JSON.stringify({
       donation: {
         donor_id: donorId,
@@ -35,8 +34,7 @@ export default async ({
         pickup_location: pickupLocation,
         canceled: false,
       },
-    }),
-  );
+    }));
 
   return response.request.status || "Error";
 };

@@ -172,7 +172,7 @@ import React, { useState } from "react";
 import { useNavigation, useNavigationParam } from "";
 import { View, Alert, TextInput } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import { Title } from "@elements";
 
 export default () => {

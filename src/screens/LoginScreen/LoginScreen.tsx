@@ -15,16 +15,16 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGlobalStore from "@state";
-import { FormTextInput, LinkButton, Title } from "@elements";
+import {
+  FormTextInput, LinkButton, Title,
+} from "@elements";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import styles from "./LoginScreen.styles";
 import ResetPassword from "./ResetPassword";
 import { PasswordResetStage } from "./ResetPassword/ResetPassword";
 
 export default function LoginScreen(props) {
-  const responseStatus = useGlobalStore(
-    (state) => state.responseStatus,
-  );
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
   const userIdentity = useGlobalStore((state) => state.userIdentity);
   const email =
     props.route.params.email ??
@@ -36,18 +36,14 @@ export default function LoginScreen(props) {
   const logIn = useGlobalStore((state) => state.logIn);
   const setEmail = useGlobalStore((state) => state.setEmail);
   const setPassword = useGlobalStore((state) => state.setPassword);
-  const clearEmailAndPassword = useGlobalStore(
-    (state) => state.clearEmailAndPassword,
-  );
+  const clearEmailAndPassword = useGlobalStore((state) => state.clearEmailAndPassword);
 
   const passwordInputRef: RefObject<TextInput> = createRef();
   const handleEmailInputSubmit = () =>
     passwordInputRef.current?.focus();
 
   const [showModal, setShowModal] = useState(false);
-  const [passwordResetStage, setPasswordResetStage] = useState(
-    PasswordResetStage.NONE,
-  );
+  const [passwordResetStage, setPasswordResetStage] = useState(PasswordResetStage.NONE);
 
   useEffect(() => {
     const reactToStatusCode = async () => {
@@ -70,9 +66,7 @@ export default function LoginScreen(props) {
           Alert.alert("Network error - please try again");
           return;
         default:
-          Alert.alert(
-            `Server replied with ${responseStatus} status code`,
-          );
+          Alert.alert(`Server replied with ${responseStatus} status code`);
         }
       }
     };
@@ -80,9 +74,7 @@ export default function LoginScreen(props) {
 
     const retrievePasswordResetStage = async () => {
       try {
-        const value = await AsyncStorage.getItem(
-          "PASSWORD RESET STAGE",
-        );
+        const value = await AsyncStorage.getItem("PASSWORD RESET STAGE");
         if (value === "VERIFY") {
           setPasswordResetStage(PasswordResetStage[value]);
         }

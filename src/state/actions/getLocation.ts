@@ -7,9 +7,7 @@ import { getCurrentPositionAsync } from "expo-location";
 import Constants from "expo-constants";
 
 export const getLocation = async (store) => {
-  const { status }: { status: PermissionStatus } = await askAsync(
-    LOCATION,
-  );
+  const { status }: { status: PermissionStatus } = await askAsync(LOCATION);
   if (status === "granted") {
     try {
       const { coords } = await getCurrentPositionAsync({});

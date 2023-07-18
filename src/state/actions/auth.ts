@@ -1,6 +1,6 @@
 import railsAxios from "@util/railsAxios";
 import { GlobalState, initialState } from "@state/index";
-import { StatusCode } from "@state/index.types";
+import { ResponseStatus } from "@state/index.types";
 
 export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>> => {
   const {
@@ -8,20 +8,18 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
   } = state;
 
   try {
-    const response = await railsAxios().post(
-      loginUrl,
+    const response = await railsAxios().post(loginUrl,
       JSON.stringify({
         [userIdentity]: {
           email,
           password,
         },
-      }),
-    );
+      }));
 
     return {
       jwt: response.data?.jwt || "",
       user: response.data?.[userIdentity] || undefined,
-      responseStatus: { code: <StatusCode["code"]>response.status } /* TODO: define return types/methods for axios */,
+      responseStatus: { code: <ResponseStatus["code"]>response.status } /* TODO: define return types/methods for axios */,
     };
   /* TODO: add type for error below */
   } catch (error: any) {
@@ -31,7 +29,7 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
     return {
       jwt: "",
       user: undefined,
-      responseStatus: { code: <StatusCode["code"]>responseStatus },
+      responseStatus: { code: <ResponseStatus["code"]>responseStatus },
     };
   }
 };

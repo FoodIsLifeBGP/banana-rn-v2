@@ -1,4 +1,6 @@
-import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import {
+  ImageStyle, TextStyle, ViewStyle,
+} from "react-native";
 import * as colors from "@util/constants/colors";
 
 // The styles for MakeClaimScreen and ClaimDetails are nearly identical so we store them here for reuse

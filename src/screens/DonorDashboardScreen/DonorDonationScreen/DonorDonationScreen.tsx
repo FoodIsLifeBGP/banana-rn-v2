@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { Switch } from "react-native-paper";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import {
   FormTextInput,
   InputLabel,

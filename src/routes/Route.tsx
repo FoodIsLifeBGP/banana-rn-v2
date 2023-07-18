@@ -154,8 +154,7 @@ const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
   Object.entries(donorOrClientDrawer()).forEach((ting) =>
-    console.log("ting", ting),
-  );
+    console.log("ting", ting));
   // TODO: figure out why Drawer.Screen is erroring and remove the above console.log
   return (
     <Drawer.Navigator>

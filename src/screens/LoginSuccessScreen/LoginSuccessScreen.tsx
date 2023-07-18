@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import InfoScreen from "../InfoScreen";
 import AccountSuspendedScreen from "../AccountSuspendedScreen";
 import ApplicationPendingScreen from "../ApplicationPendingScreen";

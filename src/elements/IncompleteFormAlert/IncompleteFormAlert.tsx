@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import { Modal, TextButton } from "@elements";
 import { Alert } from "@state/index.types";
 import { useScheme } from "@util/colorSchemes";
@@ -38,7 +38,7 @@ export default function IncompleteFormAlert({
   };
 
   const handleDismiss = () => {
-    if (alertObj.dismissable) {
+    if (alertObj.dismissible) {
       clearAlert();
     }
   };

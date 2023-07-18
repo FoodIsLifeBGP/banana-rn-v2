@@ -23,8 +23,7 @@ export default async ({
   state,
   zip,
 }: RegisterProps) => {
-  const response = await railsAxios().post(
-    "/donors/create",
+  const response = await railsAxios().post("/donors/create",
     JSON.stringify({
       donor: {
         email,
@@ -36,8 +35,7 @@ export default async ({
         address_zip: zip,
         address_state: state,
       },
-    }),
-  );
+    }));
 
   response.data
     ? await AsyncStorage.setItem("jwt", response.data.jwt)

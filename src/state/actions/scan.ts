@@ -1,12 +1,21 @@
 import railsAxios from "@util/railsAxios";
 
-export const scan = async (_store, qrCode) => {
+export const scan = async (jwt: string, qrCode: string) => {
   try {
-    const { jwt } = _store.state;
-    const response = await railsAxios(jwt).post("/donors/scan", { qr_code: qrCode });
-    return response.status;
-  } catch (error) {
-    console.log(error);
-    return 500;
+    const { request: { status, message } } = await railsAxios(jwt).post("/donors/scan", { qr_code: qrCode });
+
+    return {
+      responseStatus: {
+        code: status,
+        message: message,
+      },
+    };
+  } catch (error: any) {
+    return {
+      responseStatus: {
+        code: error.response.status,
+        message: error.response.message,
+      },
+    };
   }
 };

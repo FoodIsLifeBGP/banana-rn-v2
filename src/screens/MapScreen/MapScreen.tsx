@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import { BananaMap, NavBar } from "@elements";
 
 function MapScreen(props) {

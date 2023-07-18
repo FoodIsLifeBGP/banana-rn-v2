@@ -17,7 +17,7 @@ import {
   SpacerInline,
 } from "@elements";
 import { IconName } from "@elements/Icon";
-import useGlobal from "@state";
+import useGlobalStore from "@state";
 import styles, { ListItem } from "./ContactScreen.styles";
 
 const contactList: Array<{

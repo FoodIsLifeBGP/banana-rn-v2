@@ -47,9 +47,7 @@ const IMAGE_OPTIONS: ImagePicker.ImagePickerOptions = {
  * @param imageSource - The method of sourcing the image.
  * @returns The user-selected image result, if successful.
  */
-export async function sourceImage(
-  imageSource: Permissions.PermissionType,
-): Promise<ImagePicker.ImagePickerResult | null> {
+export async function sourceImage(imageSource: Permissions.PermissionType): Promise<ImagePicker.ImagePickerResult | null> {
   let pickedImage = {} as ImagePicker.ImagePickerResult; // The user selected image.
 
   /**
@@ -62,9 +60,7 @@ export async function sourceImage(
     permissions,
     launchImageSourcingMethod,
   }: ImageSourcingConfig): Promise<ImagePicker.ImagePickerResult> => {
-    const permissionResponses = await Permissions.askAsync(
-      ...permissions,
-    );
+    const permissionResponses = await Permissions.askAsync(...permissions);
 
     // Any unsuccessful permissions status will propogate to this 'status' property.
     if (permissionResponses.status !== "granted") {
@@ -75,9 +71,7 @@ export async function sourceImage(
   };
 
   try {
-    pickedImage = await getImageFromSource(
-      IMAGE_SOURCE_METHODS[imageSource],
-    );
+    pickedImage = await getImageFromSource(IMAGE_SOURCE_METHODS[imageSource]);
   } catch (err: any) {
     console.log(err.msg);
     // TODO: display alert with error message

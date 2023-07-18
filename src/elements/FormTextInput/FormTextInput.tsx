@@ -128,21 +128,19 @@ function PhoneNumberInput(props: BasicTextInputProps) {
  * Input component for a form that includes a standardized label and text input.
  * Can render a field with an optional visible password if 'type' password is given.
  */
-function FormTextInput(
-  {
-    type = "default",
-    label,
-    value,
-    setValue,
-    error = false,
-    errorMessage,
-    style,
-    inputStyle,
-    dropdownData,
-    ...props
-  }: FormTextInputProps,
-  ref: Ref<TextInput>,
-) {
+function FormTextInput({
+  type = "default",
+  label,
+  value,
+  setValue,
+  error = false,
+  errorMessage,
+  style,
+  inputStyle,
+  dropdownData,
+  ...props
+}: FormTextInputProps,
+ref: Ref<TextInput>) {
   const parseDigits = (string) =>
     (string.match(/\d+/g) || []).join("");
   const numberFormat = (str: string | undefined) => {

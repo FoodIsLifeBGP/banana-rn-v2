@@ -1,6 +1,4 @@
-export const categoryImage = (
-  donationCategory: string,
-): ImageData => {
+export const categoryImage = (donationCategory: string): ImageData => {
   switch (donationCategory) {
   case "Produce":
     return require("@assets/images/Stock-image-produce.png");

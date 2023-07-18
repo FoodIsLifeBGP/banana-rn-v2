@@ -3,9 +3,11 @@ import { create } from "zustand";
 import {
   Alert,
   InitialState,
-  StatusCode,
+  ResponseStatus,
   Claim,
   Donation,
+  UserIdentity,
+  ClientOrDonorRegisterProps,
 } from "./index.types";
 import * as actions from "./actions";
 
@@ -16,7 +18,6 @@ const {
 export const initialState: InitialState = {
   jwt: undefined,
   user: undefined,
-  claim: undefined,
   email: undefined,
   alert: undefined,
   password: undefined,
@@ -24,16 +25,17 @@ export const initialState: InitialState = {
   createUrl: CREATE_URL,
   apiBaseUrl: API_BASE_URL,
   userIdentity: USER_IDENTITY,
-  donationsOrClaims: <Claim[] | Donation[]>[],
+  donationsOrClaims: [],
+  currentClaim: undefined,
   responseStatus: undefined,
 };
 
 export interface GlobalState extends InitialState {
   updateAlert: (alert: Alert) => void;
-  setResponseStatus: (statusCode: StatusCode) => void;
+  setResponseStatus: (statusCode: ResponseStatus) => void;
   clearEmailAndPassword: () => void;
   clearAlert: () => void;
-  logIn: (state: GlobalState) => Promise<void>;
+  logIn: (state: GlobalState) => void;
   logOut: () => void;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
@@ -43,6 +45,8 @@ export interface GlobalState extends InitialState {
   getClaimedDonationsForClient: (state: GlobalState) => void;
   getClaimHistoryForClient: (state: GlobalState) => void;
   getDonationHistory: (state: GlobalState) => void;
+  register: (userIdentity: UserIdentity, createUrl: string, userToRegister: ClientOrDonorRegisterProps ) => void;
+  scan: (jwt: string, qrCode: string) => void;
 }
 
 const useGlobalStore = create<GlobalState>((set) => ({
@@ -70,10 +74,14 @@ const useGlobalStore = create<GlobalState>((set) => ({
     const { responseStatus } = await actions.cancelDonation(state, donationId);
     set({ responseStatus });
   },
-  claimDonation: async (state, donationId, clientId)  => {
-    const { responseStatus, claim } = await actions.claimDonation(state, donationId, clientId);
+  claimDonation: async (
+    jwt, donationId, clientId,
+  )  => {
+    const { responseStatus, currentClaim } = await actions.claimDonation(
+      jwt, donationId, clientId,
+    );
     set({
-      claim,
+      currentClaim,
       responseStatus,
     });
   },
@@ -104,6 +112,43 @@ const useGlobalStore = create<GlobalState>((set) => ({
       donationHistory,
       responseStatus,
     });
+  },
+  register: async (
+    userIdentity, createUrl, userToRegister,
+  )  => {
+
+    if (userIdentity && createUrl) {
+      const { jwt, user, responseStatus } = await actions.register(
+        userIdentity, createUrl, userToRegister,
+      );
+
+      set({
+        jwt,
+        user,
+        responseStatus,
+      });
+    } else {
+      set({
+        responseStatus: {
+          code: 400,
+          message: "Client side error in `register()` method",
+        },
+      });
+    }
+  },
+  scan: async (jwt: string, qrCode: string)  => {
+
+    if (jwt && qrCode) {
+      const { responseStatus } = await actions.scan(jwt, qrCode);
+      set({ responseStatus });
+    } else {
+      set({
+        responseStatus: {
+          code: 400,
+          message: "Client side error in `scan()` method",
+        },
+      });
+    }
   },
 }));
 /*

@@ -7,9 +7,7 @@ export const getDonations = async (store) => {
   try {
     const response = await railsAxios(jwt).get(endpoint);
     const { data } = response;
-    const sortedData = data.sort(
-      (a, b) => a.created_at < b.created_at,
-    );
+    const sortedData = data.sort((a, b) => a.created_at < b.created_at);
     if (sortedData) {
       await store.setState({ donationsOrClaims: sortedData });
       return sortedData;
