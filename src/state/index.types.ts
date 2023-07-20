@@ -16,6 +16,7 @@ export interface SharedProps {
 export interface DonorState extends SharedProps {
   organization_name: string;
   business_license: string;
+  pickup_instructions: string;
 }
 
 export interface ClientState extends SharedProps {
@@ -57,13 +58,13 @@ export interface ClientRegisterProps {
 
 export type ClientOrDonorRegisterProps = ClientRegisterProps | DonorRegisterProps;
 
-enum ClaimStatus {
+export enum ClaimStatus {
   ACTIVE = "active",
   CLOSED = "closed",
   EXPIRED = "expired",
 }
 
-enum DonationStatus {
+export enum DonationStatus {
   ACTIVE = "active",
   CLAIMED = "claimed",
   CLOSED = "closed",
@@ -71,7 +72,7 @@ enum DonationStatus {
   EXPIRED = "expired",
 }
 
-enum DonationCategory {
+export enum DonationCategory {
   BREAD = "Bread",
   DAIRY = "Dairy",
   HOT_MEAL = "Hot Meal",
@@ -111,18 +112,19 @@ export interface Donation {
   claim: Claim;
 }
 
+export interface NewDonation {
+  itemName: string;
+  category: string;
+  totalAmount: string;
+  pickupAddress: string;
+  pickupInstructions: string;
+}
+
 /**
  * An alert to be displayed to the user.
  */
 export interface Alert {
-  /**
-   * Title of the alert.
-   */
   title: string;
-
-  /**
-   * Type of the alert.
-   */
   type:
     | "default"
     | "incomplete form"
@@ -131,9 +133,6 @@ export interface Alert {
     | "donation cancelled"
     | "donation published";
 
-  /**
-   * Message to the user.
-   */
   message: string;
 
   /**

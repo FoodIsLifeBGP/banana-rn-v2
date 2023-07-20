@@ -83,7 +83,7 @@ function DonationsDetailScreen(props) {
         onPress={() =>
           updateAlert({
             type: "cancel donation",
-            dismissable: false,
+            dismissible: false,
             confirmFn: () => handleCancel(),
           })
         }

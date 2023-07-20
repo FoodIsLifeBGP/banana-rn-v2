@@ -6,16 +6,19 @@ export const getDonationHistory = async (jwt: string, user: User) => {
 
   try {
     const response = await railsAxios(jwt).get(endpoint);
-    const { data, request } = response;
+    const { data, status, statusText } = response;
 
     return {
-      donationHistory: data,
-      responseStatus: request.status,
+      donationHistory: data.closed_donations_in_db,
+      responseStatus: {
+        code: status,
+        message: statusText,
+      },
     };
   } catch (error: any) {
     return {
       responseStatus: {
-        code: status as StatusCode,,
+        code: error.response.status,
         message: error.response.statusText,
       },
     };

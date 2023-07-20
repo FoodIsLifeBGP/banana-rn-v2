@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
   useIsFocused,
-  useNavigation,
   useRoute,
 } from "@react-navigation/native";
 import {
@@ -20,9 +19,8 @@ import { ButtonStyle } from "@elements/Button";
 import claimStyles from "@util/claimStyles";
 import styles from "./MakeClaimScreen.styles";
 
-function MakeClaimScreen() {
+function MakeClaimScreen(props) {
   const isFocused = useIsFocused();
-  const { goBack } = useNavigation();
 
   const user = useGlobalStore((state) => state.user);
   const jwt = useGlobalStore((state) => state.jwt);
@@ -58,7 +56,7 @@ function MakeClaimScreen() {
   };
 
   const handleCancel = () => {
-    goBack();
+    props.navigation.goBack();
   };
 
   const fetchTravelTimes = async () => {
@@ -87,7 +85,7 @@ function MakeClaimScreen() {
             style={claimStyles.header}
           >
             <Text
-              onPress={() => goBack()}
+              onPress={() => props.navigation.goBack()}
               style={[typography.h2, claimStyles.closeLnk]}
             >
               X

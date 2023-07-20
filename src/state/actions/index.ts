@@ -11,7 +11,7 @@ export interface Actions {
   getLocation: () => Promise<{ latitude: number; longitude: number }>;
   logIn: () => Promise<ResponseStatus>;
   logOut: () => Promise<void>;
-  postDonation: () => Promise<ResponseStatus>;
+  createDonation: () => Promise<ResponseStatus>;
   registerUser: () => Promise<ResponseStatus>;
   scanQrCode: () => Promise<ResponseStatus>;
   requestResetToken: () => Promise<ResponseStatus>;
@@ -28,7 +28,7 @@ export { getLocation } from "./getLocation";
 export {
   logIn, logOut, setEmail, setPassword,
 } from "./auth";
-export { postDonation } from "./postDonation";
+export { createDonation } from "./createDonation";
 export { cancelDonation } from "./cancelDonation";
 export { claimDonation } from "./claimDonation";
 export { getTravelTimes } from "./hereApi";

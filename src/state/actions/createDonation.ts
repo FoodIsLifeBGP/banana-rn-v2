@@ -1,8 +1,7 @@
 import railsAxios from "@util/railsAxios";
-import { User } from "@state/index.types";
-import { NewDonation } from "@screens/DashboardScreen/DonationScreen/DonationScreen.type";
+import { User, NewDonation } from "@state/index.types";
 
-const postDonation = async (
+const createDonation = async (
   jwt: string, user: User, donation: NewDonation,
 ) => {
   const endpoint = "/donations/create";
@@ -34,4 +33,4 @@ const postDonation = async (
   }
 };
 
-export { postDonation };
+export { createDonation };

@@ -22,10 +22,10 @@ export interface Donation {
   showDonation: (donation) => void;
 }
 
-export interface NewDonation {
-  itemName: string;
-  category: string;
-  totalAmount: string;
-  pickupAddress: string;
-  pickupInstructions: string;
-}
+// export interface NewDonation {
+//   itemName: string;
+//   category: string;
+//   totalAmount: string;
+//   pickupAddress: string;
+//   pickupInstructions: string;
+// }

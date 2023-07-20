@@ -22,7 +22,7 @@ import styles from "./DonorDonationScreen.styles";
 export default function DonorDonationScreen(props) {
   const [state, actions] = useGlobal() as any;
   const { user, jwt } = state;
-  const { postDonation, logOut, getDonationsOrClaims } = actions;
+  const { createDonation, logOut, getDonationsOrClaims } = actions;
 
   const { donation, edit, donationId } = props.route;
 
@@ -95,7 +95,7 @@ export default function DonorDonationScreen(props) {
     if (!donationId) {
       delete donationProps.donationId;
     }
-    const statusCode = await postDonation(donationProps);
+    const statusCode = await createDonation(donationProps);
     switch (statusCode) {
     case 201:
       Alert.alert("Donation created!");

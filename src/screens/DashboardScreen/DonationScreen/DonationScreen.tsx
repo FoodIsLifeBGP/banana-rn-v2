@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
-  TextInput,
   View,
 } from "react-native";
 import useGlobalStore from "@state";
@@ -16,65 +15,78 @@ import {
   SpacerInline,
 } from "@elements";
 import validate from "validate.js";
-import { NewDonation } from "@screens/DashboardScreen/DonationScreen/DonationScreen.type";
+import {
+  NewDonation, DonationCategory, DonorState,
+} from "@state/index.types";
 import donationConstraints from "@util/validators/donation";
 import { categoryImage } from "@util/donationCategory";
 import styles from "./DonationScreen.styles";
 
 export default function DonationScreen(props) {
-  const [state, actions] = useGlobal() as any;
-  const { updateAlert } = actions;
-  const { user } = state;
-  const foodCategories: Array<string> = [
-    "Bread",
-    "Dairy",
-    "Hot Meal",
-    "Produce",
-    "Protein",
-    "Others",
-  ];
+  const jwt = useGlobalStore((state) => state.jwt);
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
+  const donor = useGlobalStore((state) => state.user as DonorState); /* NOTE: this screen/logic only takes **Donors** */
+
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const createDonation = useGlobalStore((state) => state.createDonation);
+
+  useEffect(() => {
+    if (responseStatus) {
+      const { code } = responseStatus;
+
+      if (code >= 200 && code < 300) {
+        updateAlert({
+          title: "Success!",
+          message: "Your donation has been created.",
+          type: "donation published",
+          dismissible: true,
+        });
+      }
+    }
+  }, [responseStatus.code]);
+
   const emptyDonation: NewDonation = {
-    pickupAddress: `${user.address_street} ${user.address_city}, ${user.address_state} ${user.address_zip}`,
-    category: foodCategories[0],
+    pickupAddress: donor ? `${donor.address_street} ${donor.address_city}, ${donor.address_state} ${donor.address_zip}` : "",
+    category: DonationCategory.BREAD,
     itemName: "",
-    pickupInstructions: user.pickup_instructions,
+    pickupInstructions: donor ? donor.pickup_instructions : "",
     totalAmount: "",
   };
 
-  const [newDonation, setNewDonation] =
-    useState<NewDonation>(emptyDonation);
-  const [validateError, setValidateError] = useState({} as any);
-  const { postDonation } = actions;
+  const [newDonation, setNewDonation] = useState<NewDonation>(emptyDonation);
+  const [validateError, setValidateError] = useState({} as any); /* TODO: add proper type */
 
   const hasUnsavedChanges = Boolean(newDonation.itemName ||
       newDonation.totalAmount ||
-      newDonation.pickupInstructions !== user.pickup_instructions);
+      newDonation.pickupInstructions !== donor.pickup_instructions);
+
   const preventBack = () => {
+    /*TODO: I just filled this out with valid types-- not sure if intent/copy is correct, please double check */
     updateAlert({
+      title: "Incomplete Form",
+      message: "Please fill out the rest of the form.",
       type: "incomplete form",
-      dismissable: false,
+      dismissible: false,
       confirmFn: () => props.navigation.goBack(),
     });
   };
+
   const validateInputs = async () => {
-    const validateResults = validate(newDonation,
-      donationConstraints);
-    if (validateResults) {
-      setValidateError(validateResults);
+    const invalidInputs = validate(newDonation, donationConstraints);
+
+    if (invalidInputs) {
+      setValidateError(invalidInputs);
     } else {
       setValidateError({});
-      const result = await postDonation(newDonation);
-      if (result === 201) {
-        updateAlert({
-          type: "donation published",
-          dismissable: false,
-        });
-        setNewDonation(emptyDonation);
-        props.navigation.navigate("DonorDashboardScreen");
-      } else {
-        // TODO: communicate failures better
-        console.log("There was a problem creating the donation");
+
+      if (jwt && donor) {
+        createDonation(
+          jwt, donor, newDonation,
+        );
       }
+
+      setNewDonation(emptyDonation);
+      props.navigation.navigate("DonorDashboardScreen");
     }
   };
   return (
@@ -86,7 +98,7 @@ export default function DonationScreen(props) {
     >
       <NavBar
         showBackButton={true}
-        backButtonFn={hasUnsavedChanges ? preventBack : undefined}
+        goBack={hasUnsavedChanges ? preventBack : props.navigation.goBack()}
       />
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.imageInputContainer}>
@@ -114,14 +126,14 @@ export default function DonationScreen(props) {
 
         <FormTextInput
           label="Food Category"
-          dropdownData={foodCategories}
+          dropdownData={Object.values(DonationCategory)}
           setValue={(s) =>
             setNewDonation({
               ...newDonation,
               category: s,
             })
           }
-          defaultValue={foodCategories[0]}
+          defaultValue={DonationCategory.BREAD}
           value={newDonation.category}
           type="dropdown"
           error={!!validateError.category}

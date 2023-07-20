@@ -1,6 +1,5 @@
 import railsAxios from "@util/railsAxios";
 import { GlobalState, initialState } from "@state/index";
-import { StatusCode } from "@state/index.types";
 // import { AxiosError } from "axios";
 
 export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>> => {
@@ -21,7 +20,7 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
       jwt: data?.jwt || "",
       user: data?.[userIdentity] || undefined,
       responseStatus: {
-        code: status as StatusCode,
+        code: status,
         message: statusText,
       } /* TODO: define return types/methods for axios */,
     };
@@ -31,7 +30,7 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
       jwt: "",
       user: undefined,
       responseStatus: {
-        code: error.response.status as StatusCode,
+        code: error.response.status,
         message: error.response.statusText,
       },
     };

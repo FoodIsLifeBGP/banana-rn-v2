@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import {
   ScrollView, Text, View,
 } from "react-native";
@@ -13,7 +13,6 @@ import styles from "./DonorDashboardScreen.styles";
 
 function DonorDashboardScreen(props) {
   const isFocused = useIsFocused();
-  const { goBack } = useNavigation();
   const [loaded, setLoaded] = useState(false);
 
   const getActiveDonationsFromDonor = useGlobalStore((state) => state.getActiveDonationsFromDonor);
@@ -40,7 +39,7 @@ function DonorDashboardScreen(props) {
 
   return (
     <View style={styles.outerContainer}>
-      <NavBar goBack={goBack} showBackButton={false} />
+      <NavBar goBack={props.navigation.goBack()} showBackButton={false} />
 
       <View style={styles.contentContainer}>
         <Title text="Donations" />

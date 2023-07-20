@@ -1,23 +1,26 @@
 import railsAxios from "@util/railsAxios";
-import { StatusCode, User } from "@state/index.types";
+import { User } from "@state/index.types";
 
 export const getClaimHistoryForClient = async (jwt: string, user: User) => {
   const endpoint = `/clients/${user.id}/claims_history`;
 
   try {
-    const { data, request } = await railsAxios(jwt).get(endpoint);
-    const sortedData = data.sort((a, b) => a.created_at < b.created_at);
+    const { data, status, statusText } = await railsAxios(jwt).get(endpoint);
+    const sortedClaims = data.closed_claims.sort((a, b) => a.created_at < b.created_at);
 
     return {
-      claimHistory: sortedData,
-      responseStatus: request.status,
+      claimHistory: sortedClaims,
+      responseStatus: {
+        code: status,
+        message: statusText,
+      },
     };
   } catch (error: any) {
     console.log(error);
     return {
       claimHistory: [],
       responseStatus: {
-        code: error.response.status as StatusCode,
+        code: error.response.status,
         message: error.response.statusText,
       },
     };

@@ -8,6 +8,7 @@ import {
   ClientOrDonorRegisterProps,
   User,
   Donation,
+  NewDonation,
 } from "./index.types";
 import * as actions from "./actions";
 
@@ -50,6 +51,7 @@ export interface GlobalState extends InitialState {
   setEmail: (email: string) => void;
   setClaimedDonation: (claimedDonation?: Donation) => void;
   setPassword: (password: string) => void;
+  createDonation: (jwt: string, user: User, donation: NewDonation,) => void;
   cancelDonation: (jwt: string, donationId: number) => void;
   claimDonation: (jwt: string, donationId: number, clientId: number) => void;
   getActiveDonationsForClient: (jwt: string, user: User) => void;
@@ -90,6 +92,16 @@ const useGlobalStore = create<GlobalState>((set) => ({
   }),
   cancelDonation: async (jwt, donationId) => {
     const { responseStatus } = await actions.cancelDonation(jwt, donationId);
+    set({ responseStatus });
+  },
+  createDonation: async (
+    jwt, user, donation,
+  ) => {
+
+    const { responseStatus } = await actions.createDonation(
+      jwt, user, donation,
+    );
+
     set({ responseStatus });
   },
   claimDonation: async (
