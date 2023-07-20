@@ -71,7 +71,7 @@ module.exports = {
     "@typescript-eslint/interface-name-prefix": ["off"],
     "@typescript-eslint/no-empty-function": ["warn"],
     "@typescript-eslint/ban-types": ["off"],
-    "@typescript-eslint/no-explicit-any": ["off"], /* TODO: remove this!!!! (once all major broken things are fixed) */
+    "@typescript-eslint/no-explicit-any": ["off"], /* TODO: remove this once all major broken things are fixed */
     "@typescript-eslint/type-annotation-spacing": ["warn"],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-var-requires": ["off"],
@@ -97,7 +97,7 @@ module.exports = {
         "minProperties": 3,
       },
     }],
-    "no-console": ["warn"],
+    "no-console": ["off"], /* TODO: make this a warning once all major broken things are fixed */
     "no-debugger": ["warn"],
     "indent": ["warn", 2],
   },

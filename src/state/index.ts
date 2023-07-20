@@ -26,11 +26,17 @@ export const initialState: InitialState = {
   apiBaseUrl: API_BASE_URL,
   userIdentity: USER_IDENTITY,
   activeDonationsForClient: [],
+  activeDonationsFromDonor: [],
   currentClaim: undefined,
   claimedDonation: undefined,
   responseStatus: {
     code: 418,
     message: "No API calls made yet.",
+  },
+  travelTimes: {
+    pedestrian: "calculating...",
+    publicTransport: "calculating...",
+    bicycle: "calculating...",
   },
 };
 
@@ -50,6 +56,13 @@ export interface GlobalState extends InitialState {
   getClaimedDonationsForClient: (jwt: string, user: User) => void;
   getClaimHistoryForClient: (jwt: string, user: User) => void;
   getDonationHistory: (jwt: string, user: User) => void;
+  getActiveDonationsFromDonor: (jwt: string, user: User) => void;
+  getTravelTimes: (
+    jwt: string,
+    donorId: number,
+    clientLat?: number,
+    clientLong?: number,
+  ) => void,
   registerUser: (userIdentity: UserIdentity, createUrl: string, userToRegister: ClientOrDonorRegisterProps ) => void;
   scanQrCode: (jwt: string, qrCode: string) => void;
 }
@@ -111,12 +124,36 @@ const useGlobalStore = create<GlobalState>((set) => ({
       responseStatus,
     });
   },
+  getActiveDonationsFromDonor: async (jwt, user)  => {
+    const { activeDonationsFromDonor, responseStatus } = await actions.getActiveDonationsFromDonor(jwt, user);
+    set({
+      activeDonationsFromDonor,
+      responseStatus,
+    });
+  },
   getDonationHistory: async (jwt, user)  => {
     const { donationHistory, responseStatus } = await actions.getDonationHistory(jwt, user);
     set({
       donationHistory,
       responseStatus,
     });
+  },
+  getTravelTimes: async (
+    jwt: string,
+    donorId: number,
+    clientLat?: number,
+    clientLong?: number,
+  ) => {
+    if (clientLat && clientLong) {
+      const { travelTimes, responseStatus } = await actions.getTravelTimes(
+        jwt, donorId, clientLat, clientLong,
+      );
+
+      set({
+        travelTimes,
+        responseStatus,
+      });
+    }
   },
   registerUser: async (
     userIdentity, createUrl, userToRegister,
@@ -131,30 +168,27 @@ const useGlobalStore = create<GlobalState>((set) => ({
         user,
         responseStatus,
       });
-    } else {
-      set({
-        responseStatus: {
-          code: 400,
-          message: "Client side error in `register()` method",
-        },
-      });
     }
   },
   scanQrCode: async (jwt, qrCode)  => {
     if (qrCode) {
       const { responseStatus } = await actions.scanQrCode(jwt, qrCode);
       set({ responseStatus });
-    } else {
-      set({
-        responseStatus: {
-          code: 400,
-          message: "Client side error in `scanQrCode()` method",
-        },
-      });
     }
   },
   setClaimedDonation: (claimedDonation)  => {
     set({ claimedDonation });
+  },
+  getLocation: async () => {
+    const { coords } = await actions.getLocation();
+
+    if (coords) {
+      set((state) => ({
+        ...state,
+        // eslint-disable-next-line object-property-newline
+        user: state.user ? { ...state.user, coords } : state.user,
+      }));
+    }
   },
 }));
 /*

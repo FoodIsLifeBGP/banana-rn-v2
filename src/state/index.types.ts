@@ -94,6 +94,7 @@ export interface Claim {
 }
 
 export interface Donation {
+  id: string; /* TODO: make sure this is getting sent from backend */
   food_name: string;
   category: DonationCategory;
   measurement: string;
@@ -150,7 +151,7 @@ export type StatusCode = 200 | 201 | 202 | 400 | 403 | 401 | 404 | 409 | 418 | 5
 
 export interface ResponseStatus {
   message?: string;
-  code: number; /* StatusCode; TODO: replace this type in the future? */
+  code: number; /* StatusCode; TODO: try to replace `number` w/ `StatusCode` in the future */
 }
 
 export type UserIdentity = "donor" | "client";
@@ -169,11 +170,17 @@ export interface InitialState {
   claimedDonationsForClient?: Donation[];
   claimHistory?: Claim[] /* TODO: double check this type */;
   donationHistory?: Donation[] /* TODO: double check this type */;
+  activeDonationsFromDonor?: Donation[] /* TODO: double check this type */;
   email?: string;
   password?: string;
   responseStatus: ResponseStatus;
   currentClaim?: Claim;
   claimedDonation?: Donation;
+  travelTimes: { /* TODO: double check this type.. */
+    pedestrian: string;
+    publicTransport: string;
+    bicycle: string;
+};
 }
 
 export interface Location {

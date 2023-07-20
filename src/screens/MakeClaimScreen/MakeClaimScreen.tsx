@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   useIsFocused,
   useNavigation,
@@ -22,24 +22,18 @@ import styles from "./MakeClaimScreen.styles";
 
 function MakeClaimScreen() {
   const isFocused = useIsFocused();
-  const { navigate, goBack } = useNavigation();
-  const [globalState, globalActions] = useGlobal() as any;
-  const { claimDonation, getTravelTimes } = globalActions;
-  const { user } = globalState;
-  const route = useRoute();
-  const { donation }: any = route.params;
-  const { donor } = donation;
-  const pendingTravelTimes = {
-    pedestrian: "calculating..",
-    publicTransport: "calculating..",
-    bicycle: "calculating..",
-  };
-  const unavailableTravelTimes = {
-    pedestrian: "not available",
-    publicTransport: "not available",
-    bicycle: "not available",
-  };
-  const [travelTimes, setTravelTimes] = useState(pendingTravelTimes);
+  const { goBack } = useNavigation();
+
+  const user = useGlobalStore((state) => state.user);
+  const jwt = useGlobalStore((state) => state.jwt);
+  const travelTimes = useGlobalStore((state) => state.travelTimes);
+
+  const claimDonation = useGlobalStore((state) => state.claimDonation);
+  const getTravelTimes = useGlobalStore((state) => state.getTravelTimes);
+
+  const { params: { donation } }: any = useRoute();
+
+  const donor = donation.donor;
 
   const cancelBtnStyle: ButtonStyle = {
     default: {
@@ -56,11 +50,10 @@ function MakeClaimScreen() {
   };
 
   const handleClaim = async () => {
-    const response = await claimDonation(donation.id, user.id);
-    if (response.status !== 202) {
-      console.log("Handle this error better");
-    } else {
-      navigate();
+    if (jwt && user) {
+      claimDonation(
+        jwt, donation.id, user.id,
+      );
     }
   };
 
@@ -69,15 +62,13 @@ function MakeClaimScreen() {
   };
 
   const fetchTravelTimes = async () => {
-    const result = await getTravelTimes(
-      donation.donor_id,
-      user.coords.latitude,
-      user.coords.longitude,
-    );
-    if (result.status === 200) {
-      setTravelTimes(result.times);
-    } else {
-      setTravelTimes(unavailableTravelTimes);
+    if (jwt && user && user.coords) {
+      getTravelTimes(
+        jwt,
+        donation.donor_id,
+        user.coords.latitude,
+        user.coords.longitude,
+      );
     }
   };
 

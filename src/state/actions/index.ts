@@ -5,7 +5,7 @@ import {
 export interface Actions {
   getActiveDonationsForClient: () => Promise<Donation[]>;
   getClaimedDonationsForClient: () => Promise<Donation[] | Claim[]>;
-  getDonations: () => Promise<Donation[]>;
+  getActiveDonationsFromDonor: () => Promise<Donation[]>;
   getClaimHistoryForClient: () => Promise<Claim[]>;
   getDonationHistory: () => Promise<Donation[]>;
   getLocation: () => Promise<{ latitude: number; longitude: number }>;
@@ -22,7 +22,7 @@ export interface Actions {
 export { getActiveDonationsForClient } from "./getActiveDonationsForClient";
 export { getClaimedDonationsForClient } from "./getClaimedDonationsForClient";
 export { getClaimHistoryForClient } from "./getClaimHistoryForClient";
-export { getDonations } from "./getDonations";
+export { getActiveDonationsFromDonor } from "./getActiveDonationsFromDonor";
 export { getDonationHistory } from "./getDonationHistory";
 export { getLocation } from "./getLocation";
 export {

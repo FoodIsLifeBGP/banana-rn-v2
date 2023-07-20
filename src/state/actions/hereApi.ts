@@ -1,21 +1,35 @@
 import railsAxios from "@util/railsAxios";
 
 const getTravelTimes = async (
-  _store,
+  jwt: string,
   donorId: number,
   clientLat: number,
   clientLong: number,
 ) => {
   const endpoint = `/clients/${donorId}/travel_times?client_lat=${clientLat}&client_long=${clientLong}`;
-  const { jwt } = _store.state;
+
   try {
     const response = await railsAxios(jwt).get(endpoint);
+
     return {
-      status: response.request.status,
-      times: response.data,
+      responseStatus: {
+        code: response.status,
+        message: response.statusText,
+      },
+      travelTimes: response.data.times,
     };
-  } catch (error) {
-    return 500;
+  } catch (error: any) {
+    return {
+      responseStatus: {
+        code: error.response.status,
+        message: error.response.statusText,
+        travelTimes: {
+          pedestrian: "not available",
+          publicTransport: "not available",
+          bicycle: "not available",
+        },
+      },
+    };
   }
 };
 
