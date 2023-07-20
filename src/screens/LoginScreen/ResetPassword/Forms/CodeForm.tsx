@@ -4,6 +4,7 @@ import {
   FormTextInput, LinkButton, SpacerInline,
 } from "@elements";
 import useGlobalStore from "@state";
+import { submitResetToken } from "@state/actions";
 import styles from "../ResetPassword.styles";
 
 interface CodeFormProps {
@@ -20,11 +21,11 @@ const CodeForm: FunctionComponent<CodeFormProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState("");
   const [error, setError] = useState("");
-  const [, actions] = useGlobal() as any;
-  const { submitResetToken } = actions;
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
 
   const submitTokenProps = {
-    input: formData,
+    formInput: formData,
+    userIdentity,
     setIsSubmitting,
     onComplete,
     setError,

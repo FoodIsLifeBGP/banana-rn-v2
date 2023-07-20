@@ -1,6 +1,7 @@
 import railsAxios from "@util/railsAxios";
 import { GlobalState, initialState } from "@state/index";
-import { ResponseStatus } from "@state/index.types";
+import { StatusCode } from "@state/index.types";
+// import { AxiosError } from "axios";
 
 export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>> => {
   const {
@@ -8,7 +9,7 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
   } = state;
 
   try {
-    const response = await railsAxios().post(loginUrl,
+    const { data, status, statusText } = await railsAxios().post(loginUrl,
       JSON.stringify({
         [userIdentity]: {
           email,
@@ -17,19 +18,22 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
       }));
 
     return {
-      jwt: response.data?.jwt || "",
-      user: response.data?.[userIdentity] || undefined,
-      responseStatus: { code: <ResponseStatus["code"]>response.status } /* TODO: define return types/methods for axios */,
+      jwt: data?.jwt || "",
+      user: data?.[userIdentity] || undefined,
+      responseStatus: {
+        code: status as StatusCode,
+        message: statusText,
+      } /* TODO: define return types/methods for axios */,
     };
-  /* TODO: add type for error below */
+  /* TODO: add type for error below maybe AxiosError<any> */
   } catch (error: any) {
-    const e = error.toString().toLowerCase().split(" status code ");
-    const responseStatus =
-      e.length > 1 ? parseInt(e.slice(-1), 10) : 418;
     return {
       jwt: "",
       user: undefined,
-      responseStatus: { code: <ResponseStatus["code"]>responseStatus },
+      responseStatus: {
+        code: error.response.status as StatusCode,
+        message: error.response.statusText,
+      },
     };
   }
 };

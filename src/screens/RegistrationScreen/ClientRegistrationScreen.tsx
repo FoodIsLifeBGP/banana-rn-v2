@@ -29,7 +29,7 @@ export default function ClientRegistrationScreen({
   goBack,
 }) {
   const updateAlert = useGlobalStore((state) => state.updateAlert);
-  const register = useGlobalStore((state) => state.register);
+  const registerUser = useGlobalStore((state) => state.registerUser);
   const responseStatus = useGlobalStore((state) => state.responseStatus);
 
   const userIdentity = useGlobalStore((state) => state.userIdentity);
@@ -53,7 +53,7 @@ export default function ClientRegistrationScreen({
     if (validateResults) {
       setValidateError(validateResults);
     } else {
-      register(
+      registerUser(
         userIdentity,
         createUrl,
         newClient,

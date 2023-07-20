@@ -2,28 +2,26 @@ import railsAxios from "@util/railsAxios";
 
 interface ResetPasswordPropsBase {
   onComplete: () => void;
-  input: string;
+  formInput: string;
+  userIdentity: string;
   setIsSubmitting: (value: boolean) => void;
   setError: (value: string) => void;
 }
 
 export type RequestResetTokenProps = ResetPasswordPropsBase;
 
-export const requestResetToken = async (store,
-  {
-    onComplete,
-    input,
-    setIsSubmitting,
-    setError,
-  }: RequestResetTokenProps) => {
-  const { userIdentity } = store.state;
+export const requestResetToken = async ({
+  onComplete, userIdentity, formInput, setIsSubmitting, setError,
+}: RequestResetTokenProps) => {
+
   const endpoint = `/password_resets/${userIdentity}/`;
-  const email = JSON.stringify({ email: input });
+  const email = JSON.stringify({ email: formInput });
+
   try {
     await railsAxios().post(endpoint, email);
     setIsSubmitting(false);
     onComplete();
-  } catch (e) {
+  } catch (e: any) {
     setIsSubmitting(false);
     setError(e.response
       ? e.response.data.message
@@ -36,22 +34,22 @@ export interface SubmitResetTokenProps
   setToken: (value: string) => void;
 }
 
-export const submitResetToken = async (store,
-  {
-    onComplete,
-    input,
-    setIsSubmitting,
-    setError,
-    setToken,
-  }: SubmitResetTokenProps) => {
-  const { userIdentity } = store.state;
-  const endpoint = `/password_resets/${userIdentity}/${input}/`;
+export const submitResetToken = async ({
+  onComplete,
+  formInput,
+  userIdentity,
+  setIsSubmitting,
+  setError,
+  setToken,
+}: SubmitResetTokenProps) => {
+
+  const endpoint = `/password_resets/${userIdentity}/${formInput}/`;
   try {
     await railsAxios().get(endpoint);
     setIsSubmitting(false);
-    setToken(input);
+    setToken(formInput);
     onComplete();
-  } catch (e) {
+  } catch (e: any) {
     setIsSubmitting(false);
     setError(e.response
       ? e.response.data.message
@@ -64,22 +62,22 @@ export interface SubmitNewPasswordProps
   token: string;
 }
 
-export const submitNewPassword = async (store,
-  {
-    input,
-    token,
-    setIsSubmitting,
-    onComplete,
-    setError,
-  }: SubmitNewPasswordProps) => {
-  const { userIdentity } = store.state;
-  const password = JSON.stringify({ password: input });
+export const submitNewPassword = async ({
+  formInput,
+  userIdentity,
+  token,
+  setIsSubmitting,
+  onComplete,
+  setError,
+}: SubmitNewPasswordProps) => {
+
+  const password = JSON.stringify({ password: formInput });
   const endpoint = `/password_resets/${userIdentity}/${token}`;
   try {
     await railsAxios().patch(endpoint, password);
     setIsSubmitting(false);
     onComplete();
-  } catch (e) {
+  } catch (e: any) {
     setIsSubmitting(false);
     setError(e.response
       ? e.response.data.message

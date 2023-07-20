@@ -21,19 +21,22 @@ import useGlobalStore from "@state";
 import { getStateList } from "@util/constants/statesAbbr";
 import donorConstraints from "@util/validators/donorRegistration";
 import validate from "validate.js";
-import { DonorRegisterProps } from "@state/actions/register";
-import { Alert } from "@state/index.types";
+import { Alert, DonorRegisterProps } from "@state/index.types";
 import styles from "./RegistrationScreen.styles";
 
-// TODO: possibly add prop types for this function component?
-
+// TODO: add prop types for this function component
 export default function DonorRegistrationScreen({
   navigate,
   goBack,
 }) {
 
   const updateAlert = useGlobalStore((state) => state.updateAlert);
-  const register = useGlobalStore((state) => state.register);
+  const registerUser = useGlobalStore((state) => state.registerUser);
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
+  const createUrl = useGlobalStore((state) => state.createUrl);
+
+  // TODO: doublecheck and make sure this state is dynamic (i.e. we dont need to do useEffect & useState)
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
 
 
   const [newDonor, setNewDonor] = useState<DonorRegisterProps>({ state: "WA" } as DonorRegisterProps);
@@ -55,11 +58,14 @@ export default function DonorRegistrationScreen({
 
   const validateInputs = async () => {
     const validateResults = validate(newDonor, donorConstraints);
+
     if (validateResults) {
       setValidationErrors(validateResults);
     } else {
-      const statusCode = await register(newDonor);
-      switch (statusCode) {
+      registerUser(
+        userIdentity, createUrl, newDonor,
+      );
+      switch (responseStatus.code) {
       case 201: {
         navigate("LoginSuccessScreen");
         break;
@@ -67,7 +73,7 @@ export default function DonorRegistrationScreen({
       case 409: {
         updateAlert({
           title: "Error",
-          message: `This email address has already been used (Error code:${statusCode})`,
+          message: `This email address has already been used (Error code:${responseStatus.code})`,
           dismissible: true,
         } as Alert);
         break;
@@ -75,7 +81,7 @@ export default function DonorRegistrationScreen({
       case 500: {
         updateAlert({
           title: "Error",
-          message: `Network Issues (Error code:${statusCode})`,
+          message: `Network Issues (Error code:${responseStatus.code})`,
           dismissible: true,
         } as Alert);
         break;
@@ -83,7 +89,7 @@ export default function DonorRegistrationScreen({
       default: {
         updateAlert({
           title: "Error",
-          message: `Unknown Error (Error code:${statusCode})`,
+          message: `Unknown Error (Error code:${responseStatus.code})`,
           dismissible: true,
         } as Alert);
       }

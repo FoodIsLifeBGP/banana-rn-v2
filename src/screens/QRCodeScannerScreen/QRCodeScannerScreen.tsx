@@ -19,17 +19,16 @@ import BarCodeMask from "./BarCodeMask";
 import styles from "./QRCodeScannerScreen.styles";
 
 export default function QRCodeScannerScreen(props) {
-  const scan = useGlobalStore((state) => state.scan);
-  const donationsOrClaims = useGlobalStore((state) => state.donationsOrClaims);
+  const scanQrCode = useGlobalStore((state) => state.scanQrCode);
+  const jwt = useGlobalStore((state) => state.jwt);
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
+  const claimedDonationsForClient = useGlobalStore((state) => state.claimedDonationsForClient);
+  const claimedDonation = useGlobalStore((state) => state.claimedDonation);
+  const setClaimedDonation = useGlobalStore((state) => state.setClaimedDonation);
 
-  const [hasCameraPermission, setHasCameraPermission] = useState<
-    boolean | null
-  >(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
   const [modalOn, setModalOn] = useState(false);
-  const [claimedDonation, setClaimedDonation] = useState({
-    food_name: "",
-    claim: { client_name: "" },
-  });
+
   // TBD.
   // const [ scannerActive, setScannerActive ] = useState(true);
   const [icon, setIcon] = useState(() => categoryImage(""));
@@ -41,6 +40,7 @@ export default function QRCodeScannerScreen(props) {
     },
   };
 
+  //TODO: put this in a util function
   const getTime = () => {
     const date = new Date();
     const hh = date.getHours();
@@ -51,8 +51,8 @@ export default function QRCodeScannerScreen(props) {
     } ${AMPM} `;
   };
 
-  const getDate = () =>
-    new Date().toDateString().slice(4).split(" ").join("/");
+  //TODO: put this in a util function
+  const getDate = () => new Date().toDateString().slice(4).split(" ").join("/");
 
   const getPermissions = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -60,15 +60,16 @@ export default function QRCodeScannerScreen(props) {
   };
 
   const handleBarCodeScanned = async (barcode) => {
-    if (donationsOrClaims) {
-      const match = donationsOrClaims.filter((d) => d.status === "claimed" && d.claim.qr_code === barcode.data);
+    if (claimedDonationsForClient) {
+      const match = claimedDonationsForClient.filter((claimedDonation) =>
+        claimedDonation.status === "claimed" && claimedDonation.claim.qr_code === barcode.data);
 
-      if (match[0]) {
+      if (match[0] && jwt) {
         // TBD
         // setScannerActive(false);
         try {
-          const res = await scan(barcode.data);
-          if (res === 202) {
+          scanQrCode(jwt, barcode.data);
+          if (responseStatus.code === 202) {
             setClaimedDonation(match[0]);
             setIcon(categoryImage(match[0].category));
             setModalOn(true);
@@ -87,10 +88,7 @@ export default function QRCodeScannerScreen(props) {
   // Triggers when user clicks outside of modal.
   // Resets value of scanned, and sets modalOn to false.
   const handleDismiss = () => {
-    setClaimedDonation({
-      food_name: "",
-      claim: { client_name: "" },
-    });
+    setClaimedDonation(undefined);
     setModalOn(false);
     props.navigation.goBack();
   };
@@ -98,7 +96,7 @@ export default function QRCodeScannerScreen(props) {
   // Switch for Modal Content.
   const ModalContent = () => {
     let content;
-    if (claimedDonation.food_name) {
+    if (claimedDonation && claimedDonation.food_name) {
       content = (
         <Modal
           title="ITEM DONATED"

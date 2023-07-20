@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import {
   FormTextInput, LinkButton, SpacerInline,
 } from "@elements";
+import { requestResetToken } from "@state/actions";
 import useGlobalStore from "@state";
 import styles from "../ResetPassword.styles";
 
@@ -14,9 +15,9 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState("");
   const [error, setError] = useState("");
-  const [, actions] = useGlobal() as any;
-  const { requestResetToken } = actions;
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
 
+  /* TODO: update to use actual validator (i believe we are using `validator.js` plugin) */
   const isValidEmail = () => {
     if (!formData.includes("@") || !formData.includes(".")) {
       setError("Must be a valid email address.");
@@ -26,11 +27,13 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
   };
 
   const requestResetProps = {
-    input: formData,
+    formInput: formData,
+    userIdentity,
     setIsSubmitting,
     onComplete,
     setError,
   };
+
   const handleSubmit = () => {
     if (isValidEmail() && !isSubmitting) {
       setIsSubmitting(true);
@@ -58,7 +61,7 @@ const ResetForm: FunctionComponent<ResetFormProps> = ({ onComplete }) => {
         autoCorrect={false}
         enablesReturnKeyAutomatically={true}
         autoCapitalize="none"
-        autoCompleteType="username"
+        autoComplete="email"
         textContentType="username"
         keyboardType="email-address"
         returnKeyType="next"

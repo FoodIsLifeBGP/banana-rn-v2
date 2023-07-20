@@ -11,6 +11,7 @@ import {
   FormTextInput, LinkButton, SpacerInline,
 } from "@elements";
 import useGlobalStore from "@state";
+import { submitNewPassword } from "@state/actions";
 import styles from "../ResetPassword.styles";
 
 interface NewPasswordFormProps {
@@ -29,8 +30,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({
   });
   const [error, setError] = useState("");
   const passwordInputRef: RefObject<TextInput> = createRef();
-  const [, actions] = useGlobal() as any;
-  const { submitNewPassword } = actions;
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
 
   const isPasswordValid = () => {
     if (formData.password !== formData.confirmPassword) {
@@ -45,8 +45,9 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({
   };
 
   const submitPasswordProps = {
-    input: formData.password,
     token,
+    userIdentity,
+    formInput: formData.password,
     setIsSubmitting,
     onComplete,
     setError,
@@ -78,7 +79,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({
           });
         }}
         ref={passwordInputRef}
-        autoCompleteType="password"
+        autoComplete="password"
         blurOnSubmit={false}
       />
       <SpacerInline height={20} />
@@ -94,7 +95,7 @@ const NewPasswordForm: FunctionComponent<NewPasswordFormProps> = ({
           });
         }}
         ref={passwordInputRef}
-        autoCompleteType="password"
+        autoComplete="password"
         blurOnSubmit={false}
       />
       <Text style={styles.errors}>{error || null}</Text>

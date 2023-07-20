@@ -1,9 +1,12 @@
 import railsAxios from "@util/railsAxios";
+import { User } from "@state/index.types";
 import { NewDonation } from "@screens/DashboardScreen/DonationScreen/DonationScreen.type";
 
-const postDonation = async (_store, donation: NewDonation) => {
+const postDonation = async (
+  jwt: string, user: User, donation: NewDonation,
+) => {
   const endpoint = "/donations/create";
-  const { user, jwt } = _store.state;
+
   const payload = {
     donation: {
       donor_id: user.id,
@@ -15,11 +18,19 @@ const postDonation = async (_store, donation: NewDonation) => {
     },
   };
   try {
-    const response = await railsAxios(jwt).post(endpoint, payload);
-    return response.request.status || "Error";
-  } catch (error) {
-    console.log(error);
-    return 500;
+    const { status, statusText } =  await railsAxios(jwt).post(endpoint, payload);
+
+    return {
+      code: status,
+      message: statusText,
+    };
+  } catch (error: any) {
+    return {
+      responseStatus: {
+        code: error.response.status,
+        message: error.response.statusText,
+      },
+    };
   }
 };
 

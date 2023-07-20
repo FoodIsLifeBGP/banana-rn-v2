@@ -1,9 +1,7 @@
-import { GlobalState } from "@state/index";
 import railsAxios from "@util/railsAxios";
-import { ResponseStatus } from "@state/index.types";
+import { StatusCode } from "@state/index.types";
 
-export const  cancelDonation = async ({ jwt }: GlobalState,
-  donationId: number): Promise<Partial<GlobalState>> => {
+export const cancelDonation = async (jwt: string, donationId: number) => {
   const endpoint = `/donations/${donationId}/update`;
 
   const payload = {
@@ -13,8 +11,13 @@ export const  cancelDonation = async ({ jwt }: GlobalState,
     },
   };
 
-  const { request } = await railsAxios(jwt).patch(endpoint, payload);
-  return { responseStatus: { code: <ResponseStatus["code"]> request.status || 500 } };
+  const { status, statusText } = await railsAxios(jwt).patch(endpoint, payload);
+  return {
+    responseStatus: {
+      code: status as StatusCode,
+      message: statusText,
+    },
+  };
 };
 
 export default cancelDonation;

@@ -12,8 +12,8 @@ export interface Actions {
   logIn: () => Promise<ResponseStatus>;
   logOut: () => Promise<void>;
   postDonation: () => Promise<ResponseStatus>;
-  register: () => Promise<ResponseStatus>;
-  scan: () => Promise<ResponseStatus>;
+  registerUser: () => Promise<ResponseStatus>;
+  scanQrCode: () => Promise<ResponseStatus>;
   requestResetToken: () => Promise<ResponseStatus>;
   submitResetToken: () => Promise<ResponseStatus>;
   submitNewPassword: () => Promise<ResponseStatus>;
@@ -32,8 +32,8 @@ export { postDonation } from "./postDonation";
 export { cancelDonation } from "./cancelDonation";
 export { claimDonation } from "./claimDonation";
 export { getTravelTimes } from "./hereApi";
-export { register } from "./register";
-export { scan } from "./scan";
+export { registerUser } from "./registerUser";
+export { scanQrCode } from "./scanQrCode";
 export {
   updateAlert, clearAlert, setResponseStatus,
 } from "./alert";

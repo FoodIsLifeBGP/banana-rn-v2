@@ -60,7 +60,7 @@ export type ClientOrDonorRegisterProps = ClientRegisterProps | DonorRegisterProp
 enum ClaimStatus {
   ACTIVE = "active",
   CLOSED = "closed",
-  EXPIRED = "expired"
+  EXPIRED = "expired",
 }
 
 enum DonationStatus {
@@ -68,11 +68,21 @@ enum DonationStatus {
   CLAIMED = "claimed",
   CLOSED = "closed",
   DELETED = "deleted",
-  EXPIRED = "expired"
+  EXPIRED = "expired",
+}
+
+enum DonationCategory {
+  BREAD = "Bread",
+  DAIRY = "Dairy",
+  HOT_MEAL = "Hot Meal",
+  PRODUCE = "Produce",
+  PROTEIN = "Protein",
+  OTHERS = "Others",
 }
 
 export interface Claim {
   client_id: number;
+  client_name: string;
   donation_id: number;
   qr_code: string;
   completed: boolean;
@@ -85,6 +95,7 @@ export interface Claim {
 
 export interface Donation {
   food_name: string;
+  category: DonationCategory;
   measurement: string;
   per_person: number;
   total_servings: number;
@@ -96,6 +107,7 @@ export interface Donation {
   canceled: boolean;
   pickup_location: string;
   status: DonationStatus;
+  claim: Claim;
 }
 
 /**
@@ -134,12 +146,16 @@ export interface Alert {
   confirmFn?: () => void;
 }
 
+export type StatusCode = 200 | 201 | 202 | 400 | 403 | 401 | 404 | 409 | 418 | 500;
+
 export interface ResponseStatus {
   message?: string;
-  code: 200 | 201 | 202 | 400 | 403 | 401 | 404 | 409 | 418 | 500;
+  code: number; /* StatusCode; TODO: replace this type in the future? */
 }
 
 export type UserIdentity = "donor" | "client";
+
+export type User = DonorState | ClientState;
 
 export interface InitialState {
   userIdentity: UserIdentity;
@@ -148,14 +164,16 @@ export interface InitialState {
   createUrl: string;
   alert?: Alert;
   jwt?: string;
-  user?: DonorState | ClientState;
-  donationsOrClaims?: Donation[] | Claim[];
+  user?: User;
+  activeDonationsForClient?: Donation[];
+  claimedDonationsForClient?: Donation[];
   claimHistory?: Claim[] /* TODO: double check this type */;
   donationHistory?: Donation[] /* TODO: double check this type */;
   email?: string;
   password?: string;
-  responseStatus?: ResponseStatus;
+  responseStatus: ResponseStatus;
   currentClaim?: Claim;
+  claimedDonation?: Donation;
 }
 
 export interface Location {

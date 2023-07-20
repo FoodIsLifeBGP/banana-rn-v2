@@ -19,7 +19,7 @@ export const registerDonor = async (
   } = donor;
 
   try {
-    const { data, request } = await railsAxios().post(createUrl,
+    const { data, status, statusText } = await railsAxios().post(createUrl,
       JSON.stringify({
         [userIdentity]: {
           email,
@@ -38,13 +38,16 @@ export const registerDonor = async (
     return {
       jwt: data?.jwt || "",
       user: data?.client || {},
-      responseStatus: { code: request.status },
+      responseStatus: {
+        code: status,
+        message: statusText,
+      },
     };
   } catch (error: any) {
     return {
       responseStatus: {
         code: error.response.status,
-        message: error.response.message,
+        message: error.response.statusText,
       },
     };
   }
@@ -61,7 +64,7 @@ export const registerClient = async (
   } = client;
 
   try {
-    const { data, request } = await railsAxios().post(createUrl,
+    const { data, status, statusText } = await railsAxios().post(createUrl,
       JSON.stringify({
         [userIdentity]: {
           email,
@@ -74,19 +77,22 @@ export const registerClient = async (
     return {
       jwt: data?.jwt || "",
       user: data?.client || {},
-      responseStatus: { code: request.status },
+      responseStatus: {
+        code: status,
+        message: statusText,
+      },
     };
   } catch (error: any) {
     return {
       responseStatus: {
         code: error.response.status,
-        message: error.response.message,
+        message: error.response.statusText,
       },
     };
   }
 };
 
-const register = (
+const registerUser = (
   createUrl, userIdentity, userToRegister,
 ) => {
   return userIdentity === "donor"
@@ -98,4 +104,4 @@ const register = (
     );
 };
 
-export { register };
+export { registerUser };
