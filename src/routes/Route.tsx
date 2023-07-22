@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import getEnv from "@util/environment";
-
 import navigationService from "@util/navigationService";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

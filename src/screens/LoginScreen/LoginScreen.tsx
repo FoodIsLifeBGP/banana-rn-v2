@@ -50,6 +50,10 @@ export default function LoginScreen(props) {
       if (responseStatus && responseStatus.code === 202) {
         clearEmailAndPassword();
         clearPasswordResetStage();
+        /* TODO: this is a correct example of how to navigate--
+          look at the react docs for more info: https://reactnavigation.org/docs/nesting-navigators/
+          please remove and replace all `props.navigation.navigate()` calls
+        */
         props.navigation.navigate("Drawer", { screen:"LoginSuccessScreen" });
       }
     };

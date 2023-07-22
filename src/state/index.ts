@@ -10,8 +10,8 @@ import {
   Donation,
   NewDonation,
 } from "./index.types";
-import navigationService from "@util/navigationService";
 import * as actions from "./actions";
+import navigationService from "@util/navigationService";
 
 const {
   USER_IDENTITY, API_BASE_URL, LOGIN_URL, CREATE_URL,

@@ -3,12 +3,12 @@ import React from "react";
 import {
   Image, Text, TouchableOpacity, View,
 } from "react-native";
+import navigationService from "@util/navigationService";
 import typography from "@util/typography";
 import { categoryImage } from "@util/donationCategory";
 import formatDate from "@util/formatDate";
 import { Icon } from "@elements";
 import styles from "./Donation.styles";
-import navigationService from "@util/navigationService";
 
 export default function DonorDonation(props) {
   const { donation, isHistory } = props;

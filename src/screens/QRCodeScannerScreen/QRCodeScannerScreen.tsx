@@ -70,7 +70,7 @@ export default function QRCodeScannerScreen(props) {
         // setScannerActive(false);
         try {
           scanQrCode(jwt, barcode.data);
-          if (responseStatus.code === 202) {
+          if (responseStatus && responseStatus.code === 202) {
             setClaimedDonation(match[0]);
             setIcon(categoryImage(match[0].category));
             setModalOn(true);
