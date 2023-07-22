@@ -35,8 +35,9 @@ Banana App is an open-source, not-for-profit project of The Be Good Foundation. 
 ## NOTE: If you notice any outdated information or instructions in this README, please don't hesitate to open a PR and fix any discrepancies!
 
 # View them on the App Store
+_(NOTE: unclear if these still are accurate..)_
 * Client App
-[![Client App](https://github.com/FoodIsLifeBGP/banana-rn/blob/prealpha/main/assets/iconClient.png?raw=true)](https://apps.apple.com/tt/app/banana-app-client/id1528875793?ign-mpt=uo=2)
+[![Client App](https://github.com/FoodIsLifeBGP/banana-rn-v2/blob/prealpha/main/assets/iconClient.png?raw=true)](https://apps.apple.com/tt/app/banana-app-client/id1528875793?ign-mpt=uo=2)
 
 * Donor App
 [![Donor App](https://github.com/FoodIsLifeBGP/banana-rn/blob/prealpha/main/assets/iconDonor.png?raw=true)](https://apps.apple.com/tt/app/banana-app-donor/id1528276436)
