@@ -2,7 +2,6 @@ import React from "react";
 import { Text, View } from "react-native";
 import useGlobalStore from "@state";
 import { Modal, TextButton } from "@elements";
-import { Alert } from "@state/index.types";
 import { useScheme } from "@util/colorSchemes";
 import typography from "@util/typography";
 import styles from "./CancelDonationModal.styles";
@@ -18,7 +17,7 @@ export default function CancelDonationModal({
   onNo = () => {},
   okay = () => {},
 }: CancelDonationModalProps) {
-  const updateAlert = useGlobalStore((state) => state.updateAlert);
+
   const clearAlert = useGlobalStore((state) => state.clearAlert);
   const alert = useGlobalStore((state) => state.alert);
 

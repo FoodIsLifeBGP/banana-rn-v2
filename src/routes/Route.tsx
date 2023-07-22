@@ -1,14 +1,12 @@
-/* eslint-disable react/no-children-prop */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-// TODO: remove this disabled lint eventually?
+// TODO: remove this disabled lint eventually
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import * as colors from "@util/constants/colors";
+// import * as colors from "@util/constants/colors";
 import getEnv from "@util/environment";
 
 import MakeClaimScreen from "../screens/MakeClaimScreen/MakeClaimScreen";
@@ -155,7 +153,7 @@ const Drawer = createDrawerNavigator();
 function DrawerNavigator() {
   Object.entries(donorOrClientDrawer()).forEach((ting) =>
     console.log("ting", ting));
-  // TODO: figure out why Drawer.Screen is erroring and remove the above console.log
+  // IMPORTANT TODO: figure out why Drawer.Screen is erroring and remove the above console.log
   return (
     <Drawer.Navigator>
       {/* {Object.entries(donorOrClientDrawer()).map(([ name, config ]) => (

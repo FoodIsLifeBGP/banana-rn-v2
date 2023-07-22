@@ -49,9 +49,7 @@ function MakeClaimScreen(props) {
 
   const handleClaim = async () => {
     if (jwt && user) {
-      claimDonation(
-        jwt, donation.id, user.id,
-      );
+      claimDonation(jwt, donation.id, user.id);
     }
   };
 

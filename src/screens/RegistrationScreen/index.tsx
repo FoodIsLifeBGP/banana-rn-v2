@@ -4,8 +4,8 @@ import DonorRegistrationScreen from "./DonorRegistrationScreen";
 import ClientRegistrationScreen from "./ClientRegistrationScreen";
 
 export default function RegistrationScreen(props) {
-  const [state] = useGlobal();
-  const { userIdentity } = state;
+
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
 
   return userIdentity === "donor" ? (
     <DonorRegistrationScreen {...props} />

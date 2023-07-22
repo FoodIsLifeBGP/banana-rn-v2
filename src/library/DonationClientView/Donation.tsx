@@ -7,7 +7,7 @@ import { Icon } from "@elements";
 import typography from "@util/typography";
 import formatDate from "@util/formatDate";
 import { categoryImage } from "@util/donationCategory";
-import { Donation } from "./Donation.type";
+import { Donation } from "@state/index.types";
 import styles from "./Donation.styles";
 
 interface ClientDonationProps {
@@ -25,8 +25,8 @@ export default function ClientDonation({
 }: ClientDonationProps) {
   const {
     category, food_name, id, distance, donor, updated_at,
-  } =
-    donation;
+  } = donation;
+
   const icon = categoryImage(category);
   const updatedAt = formatDate(updated_at);
 
@@ -75,7 +75,7 @@ export default function ClientDonation({
                   },
                 ]}
               >
-                {donor.donor_name}
+                {`${donor.firstName} ${donor.lastName}`}
               </Text>
               <Icon
                 name={isHistory ? "time" : "distance"}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import {
-  LinkButton, NavBar, SpacerInline, Title,
+  LinkButton, SpacerInline, Title,
 } from "@elements";
 import getEnv from "@util/environment";
 import Terms from "@assets/documents/SampleToS";

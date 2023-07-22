@@ -2,9 +2,7 @@ import railsAxios from "@util/railsAxios";
 import { UserIdentity } from "@state/index.types";
 import { DonorRegisterProps, ClientRegisterProps } from "@state/index.types";
 
-export const registerDonor = async (
-  createUrl, userIdentity: UserIdentity, donor: DonorRegisterProps,
-) => {
+export const registerDonor = async (createUrl, userIdentity: UserIdentity, donor: DonorRegisterProps) => {
   const {
     email,
     password,
@@ -46,16 +44,14 @@ export const registerDonor = async (
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }
 };
 
-export const registerClient = async (
-  createUrl, userIdentity: UserIdentity, client: ClientRegisterProps,
-) => {
+export const registerClient = async (createUrl, userIdentity: UserIdentity, client: ClientRegisterProps) => {
   const {
     email,
     password,
@@ -85,23 +81,17 @@ export const registerClient = async (
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }
 };
 
-const registerUser = (
-  createUrl, userIdentity, userToRegister,
-) => {
+const registerUser = (createUrl, userIdentity, userToRegister) => {
   return userIdentity === "donor"
-    ? registerDonor(
-      createUrl, userIdentity, userToRegister,
-    )
-    : registerClient(
-      createUrl, userIdentity, userToRegister,
-    );
+    ? registerDonor(createUrl, userIdentity, userToRegister)
+    : registerClient(createUrl, userIdentity, userToRegister);
 };
 
 export { registerUser };

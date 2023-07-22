@@ -21,7 +21,6 @@ import {
 import validate from "validate.js";
 import clientConstraints from "@util/validators/clientRegistration";
 import { ClientRegisterProps } from "@state/index.types";
-import { Alert } from "@state/index.types";
 import styles from "./RegistrationScreen.styles";
 
 export default function ClientRegistrationScreen({
@@ -53,11 +52,9 @@ export default function ClientRegistrationScreen({
     if (validateResults) {
       setValidateError(validateResults);
     } else {
-      registerUser(
-        userIdentity,
+      registerUser(userIdentity,
         createUrl,
-        newClient,
-      );
+        newClient);
 
       if (responseStatus) {
         switch (responseStatus.code) {
@@ -69,24 +66,27 @@ export default function ClientRegistrationScreen({
           updateAlert({
             title: "Error",
             message: `Network Issues (Error code:${responseStatus.code})`,
+            type: "default",
             dismissible: true,
-          } as Alert);
+          });
           break;
         }
         case 409: {
           updateAlert({
             title: "Error",
             message: `This email address has already been used (Error code:${responseStatus.code})`,
+            type: "default",
             dismissible: true,
-          } as Alert);
+          });
           break;
         }
         default: {
           updateAlert({
             title: "Error",
             message: `Unknown Error (Error code:${responseStatus.code})`,
+            type: "default",
             dismissible: true,
-          } as Alert);
+          });
         }
         }
       }

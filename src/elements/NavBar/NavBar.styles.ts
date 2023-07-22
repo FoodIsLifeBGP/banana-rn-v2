@@ -1,6 +1,4 @@
-import {
-  Dimensions, Platform, StyleSheet,
-} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import * as colors from "@util/constants/colors";
 

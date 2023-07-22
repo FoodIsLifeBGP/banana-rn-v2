@@ -4,41 +4,40 @@ import useGlobalStore from "@state";
 import {
   Icon, Modal, TextButton,
 } from "@elements";
-import { Alert } from "@state/index.types";
 import { useScheme } from "@util/colorSchemes";
 import typography from "@util/typography";
 import styles from "./ComingSoonModal.styles";
 
 export default function ComingSoonModal() {
-  const [globalState, globalActions] = useGlobal() as any;
-  const { alert: alertObj }: { alert: Alert } = globalState;
-  const { clearAlert } = globalActions;
   const scheme = useScheme();
+
+  const alertHandler = useGlobalStore((state) => state.alert);
+  const clearAlert = useGlobalStore((state) => state.clearAlert);
 
   const handleCloseButtonPress = () => {
     clearAlert();
   };
 
   const handleDismiss = () => {
-    if (alertObj.dismissible) {
+    if (alertHandler && alertHandler.dismissible) {
       clearAlert();
     }
   };
 
-  if (!alertObj) return null;
-  if (!alertObj.type || alertObj.type === "default") {
+  if (!alertHandler) return null;
+  if (!alertHandler.type || alertHandler.type === "default") {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || "Alert"}
+        title={alertHandler?.title || "Alert"}
         palette="accent"
-        open={alertObj !== undefined}
+        open={alertHandler !== undefined}
         onDismiss={handleDismiss}
       >
         <View style={styles.body}>
           <View style={styles.textContainer}>
             <Text style={typography.body1}>
-              {alertObj?.message ||
+              {alertHandler?.message ||
                 "Uh oh, an unknown error occurred!"}
             </Text>
           </View>
@@ -57,13 +56,13 @@ export default function ComingSoonModal() {
       </Modal>
     );
   }
-  if (alertObj.type === "coming soon") {
+  if (alertHandler.type === "coming soon") {
     return (
       <Modal
         style={styles.container}
-        title={alertObj?.title || "COMING SOON!"}
+        title={alertHandler?.title || "COMING SOON!"}
         palette="secondary"
-        open={alertObj !== undefined}
+        open={alertHandler !== undefined}
         onDismiss={handleDismiss}
       >
         <View style={styles.body}>
@@ -77,7 +76,7 @@ export default function ComingSoonModal() {
             }}
           >
             <Text style={typography.body1}>
-              {alertObj?.message ||
+              {alertHandler?.message ||
                 "This feature will be available soon."}
             </Text>
           </View>

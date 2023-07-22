@@ -1,6 +1,3 @@
-// TODO: maybe remove these in the future
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable @typescript-eslint/ban-types */
 import React from "react";
 import {
   ScrollView,
@@ -35,7 +32,7 @@ const contactList: Array<{
   {
     title: "email",
     message: "info@bananapp.org",
-    // TODO: When the default iOS email app is uninstalled, this fails.
+    // TODO: FIXME: When the default iOS email app is uninstalled, this fails.
     link: "mailto:info@bananapp.org",
     iconName: "email",
   },
@@ -48,7 +45,7 @@ const contactList: Array<{
 ];
 
 export default function ContactScreen(props) {
-  const [state, { updateAlert }] = useGlobal() as any;
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
 
   const openLink = async (url: string) => {
     const supported = await Linking.canOpenURL(url);
@@ -58,6 +55,7 @@ export default function ContactScreen(props) {
       : updateAlert({
         title: "Oops!",
         message: `There was an error connecting to ${url}-- please try again later.`,
+        type: "default",
         dismissible: true,
       });
   };

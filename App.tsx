@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-  LogBox,
-  Platform,
+  // LogBox,
+  // Platform,
   SafeAreaView,
   Text,
   View,
@@ -9,7 +9,7 @@ import {
 import { Provider as PaperProvider } from "react-native-paper";
 import Constants from "expo-constants";
 import * as Font from "expo-font";
-import NavigationService from "@util/navigationService";
+// import NavigationService from "@util/navigationService";
 import {
   CancelDonationModal,
   ComingSoonModal,

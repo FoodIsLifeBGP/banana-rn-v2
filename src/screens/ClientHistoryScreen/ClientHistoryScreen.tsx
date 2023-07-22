@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView, Text, View,
 } from "react-native";
@@ -14,29 +14,24 @@ import styles from "./ClientHistoryScreen.styles";
 
 function ClientHistoryScreen(props) {
   const isFocused = useIsFocused();
-  const [state, actions] = useGlobal() as any;
-  const [claims, setClaims] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
-  const getClaims = async () => {
-    const { getClaimHistoryForClient } = actions;
-    const data = await getClaimHistoryForClient();
-    if (data) {
-      setClaims(data);
-      setLoaded(true);
-    }
-  };
+  const getClaimedDonationHistoryForClient = useGlobalStore((state) => state.getClaimedDonationHistoryForClient);
+  const claimedDonationHistory = useGlobalStore((state) => state.claimedDonationHistoryForClient);
+  const jwt = useGlobalStore((state) => state.jwt);
+  const user = useGlobalStore((state) => state.user);
 
   useEffect(() => {
-    if (isFocused) {
-      getClaims();
+    if (isFocused && jwt && user) {
+      getClaimedDonationHistoryForClient(jwt, user);
     }
   }, [isFocused]);
 
   return (
     <View style={styles.outerContainer}>
-      <NavBar showBackButton={false} />
-
+      <NavBar
+        showBackButton={true}
+        goBack={() => props.navigation.goBack()}
+      />
       <View style={styles.contentContainer}>
         <Title text="Claims" />
         <View
@@ -50,22 +45,20 @@ function ClientHistoryScreen(props) {
             <Text style={styles.activeHeader}>History</Text>
           </View>
         </View>
-        {!loaded && <Text>Loading...</Text>}
-        {claims && claims.length > 0 ? (
+        {!claimedDonationHistory && <Text>Loading...</Text>}
+        {claimedDonationHistory && claimedDonationHistory.length > 0 ? (
           <ScrollView>
-            {(claims as any)
-              .sort((a, b) => a.created_at > b.created_at)
-              .map((claim) => (
-                <View key={claim.id}>
-                  <Donation
-                    donation={claim}
-                    key={claim.id}
-                    isHistory={true}
-                    isClaim={true}
-                    navigation={props.navigation}
-                  />
-                </View>
-              ))}
+            {claimedDonationHistory.map((claim) => (
+              <View key={claim.id}>
+                <Donation
+                  donation={claim}
+                  key={claim.id}
+                  isHistory={true}
+                  isClaim={true}
+                  navigation={props.navigation}
+                />
+              </View>
+            ))}
           </ScrollView>
         ) : (
           <EmptyStateView lowerText="You don't have a history of claims." />

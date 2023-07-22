@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Image,
   KeyboardAvoidingView,
@@ -24,26 +24,11 @@ import styles from "./DonationScreen.styles";
 
 export default function DonationScreen(props) {
   const jwt = useGlobalStore((state) => state.jwt);
-  const responseStatus = useGlobalStore((state) => state.responseStatus);
+  // const responseStatus = useGlobalStore((state) => state.responseStatus);
   const donor = useGlobalStore((state) => state.user as DonorState); /* NOTE: this screen/logic only takes **Donors** */
 
   const updateAlert = useGlobalStore((state) => state.updateAlert);
   const createDonation = useGlobalStore((state) => state.createDonation);
-
-  useEffect(() => {
-    if (responseStatus) {
-      const { code } = responseStatus;
-
-      if (code >= 200 && code < 300) {
-        updateAlert({
-          title: "Success!",
-          message: "Your donation has been created.",
-          type: "donation published",
-          dismissible: true,
-        });
-      }
-    }
-  }, [responseStatus.code]);
 
   const emptyDonation: NewDonation = {
     pickupAddress: donor ? `${donor.address_street} ${donor.address_city}, ${donor.address_state} ${donor.address_zip}` : "",
@@ -56,9 +41,7 @@ export default function DonationScreen(props) {
   const [newDonation, setNewDonation] = useState<NewDonation>(emptyDonation);
   const [validateError, setValidateError] = useState({} as any); /* TODO: add proper type */
 
-  const hasUnsavedChanges = Boolean(newDonation.itemName ||
-      newDonation.totalAmount ||
-      newDonation.pickupInstructions !== donor.pickup_instructions);
+  const hasUnsavedChanges = Boolean(newDonation.itemName || newDonation.totalAmount || newDonation.pickupInstructions !== donor.pickup_instructions);
 
   const preventBack = () => {
     /*TODO: I just filled this out with valid types-- not sure if intent/copy is correct, please double check */
@@ -80,13 +63,8 @@ export default function DonationScreen(props) {
       setValidateError({});
 
       if (jwt && donor) {
-        createDonation(
-          jwt, donor, newDonation,
-        );
+        createDonation(jwt, donor, newDonation);
       }
-
-      setNewDonation(emptyDonation);
-      props.navigation.navigate("DonorDashboardScreen");
     }
   };
   return (

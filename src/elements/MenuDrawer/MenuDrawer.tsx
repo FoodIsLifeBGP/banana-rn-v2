@@ -7,18 +7,23 @@ import {
   View,
 } from "react-native";
 import { DrawerItem } from "@react-navigation/drawer";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import useGlobalStore from "@state";
 import MainOption from "./MainOption/MainOption";
 import styles from "./MenuDrawer.styles";
 
 function MenuDrawer(props) {
-  const [state, actions] = useGlobal() as any;
-  const { toggleDrawer } = useNavigation() as any;
-  const { logOut } = actions;
-  const name = state.user.organization_name
-    ? state.user.organization_name
-    : state.user.first_name;
+  const logOut = useGlobalStore((state) => state.logOut);
+  const user = useGlobalStore((state) => state.user);
+  let name = "";
+
+  if (user) {
+    if ("organization_name" in user) {
+      name = user.organization_name as string;
+    } else if ("first_name" in user) {
+      name = user.first_name as string;
+    }
+  }
 
   return (
     <ScrollView>
@@ -39,7 +44,7 @@ function MenuDrawer(props) {
           labelStyle={styles.labelText}
           itemStyle={styles.menuItem}
           onItemPress={async ({ route }) => {
-            toggleDrawer();
+            props.navigation.toggleDrawer();
             props.navigation.navigate(route.routeName);
           }}
         />
@@ -47,7 +52,7 @@ function MenuDrawer(props) {
       <TouchableOpacity
         style={styles.menuItem}
         onPress={async () => {
-          toggleDrawer();
+          props.navigation.toggleDrawer();
           props.navigation.navigate("LogoutScreen");
           await logOut();
         }}

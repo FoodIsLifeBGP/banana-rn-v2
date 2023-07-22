@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView, Text, View,
 } from "react-native";
@@ -13,20 +13,23 @@ import {
 } from "@elements";
 import styles from "./DashboardScreen.styles";
 
+// TODO: rename this to `ClientDashboardScreen`
 function DashboardScreen(props) {
   const isFocused = useIsFocused();
-  const [state, actions] = useGlobal() as any;
 
-  const [donations, setDonations] = useState(state.donationsOrClaims);
-  const [loaded, setLoaded] = useState(false);
+  const jwt = useGlobalStore((state) => state.jwt);
+  const user = useGlobalStore((state) => state.user);
+  const activeDonationsForClient = useGlobalStore((state) => state.activeDonationsForClient);
+
+  const getLocation = useGlobalStore((state) => state.getLocation);
+  const getActiveDonationsForClient = useGlobalStore((state) => state.getActiveDonationsForClient);
+
+  const cannotAccessLocation = () => activeDonationsForClient && activeDonationsForClient.length > 0 && user && !user.coords;
 
   const getActiveDonationsForLocation = async () => {
-    const { getActiveDonationsForClient, getLocation } = actions;
-    await getLocation();
-    const data = await getActiveDonationsForClient();
-    if (data) {
-      setDonations(data);
-      setLoaded(true);
+    if (jwt && user) {
+      getLocation();
+      getActiveDonationsForClient(jwt, user);
     }
   };
 
@@ -41,28 +44,24 @@ function DashboardScreen(props) {
       <NavBar
         showBackButton={false}
         showSelector={true}
-        onMap={() => {
-          props.navigation.navigate("MapScreen");
-        }}
+        onMap={() => props.navigation.navigate("MapScreen")}
         position="list"
+        goBack={() => props.navigation.goBack()}
       />
-
       <View style={styles.contentContainer}>
         <Title text="Donations" />
         <SpacerInline height={20} />
-        {!loaded && <Text>Loading...</Text>}
-        {loaded && !state.user.coords && !state.user.alert && (
+        {!activeDonationsForClient && <Text>Loading...</Text>}
+        {cannotAccessLocation() && (
           <EmptyStateView
             upperText="We are unable to get your current location."
             lowerText="Please check your app settings to make sure location permissions are enabled."
           />
         )}
-        {loaded &&
-        donations &&
-        Array.isArray(donations) &&
-        donations.length > 0 ? (
+        {(activeDonationsForClient && activeDonationsForClient.length > 0)
+          ? (
             <ScrollView>
-              {(donations as any).map((donation) => (
+              {activeDonationsForClient.map((donation) => (
                 <View key={donation.id}>
                   <Donation
                     donation={donation}

@@ -1,9 +1,5 @@
-import {
-  Dimensions, Platform, StyleSheet,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import * as colors from "@util/constants/colors";
-
-const screenWidth = Math.round(Dimensions.get("window").width);
 
 export default StyleSheet.create({
   text: { color: colors.NAVY_BLUE },

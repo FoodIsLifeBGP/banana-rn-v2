@@ -4,8 +4,8 @@ import {
   Alert,
   Image,
   Text,
-  TouchableOpacity,
   View,
+  TouchableOpacity,
 } from "react-native";
 import { Switch } from "react-native-paper";
 import useGlobalStore from "@state";
@@ -20,42 +20,45 @@ import * as colors from "@util/constants/colors";
 import styles from "./DonorDonationScreen.styles";
 
 export default function DonorDonationScreen(props) {
-  const [state, actions] = useGlobal() as any;
-  const { user, jwt } = state;
-  const { createDonation, logOut, getDonationsOrClaims } = actions;
 
+  const { user, jwt } = props;
   const { donation, edit, donationId } = props.route;
 
+  const createDonation = useGlobalStore((state) => state.createDonation);
+
   const {
-    claims = "",
-    created_at = new Date(),
-    duration_minutes = 60,
+    // claims = "",
+    // created_at = new Date(),
+    // duration_minutes = 60,
+    // image_url = "",
+    category = "",
     food_name = "",
-    image_url = "",
     measurement = "",
     per_person = "",
-    pickup_location = state.user.pickup_location || "",
+    pickup_location = user.pickup_location || "",
     total_servings = "",
+    total_amount = 0,
+    pickup_address = "",
+    pickup_instructions = "",
   } = donation || {};
 
-  const [name, setName] = useState(food_name);
+  const [itemName, setItemName] = useState(food_name);
   const [durationInMinutes, setDurationInMinutes] = useState(60);
   const [totalServings, setTotalServings] = useState(total_servings);
   const [servingName, setServingName] = useState(measurement);
   const [perPerson, setPerPerson] = useState(per_person);
-  const [pickupLocation, setPickupLocation] =
-    useState(pickup_location);
+  const [pickupLocation, setPickupLocation] = useState(pickup_location);
   const [cancel, setCancel] = useState(false);
   const [stop, setStop] = useState(false);
 
   const icon = require("@assets/images/banana-icon.png");
 
   const submitDonation = async () => {
-    if (!name) {
+    if (!itemName) {
       Alert.alert("Please add the name of your donation.");
       return;
     }
-    if (/[^a-z\s]/i.test(name)) {
+    if (/[^a-z\s]/i.test(itemName)) {
       Alert.alert("Please enter a donation name with letters only.");
       return;
     }
@@ -80,50 +83,28 @@ export default function DonorDonationScreen(props) {
       return;
     }
 
-    const donationProps = {
+    const newDonation = {
       donationId,
       donorId: user.id,
       jwt,
-      name,
+      itemName,
       durationInMinutes,
       totalServings,
       servingName,
       perPerson,
       pickupLocation,
       cancel,
+      category,
+      totalAmount: total_amount,
+      pickupAddress: pickup_address,
+      pickupInstructions: pickup_instructions,
     };
+
     if (!donationId) {
-      delete donationProps.donationId;
+      delete newDonation.donationId;
     }
-    const statusCode = await createDonation(donationProps);
-    switch (statusCode) {
-    case 201:
-      Alert.alert("Donation created!");
-      getDonationsOrClaims();
-      props.navigation.navigate("LoginSuccessScreen");
-      return;
-    case 202:
-      Alert.alert("Donation updated!");
-      getDonationsOrClaims();
-      props.navigation.navigate("LoginSuccessScreen");
-      return;
-    case 400 || 406:
-      Alert.alert("Bad data - sorry, please try again!");
-      return;
-    case 401 || 403:
-      Alert.alert("Authentication error - please log in again.");
-      logOut();
-      props.navigation.navigate("LoginScreen");
-      return;
-    case 404:
-      Alert.alert("Network error - sorry, please try again!");
-      return;
-    case 500:
-      Alert.alert("Server problem - sorry, please try again!");
-      return;
-    default:
-      Alert.alert("Sorry, something went wrong. Please try again.");
-    }
+
+    createDonation(jwt, user, newDonation);
   };
 
   const toggleCancel = () => {
@@ -148,7 +129,7 @@ export default function DonorDonationScreen(props) {
           <FormTextInput
             label="Donating:"
             value=""
-            setValue={setName}
+            setValue={setItemName}
             style={{ width: "50%" }}
           />
         </View>

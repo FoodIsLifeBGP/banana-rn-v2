@@ -7,7 +7,6 @@ import typography from "@util/typography";
 import { categoryImage } from "@util/donationCategory";
 import formatDate from "@util/formatDate";
 import { Icon } from "@elements";
-import { Donation } from "./Donation.type";
 import styles from "./Donation.styles";
 
 export default function DonorDonation(props) {

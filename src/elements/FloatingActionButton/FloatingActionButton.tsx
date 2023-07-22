@@ -1,6 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import { Button, Icon } from "@elements";
+import {
+  Button,
+  // Icon,
+} from "@elements";
 import { ButtonStyle } from "@elements/Button";
 import * as colors from "@util/constants/colors";
 import styles from "./FloatingActionButton.styles";
@@ -15,10 +18,10 @@ interface FloatingActionProps {
 }
 
 export default function FloatingActionButton({
-  iconName,
+  // iconName,
   top = 525,
   left = 273,
-  size = 28.5,
+  // size = 28.5,
   onPress = () => {},
 }: FloatingActionProps) {
   const buttonFunction = onPress && ((func) => onPress(func));

@@ -1,8 +1,6 @@
 import railsAxios from "@util/railsAxios";
 
-export const claimDonation = async (
-  jwt: string, donationId: number, clientId: number,
-) => {
+export const claimDonation = async (jwt: string, donationId: number, clientId: number) => {
   const endpoint = `/donations/${donationId}/claim`;
   const payload = { client_id: clientId };
 
@@ -19,8 +17,8 @@ export const claimDonation = async (
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }

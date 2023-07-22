@@ -1,6 +1,5 @@
 import { User } from "@state/index.types";
 import railsAxios from "@util/railsAxios";
-import { StatusCode } from "@state/index.types";
 
 export const getActiveDonationsForClient = async (jwt: string, user: User) => {
   const endpoint = `/donations/active?client_lat=${user.coords.latitude}&client_long=${user.coords.longitude}`;
@@ -18,7 +17,7 @@ export const getActiveDonationsForClient = async (jwt: string, user: User) => {
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status as StatusCode,
+        code: error.response.status,
         message: error.response.statusText,
       },
     };

@@ -57,7 +57,7 @@ module.exports = {
     "object-property-newline": "warn",
     "no-unused-expressions": ["off"],
     "prefer-object-spread": ["warn"],
-    "react/destructuring-assignment": ["warn"],
+    "react/destructuring-assignment": ["off"], /* TODO: change this back to `["warn"]` once all bugs fixed */
     "react/jsx-boolean-value": ["warn", "always"],
     "react/jsx-filename-extension": ["warn", { extensions: [".ts", ".tsx"] }],
     "react/no-unused-prop-types": ["off"],
@@ -69,7 +69,7 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": ["off"],
     "@typescript-eslint/explicit-member-accessibility": ["off"],
     "@typescript-eslint/interface-name-prefix": ["off"],
-    "@typescript-eslint/no-empty-function": ["warn"],
+    "@typescript-eslint/no-empty-function": ["off"], /* TODO: probably should reassess at some point if this is best practice */
     "@typescript-eslint/ban-types": ["off"],
     "@typescript-eslint/no-explicit-any": ["off"], /* TODO: remove this once all major broken things are fixed */
     "@typescript-eslint/type-annotation-spacing": ["warn"],
@@ -78,7 +78,7 @@ module.exports = {
     "quotes": ["warn", "double"],
     "semi": ["warn", "always"],
     "max-len": ["warn", { "code": 150 }],
-    "function-paren-newline": ["warn", { "minItems": 3 }],
+    "function-paren-newline": ["warn", { "minItems": 4 }],
     "object-curly-newline": ["warn", {
       "ObjectExpression": {
         "multiline": true,

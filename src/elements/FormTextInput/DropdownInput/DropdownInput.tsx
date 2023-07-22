@@ -1,12 +1,7 @@
-import {
-  StyleProp,
-  TextInput,
-  TextInputProps,
-  TextStyle,
-} from "react-native";
-import React, { Ref } from "react";
+import { TextInputProps } from "react-native";
+import React from "react";
 import RNPickerSelect, { Item } from "react-native-picker-select";
-import { Icon } from "@elements";
+// import { Icon } from "@elements";
 import * as colors from "@util/constants/colors";
 import defaultStyle from "./DropdownInput.styles";
 
@@ -26,7 +21,7 @@ interface DropdownInputProps extends TextInputProps {
 
 function DropdownInput(props: DropdownInputProps) {
   const {
-    style, value, setValue, dropdownData, placeholder,
+    value, setValue, dropdownData, placeholder,
   } = props;
   const formattedData: Item[] = [];
   dropdownData?.forEach((item) =>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React, { useState } from "react";

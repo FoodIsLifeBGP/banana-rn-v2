@@ -82,6 +82,7 @@ export enum DonationCategory {
 }
 
 export interface Claim {
+  id: number;
   client_id: number;
   client_name: string;
   donation_id: number;
@@ -95,21 +96,23 @@ export interface Claim {
 }
 
 export interface Donation {
-  id: string; /* TODO: make sure this is getting sent from backend */
-  food_name: string;
-  category: DonationCategory;
-  measurement: string;
-  per_person: number;
-  total_servings: number;
-  donor_id: number;
-  duration_minutes: number;
-  image_url: string;
+  id: number;
+  category: string;
   created_at: Date;
   updated_at: Date;
-  canceled: boolean;
+  donor_id: number;
+  duration_minutes: number;
+  food_name: string;
+  image_url: string;
+  measurement: string;
+  per_person: number;
   pickup_location: string;
-  status: DonationStatus;
+  total_amount: number;
+  status: string;
+  distance: number;
   claim: Claim;
+  donor: DonorRegisterProps;
+  isHistory?: boolean;
 }
 
 export interface NewDonation {
@@ -167,7 +170,7 @@ export interface InitialState {
   user?: User;
   activeDonationsForClient?: Donation[];
   claimedDonationsForClient?: Donation[];
-  claimHistory?: Claim[] /* TODO: double check this type */;
+  claimedDonationHistoryForClient?: Donation[] /* TODO: double check this type */;
   donationHistory?: Donation[] /* TODO: double check this type */;
   activeDonationsFromDonor?: Donation[] /* TODO: double check this type */;
   email?: string;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView, Text, View,
 } from "react-native";
@@ -15,56 +15,51 @@ import styles from "./ClientClaimsScreen.styles";
 
 function ClientClaimsScreen(props) {
   const isFocused = useIsFocused();
-  const [state, actions] = useGlobal() as any;
 
-  const [claimedDonations, setClaimedDonations] = useState(state.donationsOrClaims);
-  const [loaded, setLoaded] = useState(false);
+  const getClaimedDonationsForClient = useGlobalStore((state) => state.getClaimedDonationsForClient);
+  const getLocation = useGlobalStore((state) => state.getLocation);
 
-  const getClaims = async () => {
-    const { getClaimedDonationsForClient, getLocation } = actions;
-    await getLocation();
-    const data = await getClaimedDonationsForClient();
-    if (data) {
-      setClaimedDonations(data);
-      setLoaded(true);
-    }
-  };
+  const jwt = useGlobalStore((state) => state.jwt);
+  const user = useGlobalStore((state) => state.user);
+  const claimedDonationsForClient = useGlobalStore((state) => state.claimedDonationsForClient);
+
+  const claimedDonationsLoaded = () => claimedDonationsForClient && claimedDonationsForClient.length > 0;
 
   useEffect(() => {
-    if (isFocused) {
-      getClaims();
+    if (isFocused && jwt && user) {
+      getLocation();
+      getClaimedDonationsForClient(jwt, user);
     }
   }, [isFocused]);
 
   return (
     <View style={styles.outerContainer}>
-      <NavBar showBackButton={true} />
-
+      <NavBar
+        showBackButton={true}
+        goBack={() => props.navigation.goBack()}
+      />
       <View style={styles.contentContainer}>
         <Title text="Claims" />
         <SpacerInline height={20} />
-        {!loaded && <Text>Loading...</Text>}
-        {loaded &&
-        claimedDonations &&
-        Array.isArray(claimedDonations) &&
-        claimedDonations.length > 0 ? (
-            <ScrollView>
-              {(claimedDonations as any).map((claimedDonation) => (
-                <View key={claimedDonation.id}>
-                  <Donation
-                    donation={claimedDonation}
-                    key={claimedDonation.id}
-                    isClaim={true}
-                    isHistory={false}
-                    navigation={props.navigation}
-                  />
-                </View>
-              ))}
-              <SpacerInline height={200} />
-            </ScrollView>
-          ) : (
-            <EmptyStateView upperText="You don't currently have any outstanding claimed donations." />
-          )}
+        {!claimedDonationsForClient && <Text>Loading...</Text>}
+        {claimedDonationsLoaded() ? (
+          <ScrollView>
+            {claimedDonationsForClient && claimedDonationsForClient.map((claimedDonation) => (
+              <View key={claimedDonation.id}>
+                <Donation
+                  donation={claimedDonation}
+                  key={claimedDonation.id}
+                  isClaim={true}
+                  isHistory={false}
+                  navigation={props.navigation}
+                />
+              </View>
+            ))}
+            <SpacerInline height={200} />
+          </ScrollView>
+        ) : (
+          <EmptyStateView upperText="You don't currently have any outstanding claimed donations." />
+        )}
       </View>
     </View>
   );

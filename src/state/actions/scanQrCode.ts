@@ -13,8 +13,8 @@ export const scanQrCode = async (jwt: string, qrCode: string) => {
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }

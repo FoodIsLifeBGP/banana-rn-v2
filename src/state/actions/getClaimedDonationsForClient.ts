@@ -18,8 +18,8 @@ export const getClaimedDonationsForClient = async (jwt: string, user: User)=> {
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }

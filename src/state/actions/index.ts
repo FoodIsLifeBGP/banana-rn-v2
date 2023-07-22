@@ -6,7 +6,7 @@ export interface Actions {
   getActiveDonationsForClient: () => Promise<Donation[]>;
   getClaimedDonationsForClient: () => Promise<Donation[] | Claim[]>;
   getActiveDonationsFromDonor: () => Promise<Donation[]>;
-  getClaimHistoryForClient: () => Promise<Claim[]>;
+  getClaimedDonationHistoryForClient: () => Promise<Donation[]>;
   getDonationHistory: () => Promise<Donation[]>;
   getLocation: () => Promise<{ latitude: number; longitude: number }>;
   logIn: () => Promise<ResponseStatus>;
@@ -21,13 +21,11 @@ export interface Actions {
 }
 export { getActiveDonationsForClient } from "./getActiveDonationsForClient";
 export { getClaimedDonationsForClient } from "./getClaimedDonationsForClient";
-export { getClaimHistoryForClient } from "./getClaimHistoryForClient";
+export { getClaimedDonationHistoryForClient } from "./getClaimedDonationHistoryForClient";
 export { getActiveDonationsFromDonor } from "./getActiveDonationsFromDonor";
 export { getDonationHistory } from "./getDonationHistory";
 export { getLocation } from "./getLocation";
-export {
-  logIn, logOut, setEmail, setPassword,
-} from "./auth";
+export { logIn } from "./auth";
 export { createDonation } from "./createDonation";
 export { cancelDonation } from "./cancelDonation";
 export { claimDonation } from "./claimDonation";

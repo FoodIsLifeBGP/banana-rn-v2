@@ -1,3 +1,4 @@
+import React from "react";
 import { ImageURISource } from "react-native";
 import { SvgProps } from "react-native-svg";
 

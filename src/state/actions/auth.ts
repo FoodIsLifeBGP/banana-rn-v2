@@ -1,12 +1,10 @@
 import railsAxios from "@util/railsAxios";
-import { GlobalState, initialState } from "@state/index";
+import { GlobalState } from "@state/index";
 // import { AxiosError } from "axios";
 
-export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>> => {
-  const {
-    loginUrl, userIdentity, email, password,
-  } = state;
-
+export const logIn = async (
+  loginUrl: string, userIdentity: string, email: string, password: string,
+): Promise<Partial<GlobalState>> => {
   try {
     const { data, status, statusText } = await railsAxios().post(loginUrl,
       JSON.stringify({
@@ -30,15 +28,9 @@ export const logIn = async ( state: GlobalState ): Promise<Partial<GlobalState>>
       jwt: "",
       user: undefined,
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }
 };
-
-export const logOut = () => ({ ...initialState });
-
-export const setEmail = (email) => ({ email });
-
-export const setPassword = (password) => ({ password });

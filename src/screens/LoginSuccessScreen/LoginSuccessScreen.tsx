@@ -10,9 +10,10 @@ import DashboardScreen from "../DashboardScreen";
 import DonorDashboardScreen from "../DonorDashboardScreen";
 
 export default function LoginSuccessScreen() {
-  const [state] = useGlobal();
-  const { user = {} as any, jwt = "", userIdentity } = state;
-  const { id } = user;
+  const user = useGlobalStore((state) => state.user);
+  const jwt = useGlobalStore((state) => state.jwt);
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
+
   if (!jwt || !user) {
     return <Text>Loading...</Text>;
   }
@@ -25,13 +26,9 @@ export default function LoginSuccessScreen() {
   case "processing":
     return <ApplicationPendingScreen />;
   case "approved":
-    return <ApplicationApprovedScreen id={id} jwt={jwt} />;
+    return <ApplicationApprovedScreen id={user.id} jwt={jwt} />;
   case "active":
-    return userIdentity === "client" ? (
-      <DashboardScreen />
-    ) : (
-      <DonorDashboardScreen />
-    );
+    return userIdentity === "client" ? <DashboardScreen /> : <DonorDashboardScreen />;
   default:
     return (
       <InfoScreen

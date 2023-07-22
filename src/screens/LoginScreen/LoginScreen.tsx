@@ -26,6 +26,7 @@ import { PasswordResetStage } from "./ResetPassword/ResetPassword";
 export default function LoginScreen(props) {
   const responseStatus = useGlobalStore((state) => state.responseStatus);
   const userIdentity = useGlobalStore((state) => state.userIdentity);
+  const loginUrl = useGlobalStore((state) => state.loginUrl);
   const email =
     props.route.params.email ??
     useGlobalStore((state) => state.email);
@@ -152,7 +153,9 @@ export default function LoginScreen(props) {
             value={password}
             setValue={handleSetPassword}
             ref={passwordInputRef}
-            onSubmitEditing={logIn}
+            onSubmitEditing={() => logIn(
+              loginUrl, userIdentity, email, password,
+            )}
             enablesReturnKeyAutomatically={true}
             returnKeyType="go"
             blurOnSubmit={false}
@@ -169,7 +172,12 @@ export default function LoginScreen(props) {
         </View>
 
         <View style={styles.buttonContainer}>
-          <LinkButton text="Log In" onPress={logIn} />
+          <LinkButton
+            text="Log In"
+            onPress={() => logIn(
+              loginUrl, userIdentity, email, password,
+            )}
+          />
           <LinkButton
             text="Register"
             destination="RegistrationScreen"

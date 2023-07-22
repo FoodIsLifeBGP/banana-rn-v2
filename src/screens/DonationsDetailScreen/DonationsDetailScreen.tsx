@@ -12,19 +12,17 @@ import * as colors from "@util/constants/colors";
 import styles from "./DonationsDetailScreen.styles";
 
 function DonationsDetailScreen(props) {
-  const [globalState, globalActions] = useGlobal() as any;
-  const { cancelDonation } = globalActions;
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const cancelDonation = useGlobalStore((state) => state.cancelDonation);
+
+  const jwt = useGlobalStore((state) => state.jwt);
+
   const { donation } = props.route;
   const hasClaim = !!donation.claim;
-  const [state, { updateAlert }] = useGlobal() as any;
 
   const handleCancel = async () => {
-    const responseCode = await cancelDonation(donation.id);
-    if (responseCode !== 202) {
-      console.log("Handle this error better");
-      // Add Common UH-OH modal here
-    } else {
-      props.navigation.navigate("DonorDashboardScreen");
+    if (jwt && donation) {
+      cancelDonation(jwt, donation.id);
     }
   };
 
@@ -82,6 +80,8 @@ function DonationsDetailScreen(props) {
         text="CANCEL DONATION"
         onPress={() =>
           updateAlert({
+            title: "Donation Cancelled",
+            message: "Your donation has been cancelled.",
             type: "cancel donation",
             dismissible: false,
             confirmFn: () => handleCancel(),

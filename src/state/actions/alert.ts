@@ -1,4 +1,5 @@
-import { Alert, ResponseStatus } from "../index.types";
+import { ResponseStatus } from "../index.types";
+import { Alert } from "@state/index.types";
 
 export const updateAlert = (alert: Alert) => ({ alert });
 

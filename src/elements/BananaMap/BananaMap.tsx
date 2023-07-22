@@ -1,6 +1,15 @@
 import React from "react";
 import { Text } from "react-native";
-import { BananaMapProps } from "./BananaMapProps";
+import { Donation, Location } from "@state/index.types";
+import { Region } from "react-native-maps";
+
+export interface BananaMapProps {
+  donations: Donation[];
+  markerSize: number;
+  clientLocation: Location;
+  mapRegion: Region;
+  navigation: any;
+}
 
 function BananaMap({
   donations,

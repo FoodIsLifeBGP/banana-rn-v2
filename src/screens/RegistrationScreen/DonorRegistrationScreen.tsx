@@ -62,9 +62,7 @@ export default function DonorRegistrationScreen({
     if (validateResults) {
       setValidationErrors(validateResults);
     } else {
-      registerUser(
-        userIdentity, createUrl, newDonor,
-      );
+      registerUser(userIdentity, createUrl, newDonor);
       switch (responseStatus.code) {
       case 201: {
         navigate("LoginSuccessScreen");

@@ -1,9 +1,9 @@
 import railsAxios from "@util/railsAxios";
 import { User, NewDonation } from "@state/index.types";
 
-const createDonation = async (
-  jwt: string, user: User, donation: NewDonation,
-) => {
+const createDonation = async (jwt: string,
+  user: User,
+  donation: NewDonation) => {
   const endpoint = "/donations/create";
 
   const payload = {
@@ -17,17 +17,18 @@ const createDonation = async (
     },
   };
   try {
-    const { status, statusText } =  await railsAxios(jwt).post(endpoint, payload);
+    const { data, status, statusText } =  await railsAxios(jwt).post(endpoint, JSON.stringify(payload));
 
     return {
       code: status,
       message: statusText,
+      donation: data.donation,
     };
   } catch (error: any) {
     return {
       responseStatus: {
-        code: error.response.status,
-        message: error.response.statusText,
+        code: error.status,
+        message: error.error,
       },
     };
   }

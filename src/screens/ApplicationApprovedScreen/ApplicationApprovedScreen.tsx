@@ -1,7 +1,7 @@
 import { Paragraph, SpacerInline } from "@elements";
 
 import setAccountToActive from "@util/setAccountToActive";
-import React, { FunctionComponent, useState } from "react";
+import React, { useState, FC } from "react";
 import InfoScreen from "../InfoScreen";
 
 type ApplicationApprovedScreenProps = {
@@ -9,9 +9,7 @@ type ApplicationApprovedScreenProps = {
   jwt: string;
 };
 
-const ApplicationApprovedScreen: FunctionComponent<
-  ApplicationApprovedScreenProps
-> = ({ id, jwt }) => {
+const ApplicationApprovedScreen: FC<ApplicationApprovedScreenProps> = ({ id, jwt }) => {
   const [activated, setActivated] = useState(false);
   setAccountToActive({
     jwt,
@@ -26,8 +24,7 @@ const ApplicationApprovedScreen: FunctionComponent<
       showBackButton={false}
     >
       <Paragraph fontSize={20}>
-        Welcome to the Banana App! We are so excited to have you join
-        our family.
+        Welcome to the Banana App! We are so excited to have you join our family.
       </Paragraph>
       <SpacerInline height={40} />
       <Paragraph emphasized={true} fontSize={20}>
