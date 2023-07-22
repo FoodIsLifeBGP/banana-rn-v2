@@ -187,7 +187,7 @@ export interface InitialState {
   activeDonationsFromDonor?: Donation[] /* TODO: double check this type */;
   email?: string;
   password?: string;
-  responseStatus: ResponseStatus;
+  responseStatus?: ResponseStatus;
   currentClaim?: Claim;
   claimedDonation?: Donation;
   travelTimes: { /* TODO: double check this type.. */

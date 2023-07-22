@@ -31,10 +31,7 @@ export const initialState: InitialState = {
   activeDonationsFromDonor: [],
   currentClaim: undefined,
   claimedDonation: undefined,
-  responseStatus: {
-    code: 418,
-    message: "No API calls made yet.",
-  },
+  responseStatus: undefined,
   travelTimes: {
     pedestrian: "calculating...",
     publicTransport: "calculating...",
