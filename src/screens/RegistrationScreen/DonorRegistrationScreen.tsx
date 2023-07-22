@@ -1,0 +1,342 @@
+import React, { useRef, useState } from "react";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Divider } from "react-native-paper";
+import {
+  FormTextInput,
+  Icon,
+  LinkButton,
+  SpacerInline,
+  Title,
+} from "@elements";
+import useGlobalStore from "@state";
+import { getStateList } from "@util/constants/statesAbbr";
+import donorConstraints from "@util/validators/donorRegistration";
+import validate from "validate.js";
+import { Alert, DonorRegisterProps } from "@state/index.types";
+import styles from "./RegistrationScreen.styles";
+
+// TODO: add prop types for this function component
+export default function DonorRegistrationScreen({
+  navigate,
+  goBack,
+}) {
+
+  const updateAlert = useGlobalStore((state) => state.updateAlert);
+  const registerUser = useGlobalStore((state) => state.registerUser);
+  const userIdentity = useGlobalStore((state) => state.userIdentity);
+  const createUrl = useGlobalStore((state) => state.createUrl);
+
+  // TODO: doublecheck and make sure this state is dynamic (i.e. we dont need to do useEffect & useState)
+  const responseStatus = useGlobalStore((state) => state.responseStatus);
+
+
+  const [newDonor, setNewDonor] = useState<DonorRegisterProps>({ state: "WA" } as DonorRegisterProps);
+  const [validationErrors, setValidationErrors] = useState({} as any);
+  const [termsOfService, setTermsOfService] = useState(false);
+  const stateList = getStateList();
+  const passwordRef = useRef<TextInput>(null);
+  const confirmPasswordRef = useRef<TextInput>(null);
+  const firstNameRef = useRef<TextInput>(null);
+  const lastNameRef = useRef<TextInput>(null);
+  const bizNameRef = useRef<TextInput>(null);
+  const bizAddressRef = useRef<TextInput>(null);
+  const cityRef = useRef<TextInput>(null);
+  const zipRef = useRef<TextInput>(null);
+  const pickUpRef = useRef<TextInput>(null);
+
+  const toggleTermsOfService = () =>
+    setTermsOfService(!termsOfService);
+
+  const validateInputs = async () => {
+    const validateResults = validate(newDonor, donorConstraints);
+
+    if (validateResults) {
+      setValidationErrors(validateResults);
+    } else {
+      registerUser(userIdentity, createUrl, newDonor);
+      switch (responseStatus.code) {
+      case 201: {
+        navigate("LoginSuccessScreen");
+        break;
+      }
+      case 409: {
+        updateAlert({
+          title: "Error",
+          message: `This email address has already been used (Error code:${responseStatus.code})`,
+          dismissible: true,
+        } as Alert);
+        break;
+      }
+      case 500: {
+        updateAlert({
+          title: "Error",
+          message: `Network Issues (Error code:${responseStatus.code})`,
+          dismissible: true,
+        } as Alert);
+        break;
+      }
+      default: {
+        updateAlert({
+          title: "Error",
+          message: `Unknown Error (Error code:${responseStatus.code})`,
+          dismissible: true,
+        } as Alert);
+      }
+      }
+    }
+  };
+
+  const registerPressHandler = async () => {
+    Keyboard.dismiss();
+    await validateInputs();
+  };
+
+  return (
+    <KeyboardAvoidingView
+      style={styles.keyboardAvoidContainer}
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Android & iOS both interact with this prop differently
+      enabled={true}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
+      <View style={styles.header}>
+        <Title text="Registration" />
+      </View>
+
+      <ScrollView
+        style={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+      >
+        <FormTextInput
+          label="Email"
+          value={newDonor.email}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              email: s,
+            })
+          }
+          style={styles.input}
+          placeholder="info@bananaapp.org"
+          error={!!validationErrors.email}
+          errorMessage={validationErrors.email}
+          autoFocus={true}
+          onSubmitEditing={() => passwordRef?.current?.focus()}
+          autoCapitalize="none"
+        />
+
+        <FormTextInput
+          label="Password"
+          value={newDonor.password}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              password: s,
+            })
+          }
+          type="password"
+          style={styles.input}
+          error={!!validationErrors.password}
+          errorMessage={validationErrors.password}
+          ref={passwordRef}
+          onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
+        />
+
+        <FormTextInput
+          label="Confirm Password"
+          value={newDonor.retypedPassword}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              retypedPassword: s,
+            })
+          }
+          style={styles.input}
+          type="password"
+          error={!!validationErrors.retypedPassword}
+          errorMessage={validationErrors.retypedPassword}
+          ref={confirmPasswordRef}
+          onSubmitEditing={() => firstNameRef?.current?.focus()}
+        />
+        <Divider style={{ marginVertical: 20 }} />
+
+        <FormTextInput
+          label="First Name"
+          value={newDonor.firstName}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              firstName: s,
+            })
+          }
+          style={styles.input}
+          error={!!validationErrors.firstName}
+          errorMessage={validationErrors.firstName}
+          ref={firstNameRef}
+          onSubmitEditing={() => lastNameRef?.current?.focus()}
+        />
+
+        <FormTextInput
+          label="Last Name"
+          value={newDonor.lastName}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              lastName: s,
+            })
+          }
+          style={styles.input}
+          error={!!validationErrors.lastName}
+          errorMessage={validationErrors.lastName}
+          ref={lastNameRef}
+          onSubmitEditing={() => bizNameRef?.current?.focus()}
+        />
+
+        <FormTextInput
+          label="Business Name"
+          value={newDonor.businessName}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              businessName: s,
+            })
+          }
+          style={styles.input}
+          error={!!validationErrors.businessName}
+          errorMessage={validationErrors.businessName}
+          ref={bizNameRef}
+          onSubmitEditing={() => bizAddressRef?.current?.focus()}
+        />
+
+        <FormTextInput
+          label="Business Address"
+          value={newDonor.businessAddress}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              businessAddress: s,
+            })
+          }
+          style={styles.input}
+          error={!!validationErrors.businessAddress}
+          errorMessage={validationErrors.businessAddress}
+          ref={bizAddressRef}
+          onSubmitEditing={() => cityRef?.current?.focus()}
+        />
+
+        <View style={[styles.row, styles.input]}>
+          <FormTextInput
+            label="City"
+            value={newDonor.city}
+            setValue={(s) =>
+              setNewDonor({
+                ...newDonor,
+                city: s,
+              })
+            }
+            style={{ width: "40%" }}
+            autoCapitalize="words"
+            error={!!validationErrors.city}
+            errorMessage={validationErrors.city}
+            ref={cityRef}
+            onSubmitEditing={() => zipRef?.current?.focus()}
+          />
+          <FormTextInput
+            label="State"
+            type="dropdown"
+            dropdownData={stateList}
+            value={newDonor.state}
+            setValue={(s) =>
+              setNewDonor({
+                ...newDonor,
+                state: s,
+              })
+            }
+            style={{ width: "20%" }}
+            error={!!validationErrors.state}
+            errorMessage={validationErrors.state}
+          />
+          <FormTextInput
+            label="Zip"
+            value={newDonor.zip}
+            setValue={(s) =>
+              setNewDonor({
+                ...newDonor,
+                zip: s,
+              })
+            }
+            style={{ width: "30%" }}
+            autoCapitalize="words"
+            error={!!validationErrors.zip}
+            errorMessage={validationErrors.zip}
+            ref={zipRef}
+            onSubmitEditing={() => pickUpRef?.current?.focus()}
+          />
+        </View>
+        <FormTextInput
+          label="Pick up instructions"
+          value={newDonor.pickupInstructions}
+          setValue={(s) =>
+            setNewDonor({
+              ...newDonor,
+              pickupInstructions: s,
+            })
+          }
+          placeholder="Directions on where to pick up item"
+          error={!!validationErrors.pickupInstructions}
+          errorMessage={validationErrors.pickupInstructions}
+          ref={pickUpRef}
+        />
+
+        <View style={styles.checkboxRow}>
+          <View style={styles.checkBox}>
+            <TouchableOpacity
+              style={{ top: 3 }}
+              onPress={toggleTermsOfService}
+            >
+              <Icon
+                name={termsOfService ? "checkboxOn" : "checkboxOff"}
+                size={24}
+                color="none"
+              />
+            </TouchableOpacity>
+          </View>
+          <SpacerInline width={10} />
+          <Text style={styles.text} onPress={toggleTermsOfService}>
+            {"I agree to the "}
+          </Text>
+          <View>
+            <TouchableOpacity onPress={() => navigate("TermsScreen")}>
+              <Text style={[styles.text, styles.textBold]}>
+                Terms & Conditions
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={[styles.row, { paddingHorizontal: "10%" }]}>
+          <LinkButton
+            text="back"
+            navigate={navigate}
+            onPress={() => goBack()}
+          />
+          <LinkButton
+            disabled={!termsOfService}
+            text="Register"
+            navigate={navigate}
+            onPress={registerPressHandler}
+          />
+        </View>
+        <SpacerInline height={50} />
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
