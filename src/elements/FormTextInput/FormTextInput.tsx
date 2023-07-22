@@ -11,7 +11,7 @@ import {
   TextStyle,
   View,
 } from "react-native";
-import { Icon, InputLabel } from "@elements";
+import { Icon, InputLabel } from "../index";
 import { LIGHT_BLUE } from "@util/constants/colors";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { AsYouType } from "libphonenumber-js";

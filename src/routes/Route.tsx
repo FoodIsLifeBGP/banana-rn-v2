@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import getEnv from "@util/environment";
 
+import NavigationService from "@util/navigationService";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -204,8 +205,14 @@ function FullAppStackNavigator() {
 }
 
 export default function AppNavigator() {
+  const navigationRef = useRef(null);
+
+  useEffect(() => {
+    NavigationService.setTopLevelNavigator(navigationRef.current);
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <FullAppStackNavigator />
     </NavigationContainer>
   );

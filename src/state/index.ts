@@ -10,6 +10,7 @@ import {
   Donation,
   NewDonation,
 } from "./index.types";
+import NavigationService from "@util/navigationService";
 import * as actions from "./actions";
 
 const {
@@ -17,11 +18,11 @@ const {
 } = getEnv();
 
 export const initialState: InitialState = {
-  jwt: undefined,
+  jwt: "",
   user: undefined,
-  email: undefined,
+  email: "",
   alert: undefined,
-  password: undefined,
+  password: "",
   loginUrl: LOGIN_URL,
   createUrl: CREATE_URL,
   apiBaseUrl: API_BASE_URL,
@@ -95,20 +96,34 @@ const useGlobalStore = create<GlobalState>((set) => ({
       userIdentity,
     );
 
-    set({
-      jwt,
-      user,
-      responseStatus,
+    set((state) => {
+      if (responseStatus && responseStatus.code !== 202) {
+        state.updateAlert({
+          title: "Uh Oh!",
+          message: "Invalid credentials.",
+          type: "default",
+          dismissible: true,
+        });
+      }
+
+      return {
+        responseStatus,
+        jwt,
+        user,
+      };
     });
   },
   logOut: () => set({ ...initialState }),
-  setEmail: (email) => set({ email }),
+  setEmail: (email) => {
+    console.log("email", email);
+    return set({ email });
+  },
   setPassword: (password) => set({ password }),
   clearEmailAndPassword: () => set({
     email: undefined,
     password: undefined,
   }),
-  // NOTE: assuming this will NOT be a function that clients can access? should we put up some guard rails?
+  // NOTE: I'm assuming this will NOT be a function that clients can access? should we put up some guard-rails in place?
   cancelDonation: async (jwt, donationId) => {
     const { responseStatus, donation: cancelledDonation } = await actions.cancelDonation(jwt, donationId);
     set((state) => {
@@ -124,8 +139,8 @@ const useGlobalStore = create<GlobalState>((set) => ({
       } else {
         updatedActiveDonations = state.activeDonationsFromDonor?.filter((donation) => donation.id !== cancelledDonation.id);
 
-        // TODO: figure out this navigation
-        // props.navigation.navigate("DonorDashboardScreen");
+        // TODO: double-check this navigation
+        NavigationService.navigate("DonorDashboardScreen");
       }
       return {
         responseStatus,
@@ -150,8 +165,8 @@ const useGlobalStore = create<GlobalState>((set) => ({
         if (newDonation) {
           updatedActiveDonations?.push(newDonation);
 
-          // TODO: figure out this navigation
-          // props.navigation.navigate("DonorDashboardScreen");
+          // TODO: double-check this navigation
+          NavigationService.navigate("DonorDashboardScreen");
         }
       } else {
         state.updateAlert({

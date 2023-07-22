@@ -27,12 +27,9 @@ export default function LoginScreen(props) {
   const responseStatus = useGlobalStore((state) => state.responseStatus);
   const userIdentity = useGlobalStore((state) => state.userIdentity);
   const loginUrl = useGlobalStore((state) => state.loginUrl);
-  const email =
-    props.route.params.email ??
-    useGlobalStore((state) => state.email);
-  const password =
-    props.route.params.password ??
-    useGlobalStore((state) => state.password);
+
+  const email = (props.route.params && props.route.params.email) ?? useGlobalStore((state) => state.email);
+  const password = (props.route.params && props.route.params.password) ?? useGlobalStore((state) => state.password);
 
   const logIn = useGlobalStore((state) => state.logIn);
   const setEmail = useGlobalStore((state) => state.setEmail);
@@ -40,8 +37,7 @@ export default function LoginScreen(props) {
   const clearEmailAndPassword = useGlobalStore((state) => state.clearEmailAndPassword);
 
   const passwordInputRef: RefObject<TextInput> = createRef();
-  const handleEmailInputSubmit = () =>
-    passwordInputRef.current?.focus();
+  const handleEmailInputSubmit = () => passwordInputRef.current?.focus();
 
   const [showModal, setShowModal] = useState(false);
   const [passwordResetStage, setPasswordResetStage] = useState(PasswordResetStage.NONE);
@@ -50,11 +46,10 @@ export default function LoginScreen(props) {
     const reactToStatusCode = async () => {
       if (responseStatus) {
         switch (responseStatus.code) {
-        // TODO: should this be pulled-from or set-to global state
         case 202: {
           clearEmailAndPassword();
           clearPasswordResetStage();
-          props.navigation.navigate("LoginSuccessScreen");
+          props.navigation.navigate("Drawer", {screen:"LoginSuccessScreen"});
           return;
         }
         case 401:

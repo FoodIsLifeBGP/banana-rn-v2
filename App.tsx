@@ -9,7 +9,6 @@ import {
 import { Provider as PaperProvider } from "react-native-paper";
 import Constants from "expo-constants";
 import * as Font from "expo-font";
-// import NavigationService from "@util/navigationService";
 import {
   CancelDonationModal,
   ComingSoonModal,
@@ -19,10 +18,11 @@ import {
 import Route from "./src/routes/Route";
 import styles from "./App.styles";
 
-// if (Platform.OS !== 'web') {
+// TODO: is this needed? if not, remove.
+// if (Platform.OS !== "web") {
 //   LogBox.ignoreLogs([
-//     'Warning: componentWillReceiveProps has been renamed',
-//     'Require cycle',
+//     "Warning: componentWillReceiveProps has been renamed",
+//     "Require cycle",
 //   ]);
 // }
 
@@ -67,8 +67,6 @@ export default function App() {
     fontsLoaded && (
       <PaperProvider>
         <SafeAreaView style={styles.container}>
-          {/* TODO: see if we even _need_ that ref on the next line */}
-          {/* <Route ref={navRef => NavigationService.setTopLevelNavigator(navRef)} /> */}
           <Route />
           <TheAlertModal />
           <IncompleteFormAlert />
