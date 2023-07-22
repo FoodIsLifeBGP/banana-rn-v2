@@ -10,7 +10,7 @@ import {
   Donation,
   NewDonation,
 } from "./index.types";
-import NavigationService from "@util/navigationService";
+import navigationService from "@util/navigationService";
 import * as actions from "./actions";
 
 const {
@@ -55,7 +55,7 @@ export interface GlobalState extends InitialState {
   ) => void;
   logOut: () => void;
   setEmail: (email: string) => void;
-  setClaimedDonation: (claimedDonation: Donation) => void;
+  setClaimedDonation: (claimedDonation?: Donation) => void;
   setPassword: (password: string) => void;
   createDonation: (jwt: string, user: User, donation: NewDonation,) => void;
   cancelDonation: (jwt: string, donationId: number) => void;
@@ -97,15 +97,30 @@ const useGlobalStore = create<GlobalState>((set) => ({
     );
 
     set((state) => {
-      if (responseStatus && responseStatus.code !== 202) {
-        state.updateAlert({
-          title: "Uh Oh!",
-          message: "Invalid credentials.",
-          type: "default",
-          dismissible: true,
-        });
+      if (responseStatus) {
+        if (responseStatus.code === 401) {
+          state.updateAlert({
+            title: "Invalid Credentials",
+            message: "Incorrect email or password",
+            type: "default",
+            dismissible: true,
+          });
+        } else if (responseStatus.code === 404) {
+          state.updateAlert({
+            title: "Server Error",
+            message: "Server not found - please try again",
+            type: "default",
+            dismissible: true,
+          });
+        } else if (responseStatus.code === 500) {
+          state.updateAlert({
+            title: "Network Error",
+            message: "Network error - please try again",
+            type: "default",
+            dismissible: true,
+          });
+        }
       }
-
       return {
         responseStatus,
         jwt,
@@ -114,16 +129,12 @@ const useGlobalStore = create<GlobalState>((set) => ({
     });
   },
   logOut: () => set({ ...initialState }),
-  setEmail: (email) => {
-    console.log("email", email);
-    return set({ email });
-  },
+  setEmail: (email) => set({ email }),
   setPassword: (password) => set({ password }),
   clearEmailAndPassword: () => set({
-    email: undefined,
-    password: undefined,
+    email: "",
+    password: "",
   }),
-  // NOTE: I'm assuming this will NOT be a function that clients can access? should we put up some guard-rails in place?
   cancelDonation: async (jwt, donationId) => {
     const { responseStatus, donation: cancelledDonation } = await actions.cancelDonation(jwt, donationId);
     set((state) => {
@@ -140,7 +151,7 @@ const useGlobalStore = create<GlobalState>((set) => ({
         updatedActiveDonations = state.activeDonationsFromDonor?.filter((donation) => donation.id !== cancelledDonation.id);
 
         // TODO: double-check this navigation
-        NavigationService.navigate("DonorDashboardScreen");
+        navigationService.navigate("DonorDashboardScreen");
       }
       return {
         responseStatus,
@@ -154,6 +165,18 @@ const useGlobalStore = create<GlobalState>((set) => ({
     set((state) => {
       const updatedActiveDonations = state.activeDonationsFromDonor;
 
+
+      // switch (statusCode) {
+      //   case 201: Alert.alert('Donation created!'); getDonationsOrClaims(); navigate('LoginSuccessScreen'); return;
+      //   case 202: Alert.alert('Donation updated!'); getDonationsOrClaims(); navigate('LoginSuccessScreen'); return;
+      //   case (400 || 406): Alert.alert('Bad data - sorry, please try again!'); return;
+      //   case (401 || 403): Alert.alert('Authentication error - please log in again.'); logOut(); navigate('LoginScreen'); return;
+      //   case 404: Alert.alert('Network error - sorry, please try again!'); return;
+      //   case 500: Alert.alert('Server problem - sorry, please try again!'); return;
+      //   default: Alert.alert('Sorry, something went wrong. Please try again.');
+      // }
+
+      // TODO: update this IF block to roughly match the above switch
       if (responseStatus && responseStatus.code >= 200 && responseStatus.code < 300) {
         state.updateAlert({
           title: "Success!",
@@ -166,7 +189,7 @@ const useGlobalStore = create<GlobalState>((set) => ({
           updatedActiveDonations?.push(newDonation);
 
           // TODO: double-check this navigation
-          NavigationService.navigate("DonorDashboardScreen");
+          navigationService.navigate("DonorDashboardScreen");
         }
       } else {
         state.updateAlert({

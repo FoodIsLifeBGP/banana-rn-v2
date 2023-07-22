@@ -19,7 +19,17 @@ export interface DonorState extends SharedProps {
   pickup_instructions: string;
 }
 
-export interface ClientState extends SharedProps {
+type DonorLite = Pick<
+  DonorState,
+   "address_city"
+  | "address_street"
+  | "address_state"
+  | "address_zip"
+  | "organization_name"
+  | "coords"
+>
+
+export interface ClientState extends SharedProps {å
   transportation_method: string;
   ethnicity: string;
   gender: string;
@@ -95,6 +105,8 @@ export interface Claim {
   status: ClaimStatus;
 }
 
+type ClaimLite = Pick<Claim, "client_name" | "qr_code" | "status">
+
 export interface Donation {
   id: number;
   category: string;
@@ -110,8 +122,8 @@ export interface Donation {
   total_amount: number;
   status: string;
   distance: number;
-  claim: Claim;
-  donor: DonorRegisterProps;
+  claim: ClaimLite; /* NOTE: may need to add back fully fleshed out Claim type */
+  donor: DonorLite; /* NOTE: may need to add back fully fleshed out Donor type */
   isHistory?: boolean;
 }
 

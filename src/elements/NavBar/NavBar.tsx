@@ -17,8 +17,8 @@ interface NavBarProps {
   leftButton?: "qrCode" | "back";
   showSelector?: boolean;
   position?: "map" | "list";
-  onMap?: () => any | undefined;
-  onList?: () => any | undefined;
+  onMap?: () => any;
+  onList?: () => any;
   backButtonFn?: () => void;
   navigation?: any;
   goBack: () => void;

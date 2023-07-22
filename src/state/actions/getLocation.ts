@@ -33,7 +33,7 @@ export const getLocation = async () => {
     }
   }
   return {
-    latitude: undefined,
-    longitude: undefined,
+    latitude: 47.609175,
+    longitude: -122.325849,
   };
 };

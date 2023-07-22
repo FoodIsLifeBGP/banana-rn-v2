@@ -33,7 +33,7 @@ function DropdownInput(props: DropdownInputProps) {
   const placeholderObj = placeholder
     ? {
       label: placeholder,
-      value: dropdownData ? dropdownData[0] : undefined,
+      value: dropdownData ? dropdownData[0] : "",
       color: colors.NAVY_BLUE,
     }
     : {};

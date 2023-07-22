@@ -17,6 +17,7 @@ import openAppSettings from "@util/openAppSettings";
 
 import BarCodeMask from "./BarCodeMask";
 import styles from "./QRCodeScannerScreen.styles";
+import navigationService from "@util/navigationService";
 
 export default function QRCodeScannerScreen(props) {
   const scanQrCode = useGlobalStore((state) => state.scanQrCode);
@@ -90,7 +91,7 @@ export default function QRCodeScannerScreen(props) {
   const handleDismiss = () => {
     setClaimedDonation(undefined);
     setModalOn(false);
-    props.navigation.goBack();
+    navigationService.goBack();
   };
 
   // Switch for Modal Content.

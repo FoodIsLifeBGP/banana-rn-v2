@@ -8,21 +8,20 @@ import { categoryImage } from "@util/donationCategory";
 import formatDate from "@util/formatDate";
 import { Icon } from "@elements";
 import styles from "./Donation.styles";
+import navigationService from "@util/navigationService";
 
 export default function DonorDonation(props) {
-  const { donation, isHistory, navigation } = props;
-
+  const { donation, isHistory } = props;
   const {
     food_name, id, total_amount, category, updated_at,
-  } =
-    donation;
+  } = donation;
 
   const icon = categoryImage(category);
   const updatedAt = formatDate(updated_at);
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("DonationsDetailScreen", {
+        navigationService.navigate("DonationsDetailScreen", {
           donation,
           id,
           edit: true,
@@ -64,9 +63,7 @@ export default function DonorDonation(props) {
                 </Text>
               </View>
             ) : (
-              <Text
-                style={typography.h5}
-              >{`about ${total_amount}`}</Text>
+              <Text style={typography.h5}>{`about ${total_amount}`}</Text>
             )}
           </View>
         </View>

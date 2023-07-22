@@ -44,26 +44,13 @@ export default function LoginScreen(props) {
 
   useEffect(() => {
     const reactToStatusCode = async () => {
-      if (responseStatus) {
-        switch (responseStatus.code) {
-        case 202: {
-          clearEmailAndPassword();
-          clearPasswordResetStage();
-          props.navigation.navigate("Drawer", {screen:"LoginSuccessScreen"});
-          return;
-        }
-        case 401:
-          Alert.alert("Incorrect email or password");
-          return;
-        case 404:
-          Alert.alert("Server not found - please try again");
-          return;
-        case 500:
-          Alert.alert("Network error - please try again");
-          return;
-        default:
-          Alert.alert(`Server replied with ${responseStatus} status code`);
-        }
+      console.log("fired");
+      Alert.alert("responseStatus", JSON.stringify(responseStatus));
+
+      if (responseStatus && responseStatus.code === 202) {
+        clearEmailAndPassword();
+        clearPasswordResetStage();
+        props.navigation.navigate("Drawer", { screen:"LoginSuccessScreen" });
       }
     };
     reactToStatusCode();

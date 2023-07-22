@@ -12,20 +12,6 @@ export default function TheAlertModal() {
 
   const scheme = useScheme();
 
-
-  // TODO: REN -- find a place for this logic to live ( originally from <DonorDonationScreen> ) maybe in this component?
-
-  // switch (statusCode) {
-  //   case 201: Alert.alert('Donation created!'); getDonationsOrClaims(); navigate('LoginSuccessScreen'); return;
-  //   case 202: Alert.alert('Donation updated!'); getDonationsOrClaims(); navigate('LoginSuccessScreen'); return;
-  //   case (400 || 406): Alert.alert('Bad data - sorry, please try again!'); return;
-  //   case (401 || 403): Alert.alert('Authentication error - please log in again.'); logOut(); navigate('LoginScreen'); return;
-  //   case 404: Alert.alert('Network error - sorry, please try again!'); return;
-  //   case 500: Alert.alert('Server problem - sorry, please try again!'); return;
-  //   default: Alert.alert('Sorry, something went wrong. Please try again.');
-  // }
-
-
   const handleCloseButtonPress = () => {
     clearAlert();
   };

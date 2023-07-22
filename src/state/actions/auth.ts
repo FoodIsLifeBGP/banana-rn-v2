@@ -16,7 +16,7 @@ export const logIn = async (
 
     return {
       jwt: data?.jwt || "",
-      user: data?.[userIdentity] || undefined,
+      user: data?.[userIdentity] || "",
       responseStatus: {
         code: status,
         message: statusText,
@@ -28,8 +28,9 @@ export const logIn = async (
       jwt: "",
       user: undefined,
       responseStatus: {
-        code: error.status,
-        message: error.error,
+        // title: error.response.statusText,
+        code: error.response.status,
+        message: error.response.data.message,
       },
     };
   }

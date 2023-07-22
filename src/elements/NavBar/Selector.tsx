@@ -5,8 +5,8 @@ import React from "react";
 
 interface SelectorProps {
   position: "map" | "list";
-  onMap?: () => any | undefined;
-  onList?: () => any | undefined;
+  onMap?: () => any;
+  onList?: () => any;
 }
 export default (function Selector({
   position,

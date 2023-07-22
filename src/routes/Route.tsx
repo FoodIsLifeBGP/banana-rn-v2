@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import getEnv from "@util/environment";
 
-import NavigationService from "@util/navigationService";
+import navigationService from "@util/navigationService";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -127,7 +127,7 @@ function donorOrClientDrawer() {
 
   const COMMON_MENU = {
     ContactScreen: {
-      component: (props) => <ContactScreen {...props} />,
+      component: ContactScreen,
       options: { drawerLabel: () => <MainOption text="Contact Us" icon="help" /> },
     },
   };
@@ -208,7 +208,7 @@ export default function AppNavigator() {
   const navigationRef = useRef(null);
 
   useEffect(() => {
-    NavigationService.setTopLevelNavigator(navigationRef.current);
+    navigationService.setTopLevelNavigator(navigationRef.current);
   }, []);
 
   return (
