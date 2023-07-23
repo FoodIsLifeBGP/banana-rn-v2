@@ -21,7 +21,7 @@ import useGlobalStore from "@state";
 import { getStateList } from "@util/constants/statesAbbr";
 import donorConstraints from "@util/validators/donorRegistration";
 import validate from "validate.js";
-import { Alert, DonorRegisterProps } from "@state/index.types";
+import { DonorRegisterProps } from "@state/index.types";
 import styles from "./RegistrationScreen.styles";
 
 // TODO: add prop types for this function component
@@ -63,35 +63,40 @@ export default function DonorRegistrationScreen({
       setValidationErrors(validateResults);
     } else {
       registerUser(userIdentity, createUrl, newDonor);
-      switch (responseStatus.code) {
-      case 201: {
-        navigate("LoginSuccessScreen");
-        break;
-      }
-      case 409: {
-        updateAlert({
-          title: "Error",
-          message: `This email address has already been used (Error code:${responseStatus.code})`,
-          dismissible: true,
-        } as Alert);
-        break;
-      }
-      case 500: {
-        updateAlert({
-          title: "Error",
-          message: `Network Issues (Error code:${responseStatus.code})`,
-          dismissible: true,
-        } as Alert);
-        break;
-      }
-      default: {
-        updateAlert({
-          title: "Error",
-          message: `Unknown Error (Error code:${responseStatus.code})`,
-          dismissible: true,
-        } as Alert);
-      }
-      }
+
+      if (responseStatus)
+        switch (responseStatus.code) {
+        case 201: {
+          navigate("LoginSuccessScreen");
+          break;
+        }
+        case 409: {
+          updateAlert({
+            title: "Error",
+            message: `This email address has already been used (Error code:${responseStatus.code})`,
+            dismissible: true,
+            type: "default",
+          });
+          break;
+        }
+        case 500: {
+          updateAlert({
+            title: "Error",
+            message: `Network Issues (Error code:${responseStatus.code})`,
+            dismissible: true,
+            type: "default",
+          });
+          break;
+        }
+        default: {
+          updateAlert({
+            title: "Error",
+            message: `Unknown Error (Error code:${responseStatus.code})`,
+            dismissible: true,
+            type: "default",
+          });
+        }
+        }
     }
   };
 

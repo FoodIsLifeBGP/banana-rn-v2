@@ -190,8 +190,6 @@ export default function QRCodeScannerScreen(props) {
     return content;
   };
 
-  /* TODO: remove this comment and fix the error */
-  // eslint-disable-next-line react/no-unstable-nested-components
   function ScannerContent() {
     switch (hasCameraPermission) {
     case true:
