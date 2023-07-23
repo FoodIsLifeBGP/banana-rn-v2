@@ -21,32 +21,37 @@ export default function TheAlertModal() {
       clearAlert();
     }
   };
-  return (
-    <Modal
-      style={styles.container}
-      title={alert?.title || "Alert"}
-      palette="accent"
-      open={alert !== undefined}
-      onDismiss={handleDismiss}
-    >
-      <View style={styles.body}>
-        <View style={styles.textContainer}>
-          <Text style={typography.body1}>
-            {alert?.message || "Uh oh, an unknown error occurred!"}
-          </Text>
-        </View>
 
-        <TextButton
-          text="OK"
-          style={{ width: 104 }}
-          buttonStyle={{
-            default: scheme.primary,
-            pressed: scheme.secondary,
-            disabled: scheme.disabled,
-          }}
-          onPress={handleCloseButtonPress}
-        />
-      </View>
-    </Modal>
+  return (
+    (alert !== undefined)
+      ?
+      <Modal
+        style={styles.container}
+        title={alert?.title || "Alert"}
+        palette="accent"
+        open={alert !== undefined}
+        onDismiss={handleDismiss}
+      >
+        <View style={styles.body}>
+          <View style={styles.textContainer}>
+            <Text style={typography.body1}>
+              {alert?.message || "Uh oh, an unknown error occurred!"}
+            </Text>
+          </View>
+
+          <TextButton
+            text="OK"
+            style={{ width: 104 }}
+            buttonStyle={{
+              default: scheme.primary,
+              pressed: scheme.secondary,
+              disabled: scheme.disabled,
+            }}
+            onPress={handleCloseButtonPress}
+          />
+        </View>
+      </Modal>
+      :
+      null
   );
 }

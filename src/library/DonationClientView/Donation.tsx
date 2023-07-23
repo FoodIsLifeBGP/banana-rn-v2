@@ -75,7 +75,7 @@ export default function ClientDonation({
                   },
                 ]}
               >
-                {`${donor.firstName} ${donor.lastName}`}
+                {donor.organization_name}
               </Text>
               <Icon
                 name={isHistory ? "time" : "distance"}

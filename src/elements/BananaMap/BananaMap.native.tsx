@@ -3,13 +3,13 @@ import { DonationMarker } from "@elements/DonationMarker";
 import MapView, { Marker } from "react-native-maps";
 import styles from "./BananaMap.styles";
 import { BananaMapProps } from "./BananaMapProps";
+import navigationService from "@util/navigationService";
 
 function BananaMap({
   donations,
   markerSize,
   clientLocation,
   mapRegion,
-  navigate,
 }: BananaMapProps) {
   return (
     <MapView initialRegion={mapRegion} style={styles.map}>
@@ -24,7 +24,7 @@ function BananaMap({
             }}
             size={markerSize}
             onPress={() =>
-              navigate("MakeClaimScreen", {
+              navigationService.navigate("MakeClaimScreen", {
                 donation,
                 id,
               })

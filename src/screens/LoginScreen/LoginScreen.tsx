@@ -5,7 +5,6 @@ import React, {
   useState,
 } from "react";
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -44,13 +43,13 @@ export default function LoginScreen(props) {
 
   useEffect(() => {
     const reactToStatusCode = async () => {
-      console.log("fired");
-      Alert.alert("responseStatus", JSON.stringify(responseStatus));
+      if (responseStatus !== undefined && responseStatus.code === 202) {
 
-      if (responseStatus && responseStatus.code === 202) {
+        // TODO: set user and jwt to async storage
+
         clearEmailAndPassword();
         clearPasswordResetStage();
-        /* TODO: this is a correct example of how to navigate--
+        /* TODO: i believe this how we are supposed to navigate now,
           look at the react docs for more info: https://reactnavigation.org/docs/nesting-navigators/
           please remove and replace all `props.navigation.navigate()` calls
         */

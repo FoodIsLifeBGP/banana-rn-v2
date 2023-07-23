@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {
   ScrollView, Text, View,
 } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/core";
 import Donation from "@library/DonationClientView/Donation";
 import useGlobalStore from "@state";
 import {

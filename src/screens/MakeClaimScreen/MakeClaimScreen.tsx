@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  useIsFocused,
-  useRoute,
-} from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/core";
 import {
   ImageBackground,
   ScrollView,
@@ -29,7 +26,7 @@ function MakeClaimScreen(props) {
   const claimDonation = useGlobalStore((state) => state.claimDonation);
   const getTravelTimes = useGlobalStore((state) => state.getTravelTimes);
 
-  const { params: { donation } }: any = useRoute();
+  const { params: { donation } } = props.route;
 
   const donor = donation.donor;
 
